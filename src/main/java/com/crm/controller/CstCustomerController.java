@@ -74,7 +74,6 @@ public class CstCustomerController extends BaseController{
     public Map deleteCstCustomer(Long cstCustomerId){
         Map map=TypeUtil.successMap();
         cstCustomerService.deleteCstCustomer(cstCustomerId);
-        //删除客户删除客户删除客户删除客户
         return map;
     }
 
