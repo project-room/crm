@@ -38,4 +38,9 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         cstCustomerMapper.selectAllCstCustomesByScreen(cstCustomer);
         return cstCustomers;
     }
+
+    @Override
+    public void deleteCstCustomer(Long cstCustomerId) {
+        cstCustomerMapper.deleteById(cstCustomerId);
+    }
 }

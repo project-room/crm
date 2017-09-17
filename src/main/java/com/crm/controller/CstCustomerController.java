@@ -6,7 +6,6 @@ import com.crm.common.BaseController;
 import com.crm.entity.CstCustomer;
 import com.crm.entity.CstLabel;
 import com.crm.entity.CstLowCustomer;
-import com.crm.utils.ObjectUtil;
 import com.crm.utils.TypeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,4 +65,17 @@ public class CstCustomerController extends BaseController{
         cstCustomerService.screenCstCustomers(cstCustomer);
         return map;
     }
+
+    /**
+     * 删除客户
+     * @param cstCustomerId
+     * @return
+     */
+    public Map deleteCstCustomer(Long cstCustomerId){
+        Map map=TypeUtil.successMap();
+        cstCustomerService.deleteCstCustomer(cstCustomerId);
+        //删除客户删除客户删除客户删除客户
+        return map;
+    }
+
 }

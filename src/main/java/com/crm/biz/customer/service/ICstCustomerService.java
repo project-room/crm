@@ -28,4 +28,10 @@ public interface ICstCustomerService {
      * @return
      */
     public Set<CstCustomer> screenCstCustomers(CstCustomer cstCustomer);
+
+    /**
+     * 删除客户
+     * @param cstCustomerId
+     */
+    public void deleteCstCustomer(Long cstCustomerId);
 }
