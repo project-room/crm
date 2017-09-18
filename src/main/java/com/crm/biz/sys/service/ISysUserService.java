@@ -1,7 +1,6 @@
 package com.crm.biz.sys.service;
 
 import com.crm.entity.SysUser;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Administrator on 2017/9/12.
@@ -19,5 +18,5 @@ public interface ISysUserService {
      * 修改用户信息
      * @param sysUser
      */
-    public void updateUserInfo(SysUser sysUser);
+//    public void updateUserInfo(SysUser sysUser);
 }

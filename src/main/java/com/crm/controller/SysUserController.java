@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.Session;
 import java.util.Map;
 
 /**
@@ -28,27 +27,27 @@ public class SysUserController extends BaseController {
     @RequestMapping("/login")
     public Map login(String userName,String userPassword){
         Map map= TypeUtil.successMap();
-       SysUser sysUser= sysUserService.login(userName,userPassword);
+        SysUser sysUser= sysUserService.login("admin","admin");
         session.setAttribute("sysUser",sysUser);
-       map.put("login",sysUser);
-       return map;
+        map.put("login",sysUser);
+        return map;
     }
 
     /**
      * 用户退出
      * @return
      */
-    @RequestMapping("/logout")
-    public Map logout(){
-        Map map=TypeUtil.successMap();
-        session.setAttribute("sysUser",null);
-        return map;
-    }
-
-    @RequestMapping("/updateUserInfo")
-    public Map updateUserInfo(SysUser sysUser){
-        Map map=TypeUtil.successMap();
-        sysUserService.updateUserInfo(sysUser);
-        return map;
-    }
+//    @RequestMapping("/logout")
+//    public Map logout(){
+//        Map map=TypeUtil.successMap();
+//        session.setAttribute("sysUser",null);
+//        return map;
+//    }
+//
+//    @RequestMapping("/updateUserInfo")
+//    public Map updateUserInfo(SysUser sysUser){
+//        Map map=TypeUtil.successMap();
+//        sysUserService.updateUserInfo(sysUser);
+//        return map;
+//    }
 }
