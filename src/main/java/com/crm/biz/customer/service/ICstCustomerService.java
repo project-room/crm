@@ -34,4 +34,17 @@ public interface ICstCustomerService {
      * @param cstCustomerId
      */
     public void deleteCstCustomer(Long cstCustomerId);
+
+    /**
+     * 根据客户名查询客户
+     * @param CstCustomerName
+     * @return
+     */
+    public Set<CstCustomer> searchByCstCustomerName(String CstCustomerName);
+
+    /**
+     * 编辑客户信息
+     * @param cstCustomer
+     */
+    public void editorCstCustomer(CstCustomer cstCustomer);
 }

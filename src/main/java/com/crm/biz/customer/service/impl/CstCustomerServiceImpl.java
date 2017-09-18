@@ -43,4 +43,14 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     public void deleteCstCustomer(Long cstCustomerId) {
         cstCustomerMapper.deleteById(cstCustomerId);
     }
+
+    @Override
+    public Set<CstCustomer> searchByCstCustomerName(String CstCustomerName) {
+        return cstCustomerMapper.searchByCstCustomerName(CstCustomerName);
+    }
+
+    @Override
+    public void editorCstCustomer(CstCustomer cstCustomer) {
+        cstCustomerMapper.updateCstCustomer(cstCustomer);
+    }
 }

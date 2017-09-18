@@ -49,8 +49,21 @@ public interface CstCustomerMapper{
     Set<CstCustomer> selectAllCstCustomesByScreen(CstCustomer cstCustomer);
 
     /**
-     * 删除客户id
+     * 根据id删除客户
      * @param id
      */
     void deleteById(Long id);
+
+    /**
+     * 根据用户名查询用户
+     * @param CstCustomerName
+     * @return
+     */
+    Set<CstCustomer> searchByCstCustomerName(String CstCustomerName);
+
+    /**
+     * 编辑用户信息
+     * @param cstCustomer
+     */
+    void updateCstCustomer(CstCustomer cstCustomer);
 }

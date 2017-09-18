@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/9/12.
@@ -74,6 +75,28 @@ public class CstCustomerController extends BaseController{
     public Map deleteCstCustomer(Long cstCustomerId){
         Map map=TypeUtil.successMap();
         cstCustomerService.deleteCstCustomer(cstCustomerId);
+        return map;
+    }
+
+    /**
+     * 根据用户名查询用户
+     * @param CstCustomerName
+     * @return
+     */
+    public Map searchByCstCustomerName(String CstCustomerName){
+        Map map=TypeUtil.successMap();
+       Set<CstCustomer> cstCustomers= cstCustomerService.searchByCstCustomerName(CstCustomerName);
+       map.put("cstCustomers",cstCustomers);
+        return map;
+    }
+
+    /**
+     * 编辑客户信息
+     * @param cstCustomer
+     */
+    public Map editorCstCustomer(CstCustomer cstCustomer){
+        Map map =TypeUtil.successMap();
+        cstCustomerService.editorCstCustomer(cstCustomer);
         return map;
     }
 
