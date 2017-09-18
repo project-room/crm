@@ -1,26 +1,40 @@
 package com.crm.entity;
 
-/**
- * Created by Administrator on 2017/9/12.
- * 用户表
- */
 public class SysUser {
-  private  String userName;
-  private String userAccounts;
-  private String userPSassword;
-  private Integer userStatus;
-  private String userDepartment;
-  private String userPosition;
-  private String userEmail;
-  private String userPhone;
-  private String userWorkphone;
+    private Long userId;
+
+    private String userName;
+
+    private String userAccounts;
+
+    private String userPassword;
+
+    private Integer userStatus;
+
+    private String userDepartment;
+
+    private String userPosition;
+
+    private String userEmail;
+
+    private String userPhone;
+
+    private String userWorkphone;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getUserAccounts() {
@@ -28,15 +42,15 @@ public class SysUser {
     }
 
     public void setUserAccounts(String userAccounts) {
-        this.userAccounts = userAccounts;
+        this.userAccounts = userAccounts == null ? null : userAccounts.trim();
     }
 
-    public String getUserPSassword() {
-        return userPSassword;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setUserPSassword(String userPSassword) {
-        this.userPSassword = userPSassword;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
     public Integer getUserStatus() {
@@ -52,7 +66,7 @@ public class SysUser {
     }
 
     public void setUserDepartment(String userDepartment) {
-        this.userDepartment = userDepartment;
+        this.userDepartment = userDepartment == null ? null : userDepartment.trim();
     }
 
     public String getUserPosition() {
@@ -60,7 +74,7 @@ public class SysUser {
     }
 
     public void setUserPosition(String userPosition) {
-        this.userPosition = userPosition;
+        this.userPosition = userPosition == null ? null : userPosition.trim();
     }
 
     public String getUserEmail() {
@@ -68,7 +82,7 @@ public class SysUser {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        this.userEmail = userEmail == null ? null : userEmail.trim();
     }
 
     public String getUserPhone() {
@@ -76,7 +90,7 @@ public class SysUser {
     }
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
     public String getUserWorkphone() {
@@ -84,6 +98,6 @@ public class SysUser {
     }
 
     public void setUserWorkphone(String userWorkphone) {
-        this.userWorkphone = userWorkphone;
+        this.userWorkphone = userWorkphone == null ? null : userWorkphone.trim();
     }
 }
