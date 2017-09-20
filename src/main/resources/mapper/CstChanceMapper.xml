@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.biz.chance.dao.CstChanceMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.entity.CstChance" >
+    <id column="ch_id" property="chId" jdbcType="BIGINT" />
+    <result column="ch_content" property="chContent" jdbcType="VARCHAR" />
+    <result column="ch_stage" property="chStage" jdbcType="INTEGER" />
+    <result column="cust_id" property="custId" jdbcType="BIGINT" />
+    <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
+    <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ch_id, ch_content, ch_stage, cust_id, ch_date, ch_money, user_name, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.entity.CstChanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cst_chance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from cst_chance
+    where ch_id = #{chId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cst_chance
+    where ch_id = #{chId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.entity.CstChanceExample" >
+    delete from cst_chance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.entity.CstChance" >
+    insert into cst_chance (ch_id, ch_content, ch_stage,
+      cust_id, ch_date, ch_money,
+      user_name, user_id)
+    values (#{chId,jdbcType=BIGINT}, #{chContent,jdbcType=VARCHAR}, #{chStage,jdbcType=INTEGER},
+      #{custId,jdbcType=BIGINT}, #{chDate,jdbcType=TIMESTAMP}, #{chMoney,jdbcType=DOUBLE},
+      #{userName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.entity.CstChance" >
+    insert into cst_chance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chId != null" >
+        ch_id,
+      </if>
+      <if test="chContent != null" >
+        ch_content,
+      </if>
+      <if test="chStage != null" >
+        ch_stage,
+      </if>
+      <if test="custId != null" >
+        cust_id,
+      </if>
+      <if test="chDate != null" >
+        ch_date,
+      </if>
+      <if test="chMoney != null" >
+        ch_money,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chId != null" >
+        #{chId,jdbcType=BIGINT},
+      </if>
+      <if test="chContent != null" >
+        #{chContent,jdbcType=VARCHAR},
+      </if>
+      <if test="chStage != null" >
+        #{chStage,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="chDate != null" >
+        #{chDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chMoney != null" >
+        #{chMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.entity.CstChanceExample" resultType="java.lang.Integer" >
+    select count(*) from cst_chance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cst_chance
+    <set >
+      <if test="record.chId != null" >
+        ch_id = #{record.chId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chContent != null" >
+        ch_content = #{record.chContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chStage != null" >
+        ch_stage = #{record.chStage,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null" >
+        cust_id = #{record.custId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chDate != null" >
+        ch_date = #{record.chDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chMoney != null" >
+        ch_money = #{record.chMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cst_chance
+    set ch_id = #{record.chId,jdbcType=BIGINT},
+      ch_content = #{record.chContent,jdbcType=VARCHAR},
+      ch_stage = #{record.chStage,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=BIGINT},
+      ch_date = #{record.chDate,jdbcType=TIMESTAMP},
+      ch_money = #{record.chMoney,jdbcType=DOUBLE},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.entity.CstChance" >
+    update cst_chance
+    <set >
+      <if test="chContent != null" >
+        ch_content = #{chContent,jdbcType=VARCHAR},
+      </if>
+      <if test="chStage != null" >
+        ch_stage = #{chStage,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null" >
+        cust_id = #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="chDate != null" >
+        ch_date = #{chDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chMoney != null" >
+        ch_money = #{chMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ch_id = #{chId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.entity.CstChance" >
+    update cst_chance
+    set ch_content = #{chContent,jdbcType=VARCHAR},
+      ch_stage = #{chStage,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=BIGINT},
+      ch_date = #{chDate,jdbcType=TIMESTAMP},
+      ch_money = #{chMoney,jdbcType=DOUBLE},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT}
+    where ch_id = #{chId,jdbcType=BIGINT}
+  </update>
+  <select id="selectListChByCstId" parameterType="Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cst_chance
+    where cust_id = #{custId}
+  </select>
+</mapper>

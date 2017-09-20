@@ -1,6 +1,9 @@
 package com.crm.entity;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> crm/eee
 import java.util.List;
 
 public class SysUser {
@@ -24,7 +27,29 @@ public class SysUser {
 
     private String userWorkphone;
 
+<<<<<<< HEAD
     private List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
+=======
+    private List<CstCustomer> customerList;//附加对象客户List
+
+    private List<UserTask> taskList;//附加对象任务List
+
+    public List<UserTask> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<UserTask> taskList) {
+        this.taskList = taskList;
+    }
+
+    public List<CstCustomer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<CstCustomer> customerList) {
+        this.customerList = customerList;
+    }
+>>>>>>> crm/eee
 
     public Long getUserId() {
         return userId;

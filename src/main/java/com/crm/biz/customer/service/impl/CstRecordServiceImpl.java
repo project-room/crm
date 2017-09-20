@@ -16,6 +16,6 @@ public class CstRecordServiceImpl implements ICstRecordService{
 
     @Override
     public void addCstRecord(CstRecord cstRecord) {
-        cstRecordMapper.saveCstRecord(cstRecord);
+        cstRecordMapper.insert(cstRecord);
     }
 }

@@ -104,6 +104,7 @@ public class CstCustomerExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+<<<<<<< HEAD
         public Criteria andIdIsNull() {
             addCriterion("id is null");
             return (Criteria) this;
@@ -161,6 +162,65 @@ public class CstCustomerExample {
 
         public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("id not between", value1, value2, "id");
+=======
+        public Criteria andCustIdIsNull() {
+            addCriterion("cust_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdIsNotNull() {
+            addCriterion("cust_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdEqualTo(Long value) {
+            addCriterion("cust_id =", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdNotEqualTo(Long value) {
+            addCriterion("cust_id <>", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdGreaterThan(Long value) {
+            addCriterion("cust_id >", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("cust_id >=", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdLessThan(Long value) {
+            addCriterion("cust_id <", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdLessThanOrEqualTo(Long value) {
+            addCriterion("cust_id <=", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdIn(List<Long> values) {
+            addCriterion("cust_id in", values, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdNotIn(List<Long> values) {
+            addCriterion("cust_id not in", values, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdBetween(Long value1, Long value2) {
+            addCriterion("cust_id between", value1, value2, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdNotBetween(Long value1, Long value2) {
+            addCriterion("cust_id not between", value1, value2, "custId");
+>>>>>>> crm/eee
             return (Criteria) this;
         }
 
@@ -783,6 +843,69 @@ public class CstCustomerExample {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
+<<<<<<< HEAD
+=======
+
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Integer value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Integer value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Integer value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Integer value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Integer> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Integer> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+>>>>>>> crm/eee
     }
 
     public static class Criteria extends GeneratedCriteria {

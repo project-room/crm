@@ -37,9 +37,14 @@ public interface SysUserMapper {
 
     SysUser selectByAccount(@Param("userAccounts")String userAccounts);
 
+<<<<<<< HEAD
     SysUser selectById(@Param("id") Long id);
 
     Integer getCount();
 
     List<SysUser> getOnePageInfo(@Param("currenPage") Integer currenPage,@Param("pageSize") Integer pageSize);
+=======
+    //根据用户id查询客户表数据
+    SysUser selectCustomerList(Long userId);
+>>>>>>> crm/eee
 }

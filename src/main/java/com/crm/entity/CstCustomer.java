@@ -1,7 +1,14 @@
 package com.crm.entity;
 
+<<<<<<< HEAD
 public class CstCustomer {
     private Long id;
+=======
+import java.util.List;
+
+public class CstCustomer {
+    private Long custId;
+>>>>>>> crm/eee
 
     private String custName;
 
@@ -21,12 +28,65 @@ public class CstCustomer {
 
     private Long userId;
 
+<<<<<<< HEAD
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+=======
+    private Integer type;
+
+    private List<CstLabel> labelList;
+
+    private List<CstLowCustomer> lowCustomerList;
+
+    private List<CstRecord> recordList;
+
+    private List<CstSchedule> scheduleList;
+
+    private List<CstChance> chanceList;
+
+    public List<CstSchedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<CstSchedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
+    public List<CstRecord> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<CstRecord> recordList) {
+        this.recordList = recordList;
+    }
+
+    public List<CstLowCustomer> getLowCustomerList() {
+        return lowCustomerList;
+    }
+
+    public void setLowCustomerList(List<CstLowCustomer> lowCustomerList) {
+        this.lowCustomerList = lowCustomerList;
+    }
+
+    public List<CstLabel> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<CstLabel> labelList) {
+        this.labelList = labelList;
+    }
+
+    public Long getCustId() {
+        return custId;
+    }
+
+    public void setCustId(Long custId) {
+        this.custId = custId;
+>>>>>>> crm/eee
     }
 
     public String getCustName() {
@@ -100,4 +160,15 @@ public class CstCustomer {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+<<<<<<< HEAD
+=======
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+>>>>>>> crm/eee
 }

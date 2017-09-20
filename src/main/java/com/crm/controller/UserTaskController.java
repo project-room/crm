@@ -23,4 +23,11 @@ public class UserTaskController {
         userTaskService.addUserTask(userTask);
         return map;
     }
+
+//    public Map selectAllUserTask(){
+//        Map map= TypeUtil.successMap();
+//
+//    }
+
+
 }

@@ -8,6 +8,7 @@ import com.crm.entity.SysUser;
 import com.crm.entity.SysUserExample;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,17 +42,32 @@ public class SysUserController extends BaseController {
      * 用户退出
      * @return
      */
-//    @RequestMapping("/logout")
-//    public Map logout(){
-//        Map map=TypeUtil.successMap();
-//        session.setAttribute("sysUser",null);
-//        return map;
-//    }
-//
-//    @RequestMapping("/updateUserInfo")
-//    public Map updateUserInfo(SysUser sysUser){
-//        Map map=TypeUtil.successMap();
-//        sysUserService.updateUserInfo(sysUser);
-//        return map;
-//    }
+    @RequestMapping("/logout")
+    public Map logout(){
+        Map map=TypeUtil.successMap();
+        session.setAttribute("sysUser",null);
+        return map;
+    }
+
+    @RequestMapping("/updateUserInfo")
+    public Map updateUserInfo(SysUser sysUser){
+        Map map=TypeUtil.successMap();
+        sysUserService.updateUserInfo(sysUser);
+        return map;
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        return "index.html";
+    }
+    @RequestMapping("/getCustomerList")
+    public Map getCustomerList(Long id){
+        Map map=TypeUtil.successMap();
+        SysUser sysUser = sysUserService.selectCustomerList((long) 1);//这传入的参数到时候要改
+        map.put("sysUserCustomerList",sysUser.getCustomerList());
+        return map;
+    }
+
+
+
 }

@@ -1,18 +1,25 @@
 package com.crm.entity;
 
-import com.crm.common.BaseEntity;
-
 import java.util.Date;
 
-/**
- * Created by Administrator on 2017/9/13.
- * 进度表
- */
-public class CstSchedule extends BaseEntity {
+public class CstSchedule {
+    private Long scheId;
+
     private Integer scheType;
+
     private Date scheTime;
+
     private String scheContent;
+
     private Long custId;
+
+    public Long getScheId() {
+        return scheId;
+    }
+
+    public void setScheId(Long scheId) {
+        this.scheId = scheId;
+    }
 
     public Integer getScheType() {
         return scheType;
@@ -35,7 +42,7 @@ public class CstSchedule extends BaseEntity {
     }
 
     public void setScheContent(String scheContent) {
-        this.scheContent = scheContent;
+        this.scheContent = scheContent == null ? null : scheContent.trim();
     }
 
     public Long getCustId() {
