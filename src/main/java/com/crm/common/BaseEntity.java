@@ -7,7 +7,6 @@ import java.util.Date;
  */
 public class BaseEntity  {
     private Long id;
-    private Date ctime=new Date();
 
     public Long getId() {
         return id;
@@ -17,11 +16,4 @@ public class BaseEntity  {
         this.id = id;
     }
 
-    public Date getCtime() {
-        return ctime;
-    }
-
-    public void setCtime(Date ctime) {
-        this.ctime = ctime;
-    }
 }

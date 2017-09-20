@@ -4,6 +4,7 @@ import com.crm.entity.SysUser;
 import com.crm.entity.SysUserExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -35,4 +36,10 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     SysUser selectByAccount(@Param("userAccounts")String userAccounts);
+
+    SysUser selectById(@Param("id") Long id);
+
+    Integer getCount();
+
+    List<SysUser> getOnePageInfo(@Param("currenPage") Integer currenPage,@Param("pageSize") Integer pageSize);
 }

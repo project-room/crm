@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Page<T> {
     private Integer currentPage = 1;
-    private Integer pageSize = 10;
+    private Integer pageSize = 2;
     private List<T> list = new ArrayList<T>();
     private Long recTotal = 0L;
 

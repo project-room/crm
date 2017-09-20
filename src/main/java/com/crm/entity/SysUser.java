@@ -1,5 +1,8 @@
 package com.crm.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SysUser {
     private Long userId;
 
@@ -21,6 +24,8 @@ public class SysUser {
 
     private String userWorkphone;
 
+    private List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
+
     public Long getUserId() {
         return userId;
     }
@@ -34,7 +39,7 @@ public class SysUser {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public String getUserAccounts() {
@@ -42,7 +47,7 @@ public class SysUser {
     }
 
     public void setUserAccounts(String userAccounts) {
-        this.userAccounts = userAccounts == null ? null : userAccounts.trim();
+        this.userAccounts = userAccounts;
     }
 
     public String getUserPassword() {
@@ -50,7 +55,7 @@ public class SysUser {
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
+        this.userPassword = userPassword;
     }
 
     public Integer getUserStatus() {
@@ -66,7 +71,7 @@ public class SysUser {
     }
 
     public void setUserDepartment(String userDepartment) {
-        this.userDepartment = userDepartment == null ? null : userDepartment.trim();
+        this.userDepartment = userDepartment;
     }
 
     public String getUserPosition() {
@@ -74,7 +79,7 @@ public class SysUser {
     }
 
     public void setUserPosition(String userPosition) {
-        this.userPosition = userPosition == null ? null : userPosition.trim();
+        this.userPosition = userPosition;
     }
 
     public String getUserEmail() {
@@ -82,7 +87,7 @@ public class SysUser {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail == null ? null : userEmail.trim();
+        this.userEmail = userEmail;
     }
 
     public String getUserPhone() {
@@ -90,7 +95,7 @@ public class SysUser {
     }
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone == null ? null : userPhone.trim();
+        this.userPhone = userPhone;
     }
 
     public String getUserWorkphone() {
@@ -98,6 +103,14 @@ public class SysUser {
     }
 
     public void setUserWorkphone(String userWorkphone) {
-        this.userWorkphone = userWorkphone == null ? null : userWorkphone.trim();
+        this.userWorkphone = userWorkphone;
+    }
+
+    public List<CstCustomer> getCstCustomers() {
+        return cstCustomers;
+    }
+
+    public void setCstCustomers(List<CstCustomer> cstCustomers) {
+        this.cstCustomers = cstCustomers;
     }
 }

@@ -12,6 +12,18 @@
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_workphone" property="userWorkphone" jdbcType="VARCHAR" />
+    <collection property="cstCustomers" ofType="CstCustomer">
+      <id column="id" property="id"></id>
+      <result column="cust_name" property="custName"></result>
+      <result column="cust_phone" property="custPhone"></result>
+      <result column="cust_email" property="custEmail"></result>
+      <result column="cust_company" property="custCompany"></result>
+      <result column="cust_address" property="custAddress"></result>
+      <result column="cust_industry" property="custIndustry"></result>
+      <result column="cust_pic" property="custPic"></result>
+      <result column="cust_sales" property="custSales"></result>
+      <result column="user_id" property="userId" javaType="Long"></result>
+    </collection>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -294,6 +306,15 @@
   <include refid="Base_Column_List" />
   from sys_user
   where user_accounts = #{userAccounts}
+  </select>
+  <select id="selectById"  resultMap="BaseResultMap" >
+   SELECT * FROM sys_user s,cst_customer c WHERE s.`user_id`=c.`user_id` AND s.user_id=#{id}
+  </select>
+  <select id="getCount" resultType="int">
+    SELECT COUNT(1) FROM cst_customer
+  </select>
+  <select id="getOnePageInfo"  parameterType="Integer" resultMap="BaseResultMap">
+  SELECT * FROM cst_customer LIMIT  #{currenPage},#{pageSize}
   </select>
 
 </mapper>
