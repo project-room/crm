@@ -28,6 +28,7 @@ public class CstCustomerController extends BaseController{
     @Autowired
     private CstCustomerMapper cstCustomerMapper;
 
+
     @RequestMapping("/get")
     public Map getCstCustomer(){
         Map map= TypeUtil.successMap();
@@ -97,6 +98,17 @@ public class CstCustomerController extends BaseController{
     public Map editorCstCustomer(CstCustomer cstCustomer){
         Map map =TypeUtil.successMap();
         cstCustomerService.editorCstCustomer(cstCustomer);
+        return map;
+    }
+
+    /***
+     * 通过客户id查询标签
+     */
+    @RequestMapping("/getCstLabel")
+    public Map selectCstLabel(CstCustomer cstCustomer){
+        Map map=TypeUtil.successMap();
+        CstCustomer cstCustomer1 = cstCustomerService.selectLabelList((long) 1);
+        map.put("cstLabelList",cstCustomer1.getLabelList());
         return map;
     }
 

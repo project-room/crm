@@ -15,6 +15,6 @@ public class UserTaskServiceImpl implements IUserTaskService {
     private UserTaskMapper userTaskMapper;
     @Override
     public void addUserTask(UserTask userTask) {
-        userTaskMapper.saveUserTask(userTask);
+        userTaskMapper.insert(userTask);
     }
 }

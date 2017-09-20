@@ -1,5 +1,7 @@
 package com.crm.entity;
 
+import java.util.List;
+
 public class SysUser {
     private Long userId;
 
@@ -20,6 +22,26 @@ public class SysUser {
     private String userPhone;
 
     private String userWorkphone;
+
+    private List<CstCustomer> customerList;//附加对象客户List
+
+    private List<UserTask> taskList;//附加对象任务List
+
+    public List<UserTask> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<UserTask> taskList) {
+        this.taskList = taskList;
+    }
+
+    public List<CstCustomer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<CstCustomer> customerList) {
+        this.customerList = customerList;
+    }
 
     public Long getUserId() {
         return userId;

@@ -35,4 +35,7 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     SysUser selectByAccount(@Param("userAccounts")String userAccounts);
+
+    //根据用户id查询客户表数据
+    SysUser selectCustomerList(Long userId);
 }

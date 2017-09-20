@@ -5,9 +5,21 @@ package com.crm.entity;
  * 下级客户表
  */
 public class CstLowCustomer {
+    private Long lowCustId;
+
     private Long highCustId;
+
     private String custCompany;
+
     private Long custId;
+
+    public Long getLowCustId() {
+        return lowCustId;
+    }
+
+    public void setLowCustId(Long lowCustId) {
+        this.lowCustId = lowCustId;
+    }
 
     public Long getHighCustId() {
         return highCustId;
@@ -22,7 +34,7 @@ public class CstLowCustomer {
     }
 
     public void setCustCompany(String custCompany) {
-        this.custCompany = custCompany;
+        this.custCompany = custCompany == null ? null : custCompany.trim();
     }
 
     public Long getCustId() {

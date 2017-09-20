@@ -9,12 +9,27 @@ import java.util.Date;
  * 首页动态表
  */
 public class SysDynamic extends BaseEntity{
+    private Long dyId;
+
     private Long userId;
+
     private String userName;
+
     private String dyContent;
+
     private Date dyDate;
+
     private Integer dyClassify;
-    private  Long dyClassifyId;
+
+    private Long dyClassifyId;
+
+    public Long getDyId() {
+        return dyId;
+    }
+
+    public void setDyId(Long dyId) {
+        this.dyId = dyId;
+    }
 
     public Long getUserId() {
         return userId;
@@ -29,7 +44,7 @@ public class SysDynamic extends BaseEntity{
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getDyContent() {
@@ -37,7 +52,7 @@ public class SysDynamic extends BaseEntity{
     }
 
     public void setDyContent(String dyContent) {
-        this.dyContent = dyContent;
+        this.dyContent = dyContent == null ? null : dyContent.trim();
     }
 
     public Date getDyDate() {

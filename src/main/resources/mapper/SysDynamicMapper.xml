@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.biz.dynamic.dao.SysDynamicMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.entity.SysDynamic" >
+    <id column="dy_id" property="dyId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="dy_content" property="dyContent" jdbcType="VARCHAR" />
+    <result column="dy_date" property="dyDate" jdbcType="TIMESTAMP" />
+    <result column="dy_classify" property="dyClassify" jdbcType="INTEGER" />
+    <result column="dy_classify_id" property="dyClassifyId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dy_id, user_id, user_name, dy_content, dy_date, dy_classify, dy_classify_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.crm.entity.SysDynamicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dynamic
+    where dy_id = #{dyId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_dynamic
+    where dy_id = #{dyId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crm.entity.SysDynamicExample" >
+    delete from sys_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crm.entity.SysDynamic" >
+    insert into sys_dynamic (dy_id, user_id, user_name, 
+      dy_content, dy_date, dy_classify, 
+      dy_classify_id)
+    values (#{dyId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
+      #{dyContent,jdbcType=VARCHAR}, #{dyDate,jdbcType=TIMESTAMP}, #{dyClassify,jdbcType=INTEGER}, 
+      #{dyClassifyId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.entity.SysDynamic" >
+    insert into sys_dynamic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dyId != null" >
+        dy_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="dyContent != null" >
+        dy_content,
+      </if>
+      <if test="dyDate != null" >
+        dy_date,
+      </if>
+      <if test="dyClassify != null" >
+        dy_classify,
+      </if>
+      <if test="dyClassifyId != null" >
+        dy_classify_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dyId != null" >
+        #{dyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="dyContent != null" >
+        #{dyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dyDate != null" >
+        #{dyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dyClassify != null" >
+        #{dyClassify,jdbcType=INTEGER},
+      </if>
+      <if test="dyClassifyId != null" >
+        #{dyClassifyId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crm.entity.SysDynamicExample" resultType="java.lang.Integer" >
+    select count(*) from sys_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_dynamic
+    <set >
+      <if test="record.dyId != null" >
+        dy_id = #{record.dyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dyContent != null" >
+        dy_content = #{record.dyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dyDate != null" >
+        dy_date = #{record.dyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dyClassify != null" >
+        dy_classify = #{record.dyClassify,jdbcType=INTEGER},
+      </if>
+      <if test="record.dyClassifyId != null" >
+        dy_classify_id = #{record.dyClassifyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_dynamic
+    set dy_id = #{record.dyId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      dy_content = #{record.dyContent,jdbcType=VARCHAR},
+      dy_date = #{record.dyDate,jdbcType=TIMESTAMP},
+      dy_classify = #{record.dyClassify,jdbcType=INTEGER},
+      dy_classify_id = #{record.dyClassifyId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.entity.SysDynamic" >
+    update sys_dynamic
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="dyContent != null" >
+        dy_content = #{dyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dyDate != null" >
+        dy_date = #{dyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dyClassify != null" >
+        dy_classify = #{dyClassify,jdbcType=INTEGER},
+      </if>
+      <if test="dyClassifyId != null" >
+        dy_classify_id = #{dyClassifyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where dy_id = #{dyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.entity.SysDynamic" >
+    update sys_dynamic
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      dy_content = #{dyContent,jdbcType=VARCHAR},
+      dy_date = #{dyDate,jdbcType=TIMESTAMP},
+      dy_classify = #{dyClassify,jdbcType=INTEGER},
+      dy_classify_id = #{dyClassifyId,jdbcType=BIGINT}
+    where dy_id = #{dyId,jdbcType=BIGINT}
+  </update>
+</mapper>

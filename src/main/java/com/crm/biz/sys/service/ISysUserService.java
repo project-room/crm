@@ -18,5 +18,16 @@ public interface ISysUserService {
      * 修改用户信息
      * @param sysUser
      */
-//    public void updateUserInfo(SysUser sysUser);
+    public void updateUserInfo(SysUser sysUser);
+
+    /***
+     * 插入用户信息
+     */
+    public void insertUserInfo(SysUser sysUser);
+
+    /***
+     * 查询客户信息
+     */
+    public SysUser selectCustomerList(Long userId);
+
 }

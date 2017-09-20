@@ -47,4 +47,9 @@ public interface ICstCustomerService {
      * @param cstCustomer
      */
     public void editorCstCustomer(CstCustomer cstCustomer);
+
+    /***
+     * 查询客户的标签
+     */
+    public CstCustomer selectLabelList(Long custId);
 }

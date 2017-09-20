@@ -8,12 +8,26 @@ import java.util.Date;
  * Created by Administrator on 2017/9/13.
  * 任务表
  */
-public class UserTask extends BaseEntity {
+public class UserTask {
+    private Long taskId;
+
     private Integer taskStatus;
+
     private String taskContent;
+
     private Date taskDate;
+
     private Long userId;
+
     private Long cstId;
+
+    public Long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
+    }
 
     public Integer getTaskStatus() {
         return taskStatus;
@@ -28,7 +42,7 @@ public class UserTask extends BaseEntity {
     }
 
     public void setTaskContent(String taskContent) {
-        this.taskContent = taskContent;
+        this.taskContent = taskContent == null ? null : taskContent.trim();
     }
 
     public Date getTaskDate() {

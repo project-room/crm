@@ -1,25 +1,32 @@
 package com.crm.entity;
 
-import com.crm.common.BaseEntity;
-
 import java.util.Date;
 
-/**
- * Created by Administrator on 2017/9/12.
- * 记录表
- */
-public class CstRecord extends BaseEntity {
+public class CstRecord {
+    private Long reId;
+
     private String reContent;
+
     private Long custId;
+
     private String userName;
+
     private Date reDate;
+
+    public Long getReId() {
+        return reId;
+    }
+
+    public void setReId(Long reId) {
+        this.reId = reId;
+    }
 
     public String getReContent() {
         return reContent;
     }
 
     public void setReContent(String reContent) {
-        this.reContent = reContent;
+        this.reContent = reContent == null ? null : reContent.trim();
     }
 
     public Long getCustId() {
@@ -35,7 +42,7 @@ public class CstRecord extends BaseEntity {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public Date getReDate() {
