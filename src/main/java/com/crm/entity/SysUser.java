@@ -1,6 +1,5 @@
 package com.crm.entity;
 
-
 import java.util.List;
 
 public class SysUser {
@@ -24,10 +23,21 @@ public class SysUser {
 
     private String userWorkphone;
 
+    private Integer userState;
 
-    private List<CstCustomer> customerList;//附加对象客户List
+    private List<CstCustomer> customerList;
 
-    private List<UserTask> taskList;//附加对象任务List
+    private List<UserTask> taskList;
+
+    private List<CstChance> chanceList;
+
+    public List<CstChance> getChanceList() {
+        return chanceList;
+    }
+
+    public void setChanceList(List<CstChance> chanceList) {
+        this.chanceList = chanceList;
+    }
 
     public List<UserTask> getTaskList() {
         return taskList;
@@ -58,7 +68,7 @@ public class SysUser {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getUserAccounts() {
@@ -66,7 +76,7 @@ public class SysUser {
     }
 
     public void setUserAccounts(String userAccounts) {
-        this.userAccounts = userAccounts;
+        this.userAccounts = userAccounts == null ? null : userAccounts.trim();
     }
 
     public String getUserPassword() {
@@ -74,7 +84,7 @@ public class SysUser {
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
     public Integer getUserStatus() {
@@ -90,7 +100,7 @@ public class SysUser {
     }
 
     public void setUserDepartment(String userDepartment) {
-        this.userDepartment = userDepartment;
+        this.userDepartment = userDepartment == null ? null : userDepartment.trim();
     }
 
     public String getUserPosition() {
@@ -98,7 +108,7 @@ public class SysUser {
     }
 
     public void setUserPosition(String userPosition) {
-        this.userPosition = userPosition;
+        this.userPosition = userPosition == null ? null : userPosition.trim();
     }
 
     public String getUserEmail() {
@@ -106,7 +116,7 @@ public class SysUser {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        this.userEmail = userEmail == null ? null : userEmail.trim();
     }
 
     public String getUserPhone() {
@@ -114,7 +124,7 @@ public class SysUser {
     }
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
     public String getUserWorkphone() {
@@ -122,8 +132,14 @@ public class SysUser {
     }
 
     public void setUserWorkphone(String userWorkphone) {
-        this.userWorkphone = userWorkphone;
+        this.userWorkphone = userWorkphone == null ? null : userWorkphone.trim();
     }
 
+    public Integer getUserState() {
+        return userState;
+    }
 
+    public void setUserState(Integer userState) {
+        this.userState = userState;
+    }
 }

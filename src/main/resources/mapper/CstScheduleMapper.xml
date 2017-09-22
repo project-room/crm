@@ -6,7 +6,7 @@
     <result column="sche_type" property="scheType" jdbcType="INTEGER" />
     <result column="sche_time" property="scheTime" jdbcType="TIMESTAMP" />
     <result column="sche_content" property="scheContent" jdbcType="VARCHAR" />
-    <result column="cust_id" property="custId" jdbcType="BIGINT" />
+    <result column="ch_id" property="chId" jdbcType="BIGINT" />
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM cst_schedule WHERE sche_id=#{id}

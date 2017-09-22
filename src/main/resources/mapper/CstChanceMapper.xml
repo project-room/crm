@@ -4,12 +4,76 @@
   <resultMap id="BaseResultMap" type="com.crm.entity.CstChance" >
     <id column="ch_id" property="chId" jdbcType="BIGINT" />
     <result column="ch_content" property="chContent" jdbcType="VARCHAR" />
-    <result column="ch_stage" property="chStage" jdbcType="INTEGER" />
     <result column="cust_id" property="custId" jdbcType="BIGINT" />
     <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
     <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
+    <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
+    <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
+    <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
+    <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+    <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+    <!--机会表和记录表的关联-->
+    <collection property="recordList" ofType="com.crm.entity.CstRecord">
+      <id column="re_id" property="reId" jdbcType="BIGINT" />
+      <result column="re_content" property="reContent" jdbcType="VARCHAR" />
+      <result column="ch_id" property="chId" jdbcType="BIGINT" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="re_date" property="reDate" jdbcType="TIMESTAMP" />
+    </collection>
+    <!--机会表和进度表的关联-->
+    <collection property="scheduleList" ofType="com.crm.entity.CstSchedule">
+      <id column="sche_id" property="scheId" jdbcType="BIGINT" />
+      <result column="sche_type" property="scheType" jdbcType="INTEGER" />
+      <result column="sche_time" property="scheTime" jdbcType="TIMESTAMP" />
+      <result column="sche_content" property="scheContent" jdbcType="VARCHAR" />
+      <result column="ch_id" property="chId" jdbcType="BIGINT" />
+    </collection>
+    <!--机会表和合同表的关联-->
+    <collection property="contractList" ofType="com.crm.entity.CstContract">
+      <id column="contract_id" property="contractId" jdbcType="BIGINT" />
+      <result column="contract_type" property="contractType" jdbcType="VARCHAR" />
+      <result column="contract_name" property="contractName" jdbcType="VARCHAR" />
+      <result column="contract_all_money" property="contractAllMoney" jdbcType="DOUBLE" />
+      <result column="ch_id" property="chId" jdbcType="BIGINT" />
+      <result column="sign_date" property="signDate" jdbcType="DATE" />
+      <result column="expire_date" property="expireDate" jdbcType="DATE" />
+      <result column="contract_state" property="contractState" jdbcType="INTEGER" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="create_date" property="createDate" jdbcType="DATE" />
+    </collection>
+    <!--机会表和联系人表的关联-->
+    <collection property="linkmanList" ofType="com.crm.entity.ChLinkman">
+      <id column="link_id" property="linkId" jdbcType="BIGINT" />
+      <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+      <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+      <result column="link_landline_phone" property="linkLandlinePhone" jdbcType="VARCHAR" />
+      <result column="link_email" property="linkEmail" jdbcType="VARCHAR" />
+      <result column="link_qq" property="linkQq" jdbcType="VARCHAR" />
+      <result column="link_wechat" property="linkWechat" jdbcType="VARCHAR" />
+      <result column="link_status" property="linkStatus" jdbcType="INTEGER" />
+      <result column="ch_id" property="chId" jdbcType="BIGINT" />
+      <result column="link_department" property="linkDepartment" jdbcType="VARCHAR" />
+      <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
+    </collection>
+    <!--机会表和客户表的关联-->
+    <collection property="chCustomer" ofType="com.crm.entity.CstCustomer">
+      <id column="cust_id" property="custId" jdbcType="BIGINT" />
+      <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
+      <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
+      <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
+      <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
+      <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
+      <result column="cust_sales" property="custSales" jdbcType="VARCHAR" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="cust_classify" property="custClassify" jdbcType="INTEGER" />
+      <result column="cust_content" property="custContent" jdbcType="VARCHAR" />
+      <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
+      <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
+      <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+  </collection>
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM cst_chance WHERE cust_id=#{id}

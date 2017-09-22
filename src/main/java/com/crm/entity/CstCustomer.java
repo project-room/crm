@@ -1,14 +1,9 @@
 package com.crm.entity;
 
-
 import java.util.List;
 
 public class CstCustomer {
     private Long custId;
-
-    private String custName;
-
-    private String custPhone;
 
     private String custEmail;
 
@@ -24,33 +19,19 @@ public class CstCustomer {
 
     private Long userId;
 
-    private Integer type;
+    private Integer custClassify;
+
+    private String custContent;
+
+    private String custLifecycle;
+
+    private String custWebsite;
+
+    private String custType;
 
     private List<CstLabel> labelList;
 
     private List<CstLowCustomer> lowCustomerList;
-
-    private List<CstRecord> recordList;
-
-    private List<CstSchedule> scheduleList;
-
-    private List<CstChance> chanceList;
-
-    public List<CstSchedule> getScheduleList() {
-        return scheduleList;
-    }
-
-    public void setScheduleList(List<CstSchedule> scheduleList) {
-        this.scheduleList = scheduleList;
-    }
-
-    public List<CstRecord> getRecordList() {
-        return recordList;
-    }
-
-    public void setRecordList(List<CstRecord> recordList) {
-        this.recordList = recordList;
-    }
 
     public List<CstLowCustomer> getLowCustomerList() {
         return lowCustomerList;
@@ -74,22 +55,6 @@ public class CstCustomer {
 
     public void setCustId(Long custId) {
         this.custId = custId;
-    }
-
-    public String getCustName() {
-        return custName;
-    }
-
-    public void setCustName(String custName) {
-        this.custName = custName == null ? null : custName.trim();
-    }
-
-    public String getCustPhone() {
-        return custPhone;
-    }
-
-    public void setCustPhone(String custPhone) {
-        this.custPhone = custPhone == null ? null : custPhone.trim();
     }
 
     public String getCustEmail() {
@@ -148,12 +113,43 @@ public class CstCustomer {
         this.userId = userId;
     }
 
-
-    public Integer getType() {
-        return type;
+    public Integer getCustClassify() {
+        return custClassify;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setCustClassify(Integer custClassify) {
+        this.custClassify = custClassify;
+    }
+
+    public String getCustContent() {
+        return custContent;
+    }
+
+    public void setCustContent(String custContent) {
+        this.custContent = custContent == null ? null : custContent.trim();
+    }
+
+    public String getCustLifecycle() {
+        return custLifecycle;
+    }
+
+    public void setCustLifecycle(String custLifecycle) {
+        this.custLifecycle = custLifecycle == null ? null : custLifecycle.trim();
+    }
+
+    public String getCustWebsite() {
+        return custWebsite;
+    }
+
+    public void setCustWebsite(String custWebsite) {
+        this.custWebsite = custWebsite == null ? null : custWebsite.trim();
+    }
+
+    public String getCustType() {
+        return custType;
+    }
+
+    public void setCustType(String custType) {
+        this.custType = custType == null ? null : custType.trim();
     }
 }

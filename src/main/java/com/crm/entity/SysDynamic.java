@@ -1,14 +1,8 @@
 package com.crm.entity;
 
-import com.crm.common.BaseEntity;
-
 import java.util.Date;
 
-/**
- * Created by Administrator on 2017/9/13.
- * 首页动态表
- */
-public class SysDynamic extends BaseEntity{
+public class SysDynamic {
     private Long dyId;
 
     private Long userId;

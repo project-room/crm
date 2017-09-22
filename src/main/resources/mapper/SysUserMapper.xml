@@ -12,11 +12,10 @@
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_workphone" property="userWorkphone" jdbcType="VARCHAR" />
+    <result column="user_state" property="userState" jdbcType="INTEGER" />
     <!--用户表和客户表的关联-->
     <collection property="customerList" ofType="com.crm.entity.CstCustomer">
       <id column="cust_id" property="custId" jdbcType="BIGINT" />
-      <result column="cust_name" property="custName" jdbcType="VARCHAR" />
-      <result column="cust_phone" property="custPhone" jdbcType="VARCHAR" />
       <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
       <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
       <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
@@ -24,16 +23,37 @@
       <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
       <result column="cust_sales" property="custSales" jdbcType="VARCHAR" />
       <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="cust_classify" property="custClassify" jdbcType="INTEGER" />
+      <result column="cust_content" property="custContent" jdbcType="VARCHAR" />
+      <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
+      <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
+      <result column="cust_type" property="custType" jdbcType="VARCHAR" />
     </collection>
-    <!-- 用户表和任务表的关联 -->
-  <collection property="taskList" ofType="com.crm.entity.UserTask">
-    <id column="task_id" property="taskId" jdbcType="BIGINT" />
-    <result column="task_status" property="taskStatus" jdbcType="INTEGER" />
-    <result column="task_content" property="taskContent" jdbcType="VARCHAR" />
-    <result column="task_date" property="taskDate" jdbcType="TIMESTAMP" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="cst_id" property="cstId" jdbcType="BIGINT" />
-  </collection>
+    <!--用户表和任务表的关联-->
+    <collection property="taskList" ofType="com.crm.entity.UserTask">
+      <id column="task_id" property="taskId" jdbcType="BIGINT" />
+      <result column="task_status" property="taskStatus" jdbcType="INTEGER" />
+      <result column="task_content" property="taskContent" jdbcType="VARCHAR" />
+      <result column="task_date" property="taskDate" jdbcType="TIMESTAMP" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="ch_id" property="chId" jdbcType="BIGINT" />
+    </collection>
+    <!--用户表和机会表的关联-->
+    <collection property="chanceList" ofType="com.crm.entity.CstChance">
+      <id column="ch_id" property="chId" jdbcType="BIGINT" />
+      <result column="ch_content" property="chContent" jdbcType="VARCHAR" />
+      <result column="cust_id" property="custId" jdbcType="BIGINT" />
+      <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
+      <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
+      <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
+      <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
+      <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
+      <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+      <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+    </collection>
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM sys_user WHERE user_id=#{id}

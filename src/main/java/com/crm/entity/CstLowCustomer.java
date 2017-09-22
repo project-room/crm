@@ -1,9 +1,5 @@
 package com.crm.entity;
 
-/**
- * Created by Administrator on 2017/9/12.
- * 下级客户表
- */
 public class CstLowCustomer {
     private Long lowCustId;
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.biz.sys.dao.mapper.ChLinkmanMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.entity.ChLinkman" >
+    <id column="link_id" property="linkId" jdbcType="BIGINT" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="link_landline_phone" property="linkLandlinePhone" jdbcType="VARCHAR" />
+    <result column="link_email" property="linkEmail" jdbcType="VARCHAR" />
+    <result column="link_qq" property="linkQq" jdbcType="VARCHAR" />
+    <result column="link_wechat" property="linkWechat" jdbcType="VARCHAR" />
+    <result column="link_status" property="linkStatus" jdbcType="INTEGER" />
+    <result column="ch_id" property="chId" jdbcType="BIGINT" />
+    <result column="link_department" property="linkDepartment" jdbcType="VARCHAR" />
+    <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
+  </resultMap>
+
+</mapper>
