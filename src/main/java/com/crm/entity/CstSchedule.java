@@ -11,7 +11,7 @@ public class CstSchedule {
 
     private String scheContent;
 
-    private Long custId;
+    private Long chId;
 
     public Long getScheId() {
         return scheId;
@@ -45,11 +45,11 @@ public class CstSchedule {
         this.scheContent = scheContent == null ? null : scheContent.trim();
     }
 
-    public Long getCustId() {
-        return custId;
+    public Long getChId() {
+        return chId;
     }
 
-    public void setCustId(Long custId) {
-        this.custId = custId;
+    public void setChId(Long chId) {
+        this.chId = chId;
     }
 }

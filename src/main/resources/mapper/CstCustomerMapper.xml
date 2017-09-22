@@ -2,59 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crm.biz.customer.dao.CstCustomerMapper" >
   <resultMap id="BaseResultMap" type="com.crm.entity.CstCustomer" >
-
     <id column="cust_id" property="custId" jdbcType="BIGINT" />
-    <result column="cust_name" property="custName" jdbcType="VARCHAR" />
-    <result column="cust_phone" property="custPhone" jdbcType="VARCHAR" />
     <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
     <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
     <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
     <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
     <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
     <result column="cust_sales" property="custSales" jdbcType="VARCHAR" />
-
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <!--客户表和标签表之间的关联-->
-    <collection property="labelList" ofType="com.crm.entity.CstLabel">
-      <id column="label_id" property="labelId" jdbcType="INTEGER" />
-      <result column="label_name" property="labelName" jdbcType="VARCHAR" />
-      <result column="user_id" property="userId" jdbcType="BIGINT" />
-    </collection>
-    <!--客户表与下级客户表之间的关联-->
-    <collection property="lowCustomerList" ofType="com.crm.entity.CstLowCustomer">
-      <id column="low_cust_id" property="lowCustId" jdbcType="BIGINT" />
-      <result column="high_cust_id" property="highCustId" jdbcType="BIGINT" />
-      <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
-      <result column="cust_id" property="custId" jdbcType="BIGINT" />
-    </collection>
-    <!--客户表与记录表之间的关联-->
-  <collection property="recordList" ofType="com.crm.entity.CstRecord">
-    <id column="re_id" property="reId" jdbcType="BIGINT" />
-    <result column="re_content" property="reContent" jdbcType="VARCHAR" />
-    <result column="cust_id" property="custId" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="re_date" property="reDate" jdbcType="TIMESTAMP" />
-  </collection>
-    <!--与进度表之间的关联-->
-    <collection property="scheduleList" ofType="com.crm.entity.CstSchedule">
-      <id column="sche_id" property="scheId" jdbcType="BIGINT" />
-      <result column="sche_type" property="scheType" jdbcType="INTEGER" />
-      <result column="sche_time" property="scheTime" jdbcType="TIMESTAMP" />
-      <result column="sche_content" property="scheContent" jdbcType="VARCHAR" />
-      <result column="cust_id" property="custId" jdbcType="BIGINT" />
-    </collection>
-    <!--与机会表之间的关联-->
-    <collection property="chanceList" ofType="com.crm.entity.CstChance">
-      <id column="ch_id" property="chId" jdbcType="BIGINT" />
-      <result column="ch_content" property="chContent" jdbcType="VARCHAR" />
-      <result column="ch_stage" property="chStage" jdbcType="INTEGER" />
-      <result column="cust_id" property="custId" jdbcType="BIGINT" />
-      <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
-      <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
-      <result column="user_name" property="userName" jdbcType="VARCHAR" />
-      <result column="user_id" property="userId" jdbcType="BIGINT" />
-    </collection>
+    <result column="cust_classify" property="custClassify" jdbcType="INTEGER" />
+    <result column="cust_content" property="custContent" jdbcType="VARCHAR" />
+    <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
+    <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
+    <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+      <!--客户表和标签表之间的关联-->
+      <collection property="labelList" ofType="com.crm.entity.CstLabel">
+          <id column="label_id" property="labelId" jdbcType="INTEGER" />
+          <result column="label_name" property="labelName" jdbcType="VARCHAR" />
+          <result column="user_id" property="userId" jdbcType="BIGINT" />
+      </collection>
+      <!--客户表与下级客户表之间的关联-->
+      <collection property="lowCustomerList" ofType="com.crm.entity.CstLowCustomer">
+          <id column="low_cust_id" property="lowCustId" jdbcType="BIGINT" />
+          <result column="high_cust_id" property="highCustId" jdbcType="BIGINT" />
+          <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
+          <result column="cust_id" property="custId" jdbcType="BIGINT" />
+      </collection>
+
   </resultMap>
 
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">

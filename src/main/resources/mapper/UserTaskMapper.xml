@@ -7,7 +7,7 @@
     <result column="task_content" property="taskContent" jdbcType="VARCHAR" />
     <result column="task_date" property="taskDate" jdbcType="TIMESTAMP" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="cst_id" property="cstId" jdbcType="BIGINT" />
+    <result column="ch_id" property="chId" jdbcType="BIGINT" />
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM user_task WHERE task_id=#{id}

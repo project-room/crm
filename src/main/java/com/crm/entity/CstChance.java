@@ -1,13 +1,12 @@
 package com.crm.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class CstChance {
     private Long chId;
 
     private String chContent;
-
-    private Integer chStage;
 
     private Long custId;
 
@@ -18,6 +17,68 @@ public class CstChance {
     private String userName;
 
     private Long userId;
+
+    private String chDept;
+
+    private Integer chDoc;
+
+    private Integer chSupplier;
+
+    private String chUptime;
+
+    private String chBackground;
+
+    private String chStage;
+
+    private List<CstRecord> recordList;
+
+    private List<CstSchedule> scheduleList;
+
+    private List<CstContract> contractList;
+
+    private List<ChLinkman> linkmanList;
+
+    private CstCustomer chCustomer;
+
+    public CstCustomer getChCustomer() {
+        return chCustomer;
+    }
+
+    public void setChCustomer(CstCustomer chCustomer) {
+        this.chCustomer = chCustomer;
+    }
+
+    public List<ChLinkman> getLinkmanList() {
+        return linkmanList;
+    }
+
+    public void setLinkmanList(List<ChLinkman> linkmanList) {
+        this.linkmanList = linkmanList;
+    }
+
+    public List<CstContract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<CstContract> contractList) {
+        this.contractList = contractList;
+    }
+
+    public List<CstSchedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<CstSchedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
+    public List<CstRecord> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<CstRecord> recordList) {
+        this.recordList = recordList;
+    }
 
     public Long getChId() {
         return chId;
@@ -33,14 +94,6 @@ public class CstChance {
 
     public void setChContent(String chContent) {
         this.chContent = chContent == null ? null : chContent.trim();
-    }
-
-    public Integer getChStage() {
-        return chStage;
-    }
-
-    public void setChStage(Integer chStage) {
-        this.chStage = chStage;
     }
 
     public Long getCustId() {
@@ -81,5 +134,53 @@ public class CstChance {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getChDept() {
+        return chDept;
+    }
+
+    public void setChDept(String chDept) {
+        this.chDept = chDept == null ? null : chDept.trim();
+    }
+
+    public Integer getChDoc() {
+        return chDoc;
+    }
+
+    public void setChDoc(Integer chDoc) {
+        this.chDoc = chDoc;
+    }
+
+    public Integer getChSupplier() {
+        return chSupplier;
+    }
+
+    public void setChSupplier(Integer chSupplier) {
+        this.chSupplier = chSupplier;
+    }
+
+    public String getChUptime() {
+        return chUptime;
+    }
+
+    public void setChUptime(String chUptime) {
+        this.chUptime = chUptime == null ? null : chUptime.trim();
+    }
+
+    public String getChBackground() {
+        return chBackground;
+    }
+
+    public void setChBackground(String chBackground) {
+        this.chBackground = chBackground == null ? null : chBackground.trim();
+    }
+
+    public String getChStage() {
+        return chStage;
+    }
+
+    public void setChStage(String chStage) {
+        this.chStage = chStage == null ? null : chStage.trim();
     }
 }

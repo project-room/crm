@@ -1,17 +1,28 @@
 package com.crm.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class CstRecord {
     private Long reId;
 
     private String reContent;
 
-    private Long custId;
+    private Long chId;
 
     private String userName;
 
     private Date reDate;
+
+    private List<SysAttachment> attachmentList;
+
+    public List<SysAttachment> getAttachmentList() {
+        return attachmentList;
+    }
+
+    public void setAttachmentList(List<SysAttachment> attachmentList) {
+        this.attachmentList = attachmentList;
+    }
 
     public Long getReId() {
         return reId;
@@ -29,12 +40,12 @@ public class CstRecord {
         this.reContent = reContent == null ? null : reContent.trim();
     }
 
-    public Long getCustId() {
-        return custId;
+    public Long getChId() {
+        return chId;
     }
 
-    public void setCustId(Long custId) {
-        this.custId = custId;
+    public void setChId(Long chId) {
+        this.chId = chId;
     }
 
     public String getUserName() {

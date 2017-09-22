@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.biz.sys.dao.mapper.CstContractMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.entity.CstContract" >
+    <id column="contract_id" property="contractId" jdbcType="BIGINT" />
+    <result column="contract_type" property="contractType" jdbcType="VARCHAR" />
+    <result column="contract_name" property="contractName" jdbcType="VARCHAR" />
+    <result column="contract_all_money" property="contractAllMoney" jdbcType="DOUBLE" />
+    <result column="ch_id" property="chId" jdbcType="BIGINT" />
+    <result column="sign_date" property="signDate" jdbcType="DATE" />
+    <result column="expire_date" property="expireDate" jdbcType="DATE" />
+    <result column="contract_state" property="contractState" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <!--合同表和附件表的关联-->
+    <collection property="attachmentList" ofType="com.crm.entity.SysAttachment">
+      <id column="atta_id" property="attaId" jdbcType="BIGINT" />
+      <result column="atta_classify" property="attaClassify" jdbcType="INTEGER" />
+      <result column="atta_classify_id" property="attaClassifyId" jdbcType="BIGINT" />
+      <result column="atta_name" property="attaName" jdbcType="VARCHAR" />
+      <result column="atta_address" property="attaAddress" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+</mapper>
