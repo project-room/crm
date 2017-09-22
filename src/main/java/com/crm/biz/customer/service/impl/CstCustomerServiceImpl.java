@@ -15,48 +15,48 @@ import java.util.Set;
  */
 @Service
 public class CstCustomerServiceImpl implements ICstCustomerService{
-    @Autowired
-    private CstCustomerMapper cstCustomerMapper;
-    @Override
-    public CstCustomer getCstCustomer() {
-//        CstCustomer cstCustomer=null;
-//        cstCustomer=cstCustomerMapper.findCstCustomer();
-//        return cstCustomer;
-        return null;
-    }
-
-    @Override
-    public void addCstCustomerInfo(CstCustomer cstCustomer, CstLowCustomer cstLowCustomer, CstLabel cstLabel) {
-//        cstCustomerMapper.addCstCustomerInfo(cstCustomer,cstLowCustomer,cstLabel);
-    }
-
-    @Override
-    public Set<CstCustomer> screenCstCustomers(CstCustomer cstCustomer) {
-//        Set<CstCustomer> cstCustomers=null;
-//        cstCustomerMapper.selectAllCstCustomesByScreen(cstCustomer);
-//        return cstCustomers;
-        return null;
-    }
-
-    @Override
-    public void deleteCstCustomer(Long cstCustomerId) {
-//        cstCustomerMapper.deleteById(cstCustomerId);
-    }
-
-    @Override
-    public Set<CstCustomer> searchByCstCustomerName(String CstCustomerName) {
-//        return cstCustomerMapper.searchByCstCustomerName(CstCustomerName);
-        return null;
-    }
-
-    @Override
-    public void editorCstCustomer(CstCustomer cstCustomer) {
-//        cstCustomerMapper.updateCstCustomer(cstCustomer);
-    }
-
-    public CstCustomer selectLabelList(Long custId){
-        return cstCustomerMapper.selectLabelList(custId);
-    }
+//    @Autowired
+//    private CstCustomerMapper cstCustomerMapper;
+//    @Override
+//    public CstCustomer getCstCustomer() {
+////        CstCustomer cstCustomer=null;
+////        cstCustomer=cstCustomerMapper.findCstCustomer();
+////        return cstCustomer;
+//        return null;
+//    }
+//
+//    @Override
+//    public void addCstCustomerInfo(CstCustomer cstCustomer, CstLowCustomer cstLowCustomer, CstLabel cstLabel) {
+////        cstCustomerMapper.addCstCustomerInfo(cstCustomer,cstLowCustomer,cstLabel);
+//    }
+//
+//    @Override
+//    public Set<CstCustomer> screenCstCustomers(CstCustomer cstCustomer) {
+////        Set<CstCustomer> cstCustomers=null;
+////        cstCustomerMapper.selectAllCstCustomesByScreen(cstCustomer);
+////        return cstCustomers;
+//        return null;
+//    }
+//
+//    @Override
+//    public void deleteCstCustomer(Long cstCustomerId) {
+////        cstCustomerMapper.deleteById(cstCustomerId);
+//    }
+//
+//    @Override
+//    public Set<CstCustomer> searchByCstCustomerName(String CstCustomerName) {
+////        return cstCustomerMapper.searchByCstCustomerName(CstCustomerName);
+//        return null;
+//    }
+//
+//    @Override
+//    public void editorCstCustomer(CstCustomer cstCustomer) {
+////        cstCustomerMapper.updateCstCustomer(cstCustomer);
+//    }
+//
+//    public CstCustomer selectLabelList(Long custId){
+//        return cstCustomerMapper.selectLabelList(custId);
+//    }
 
 
 }

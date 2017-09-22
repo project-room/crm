@@ -11,10 +11,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserTaskServiceImpl implements IUserTaskService {
-    @Autowired
-    private UserTaskMapper userTaskMapper;
-    @Override
-    public void addUserTask(UserTask userTask) {
-        userTaskMapper.insert(userTask);
-    }
+
 }

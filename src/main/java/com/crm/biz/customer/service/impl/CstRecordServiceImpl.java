@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CstRecordServiceImpl implements ICstRecordService{
-    @Autowired
-    private CstRecordMapper cstRecordMapper;
 
-    @Override
-    public void addCstRecord(CstRecord cstRecord) {
-        cstRecordMapper.insert(cstRecord);
-    }
 }
+

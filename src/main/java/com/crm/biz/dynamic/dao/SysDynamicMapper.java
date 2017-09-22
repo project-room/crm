@@ -1,34 +1,22 @@
 package com.crm.biz.dynamic.dao;
 
+import com.crm.entity.CstCustomer;
 import com.crm.entity.SysDynamic;
-import com.crm.entity.SysDynamicExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/15.
  */
-    public interface SysDynamicMapper {
-        int countByExample(SysDynamicExample example);
+@Component
+public interface SysDynamicMapper {
+    SysDynamic findById(Long id);
 
-        int deleteByExample(SysDynamicExample example);
+    void addSysDynamic(SysDynamic sysDynamic);
 
-        int deleteByPrimaryKey(Long dyId);
+    void deleteById(Long id);
 
-        int insert(SysDynamic record);
-
-        int insertSelective(SysDynamic record);
-
-        List<SysDynamic> selectByExample(SysDynamicExample example);
-
-        SysDynamic selectByPrimaryKey(Long dyId);
-
-        int updateByExampleSelective(@Param("record") SysDynamic record, @Param("example") SysDynamicExample example);
-
-    int updateByExample(@Param("record") SysDynamic record, @Param("example") SysDynamicExample example);
-
-    int updateByPrimaryKeySelective(SysDynamic record);
-
-    int updateByPrimaryKey(SysDynamic record);
+    void updateSysDynamicById(SysDynamic sysDynamic);
 }

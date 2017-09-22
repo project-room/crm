@@ -9,6 +9,5 @@ import java.util.List;
  */
 public interface ICstChanceService {
 
-    public List<CstChance> findChanceById(Long cstId);
 
 }

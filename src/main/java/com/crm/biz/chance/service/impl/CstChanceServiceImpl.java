@@ -14,12 +14,6 @@ import java.util.List;
 @Service
 public class CstChanceServiceImpl implements ICstChanceService {
 
-    @Autowired
-    private CstChanceMapper cstChanceMapper;
-
-    public List<CstChance> findChanceById(Long CstId){
-        return cstChanceMapper.selectListChByCstId(CstId);
-    }
 
 
 }

@@ -1,7 +1,7 @@
 package com.crm.biz.user.dao;
 
+import com.crm.entity.CstSchedule;
 import com.crm.entity.UserTask;
-import com.crm.entity.UserTaskExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -12,25 +12,11 @@ import java.util.List;
  */
 @Component
 public interface UserTaskMapper {
-    int countByExample(UserTaskExample example);
+    UserTask findById(Long id);
 
-    int deleteByExample(UserTaskExample example);
+    void addUserTask(UserTask userTask);
 
-    int deleteByPrimaryKey(Long taskId);
+    void deleteById(Long id);
 
-    int insert(UserTask record);
-
-    int insertSelective(UserTask record);
-
-    List<UserTask> selectByExample(UserTaskExample example);
-
-    UserTask selectByPrimaryKey(Long taskId);
-
-    int updateByExampleSelective(@Param("record") UserTask record, @Param("example") UserTaskExample example);
-
-    int updateByExample(@Param("record") UserTask record, @Param("example") UserTaskExample example);
-
-    int updateByPrimaryKeySelective(UserTask record);
-
-    int updateByPrimaryKey(UserTask record);
+    void updateUserTaskById(UserTask userTask);
 }

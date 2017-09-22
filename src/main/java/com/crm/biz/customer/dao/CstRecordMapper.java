@@ -1,30 +1,20 @@
 package com.crm.biz.customer.dao;
 
+import com.crm.entity.CstCustomer;
 import com.crm.entity.CstRecord;
-import com.crm.entity.CstRecordExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CstRecordMapper {
-    int countByExample(CstRecordExample example);
+    CstRecord findById(Long id);
 
-    int deleteByExample(CstRecordExample example);
+    void addCstRecord(CstRecord cstRecord);
 
-    int deleteByPrimaryKey(Long reId);
+    void deleteById(Long id);
 
-    int insert(CstRecord record);
-
-    int insertSelective(CstRecord record);
-
-    List<CstRecord> selectByExample(CstRecordExample example);
-
-    CstRecord selectByPrimaryKey(Long reId);
-
-    int updateByExampleSelective(@Param("record") CstRecord record, @Param("example") CstRecordExample example);
-
-    int updateByExample(@Param("record") CstRecord record, @Param("example") CstRecordExample example);
-
-    int updateByPrimaryKeySelective(CstRecord record);
-
-    int updateByPrimaryKey(CstRecord record);
+    void updateCstRecordById(CstRecord cstRecord);
 }
