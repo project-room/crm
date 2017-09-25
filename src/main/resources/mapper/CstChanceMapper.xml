@@ -57,6 +57,7 @@
       <result column="ch_id" property="chId" jdbcType="BIGINT" />
       <result column="link_department" property="linkDepartment" jdbcType="VARCHAR" />
       <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
+      <result column="cust_id" property="custId" jdbcType="BIGINT" />
     </collection>
     <!--机会表和客户表的关联-->
     <collection property="chCustomer" ofType="com.crm.entity.CstCustomer">

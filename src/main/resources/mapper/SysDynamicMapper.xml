@@ -23,4 +23,5 @@
   <update id="updateSysDynamicById" parameterType="SysDynamic">
     UPDATE sys_dynamic SET user_id=#{userId},user_name=#{userName},dy_content=#{dyContent},dy_date=#{dyDate},dy_classify=#{dyClassify},dy_classify_id=#{dyClassifyId} WHERE dy_id=#{dyId}
   </update>
+
 </mapper>
