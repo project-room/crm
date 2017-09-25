@@ -88,4 +88,57 @@
   <update id="updateCstChanceById" parameterType="CstChance">
     UPDATE cst_chance SET ch_content=#{chContent},ch_stage=#{chStage},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId} WHERE ch_id=#{chId}
   </update>
+
+    <!--添加机会-->
+      <insert id="addCstChance" parameterType="cstChance" >
+      insert into cst_chance values(null,#{chContent},#{custId},#{chDate},#{chMoney},#{userName},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chStage})
+      </insert>
+       <!--根据机会id查询机会的详细信息-->
+        <select id="getCstChanceId" parameterType="Long">
+
+
+        </select>
+     <!--查询机会条数 -->
+     <select id="getCstChanceCount" resultType="int">
+       select count(ch_id) from cst_chance
+     </select>
+  <!-- 根据用户id查询我的所有机会  -->
+   <select id="getCstChance" parameterType="Long" resultMap="BaseResultMap">
+     select * from cst_chance c ,cst_customer u ,cst_record  r  where c.cust_id =u.cust_id and c.ch_id=r.ch_id  and c.user_id=#{userId}
+   </select>
+
+  <!--删除我的机会 -->
+     <delete id="deleteCstChance" parameterType="Long">
+       delete from cst_chance where cust_id=#{id}
+     </delete>
+     <!--修改我的机会 -->
+     <update id="updateCstChance" parameterType="cstChance">
+       update cst_chance set ch_content=#{chContent},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
+     </update>
+     <!--修改机会表的用户id -->
+      <update id="updateChance" parameterType="cst">
+        update cst_chance set user_id=#{userId} where ch_id=#{chId}
+      </update>
+
+    <!--根据字段查询 -->
+  <select id="getCstChanceTo" parameterType="cstChance" resultMap="BaseResultMap">
+    select * from cst_chance c ,cst_customer u ,cst_record  r 
+     <where>
+        <if test="userId!=null and userId!=0">
+         and c.cust_id =u.cust_id and c.ch_id=r.ch_id  and c.user_id=#{userId}
+        </if>
+        <if test="chStage!=null and chStage!=''">
+         and ch_stage=#{chStage}
+        </if>
+       <if test="chContent!=null and chContent!=''">
+        and ch_content like '%${chContent}%'
+       </if>
+       <if test="chCustomer.custLifecycle!=null and chCustomer.custLifecycle!=''">
+        and  u.cust_lifecycle =#{chCustomer.custLifecycle}
+       </if>
+       <if test="chCustomer.custCompany!=null and chCustomer.custCompany!=''">
+         and u.cust_company like '%${chCustomer.custCompany}%'
+       </if>
+     </where>
+  </select>
 </mapper>
