@@ -19,4 +19,5 @@ public interface SysDynamicMapper {
     void deleteById(Long id);
 
     void updateSysDynamicById(SysDynamic sysDynamic);
+
 }

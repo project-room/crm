@@ -33,6 +33,16 @@ public class CstCustomer {
 
     private List<CstLowCustomer>  lowCustomerList;
 
+    private List<ChLinkman> linkmanList;
+
+    public List<ChLinkman> getLinkmanList() {
+        return linkmanList;
+    }
+
+    public void setLinkmanList(List<ChLinkman> linkmanList) {
+        this.linkmanList = linkmanList;
+    }
+
     public List<CstLowCustomer> getLowCustomerList() {
         return lowCustomerList;
     }
