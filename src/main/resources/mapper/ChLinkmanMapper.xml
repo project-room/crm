@@ -13,6 +13,7 @@
     <result column="ch_id" property="chId" jdbcType="BIGINT" />
     <result column="link_department" property="linkDepartment" jdbcType="VARCHAR" />
     <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
+    <result column="cust_id" property="custId" jdbcType="BIGINT" />
   </resultMap>
 
 </mapper>

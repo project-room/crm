@@ -23,6 +23,16 @@ public class ChLinkman {
 
     private String linkPosition;
 
+    private Long custId;
+
+    public Long getCustId() {
+        return custId;
+    }
+
+    public void setCustId(Long custId) {
+        this.custId = custId;
+    }
+
     public Long getLinkId() {
         return linkId;
     }
