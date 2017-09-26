@@ -29,7 +29,7 @@ public interface CstChanceMapper {
     int addCstChance(CstChance cstChance);
 
     //根据机会id查询机会的详细信息
-    CstChance getCstChanceId(Long id);
+    CstChance getCstChanceId(Long chId);
 
     //根据机会id删除机会
     int deleteCstChance(Long id);
@@ -37,10 +37,11 @@ public interface CstChanceMapper {
     //根据机会id修改机会
     int updateCstChance(CstChance cstChance);
 
-    //根据机会id同时修改机会表和客户表的用户id
+    //根据机会id修改机会表的用户id
     int updateChance(CstChance cst);
 
-    int updateCstCustomer(CstChance cst);
+    //根据机会对象里的客户id修改客户表里的用户id
+    int updateCstCustomer(CstChance cs);
 
     //查询总共有多少条机会
     int  getCstChanceCount();

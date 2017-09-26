@@ -51,11 +51,11 @@ public class CstChanceController extends BaseController{
         return map;
     }
 
-    //按条件查询
+    //按机会id查询机会的详细信息
     @RequestMapping("/getCstChanceId")
-    public Map getCstChanceId(Long id){
+    public Map getCstChanceId(Long chId){
         Map map= TypeUtil.successMap();
-        CstChance cstChance=iCstChance.getCstChanceId(id);
+        CstChance cstChance=iCstChance.getCstChanceId(chId);
         Boolean by= ObjectUtil.isNotNull(cstChance);
         if(by==true){
             map.put("cstChance",cstChance);

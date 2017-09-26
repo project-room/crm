@@ -40,9 +40,9 @@ public class CstChanceServiceImpl implements ICstChanceService {
 
     //根据机会id查询机会的详细信息
     @Override
-    public CstChance getCstChanceId(Long id) {
+    public CstChance getCstChanceId(Long chId) {
 
-        return cstChanceMapper.getCstChanceId(id);
+        return cstChanceMapper.getCstChanceId(chId);
     }
 
     //根据机会id删除机会
