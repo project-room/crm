@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
+*//**
  * Created by Administrator on 2017/9/19.
- */
+ *//*
 @RestController
 public class CstCustomerController extends BaseController{
     @Autowired
@@ -27,15 +27,15 @@ public class CstCustomerController extends BaseController{
     @Autowired
     private  ICstCustomerService cstCustomerService;
 
-    /**
+   /**
      * 获取所有公海客户
      * @return
      */
     @RequestMapping("selectGonghaiCstCustomer")
     public Map index(){
         Map map=TypeUtil.successMap();
-      List<CstCustomer> customerList= cstCustomerMapper.selectAllCstCutomer();
-      map.put("customerList",customerList);
+//      List<CstCustomer> customerList= cstCustomerMapper.selectAllCstCutomer();
+//      map.put("customerList",customerList);
         return map;
     }
 
@@ -68,7 +68,7 @@ public class CstCustomerController extends BaseController{
         return map;
     }
 
-    /**
+   /**
      * 获取公海客户一页的信息
      * @return
      */
@@ -80,7 +80,7 @@ public class CstCustomerController extends BaseController{
        return  map;
     }
 
-    /**
+   /**
      * 获取公海客户的总记录数
      * @return
      */
@@ -92,7 +92,7 @@ public class CstCustomerController extends BaseController{
         return map;
     }
 
-    /**
+   /**
      *通过分页bean获取公海客户信息
      * @return
      */
@@ -121,7 +121,7 @@ public class CstCustomerController extends BaseController{
         return map;
     }
 
-    /**
+   /**
      * 输入客户名称搜索客户
      * @return
      */
