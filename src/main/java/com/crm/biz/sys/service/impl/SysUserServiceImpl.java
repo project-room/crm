@@ -13,5 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 public class SysUserServiceImpl implements ISysUserService {
-
+    @Autowired
+    private SysUserMapper sysUserMapper;
+    @Override
+    public SysUser login(String account, String password) {
+       SysUser sysUser= sysUserMapper.loginByAccountAndPassword(account,password);
+        return sysUser;
+    }
 }

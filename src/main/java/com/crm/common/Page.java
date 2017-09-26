@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Administrator on 2017/9/13.
  */
 public class Page<T> {
-    private Integer currentPage = 1;
+    private Integer currentPage = 0;
     private Integer pageSize = 2;
     private List<T> list = new ArrayList<T>();
     private Long recTotal = 0L;

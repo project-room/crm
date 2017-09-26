@@ -19,4 +19,8 @@ public interface SysUserMapper {
     void deleteById(Long id);
 
     void updateSysUserById(SysUser sysUser);
+
+    SysUser selectIdByCstCustomer(Long id);
+
+    SysUser loginByAccountAndPassword(@Param("account") String account,@Param("password") String password);
 }

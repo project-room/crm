@@ -58,9 +58,9 @@
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM sys_user WHERE user_id=#{id}
   </select>
-  <insert id="addSysUser" parameterType="SysUser">
-    INSERT INTO sys_user (user_name,user_accounts,user_password,user_status,user_department,user_position,user_email,user_phone,user_workphone)
-    VALUES (#{userName},#{userAccounts},#{userPassword},#{userStatus},#{userDepartment},#{userPosition},#{userEmail},#{userPhone},#{userWorkphone})
+  <insert id="saveSysUser" parameterType="SysUser">
+    INSERT INTO sys_user (user_name,user_accounts,user_password,user_status,user_department,user_position,user_email,user_phone,user_workphone,user_state)
+    VALUES (#{userName},#{userAccounts},#{userPassword},#{userStatus},#{userDepartment},#{userPosition},#{userEmail},#{userPhone},#{userWorkphone},#{userState})
   </insert>
   <delete id="deleteById" parameterType="Long">
     DELETE FROM sys_user WHERE user_id=#{id}
@@ -68,4 +68,9 @@
   <update id="updateSysUserById" parameterType="SysUser">
     UPDATE sys_user SET user_name=#{userName},user_accounts=#{userAccounts},user_password=#{userPassword},user_status=#{userStatus},user_department=#{userDepartment},user_position=#{userPosition},user_email=#{userEmail},user_phone=#{userPhone},user_workphone=#{userWorkphone} WHERE user_id=#{userId}
   </update>
+
+  <!--账号和密码登录-->
+  <select id="loginByAccountAndPassword" parameterType="Map" resultMap="BaseResultMap">
+    SELECT * FROM sys_user WHERE user_accounts=#{account} AND user_password=#{password}
+  </select>
 </mapper>

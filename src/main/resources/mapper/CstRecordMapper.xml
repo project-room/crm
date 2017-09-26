@@ -29,4 +29,9 @@
   <update id="updateCstRecordById" parameterType="CstRecord">
     UPDATE cst_record SET re_content=#{reContent},cust_id=#{custId},user_name=#{userName},re_date=#{reDate} WHERE re_id=#{reId}
   </update>
+
+  <!--插入返回id-->
+  <insert id="saveCstRecord" parameterType="com.crm.entity.CstRecord" useGeneratedKeys="true" keyProperty="reId">
+    INSERT INTO cst_record (re_content,ch_id,user_name,re_date) VALUES (#{reContent},#{chId},#{userName},#{reDate})
+  </insert>
 </mapper>
