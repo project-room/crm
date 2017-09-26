@@ -1,5 +1,6 @@
 package com.crm.biz.customer.dao;
 
+import com.crm.entity.CstChance;
 import com.crm.entity.CstCustomer;
 
 import org.springframework.stereotype.Component;
@@ -17,5 +18,7 @@ public interface CstCustomerMapper{
     void deleteById(Long id);
 
     void updateCstCustomerById(CstCustomer cstCustomer);
+
+
 
 }

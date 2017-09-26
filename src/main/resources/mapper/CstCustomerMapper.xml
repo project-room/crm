@@ -58,4 +58,10 @@
   <update id="updateCstCustomerById" parameterType="CstCustomer">
  UPDATE cst_customer SET cust_name=#{custName},cust_phone=#{custPhone},cust_email=#{custEmail},cust_company=#{custCompany},cust_address=#{custAddress},cust_industry=#{custIndustry},cust_pic=#{custPic},cust_sales=#{custSales},user_id=#{userId},`type`=#{type} WHERE cust_id=#{custId}
   </update>
+    <!--修改客户表的用户id -->
+    <update id="updateCstCustomer" parameterType="cst">
+        update cst_customer set user_id=#{userId} where cust_id=#{custId}
+    </update>
+
+
 </mapper>
