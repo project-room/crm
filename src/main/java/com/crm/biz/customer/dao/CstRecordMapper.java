@@ -17,4 +17,6 @@ public interface CstRecordMapper {
     void deleteById(Long id);
 
     void updateCstRecordById(CstRecord cstRecord);
+
+    int saveCstRecord(CstRecord cstRecord);
 }

@@ -117,9 +117,9 @@
        update cst_chance set ch_content=#{chContent},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
      </update>
      <!--修改机会表的用户id -->
-      <update id="updateChance" parameterType="cst">
-        update cst_chance set user_id=#{userId} where ch_id=#{chId}
-      </update>
+      <!--<update id="updateChance" parameterType="cst">-->
+        <!--update cst_chance set user_id=#{userId} where ch_id=#{chId}-->
+      <!--</update>-->
 
     <!--根据字段查询 -->
   <select id="getCstChanceTo" parameterType="cstChance" resultMap="BaseResultMap">

@@ -179,7 +179,7 @@ public class CstCustomerController extends BaseController{
 
 
     /**
-     *通过分页bean获取公海客户信息
+     *通过分页bean获取认领公海客户信息
      * @return
      */
     @RequestMapping("getPage")
@@ -196,7 +196,7 @@ public class CstCustomerController extends BaseController{
     }
 
     /**
-     * 根据id查看公海客户信息
+     * 根据id查看认领公海客户信息
      * @return
      */
     @RequestMapping("lookCstCustomerInfo")
@@ -208,7 +208,7 @@ public class CstCustomerController extends BaseController{
     }
 
     /**
-     * 输入客户名称搜索客户
+     * 输入认领客户名称模糊搜索客户
      * @return
      */
     @RequestMapping("selectCstCustomerByName")
