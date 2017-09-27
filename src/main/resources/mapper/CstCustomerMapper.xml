@@ -55,8 +55,8 @@
   <delete id="deleteById" parameterType="Long">
      DELETE FROM cst_customer WHERE cust_id=#{id}
   </delete>
-  <update id="updateCstCustomerById" parameterType="CstCustomer">
- UPDATE cst_customer SET cust_name=#{custName},cust_phone=#{custPhone},cust_email=#{custEmail},cust_company=#{custCompany},cust_address=#{custAddress},cust_industry=#{custIndustry},cust_pic=#{custPic},cust_sales=#{custSales},user_id=#{userId},`type`=#{type} WHERE cust_id=#{custId}
+  <update id="updateCstCustomerById" parameterType="map">
+    UPDATE cst_customer SET cust_email=#{cstCustomer.custEmail},cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},cust_industry=#{cstCustomer.custIndustry},cust_pic=#{cstCustomer.custPic},cust_sales=#{cstCustomer.custSales},user_id=#{cstCustomer.userId},cust_classify=#{cstCustomer.custClassify},cust_content=#{cstCustomer.custContent},cust_lifecycle=#{cstCustomer.custLifecycle},cust_website=#{cstCustomer.custWebsite},cust_type=#{cstCustomer.custType} WHERE cust_id=#{cstcustId}
   </update>
   <!--查询所有公海客户-->
   <select id="selectAllCstCutomer" resultMap="BaseResultMap">
@@ -80,7 +80,7 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     </select>
 
     <!--根据id查看公海客户信息-->
-    <select id="selectCstCustomerInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    <select id="selectCstCustomerInfo" parameterType="map" resultMap="BaseResultMap">
           SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`cust_id`=#{cstCustomerId}
     </select>
 
@@ -88,4 +88,14 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <select id="selectCstCustomerByName" parameterType="String" resultMap="BaseResultMap">
 SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  AND cc.`cust_company` LIKE #{custCompany}
     </select>
+
+    <!--根据客户id删除客户信息以及与之关联的联系人信息-->
+    <delete id="deleteCstCustomerAndChLinkmanById" parameterType="Long" >
+        DELETE cc,ch FROM cst_customer cc,ch_linkman ch WHERE 1=1 AND cc.`cust_id`=ch.`cust_id` AND cc.`cust_id`=#{id}
+    </delete>
+
+    <!--根据客户id和标签id给中间表插入数据-->
+    <insert id="saveCstCustomerAndLabel" parameterType="map">
+        INSERT INTO cst_ref_label (cust_id,label_id) VALUES (#{cstCustId},#{labelId})
+    </insert>
 </mapper>

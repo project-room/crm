@@ -185,7 +185,7 @@ public class CstCustomerController extends BaseController{
     @RequestMapping("getPage")
     public Map getPage(){
         Map map=TypeUtil.successMap();
-       Page<CstCustomer> cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(3,2);
+       Page<CstCustomer> cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(1,2);
        cstCustomerPage.getCurrentPage();
        cstCustomerPage.getList();
        cstCustomerPage.getPageSize();
@@ -218,4 +218,56 @@ public class CstCustomerController extends BaseController{
       map.put("cstCustomers",cstCustomers);
         return map;
     }
+
+    /**
+     * 根据认领公海客户id删除公海客户
+     * @return
+     */
+    @RequestMapping("deleteCstCustomerById")
+    public Map deleteCstCustomerById(){
+        Map map=TypeUtil.successMap();
+        cstCustomerService.deleteCstCustomerById(2l);
+        return map;
+    }
+
+    /**
+     * 批量删除认领公海客户
+     * @return
+     */
+    @RequestMapping("deleteCstCustomerByBatch")
+    public Map deleteCstCustomerByBatch(){
+        Map map=TypeUtil.successMap();
+        Long[] idArray={17L,18L,19L,20L,23L};
+        for (int i=0;i<idArray.length;i++){
+            cstCustomerService.deleteCstCustomerById(idArray[i]);
+        }
+        return map;
+    }
+
+    /**
+     * 编辑认领公海客户信息
+     * @return
+     */
+    @RequestMapping("editCstCustomerInfo")
+    public Map editCstCustomerInfo(){
+        Map map=TypeUtil.successMap();
+        Long custId=24L;
+        CstCustomer cstCustomer=new CstCustomer();
+        cstCustomer.setCustCompany("纵使公司");
+        ChLinkman chLinkman=new ChLinkman();
+        chLinkman.setLinkStatus(0);
+        chLinkman.setCustId(custId);
+        chLinkman.setLinkWechat("linxiren");
+        chLinkman.setLinkName("张全");
+        CstLowCustomer cstLowCustomer=new CstLowCustomer();
+        cstLowCustomer.setCustCompany("下级客户名称");
+        cstLowCustomer.setHighCustId(3l);
+        CstLabel cstLabel=new CstLabel();
+        cstLabel.setLabelName("特别难搞客户");
+        cstCustomerService.editCstCustomerInfo(custId,1L,cstCustomer,cstLowCustomer,chLinkman,cstLabel);
+        int labelId=cstLabel.getLabelId();
+        map.put("labelId",labelId);
+        return map;
+    }
+
 }
