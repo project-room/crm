@@ -10,4 +10,20 @@ import java.util.List;
 public interface ICstChanceService {
 
 
+    public List<CstChance> getCstChance(Long userId);
+
+    public boolean addCstChance(CstChance cstChance);
+
+    public CstChance  getCstChanceId(Long id);
+
+    public  boolean deleteCstChance(Long id);
+
+    public  boolean updateCstChance(CstChance cstChance);
+
+    public  int getCstChanceCount();
+
+    public CstChance getCstChanceTo(CstChance cstChance);
+
+    public boolean updateChance(CstChance cst);
+
 }

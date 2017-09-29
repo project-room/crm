@@ -35,4 +35,9 @@
   <update id="updateCstLabelById" parameterType="CstLabel">
     UPDATE cst_label SET label_name=#{labelName},user_id=#{userId} WHERE label_id=#{label_id}
   </update>
+
+  <!--认领公海客户添加标签-->
+  <insert id="saveCstLabel" parameterType="map" useGeneratedKeys="true" keyProperty="cstLabel.labelId">
+      INSERT INTO cst_label (label_name,user_id) VALUES (#{cstLabel.labelName},#{userId})
+  </insert>
 </mapper>

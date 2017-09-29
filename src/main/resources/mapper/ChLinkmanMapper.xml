@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.crm.biz.sys.dao.mapper.ChLinkmanMapper" >
+<mapper namespace="com.crm.biz.customer.dao.ChLinkmanMapper" >
   <resultMap id="BaseResultMap" type="com.crm.entity.ChLinkman" >
     <id column="link_id" property="linkId" jdbcType="BIGINT" />
     <result column="link_name" property="linkName" jdbcType="VARCHAR" />
@@ -15,5 +15,12 @@
     <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
     <result column="cust_id" property="custId" jdbcType="BIGINT" />
   </resultMap>
+<insert id="saveChLinkman" parameterType="ChLinkman">
+  INSERT INTO ch_linkman (link_name,link_phone,link_landline_phone,link_email,link_qq,link_wechat,link_status,ch_id,link_department,link_position,cust_id)
+VALUES (#{linkName},#{linkPhone},#{linkLandlinePhone},#{linkEmail},#{linkQq},#{linkWechat},#{linkStatus},#{chId},#{linkDepartment},#{linkPosition},#{custId})
+</insert>
 
+  <update id="updateChLinkmanByIdAndChLinkman" parameterType="map">
+   UPDATE ch_linkman SET link_name=#{chLinkman.linkName},link_phone=#{chLinkman.linkPhone},link_landline_phone=#{chLinkman.linkLandlinePhone},link_email=#{chLinkman.linkEmail},link_qq=#{chLinkman.linkQq},link_wechat=#{chLinkman.linkWechat},link_status=#{chLinkman.linkStatus},ch_id=#{chLinkman.chId},link_department=#{chLinkman.linkDepartment},link_position=#{chLinkman.linkPosition},cust_id=#{chLinkman.custId} WHERE link_id=#{id}
+  </update>
 </mapper>

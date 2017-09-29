@@ -120,4 +120,5 @@ public class ChLinkman {
     public void setLinkPosition(String linkPosition) {
         this.linkPosition = linkPosition == null ? null : linkPosition.trim();
     }
+
 }

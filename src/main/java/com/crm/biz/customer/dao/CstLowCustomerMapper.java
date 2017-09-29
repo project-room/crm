@@ -19,4 +19,6 @@ public interface CstLowCustomerMapper  {
     void deleteById(Long id);
 
     void updateCstLowCustomerById(CstLowCustomer cstLowCustomer);
+
+    void saveCstLowCustomerInfo(CstLowCustomer cstLowCustomer);
 }

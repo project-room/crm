@@ -31,7 +31,7 @@ public class CstCustomer {
 
     private List<CstLabel> labelList;
 
-    private List<CstLowCustomer> lowCustomerList;
+    private List<CstLowCustomer>  lowCustomerList;
 
     private List<ChLinkman> linkmanList;
 

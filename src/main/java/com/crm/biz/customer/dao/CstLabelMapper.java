@@ -19,4 +19,6 @@ public interface CstLabelMapper {
     void deleteById(Long id);
 
     void updateCstLabelById(CstLabel cstLabel);
+
+    void saveCstLabel(@Param("cstLabel") CstLabel cstLabel,@Param("userId") Long userId);
 }

@@ -20,4 +20,8 @@
   <update id="updateCstLowCustomerById" parameterType="CstLowCustomer">
     UPDATE cst_low_customer SET high_cust_id=#{highCustId},cust_company=#{custCompany},cust_id=#{custId} WHERE low_cust_id=#{lowCustId}
   </update>
+  <!--认领的公海客户添加下级客户-->
+  <insert id="saveCstLowCustomerInfo" parameterType="CstLowCustomer">
+      INSERT INTO cst_low_customer (high_cust_id,cust_company,cust_id) VALUES (#{highCustId},#{custCompany},#{custId})
+  </insert>
 </mapper>
