@@ -23,11 +23,11 @@ import java.util.Set;
 public class CstCustomerController extends BaseController{
     @Autowired
     private CstCustomerMapper cstCustomerMapper;
-    @RequestMapping("selectGonghaiCstCustomer")
-    public Map index(){
-        Map map=TypeUtil.successMap();
-      List<CstCustomer> customerList= cstCustomerMapper.selectAllCstCutomer();
-      map.put("customerList",customerList);
-        return map;
-    }
+//    @RequestMapping("selectGonghaiCstCustomer")
+//    public Map index(){
+//        Map map=TypeUtil.successMap();
+//      List<CstCustomer> customerList= cstCustomerMapper.selectAllCstCutomer();
+//      map.put("customerList",customerList);
+//        return map;
+//    }
 }

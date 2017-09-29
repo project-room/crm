@@ -14,9 +14,12 @@ import java.util.List;
 public interface SysUserMapper {
     SysUser findById(Long id);
 
-    void addSysUser(SysUser sysUser);
+    int addSysUser(SysUser sysUser);
 
-    void deleteById(Long id);
+    int deleteById(Long id);
 
-    void updateSysUserById(SysUser sysUser);
+    int updateSysUserById(SysUser sysUser);
+
+    SysUser findByAccount(String account);
+
 }

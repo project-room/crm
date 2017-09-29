@@ -7,4 +7,12 @@ import com.crm.entity.SysUser;
  */
 public interface ISysUserService {
 
+    SysUser login(String account,String password);
+
+    int register(SysUser sysUser);
+
+    int deleteById(Long userId);
+
+    int updateSysUserById(SysUser sysUser);
+
 }

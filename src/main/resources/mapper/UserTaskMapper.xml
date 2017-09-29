@@ -13,13 +13,13 @@
     SELECT * FROM user_task WHERE task_id=#{id}
   </select>
   <insert id="addUserTask" parameterType="UserTask">
-    INSERT INTO user_task (task_status,task_content,task_date,user_id,cst_id)
-    VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId},#{cstId})
+    INSERT INTO user_task (task_status,task_content,task_date,user_id,ch_id)
+    VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId},#{chId})
   </insert>
   <delete id="deleteById" parameterType="Long">
     DELETE FROM user_task WHERE task_id=#{id}
   </delete>
   <update id="updateUserTaskById" parameterType="UserTask">
-    UPDATE user_task SET task_status=#{taskStatus},task_content=#{taskContent},task_date=#{taskDate},user_id=#{userId},cst_id=#{cstId} WHERE task_id=#{taskId}
+    UPDATE user_task SET task_status=#{taskStatus},task_content=#{taskContent},task_date=#{taskDate},user_id=#{userId},ch_id=#{chId} WHERE task_id=#{taskId}
   </update>
 </mapper>
