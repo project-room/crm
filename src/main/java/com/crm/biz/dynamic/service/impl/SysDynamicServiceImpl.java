@@ -1,9 +1,13 @@
 package com.crm.biz.dynamic.service.impl;
 
+import com.crm.biz.dynamic.dao.SysDynamicMapper;
 import com.crm.biz.dynamic.service.ISysDynamicService;
 import com.crm.entity.SysDynamic;
+import com.crm.entity.UserTask;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,8 +16,18 @@ import java.util.List;
 @Service
 public class SysDynamicServiceImpl implements ISysDynamicService {
 
-    public List<SysDynamic> selectDynamicByUserId(){
-        return null;
+    @Autowired
+    private SysDynamicMapper sysDynamicMapper;
+
+    public List<SysDynamic> selectDynamicListByUserId(Long userId,Integer limitId,Integer classify){
+        if(classify != null){
+            //在这里判断当有分类传进来时传出带有分类的数据
+        }
+        return sysDynamicMapper.selectDynamicListByUserId(userId,limitId);
+    }
+
+    public List<UserTask> selectTaskListByUserId(Long userId){
+        return sysDynamicMapper.selectTaskListByUserId(userId,0);
     }
 
 }

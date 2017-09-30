@@ -1,5 +1,11 @@
 package com.crm.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.management.MXBean;
+import javax.persistence.Entity;
 import java.util.List;
 
 public class SysUser {

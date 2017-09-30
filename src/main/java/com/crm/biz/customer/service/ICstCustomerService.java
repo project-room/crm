@@ -46,4 +46,18 @@ public interface ICstCustomerService {
      * @return
      */
     List<CstCustomer> selectAllCstCutomer();
+
+    /**
+     * 根据认领公海客户id删除公海客户
+     * @param id
+     */
+    void deleteCstCustomerById(Long id);
+
+    /**
+     * 编辑认领公海客户信息
+     * @param cstCustomer
+     * @param chLinkman
+     * @param cstLabel
+     */
+    void editCstCustomerInfo(Long custId,Long userId,CstCustomer cstCustomer,CstLowCustomer cstLowCustomer,ChLinkman chLinkman,CstLabel cstLabel);
 }

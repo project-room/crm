@@ -1,6 +1,7 @@
 package com.crm.biz.customer.dao;
 
 import com.crm.entity.ChLinkman;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,4 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ChLinkmanMapper {
   void saveChLinkman(ChLinkman chLinkman);
+
+  void updateChLinkmanByIdAndChLinkman(@Param("id") Long id,@Param("chLinkman") ChLinkman chLinkman);
+
+
 }

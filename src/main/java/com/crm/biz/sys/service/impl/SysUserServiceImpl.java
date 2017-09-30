@@ -13,11 +13,38 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 public class SysUserServiceImpl implements ISysUserService {
+
     @Autowired
     private SysUserMapper sysUserMapper;
-    @Override
-    public SysUser login(String account, String password) {
-       SysUser sysUser= sysUserMapper.loginByAccountAndPassword(account,password);
-        return sysUser;
+
+    public SysUser login(String account,String password){
+        SysUser byAccount = sysUserMapper.findByAccount(account);
+        if(byAccount != null){
+            //密码判断，到时候要进行加密
+            if(byAccount.getUserPassword().equals(password)){
+                return byAccount;
+            }
+        }
+        return null;
     }
+
+    public int register(SysUser sysUser){
+        SysUser byAccount = sysUserMapper.findByAccount(sysUser.getUserAccounts());
+        if(byAccount == null){
+             return sysUserMapper.addSysUser(sysUser);
+        }else{
+            //帐号已经存在
+        }
+        return 0;
+    }
+
+    public int deleteById(Long userId){
+        return sysUserMapper.deleteById(userId);
+    }
+
+    public int updateSysUserById(SysUser sysUser){
+        return sysUserMapper.updateSysUserById(sysUser);
+    }
+
+
 }

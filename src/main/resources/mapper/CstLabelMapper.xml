@@ -20,6 +20,7 @@
       <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
       <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
       <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+      <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
     </collection>
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
@@ -35,4 +36,9 @@
   <update id="updateCstLabelById" parameterType="CstLabel">
     UPDATE cst_label SET label_name=#{labelName},user_id=#{userId} WHERE label_id=#{label_id}
   </update>
+
+  <!--认领公海客户添加标签-->
+  <insert id="saveCstLabel" parameterType="map" useGeneratedKeys="true" keyProperty="cstLabel.labelId">
+      INSERT INTO cst_label (label_name,user_id) VALUES (#{cstLabel.labelName},#{userId})
+  </insert>
 </mapper>

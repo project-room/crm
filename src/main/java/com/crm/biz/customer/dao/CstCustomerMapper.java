@@ -22,7 +22,7 @@ public interface CstCustomerMapper{
 
     void deleteById(Long id);
 
-    void updateCstCustomerById(CstCustomer cstCustomer);
+    void updateCstCustomerById(@Param("cstcustId") Long cstcustId,@Param("cstCustomer") CstCustomer cstCustomer);
 
     List<CstCustomer> selectAllCstCutomer();
 
@@ -36,4 +36,7 @@ public interface CstCustomerMapper{
 
     List<CstCustomer> selectCstCustomerByName(@Param("custCompany") String custCompany);
 
+    void deleteCstCustomerAndChLinkmanById(Long id);
+
+    void saveCstCustomerAndLabel(@Param("cstCustId") Long cstCustId,@Param("labelId") Integer labelId);
 }

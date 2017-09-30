@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crm.biz.dynamic.dao.SysDynamicMapper" >
-  <resultMap id="BaseResultMap" type="com.crm.entity.SysDynamic" >
+  <resultMap id="BaseDynamicResultMap" type="com.crm.entity.SysDynamic" >
     <id column="dy_id" property="dyId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -10,7 +10,32 @@
     <result column="dy_classify" property="dyClassify" jdbcType="INTEGER" />
     <result column="dy_classify_id" property="dyClassifyId" jdbcType="BIGINT" />
   </resultMap>
-  <select id="findById" parameterType="Long" resultMap="BaseResultMap">
+  <resultMap id="BaseUserTaskResultMap" type="com.crm.entity.UserTask" >
+    <id column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="task_status" property="taskStatus" jdbcType="INTEGER" />
+    <result column="task_content" property="taskContent" jdbcType="VARCHAR" />
+    <result column="task_date" property="taskDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="ch_id" property="chId" jdbcType="BIGINT" />
+    <!--任务表与机会表的关联-->
+    <collection property="chance" ofType="com.crm.entity.CstChance">
+      <id column="ch_id" property="chId" jdbcType="BIGINT" />
+      <result column="ch_content" property="chContent" jdbcType="VARCHAR" />
+      <result column="cust_id" property="custId" jdbcType="BIGINT" />
+      <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
+      <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
+      <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
+      <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
+      <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
+      <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+      <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="findById" parameterType="Long" resultMap="BaseDynamicResultMap">
     SELECT * FROM sys_dynamic WHERE dy_id=#{id}
   </select>
   <insert id="addSysDynamic" parameterType="SysDynamic">
@@ -23,5 +48,42 @@
   <update id="updateSysDynamicById" parameterType="SysDynamic">
     UPDATE sys_dynamic SET user_id=#{userId},user_name=#{userName},dy_content=#{dyContent},dy_date=#{dyDate},dy_classify=#{dyClassify},dy_classify_id=#{dyClassifyId} WHERE dy_id=#{dyId}
   </update>
+
+  <select id="selectDynamicListByUserId"  resultMap="BaseDynamicResultMap">
+    select dy_id,user_id,user_name,dy_content,dy_date,dy_classify,dy_classify_id
+    from sys_dynamic where user_id = #{userId} limit #{limitId},10
+  </select>
+
+  <select id="selectTaskListByUserId" resultMap="BaseUserTaskResultMap">
+    select
+    t.task_id,
+    t.task_status,
+    t.task_content,
+    t.task_date,
+    t.user_id,
+    t.ch_id,
+    c.ch_content,
+    c.cust_id
+    FROM
+	user_task t,
+	cst_chance c
+    WHERE
+        t.user_id =  #{userId}
+    AND t.ch_id = c.ch_id
+    <if test="taskStatus != null">
+      AND t.task_status = #{taskStatus}
+    </if>
+    OR t.user_id =  #{userId}
+    AND t.ch_id = c.ch_id
+    AND TO_DAYS(t.task_date) = TO_DAYS(NOW())
+    ORDER BY
+	task_date ASC
+  </select>
+
+  <!--测试用需删除-->
+  <insert id="insertTaskTest" parameterType="com.crm.entity.UserTask" useGeneratedKeys="true" keyProperty="taskId">
+    INSERT INTO user_task (task_status,task_content,task_date,user_id)
+    VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId})
+  </insert>
 
 </mapper>
