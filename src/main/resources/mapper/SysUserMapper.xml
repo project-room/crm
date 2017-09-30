@@ -28,6 +28,7 @@
       <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
       <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
       <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+      <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
     </collection>
     <!--用户表和任务表的关联-->
     <collection property="taskList" ofType="com.crm.entity.UserTask">

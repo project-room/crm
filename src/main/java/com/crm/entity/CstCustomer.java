@@ -1,5 +1,6 @@
 package com.crm.entity;
 
+import java.util.Date;
 import java.util.List;
 
 public class CstCustomer {
@@ -29,6 +30,8 @@ public class CstCustomer {
 
     private String custType;
 
+    private Date custDate;
+
     private List<CstLabel> labelList;
 
     private List<CstLowCustomer>  lowCustomerList;
@@ -37,6 +40,14 @@ public class CstCustomer {
 
     public List<ChLinkman> getLinkmanList() {
         return linkmanList;
+    }
+
+    public Date getCustDate() {
+        return custDate;
+    }
+
+    public void setCustDate(Date custDate) {
+        this.custDate = custDate;
     }
 
     public void setLinkmanList(List<ChLinkman> linkmanList) {

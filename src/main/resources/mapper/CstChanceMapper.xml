@@ -74,6 +74,7 @@
       <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
       <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
       <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+      <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
   </collection>
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
