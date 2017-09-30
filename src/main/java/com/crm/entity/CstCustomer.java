@@ -2,7 +2,7 @@ package com.crm.entity;
 
 import java.util.List;
 
-public class CstCustomer {
+public class  CstCustomer {
     private Long custId;
 
     private String custEmail;

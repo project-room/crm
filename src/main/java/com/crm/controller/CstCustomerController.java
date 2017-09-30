@@ -7,10 +7,13 @@ import com.crm.common.Page;
 import com.crm.entity.*;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +23,11 @@ import java.util.Set;
 /**
  * Created by Administrator on 2017/9/19.
  */
-@RestController
+@Controller
 public class CstCustomerController extends BaseController{
 
     @Autowired
     private  ICstCustomerService cstCustomerService;
-
     /**
      * 查看所有认领的公海客户
      * @return
@@ -190,20 +192,21 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("getPage")
-    public Map getPage(){
+    public String getPage(Model model){
         Map map=TypeUtil.successMap();
         try {
-            Page<CstCustomer> cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(2,2);
+            Page<CstCustomer> cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(1,4);
             cstCustomerPage.getCurrentPage();
             cstCustomerPage.getList();
             cstCustomerPage.getPageSize();
             cstCustomerPage.getRecTotal();
             cstCustomerPage.getTotalPage();
-            map.put("cstCustomerPage",cstCustomerPage);
+//            map.put("cstCustomerPage",cstCustomerPage);
+            model.addAttribute("cstCustomerPage",cstCustomerPage);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return map;
+        return "page/customer";
     }
 
     /**
@@ -301,5 +304,23 @@ public class CstCustomerController extends BaseController{
         }
         return map;
     }
+
+    @RequestMapping("toIndex")
+    public String toIndex(Model model){
+        Map map=TypeUtil.successMap();
+        model.addAttribute("bind","欢迎您的到来");
+        return "page/index";
+    }
+
+    @RequestMapping("toShow")
+    public String showInfo(SysUser sysUser,Model model){
+        String username= sysUser.getUserName();
+        String password= sysUser.getUserPassword();
+        model.addAttribute("userName",username);
+        model.addAttribute("userPassword",password);
+        return "show";
+    }
+
+
 
 }

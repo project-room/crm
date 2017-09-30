@@ -42,7 +42,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     @Override
     public Page<CstCustomer> getCstCustomerOnePageInfo(int currentPage, int pageSize) {
         Long count=cstCustomerMapper.getCstCustomerCount();
-       int currentPageLimit=currentPage-1;
+       int currentPageLimit=(currentPage-1)*pageSize;
        List<CstCustomer> cstCustomers= cstCustomerMapper.getPageCstCustomerInfo(currentPageLimit,pageSize);
         return new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
     }
