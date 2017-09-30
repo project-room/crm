@@ -17,4 +17,11 @@ public class TypeUtil {
         map.put("msg", "success");
         return map;
     }
+
+    public static Map<String, Object> failMap(){
+        Map map = TypeUtil.map();
+        map.put("code", "0");
+        map.put("msg", "fail");
+        return map;
+    }
 }

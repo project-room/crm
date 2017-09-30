@@ -1,6 +1,7 @@
 package com.crm.biz.dynamic.service;
 
 import com.crm.entity.SysDynamic;
+import com.crm.entity.UserTask;
 
 import java.util.List;
 
@@ -10,5 +11,9 @@ import java.util.List;
 public interface ISysDynamicService {
 
     //通过用户id查询所有动态
-    public List<SysDynamic> selectDynamicByUserId();
+    List<SysDynamic> selectDynamicListByUserId(Long userId,Integer limitId,Integer classify);
+
+    //通过用户id查询当前日期的任务表
+    List<UserTask> selectTaskListByUserId(Long userId);
+
 }

@@ -19,7 +19,25 @@ public class UserTask {
 
     private Long userId;
 
-    private Long cstId;
+    private Long chId;
+
+    private CstChance chance;
+
+    public CstChance getChance() {
+        return chance;
+    }
+
+    public void setChance(CstChance chance) {
+        this.chance = chance;
+    }
+
+    public Long getChId() {
+        return chId;
+    }
+
+    public void setChId(Long chId) {
+        this.chId = chId;
+    }
 
     public Long getTaskId() {
         return taskId;
@@ -61,11 +79,5 @@ public class UserTask {
         this.userId = userId;
     }
 
-    public Long getCstId() {
-        return cstId;
-    }
 
-    public void setCstId(Long cstId) {
-        this.cstId = cstId;
-    }
 }
