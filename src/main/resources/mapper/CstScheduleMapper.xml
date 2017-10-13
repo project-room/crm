@@ -21,4 +21,14 @@
   <update id="updateCstScheduleById" parameterType="CstSchedule">
     UPDATE cst_schedule SET sche_type=#{scheType},sche_time=#{scheTime},sche_content=#{scheContent},cust_id=#{custId} WHERE sche_id=#{scheId}
   </update>
+
+  <!--根据机会id查询进度表-->
+  <select id="getCstSchedule" parameterType="Long" resultMap="BaseResultMap">
+    select *  from cst_schedule  where ch_id=1 ORDER BY sche_time  DESC
+  </select>
+
+  <!--根据机会id删除进度-->
+  <delete id="deleteCstSchedule" parameterType="Long">
+     delete from cst_schedule where ch_id=#{chId}
+  </delete>
 </mapper>
