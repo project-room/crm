@@ -291,9 +291,9 @@ public class CstCustomerController extends BaseController{
             chLinkman.setLinkWechat("linxiren");
             chLinkman.setLinkName("李天下");
             CstLowCustomer cstLowCustomer=new CstLowCustomer();
-            cstLowCustomer.setCustCompany("下级代理客户名称");
-            cstLowCustomer.setHighCustId(3l);
-            cstLowCustomer.setCustId(3L);
+//            cstLowCustomer.setCustCompany("下级代理客户名称");
+//            cstLowCustomer.setHighCustId(3l);
+//            cstLowCustomer.setCustId(3L);
             CstLabel cstLabel=new CstLabel();
             cstLabel.setLabelName("随和客户");
             cstCustomerService.editCstCustomerInfo(custId,1L,cstCustomer,cstLowCustomer,chLinkman,cstLabel);

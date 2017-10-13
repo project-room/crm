@@ -25,10 +25,10 @@
       </collection>
       <!--客户表与下级客户表之间的关联-->
       <collection property="lowCustomerList" ofType="com.crm.entity.CstLowCustomer">
-          <id column="low_cust_id" property="lowCustId" jdbcType="BIGINT" />
-          <result column="high_cust_id" property="highCustId" jdbcType="BIGINT" />
-          <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
-          <result column="cust_id" property="custId" jdbcType="BIGINT" />
+          <id column="low_id" property="lowId" jdbcType="BIGINT" />
+          <result column="high_id" property="highId" jdbcType="BIGINT" />
+          <result column="cust_low_company" property="custLowCompany" jdbcType="VARCHAR" />
+          <result column="cust_low_id" property="custLowId" jdbcType="BIGINT" />
       </collection>
       <!--客户表和联系人表的关联-->
       <collection property="linkmanList" ofType="com.crm.entity.ChLinkman">

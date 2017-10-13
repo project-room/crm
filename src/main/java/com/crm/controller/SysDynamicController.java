@@ -38,7 +38,7 @@ public class SysDynamicController {
 
     //根据用户id以及limitId和分类查看全部动态
     @RequestMapping("/getDynamicListById")
-    public Map selectDynamicByUserId(Long userId,Integer limitId,Integer classify){
+    public Map selectDynamicByUserId(Long userId,Integer limitId,Integer classify){//classify:分类，当为Null时查所有数据
         Map map= TypeUtil.successMap();
         List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)2,1,classify);
         map.put("sysDynamic",sysDynamicList);
