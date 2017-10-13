@@ -8,6 +8,7 @@ import com.crm.entity.SysDynamic;
 import com.crm.entity.SysUser;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,9 +34,10 @@ public class SysUserController extends BaseController {
 
     //用户登陆
     @RequestMapping("userLogin")
-    public Map login(){
+    public Map login(String username,String password){
+        System.out.println("username:"+username +"    password:"+password);
         Map map= TypeUtil.successMap();
-        SysUser sysUser=iSysUserService.login("admin","admin");
+        SysUser sysUser=iSysUserService.login(username,password);
         map.put("sysUser",sysUser);
         return map;
     }
@@ -80,6 +82,7 @@ public class SysUserController extends BaseController {
         }
         return map;
     }
+
 
 
 

@@ -96,9 +96,9 @@
       insert into cst_chance values(null,#{chContent},#{custId},#{chDate},#{chMoney},#{userName},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chStage})
       </insert>
        <!--根据机会id查询机会的详细信息-->
-        <select id="getCstChanceId" parameterType="Long">
-
-
+        <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
+          select * from  cst_chance c,cst_customer u,ch_linkman l,cst_label a,cst_low_customer w where c.ch_id=1  AND c.cust_id=u.cust_id  AND
+          u.cust_id=l.cust_id  AND u.cust_id=a.label_id AND u.cust_id=w.cust_id
         </select>
      <!--查询机会条数 -->
      <select id="getCstChanceCount" resultType="int">
@@ -118,9 +118,9 @@
        update cst_chance set ch_content=#{chContent},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
      </update>
      <!--修改机会表的用户id -->
-      <!--<update id="updateChance" parameterType="cst">-->
-        <!--update cst_chance set user_id=#{userId} where ch_id=#{chId}-->
-      <!--</update>-->
+      <update id="updateChance" parameterType="CstChance">
+        update cst_chance set user_id=#{userId} where ch_id=#{chId}
+      </update>
 
     <!--根据字段查询 -->
   <select id="getCstChanceTo" parameterType="cstChance" resultMap="BaseResultMap">
@@ -135,10 +135,10 @@
        <if test="chContent!=null and chContent!=''">
         and ch_content like '%${chContent}%'
        </if>
-       <if test="chCustomer.custLifecycle!=null and chCustomer.custLifecycle!=''">
+     <if test="chCustomer!=null and chCustomer!='' and chCustomer.custLifecycle!=null and chCustomer.custLifecycle!=''">
         and  u.cust_lifecycle =#{chCustomer.custLifecycle}
        </if>
-       <if test="chCustomer.custCompany!=null and chCustomer.custCompany!=''">
+       <if test="chCustomer!=null and chCustomer!='' and chCustomer.custCompany!=null and chCustomer.custCompany!=''">
          and u.cust_company like '%${chCustomer.custCompany}%'
        </if>
      </where>

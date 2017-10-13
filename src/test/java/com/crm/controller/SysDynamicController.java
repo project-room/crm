@@ -9,7 +9,11 @@ import java.util.Date;
 
 public class SysDynamicController {
 
-
+    //修改用户
+    @RequestMapping("goToIndex")
+    public String index(){
+        return "index";
+    }
 
     //    @RequestMapping("/inserTest")
 //    public void insertTest(){

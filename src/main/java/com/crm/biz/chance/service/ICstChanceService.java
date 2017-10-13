@@ -14,7 +14,7 @@ public interface ICstChanceService {
 
     public boolean addCstChance(CstChance cstChance);
 
-    public CstChance  getCstChanceId(Long id);
+    public CstChance  getCstChanceId(Long chId);
 
     public  boolean deleteCstChance(Long id);
 
