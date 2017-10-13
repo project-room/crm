@@ -1,29 +1,32 @@
 package com.crm.controller;
 
-import com.crm.biz.customer.dao.CstCustomerMapper;
 import com.crm.biz.customer.service.ICstCustomerService;
 import com.crm.common.BaseController;
 import com.crm.common.Page;
+import com.crm.converter.CstCustomerConverter;
+import com.crm.dto.CstCustomerDto;
 import com.crm.entity.*;
+import com.crm.enums.ChLinkmanStatusEnums;
 import com.crm.utils.TypeUtil;
+import com.sun.xml.internal.bind.v2.TODO;
+import groovy.util.logging.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Administrator on 2017/9/19.
  */
 @Controller
+@RequestMapping("/cstCustomer")
 public class CstCustomerController extends BaseController{
 
     @Autowired
@@ -191,33 +194,43 @@ public class CstCustomerController extends BaseController{
      *通过分页bean获取认领公海客户信息
      * @return
      */
-    @RequestMapping("getPage")
-    public String getPage(Model model){
+    @RequestMapping("/getPage/{currentPage}/{pageSize}")
+    public Map getPage(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize, Model model){
         Map map=TypeUtil.successMap();
+        Set<String> date=null;
+        Page<CstCustomer> cstCustomerPage=null;
         try {
-            Page<CstCustomer> cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(1,4);
-            cstCustomerPage.getCurrentPage();
-            cstCustomerPage.getList();
-            cstCustomerPage.getPageSize();
-            cstCustomerPage.getRecTotal();
-            cstCustomerPage.getTotalPage();
+            cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(currentPage,pageSize);
 //            map.put("cstCustomerPage",cstCustomerPage);
+            //设置创建时间格式
+           List<CstCustomer> cstCustomers= cstCustomerPage.getList();
+            
+            for (CstCustomer cstCustomer:cstCustomers
+                 ) {
+                Date formation= cstCustomer.getCustDate();
+           String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
+                cstCustomer.setRevertDate(afterDate);
+            }
+            
             model.addAttribute("cstCustomerPage",cstCustomerPage);
+            map.put("cstCustomerPage",cstCustomerPage);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "page/customer";
+        return map;
     }
 
     /**
      * 根据id查看认领公海客户信息
      * @return
      */
-    @RequestMapping("lookCstCustomerInfo")
-    public Map lookCstCustomerInfo(){
+    @RequestMapping("lookCstCustomerInfo/{cstCustomerId}")
+    public Map lookCstCustomerInfo(@PathVariable("cstCustomerId") Long cstCustomerId){
         Map map= TypeUtil.successMap();
         try {
-            CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(1L);
+            CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(cstCustomerId);
+            //转换创建日期格式
+            CstCustomerConverter.dateConvertor(cstCustomer);
             map.put("cstCustomer",cstCustomer);
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,11 +242,15 @@ public class CstCustomerController extends BaseController{
      * 输入认领客户名称模糊搜索客户
      * @return
      */
-    @RequestMapping("selectCstCustomerByName")
-    public Map selectCstCustomerByName(){
+    @RequestMapping("selectCstCustomerByName/{custCompany}")
+    public Map selectCstCustomerByName(@PathVariable("custCompany") String custCompany){
         Map map=TypeUtil.successMap();
         try {
-            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName("广州");
+            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(custCompany);
+            for (CstCustomer cstCustomer:cstCustomers
+                 ) {
+                CstCustomerConverter.dateConvertor(cstCustomer);
+            }
             map.put("cstCustomers",cstCustomers);
         } catch (Exception e) {
             e.printStackTrace();
@@ -245,11 +262,11 @@ public class CstCustomerController extends BaseController{
      * 根据认领公海客户id删除公海客户
      * @return
      */
-    @RequestMapping("deleteCstCustomerById")
-    public Map deleteCstCustomerById(){
+    @RequestMapping("deleteCstCustomerById/{cstCustomerId}")
+    public Map deleteCstCustomerById(@PathVariable("cstCustomerId") Long cstCustomerId){
         Map map=TypeUtil.successMap();
         try {
-            cstCustomerService.deleteCstCustomerById(27l);
+            cstCustomerService.deleteCstCustomerById(cstCustomerId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,10 +278,9 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("deleteCstCustomerByBatch")
-    public Map deleteCstCustomerByBatch(){
+    public Map deleteCstCustomerByBatch(@PathVariable("idArray") Long[] idArray){
         Map map=TypeUtil.successMap();
         try {
-            Long[] idArray={17L,18L,19L,20L,23L};
             for (int i=0;i<idArray.length;i++){
                 cstCustomerService.deleteCstCustomerById(idArray[i]);
             }
@@ -278,27 +294,33 @@ public class CstCustomerController extends BaseController{
      * 编辑认领公海客户信息
      * @return
      */
-    @RequestMapping("editCstCustomerInfo")
-    public Map editCstCustomerInfo(){
+    @RequestMapping("/editCstCustomerInfo")
+    public Map editCstCustomerInfo( String custId, String userId, CstCustomer cstCustomer, CstLowCustomer cstLowCustomer, ChLinkman chLinkman, CstLabel cstLabel){
         Map map=TypeUtil.successMap();
         try {
-            Long custId=24L;
-            CstCustomer cstCustomer=new CstCustomer();
-            cstCustomer.setCustCompany("南方公司");
-            ChLinkman chLinkman=new ChLinkman();
-            chLinkman.setLinkStatus(0);
-            chLinkman.setCustId(custId);
-            chLinkman.setLinkWechat("linxiren");
-            chLinkman.setLinkName("李天下");
-            CstLowCustomer cstLowCustomer=new CstLowCustomer();
-            cstLowCustomer.setCustCompany("下级代理客户名称");
-            cstLowCustomer.setHighCustId(3l);
-            cstLowCustomer.setCustId(3L);
-            CstLabel cstLabel=new CstLabel();
-            cstLabel.setLabelName("随和客户");
-            cstCustomerService.editCstCustomerInfo(custId,1L,cstCustomer,cstLowCustomer,chLinkman,cstLabel);
-            int labelId=cstLabel.getLabelId();
-            map.put("labelId",labelId);
+//            Long custId=1L;
+//            CstCustomer cstCustomer=new CstCustomer();
+//            cstCustomer.setCustCompany("南方公司");
+//            ChLinkman chLinkman=new ChLinkman();
+//            chLinkman.setLinkStatus(0);
+//            chLinkman.setCustId(custId);
+//            chLinkman.setLinkWechat("linxiren");
+//            chLinkman.setLinkName("李天下");
+//            CstLowCustomer cstLowCustomer=new CstLowCustomer();
+//            cstLowCustomer.setCustCompany("下级代理客户名称");
+//            cstLowCustomer.setHighCustId(3l);
+//            cstLowCustomer.setCustId(3L);
+//            CstLabel cstLabel=new CstLabel();
+//            cstLabel.setLabelName("随和客户");
+//            cstCustomerService.editCstCustomerInfo(custId,1L,cstCustomer,cstLowCustomer,chLinkman,cstLabel);
+//            int labelId=cstLabel.getLabelId();
+//            map.put("labelId",labelId);
+            long custIdL= new Long(custId).longValue();
+            chLinkman.setCustId(custIdL);
+            long userIdL= new Long(custId).longValue();
+            chLinkman.setLinkStatus(ChLinkmanStatusEnums.MASTER_CHLINKMAN.getCode());
+            cstLowCustomer.setHighId(custIdL);
+            cstCustomerService.editCstCustomerInfo(custIdL,userIdL,cstCustomer,cstLowCustomer,chLinkman,cstLabel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -321,6 +343,10 @@ public class CstCustomerController extends BaseController{
         return "show";
     }
 
-
-
+    /*等会删掉*/
+    @RequestMapping("toedit")
+    public String toedit(){
+        Map map=TypeUtil.successMap();
+        return "page/edit";
+    }
 }

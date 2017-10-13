@@ -1,6 +1,7 @@
 package com.crm.biz.customer.dao;
 
 import com.crm.common.Page;
+import com.crm.dto.CstCustomerDto;
 import com.crm.entity.ChLinkman;
 import com.crm.entity.CstChance;
 import com.crm.entity.CstCustomer;
@@ -28,7 +29,7 @@ public interface CstCustomerMapper{
 
     int saveCstCustomer(CstCustomer cstCustomer);
 
-    List<CstCustomer> getPageCstCustomerInfo(@Param("currentPageLimit") int currentPageLimit,@Param("pageSize") int pageSize);
+    List<CstCustomer> getPageCstCustomerInfo(@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
     Long getCstCustomerCount();
 

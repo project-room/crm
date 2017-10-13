@@ -1,43 +1,43 @@
 package com.crm.entity;
 
 public class CstLowCustomer {
-    private Long lowCustId;
+    private Long lowId;
 
-    private Long highCustId;
+    private Long highId;
 
-    private String custCompany;
+    private String custLowCompany;
 
-    private Long custId;
+    private Long custLowId;
 
-    public Long getLowCustId() {
-        return lowCustId;
+    public Long getLowId() {
+        return lowId;
     }
 
-    public void setLowCustId(Long lowCustId) {
-        this.lowCustId = lowCustId;
+    public void setLowId(Long lowId) {
+        this.lowId = lowId;
     }
 
-    public Long getHighCustId() {
-        return highCustId;
+    public Long getHighId() {
+        return highId;
     }
 
-    public void setHighCustId(Long highCustId) {
-        this.highCustId = highCustId;
+    public void setHighId(Long highId) {
+        this.highId = highId;
     }
 
-    public String getCustCompany() {
-        return custCompany;
+    public String getCustLowCompany() {
+        return custLowCompany;
     }
 
-    public void setCustCompany(String custCompany) {
-        this.custCompany = custCompany == null ? null : custCompany.trim();
+    public void setCustLowCompany(String custLowCompany) {
+        this.custLowCompany = custLowCompany == null ? null : custLowCompany.trim();
     }
 
-    public Long getCustId() {
-        return custId;
+    public Long getCustLowId() {
+        return custLowId;
     }
 
-    public void setCustId(Long custId) {
-        this.custId = custId;
+    public void setCustLowId(Long custLowId) {
+        this.custLowId = custLowId;
     }
 }

@@ -1,12 +1,18 @@
-package com.crm.entity;
+package com.crm.dto;
 
+
+import com.crm.entity.ChLinkman;
+import com.crm.entity.CstLabel;
+import com.crm.entity.CstLowCustomer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.List;
 
-public class  CstCustomer {
+/**
+ * Created by Administrator on 2017/10/12.
+ */
+public class CstCustomerDto {
     private Long custId;
 
     private String custEmail;
@@ -187,4 +193,5 @@ public class  CstCustomer {
     public void setRevertDate(String revertDate) {
         this.revertDate = revertDate;
     }
+
 }

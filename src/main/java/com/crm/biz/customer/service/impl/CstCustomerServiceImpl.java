@@ -89,7 +89,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         chLinkmanMapper.updateChLinkmanByIdAndChLinkman(chLinkmanId,chLinkman);
 
         //添加下级客户
-        cstLowCustomer.setHighCustId(cstCustId);
+//        cstLowCustomer.setHighCustId(cstCustId);
         cstLowCustomerMapper.saveCstLowCustomerInfo(cstLowCustomer);
 
         //添加标签
