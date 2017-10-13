@@ -26,16 +26,6 @@ public class SysDynamicController {
     @Autowired
     private ISysDynamicService iSysDynamicService;
 
-
-
-//    @RequestMapping("selectSysDynamicById")
-//    public Map selectById(){
-//        Map map= TypeUtil.successMap();
-//        SysDynamic sysDynamic=sysDynamicMapper.findById(1l);
-//        map.put("sysDynamic",sysDynamic);
-//        return map;
-//    }
-
     //根据用户id以及limitId和分类查看全部动态
     @RequestMapping("/getDynamicListById")
     public Map selectDynamicByUserId(Long userId,Integer limitId,Integer classify){
