@@ -12,16 +12,16 @@
   </select>
   <insert id="addCstLowCustomer" parameterType="CstLowCustomer">
     INSERT INTO cst_low_customer (high_id,cust_low_company,cust_low_id)
-    VALUES (#{highCustId},#{custCompany},#{custId})
+    VALUES (#{highId},#{custLowCompany},#{custLowId})
   </insert>
   <delete id="deleteById" parameterType="Long">
     DELETE FROM cst_low_customer WHERE low_id=#{id}
   </delete>
   <update id="updateCstLowCustomerById" parameterType="CstLowCustomer">
-    UPDATE cst_low_customer SET high_id=#{highCustId},cust_low_company=#{custCompany},cust_low_id=#{custId} WHERE low_id=#{lowCustId}
+    UPDATE cst_low_customer SET high_id=#{highId},cust_low_company=#{custLowCompany},cust_low_id=#{custLowId} WHERE low_id=#{lowId}
   </update>
   <!--认领的公海客户添加下级客户-->
   <insert id="saveCstLowCustomerInfo" parameterType="CstLowCustomer">
-      INSERT INTO cst_low_customer (high_id,cust_low_company,cust_low_id) VALUES (#{highCustId},#{custCompany},#{custId})
+      INSERT INTO cst_low_customer (high_id,cust_low_company,cust_low_id) VALUES (#{highId},#{custLowCompany},#{custLowId})
   </insert>
 </mapper>

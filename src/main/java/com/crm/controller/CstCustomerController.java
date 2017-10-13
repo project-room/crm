@@ -319,7 +319,7 @@ public class CstCustomerController extends BaseController{
             chLinkman.setCustId(custIdL);
             long userIdL= new Long(custId).longValue();
             chLinkman.setLinkStatus(ChLinkmanStatusEnums.MASTER_CHLINKMAN.getCode());
-            cstLowCustomer.setHighCustId(custIdL);
+            cstLowCustomer.setHighId(custIdL);
             cstCustomerService.editCstCustomerInfo(custIdL,userIdL,cstCustomer,cstLowCustomer,chLinkman,cstLabel);
         } catch (Exception e) {
             e.printStackTrace();
