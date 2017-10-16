@@ -12,14 +12,40 @@
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM user_task WHERE task_id=#{id}
   </select>
-  <insert id="addUserTask" parameterType="UserTask">
-    INSERT INTO user_task (task_status,task_content,task_date,user_id,ch_id)
-    VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId},#{chId})
-  </insert>
   <delete id="deleteById" parameterType="Long">
     DELETE FROM user_task WHERE task_id=#{id}
   </delete>
   <update id="updateUserTaskById" parameterType="UserTask">
+    UPDATE user_task SET task_status=#{taskStatus},task_content=#{taskContent},task_date=#{taskDate},user_id=#{userId},cst_id=#{cstId} WHERE task_id=#{taskId}
+  </update>
+
+
+  <!--按机会id查询任务表-->
+  <select id="getUserTask" parameterType="Long" resultMap="BaseResultMap">
+     select * from user_task where ch_id=1
+  </select>
+
+  <!--添加一条任务-->
+  <insert id="addUserTask" parameterType="userTask">
+    INSERT INTO user_task (task_status,task_content,task_date,user_id,ch_id)
+    VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId},#{chId})
+  </insert>
+
+  <!--按任务id删除任务-->
+   <delete id="deleteUserTask" parameterType="Long">
+      delete from user_task where task_id =2
+   </delete>
+
+  <delete id="deleteUserTaskChId" parameterType="Long">
+    delete from user_task where ch_id=#{chId}
+  </delete>
+
+  <!--按任务id修改一条任务-->
+  <update id="updateUserTask" parameterType="UserTask">
     UPDATE user_task SET task_status=#{taskStatus},task_content=#{taskContent},task_date=#{taskDate},user_id=#{userId},ch_id=#{chId} WHERE task_id=#{taskId}
+  </update>
+   
+  <update id="updateUserTasktaskStatus" parameterType="Long">
+     update user_task set task_status=1 where task_id=5
   </update>
 </mapper>

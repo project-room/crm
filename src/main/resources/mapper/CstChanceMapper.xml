@@ -95,52 +95,67 @@
       <insert id="addCstChance" parameterType="cstChance" >
       insert into cst_chance values(null,#{chContent},#{custId},#{chDate},#{chMoney},#{userName},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chStage})
       </insert>
+
        <!--根据机会id查询机会的详细信息-->
         <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
-          select * from  cst_chance c,cst_customer u,ch_linkman l,cst_label a,cst_low_customer w where c.ch_id=1  AND c.cust_id=u.cust_id  AND
-          u.cust_id=l.cust_id  AND u.cust_id=a.label_id AND u.cust_id=w.cust_id
+          SELECT * from cst_chance c,cst_customer u ,ch_linkman l,cst_low_customer w,cst_label a,cst_ref_label b  WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id and l.ch_id=c.ch_id AND u.cust_id=w.high_cust_id AND
+          u.cust_id=b.cust_id AND a.label_id=b.label_id
         </select>
+
      <!--查询机会条数 -->
-     <select id="getCstChanceCount" resultType="int">
-       select count(ch_id) from cst_chance
+     <select id="getCstChanceCount" parameterType="Long" resultType="int">
+       select count(ch_id) from cst_chance where user_id=#{userId}
      </select>
+
   <!-- 根据用户id查询我的所有机会  -->
-   <select id="getCstChance" parameterType="Long" resultMap="BaseResultMap">
-     select * from cst_chance c ,cst_customer u ,cst_record  r  where c.cust_id =u.cust_id and c.ch_id=r.ch_id  and c.user_id=#{userId}
-   </select>
+   <select id="getCstChance"  resultMap="BaseResultMap">
+     select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u WHERE c.user_id=#{userId} AND c.cust_id =u.cust_id
+     ORDER BY c.ch_id  limit  #{currentPageLimit},#{pageSize}
+  </select>
 
   <!--删除我的机会 -->
-     <delete id="deleteCstChance" parameterType="Long">
-       delete from cst_chance where cust_id=#{id}
-     </delete>
-     <!--修改我的机会 -->
-     <update id="updateCstChance" parameterType="cstChance">
-       update cst_chance set ch_content=#{chContent},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
-     </update>
-     <!--修改机会表的用户id -->
-      <update id="updateChance" parameterType="CstChance">
-        update cst_chance set user_id=#{userId} where ch_id=#{chId}
-      </update>
+  <delete id="deleteCstChance" parameterType="Long">
+    delete from cst_chance where ch_id=#{id}
+  </delete>
+  <!--修改我的机会 -->
+  <update id="updateCstChance" parameterType="cstChance">
+    update cst_chance set ch_content=#{chContent},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
+  </update>
+  <!--修改机会表的用户id -->
+  <update id="updateChance" parameterType="CstChance">
+    update cst_chance set user_name=#{userName},user_id=#{userId} where ch_id=#{chId}
+  </update>
 
-    <!--根据字段查询 -->
-  <select id="getCstChanceTo" parameterType="cstChance" resultMap="BaseResultMap">
-    select * from cst_chance c ,cst_customer u ,cst_record  r 
-     <where>
-        <if test="userId!=null and userId!=0">
-         and c.cust_id =u.cust_id and c.ch_id=r.ch_id  and c.user_id=#{userId}
-        </if>
-        <if test="chStage!=null and chStage!=''">
-         and ch_stage=#{chStage}
-        </if>
-       <if test="chContent!=null and chContent!=''">
+  <!--根据机会状态修改机会的负责人-->
+  <update id="updateCst"  parameterType="cstChance">
+    UPDATE cst_chance SET  user_name=#{userName},user_id=#{userId} WHERE ch_stage=#{chStage}
+  </update>
+
+  <!--根据字段查询 -->
+  <select id="getCstChanceTo"  resultMap="BaseResultMap">
+    select * from cst_customer u ,cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id
+    <where>
+      <if test="cstChance.userId!=null and cstChance.userId!=0">
+        and c.user_id=#{cstChance.userId} and c.cust_id =u.cust_id
+      </if>
+
+      <if test="cstChance.chStage!=null and cstChance.chStage!=''">
+       and ch_stage=#{chStage}
+      </if>
+
+      <if test="cstChance.chContent!=null and cstChance.chContent!=''">
         and ch_content like '%${chContent}%'
        </if>
-     <if test="chCustomer!=null and chCustomer!='' and chCustomer.custLifecycle!=null and chCustomer.custLifecycle!=''">
-        and  u.cust_lifecycle =#{chCustomer.custLifecycle}
+
+       <if test="cstChance.chCustomer!=null and cstChance.chCustomer!='' and cstChance.chCustomer.custLifecycle!=null and cstChance.chCustomer.custLifecycle!=''">
+        and  u.cust_lifecycle =#{cstChance.chCustomer.custLifecycle}
        </if>
-       <if test="chCustomer!=null and chCustomer!='' and chCustomer.custCompany!=null and chCustomer.custCompany!=''">
-         and u.cust_company like '%${chCustomer.custCompany}%'
+
+       <if test="cstChance.chCustomer!=null and cstChance.chCustomer!='' and cstChance.chCustomer.custCompany!=null and cstChance.chCustomer.custCompany!=''">
+         and u.cust_company like '%${cstChance.chCustomer.custCompany}%'
        </if>
+
      </where>
+       ORDER BY c.ch_id  limit #{currentPageLimit},#{pageSize}
   </select>
 </mapper>

@@ -60,6 +60,12 @@
   <update id="updateCstCustomerById" parameterType="map">
     UPDATE cst_customer SET cust_email=#{cstCustomer.custEmail},cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},cust_industry=#{cstCustomer.custIndustry},cust_pic=#{cstCustomer.custPic},cust_sales=#{cstCustomer.custSales},user_id=#{cstCustomer.userId},cust_classify=#{cstCustomer.custClassify},cust_content=#{cstCustomer.custContent},cust_lifecycle=#{cstCustomer.custLifecycle},cust_website=#{cstCustomer.custWebsite},cust_type=#{cstCustomer.custType} WHERE cust_id=#{cstcustId}
   </update>
+
+       <!--根据机会对象里的客户id修改客户表的用户id-->
+        <update id="updateCstCustomer" parameterType="CstChance">
+            update cst_customer set user_id=#{userId} where cust_id=#{custId}
+        </update>
+
   <!--查询所有公海客户-->
   <select id="selectAllCstCutomer" resultMap="BaseResultMap">
     SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`
@@ -88,11 +94,11 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
 
     <!--根据客户名称模糊查询客户-->
     <select id="selectCstCustomerByName" parameterType="String" resultMap="BaseResultMap">
-SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  AND cc.`cust_company` LIKE #{custCompany}
+      SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  AND cc.`cust_company` LIKE #{custCompany}
     </select>
 
     <!--根据客户id删除客户信息以及与之关联的联系人信息-->
-    <delete id="deleteCstCustomerAndChLinkmanById" parameterType="Long" >
+    <delete id="deleteCstCustomerAndChLinkmanById"  parameterType="Long">
         DELETE cc,ch FROM cst_customer cc,ch_linkman ch WHERE 1=1 AND cc.`cust_id`=ch.`cust_id` AND cc.`cust_id`=#{id}
     </delete>
 

@@ -40,4 +40,7 @@ public interface CstCustomerMapper{
     void deleteCstCustomerAndChLinkmanById(Long id);
 
     void saveCstCustomerAndLabel(@Param("cstCustId") Long cstCustId,@Param("labelId") Integer labelId);
+
+    //根据机会对象里的客户id修改客户表里的用户id
+    int updateCstCustomer(CstChance cstChance);
 }

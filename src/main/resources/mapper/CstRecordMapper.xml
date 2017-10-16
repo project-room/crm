@@ -34,4 +34,28 @@
   <insert id="saveCstRecord" parameterType="com.crm.entity.CstRecord" useGeneratedKeys="true" keyProperty="reId">
     INSERT INTO cst_record (re_content,ch_id,user_name,re_date) VALUES (#{reContent},#{chId},#{userName},#{reDate})
   </insert>
+
+    <!--根据机会id查询记录表-->
+  <select id="getCstRecord" parameterType="Long"  resultMap="BaseResultMap">
+    select * from cst_record  where ch_id=1 ORDER BY re_date DESC
+  </select>
+  <!--添加记录-->
+   <insert id="addRecord" parameterType="CstRecord">
+     INSERT INTO cst_record (re_content,ch_id,user_name,re_date)
+     VALUES (#{reContent},#{chId},#{userName},#{reDate})
+   </insert>
+  <!--删除记录-->
+   <delete id="deleteCstRecord" parameterType="Long">
+     delete from cst_record where  re_id=2
+  </delete>
+
+  <!--根据机会id删除记录-->
+  <delete id="deleteCstRecordChId" parameterType="Long">
+    delete from cst_record where ch_id=#{chId}
+  </delete>
+
+  <!--修改记录-->
+  <update id="updateCstRecord" parameterType="CstRecord">
+    UPDATE cst_record SET re_content=#{reContent},ch_id=#{chId},user_name=#{userName},re_date=#{reDate} WHERE re_id=#{reId}
+  </update>
 </mapper>
