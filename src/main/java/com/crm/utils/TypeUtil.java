@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class TypeUtil {
     public static Map<String, Object> map() {
+
         return new HashMap();
     }
 
