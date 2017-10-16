@@ -70,9 +70,10 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         cstCustomerMapper.deleteCstCustomerAndChLinkmanById(id);
     }
 
+
     @Override
-    public void editCstCustomerInfo(Long cstCustId,Long userId,CstCustomer cstCustomer,CstLowCustomer cstLowCustomer, ChLinkman chLinkman, CstLabel cstLabel) {
-       //目标获取认领公海客户的主联系人
+    public void editCstCustomerInfo(Long cstCustId,Long userId,CstCustomer cstCustomer,List<CstLowCustomer> cstLowCustomers, ChLinkman chLinkman, List<CstLabel> cstLabels) {
+        //目标获取认领公海客户的主联系人
         CstCustomer cstCustomerResult=cstCustomerMapper.selectCstCustomerInfo(cstCustId);
         List<ChLinkman> chLinkmans=cstCustomerResult.getLinkmanList();
         ChLinkman chLinkmanFinal=null;
@@ -82,23 +83,33 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
             }
         }
         //获得的主联系人id
-      Long chLinkmanId=chLinkmanFinal.getLinkId();
-            //根据客户id更改客户信息
+        Long chLinkmanId=chLinkmanFinal.getLinkId();
+        //根据客户id更改客户信息
         cstCustomerMapper.updateCstCustomerById(cstCustId,cstCustomer);
         //根据主联系人id更改主联系人信息
         chLinkmanMapper.updateChLinkmanByIdAndChLinkman(chLinkmanId,chLinkman);
 
         //添加下级客户
 //        cstLowCustomer.setHighCustId(cstCustId);
-        cstLowCustomerMapper.saveCstLowCustomerInfo(cstLowCustomer);
+        for (CstLowCustomer cstLowCustomer:cstLowCustomers
+             ) {
+            cstLowCustomerMapper.saveCstLowCustomerInfo(cstLowCustomer);
+        }
+
 
         //添加标签
-        cstLabelMapper.saveCstLabel(cstLabel,userId);
-        //获取标签id
-        int labelId=cstLabel.getLabelId();
+        for (CstLabel cstLabel:cstLabels
+             ) {
+            cstLabelMapper.saveCstLabel(cstLabel,userId);
+            //获取标签id
+            int labelId=cstLabel.getLabelId();
+            //插入客户标签中间表的数据
+            cstCustomerMapper.saveCstCustomerAndLabel(cstCustId,labelId);
+        }
 
-        //插入客户标签中间表的数据
-        cstCustomerMapper.saveCstCustomerAndLabel(cstCustId,labelId);
+
+
+
     }
 
 

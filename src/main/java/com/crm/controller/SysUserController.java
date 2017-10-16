@@ -48,7 +48,7 @@ public class SysUserController extends BaseController {
         Map map= null;
         int state = iSysUserService.register(sysUser);
         if(state == 0){//注册失败
-            map = TypeUtil.failMap();
+            // TODO: 2017/10/16     map = TypeUtil.failMap();
         }else{//注册成功
             map= TypeUtil.successMap();
         }
@@ -63,7 +63,7 @@ public class SysUserController extends BaseController {
         Map map = null;
         int state =iSysUserService.deleteById(userId);
         if(state == 0){//删除失败
-            map = TypeUtil.failMap();
+            // TODO: 2017/10/16       map = TypeUtil.failMap();
         }else{//删除成功
             map= TypeUtil.successMap();
         }
@@ -76,7 +76,7 @@ public class SysUserController extends BaseController {
         Map map = null;
         int state =iSysUserService.updateSysUserById(sysUser);
         if(state == 0){//修改失败
-            map = TypeUtil.failMap();
+            // TODO: 2017/10/16   map = TypeUtil.failMap();
         }else{//修改成功
             map= TypeUtil.successMap();
         }
