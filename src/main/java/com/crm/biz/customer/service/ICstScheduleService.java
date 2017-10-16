@@ -1,6 +1,7 @@
 package com.crm.biz.customer.service;
 
 import com.crm.entity.CstSchedule;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
