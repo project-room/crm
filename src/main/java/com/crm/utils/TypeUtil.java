@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class TypeUtil {
     public static Map<String, Object> map() {
+
         return new HashMap();
     }
 
@@ -15,13 +16,6 @@ public class TypeUtil {
         Map map = TypeUtil.map();
         map.put("code", "0");
         map.put("msg", "success");
-        return map;
-    }
-
-    public static Map<String, Object> failMap(){
-        Map map = TypeUtil.map();
-        map.put("code", "0");
-        map.put("msg", "fail");
         return map;
     }
 }
