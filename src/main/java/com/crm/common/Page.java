@@ -1,5 +1,7 @@
 package com.crm.common;
 
+import com.crm.entity.CstChance;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,7 @@ public class Page<T> {
     private List<T> list = new ArrayList<T>();
     private Long recTotal = 0L;
 
-    public Page() {
-        super();
-    }
+    public Page() { super(); }
 
     public Page(Integer currentPage, Integer pageSize, List<T> list,
                 Long recTotal) {

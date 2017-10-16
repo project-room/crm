@@ -10,7 +10,6 @@ import com.crm.enums.ChLinkmanStatusEnums;
 import com.crm.enums.CstCustomerTypeEnums;
 import com.crm.utils.TypeUtil;
 import com.sun.xml.internal.bind.v2.TODO;
-import groovy.util.logging.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

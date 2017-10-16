@@ -3,11 +3,13 @@ package com.crm.biz.chance.dao;
 /**
  * Created by Administrator on 2017/9/12.
  */
+import com.crm.common.Page;
 import com.crm.entity.CstChance;
 
 import java.util.List;
 
 import com.crm.entity.CstCustomer;
+import com.crm.entity.CstSchedule;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,7 @@ public interface CstChanceMapper {
     void updateCstChanceById(CstChance cstChance);
 
     //根据用户id查询机会
-     List<CstChance> getCstChance(Long userId);
+    List<CstChance> getCstChance(@Param("userId") Long userId, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
     //添加机会
     int addCstChance(CstChance cstChance);
@@ -40,14 +42,13 @@ public interface CstChanceMapper {
     //根据机会id修改机会表的用户id
     int updateChance(CstChance cst);
 
-    //根据机会对象里的客户id修改客户表里的用户id
-    int updateCstCustomer(CstChance cs);
-
+    //根据机会的状态来修改负责人
+    int updateCst(CstChance cstChance);
+    
     //查询总共有多少条机会
-    int  getCstChanceCount();
+    int  getCstChanceCount(Long userId);
 
     //机会的条件查询
-    CstChance getCstChanceTo(CstChance cstChance);
-
+    List<CstChance> getCstChanceTo(@Param("cstChance") CstChance cstChance,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
 }
