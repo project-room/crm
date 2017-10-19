@@ -51,26 +51,32 @@ public class CstRecordController extends BaseController{
     //根据机会id查询记录表
     @RequestMapping("/getCstRecord")
     public  Map getCstRecord(Long id){
-        Map map= TypeUtil.successMap();
-        List<CstRecord> RecordList=iCstRecordService.getCstRecord(id);
-        Boolean by= ObjectUtil.isNotNull(RecordList);
-        if(by==true){
-            map.put("RecordList",RecordList);
-        }else {
-            map.put("RecordList","查询失败，对象为空");
+        Map map=result();
+        try {
+            List<CstRecord> RecordList = iCstRecordService.getCstRecord(id);
+            Boolean by = ObjectUtil.isNotNull(RecordList);
+            if (by) {
+                map.put("RecordList", RecordList);
+            } else {
+                map.put("-1", "查询失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return  map;
     }
     //添加一条记录
     @RequestMapping("/addCstRecord")
     public Map addCstRecord(CstRecord cstRecord){
-        Map map= TypeUtil.successMap();
-        boolean mak=false;
-        mak=iCstRecordService.addCstRecord(cstRecord);
-        if (mak==true){
-            map.put("mak","添加成功");
-        }else {
-            map.put("mak","添加失败");
+        Map map= result();
+        try {
+            boolean mak = iCstRecordService.addCstRecord(cstRecord);
+            if (mak == false) {
+                map.put("code", "-1");
+                map.put("msg", "添加失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return map;
     }
@@ -78,28 +84,31 @@ public class CstRecordController extends BaseController{
      //删除记录
     @RequestMapping("/deleteCstRecord")
     public Map deleteCstRecord(Long  reId){
-        Map map= TypeUtil.successMap();
-        boolean mak=false;
-
-        mak=iCstRecordService.deleteCstRecord(reId);
-        if (mak==true){
-            map.put("mak","删除成功");
-        }else {
-            map.put("mak","删除失败");
+        Map map= result();
+      try{
+           boolean mak=iCstRecordService.deleteCstRecord(reId);
+           if (mak == false) {
+            map.put("code", "-1");
+            map.put("msg", "删除失败");
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
         return map;
     }
 
     //修改记录
     @RequestMapping("/updateCstRecord")
     public Map updateCstRecord( CstRecord Record){
-        Map map= TypeUtil.successMap();
-        boolean mak=false;
-        mak=iCstRecordService.updateCstRecord(Record);
-        if (mak==true){
-            map.put("mak","修改成功");
-        }else {
-            map.put("mak","修改失败");
+        Map map= result();
+        try {
+            boolean mak = iCstRecordService.updateCstRecord(Record);
+            if (mak == false) {
+                map.put("code", "-1");
+                map.put("msg", "修改失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return map;
     }
