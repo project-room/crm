@@ -24,7 +24,7 @@
 
   <!--根据机会id查询进度表-->
   <select id="getCstSchedule" parameterType="Long" resultMap="BaseResultMap">
-    select *  from cst_schedule  where ch_id=1 ORDER BY sche_time  DESC
+    select *  from cst_schedule  where ch_id=#{chId} ORDER BY sche_time  DESC
   </select>
 
   <!--根据机会id删除进度-->

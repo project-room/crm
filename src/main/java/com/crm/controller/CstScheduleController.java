@@ -3,6 +3,7 @@ package com.crm.controller;
 import com.crm.biz.customer.dao.CstRecordMapper;
 import com.crm.biz.customer.dao.CstScheduleMapper;
 import com.crm.biz.customer.service.ICstScheduleService;
+import com.crm.common.BaseController;
 import com.crm.entity.CstRecord;
 import com.crm.entity.CstSchedule;
 
@@ -19,7 +20,7 @@ import java.util.Map;
  * Created by Administrator on 2017/9/15.
  */
 @RestController
-public class CstScheduleController {
+public class CstScheduleController extends BaseController {
     @Autowired
     private CstScheduleMapper cstScheduleMapper;
 
@@ -37,13 +38,17 @@ public class CstScheduleController {
     //按机会id查询进度表
     @RequestMapping("/getCstSchedule")
     public Map getCstSchedule(Long chId){
-        Map map= TypeUtil.successMap();
-       List<CstSchedule> cstScheduleList=iCstScheduleService.getCstSchedule(chId);
-        Boolean by= ObjectUtil.isNotNull(cstScheduleList);
-        if(by==true){
-            map.put("cstScheduleList",cstScheduleList);
-        }else {
-            map.put("cstScheduleList","查询失败，对象为空");
+        Map map= result();
+        try {
+            List<CstSchedule> cstScheduleList = iCstScheduleService.getCstSchedule(chId);
+            Boolean by = ObjectUtil.isNotNull(cstScheduleList);
+            if (by) {
+                map.put("cstScheduleList", cstScheduleList);
+            } else {
+                map.put("-1", "查询失败，对象为空");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
         return  map;
     }

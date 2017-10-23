@@ -43,7 +43,7 @@ public class CstChanceController extends BaseController {
     //查询我的机会方法
     @RequestMapping("/getCstChance")
     public Map getCstChance(Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
-        Map map = TypeUtil.successMap();
+        Map map = result();
  //       Long userId = (long) 1;
  //       int currentPage = 1;
   //      int pageSize = 2;

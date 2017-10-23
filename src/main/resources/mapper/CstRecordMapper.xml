@@ -37,7 +37,7 @@
 
     <!--根据机会id查询记录表-->
   <select id="getCstRecord" parameterType="Long"  resultMap="BaseResultMap">
-    select * from cst_record  where ch_id=1 ORDER BY re_date DESC
+    select * from cst_record  where ch_id=#{chId} ORDER BY re_date DESC
   </select>
   <!--添加记录-->
    <insert id="addRecord" parameterType="CstRecord">
@@ -46,7 +46,7 @@
    </insert>
   <!--删除记录-->
    <delete id="deleteCstRecord" parameterType="Long">
-     delete from cst_record where  re_id=2
+     delete from cst_record where  re_id=#{reId}
   </delete>
 
   <!--根据机会id删除记录-->
