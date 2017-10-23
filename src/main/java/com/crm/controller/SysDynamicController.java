@@ -47,6 +47,8 @@ public class SysDynamicController {
         Map map= TypeUtil.successMap();
         try {
 
+
+
         List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId((long)userId);
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  //data里返回的是时间戳
 //        String s = formatter.format(sysDynamicList.get(0).getTaskDate());
