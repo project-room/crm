@@ -16,4 +16,7 @@ public interface ISysDynamicService {
     //通过用户id查询当前日期的任务表
     List<UserTask> selectTaskListByUserId(Long userId);
 
+    //修改任务中的状态，当状态为未完成时修改为已完成，状态为已完成时修改成未完成
+    void updateTask(Long taskId,Integer taskStatus);
+
 }

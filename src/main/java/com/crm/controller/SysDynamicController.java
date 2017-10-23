@@ -30,8 +30,14 @@ public class SysDynamicController {
     @RequestMapping("/getDynamicListById")
     public Map selectDynamicByUserId(Long userId,Integer limitId,Integer classify){//classify:分类，当为Null时查所有数据
         Map map= TypeUtil.successMap();
-        List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)1,1,classify);
-        map.put("sysDynamic",sysDynamicList);
+        try {
+            List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)userId,limitId,classify);
+            map.put("sysDynamic",sysDynamicList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code","-1");
+            map.put("msg","批量删除公海客户失败");
+        }
         return map;
 }
 
@@ -39,16 +45,34 @@ public class SysDynamicController {
     @RequestMapping("/getTaskListByUserId")
     public Map selectTaskByUserId(Long userId){
         Map map= TypeUtil.successMap();
-        List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId((long)1);
+        try {
+        List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId((long)userId);
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  //data里返回的是时间戳
 //        String s = formatter.format(sysDynamicList.get(0).getTaskDate());
 //        System.out.println("日期:" + s);
         map.put("sysDynamic",sysDynamicList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code","-1");
+            map.put("msg","任务列表查询失败");
+        }
         return map;
     }
 
 
-
+    //修改任务中的状态，当状态为未完成时修改为已完成，状态为已完成时修改成未完成
+    @RequestMapping("/updateTask")
+    public Map updateTask(Long taskId,Integer taskStatus){
+        Map map= TypeUtil.successMap();
+        try {
+        iSysDynamicService.updateTask(taskId,taskStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code","-1");
+            map.put("msg","任务状态修改失败");
+        }
+        return map;
+    }
 
 
 

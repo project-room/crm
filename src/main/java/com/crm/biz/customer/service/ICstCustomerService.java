@@ -57,7 +57,7 @@ public interface ICstCustomerService {
      * 编辑认领公海客户信息
      * @param cstCustomer
      * @param chLinkman
-     * @param cstLabel
+     * @param cstLabels
      */
-    void editCstCustomerInfo(Long custId,Long userId,CstCustomer cstCustomer,CstLowCustomer cstLowCustomer,ChLinkman chLinkman,CstLabel cstLabel);
+    void editCstCustomerInfo(Long custId,Long userId,CstCustomer cstCustomer,List<CstLowCustomer> cstLowCustomers,ChLinkman chLinkman,List<CstLabel> cstLabels);
 }
