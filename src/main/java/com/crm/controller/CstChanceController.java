@@ -41,12 +41,15 @@ public class CstChanceController extends BaseController {
 
 
     //查询我的机会方法
+//    Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize
     @RequestMapping("/getCstChance")
-    public Map getCstChance(Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+    public Map getCstChance() {
         Map map = TypeUtil.successMap();
- //       Long userId = (long) 1;
- //       int currentPage = 1;
-  //      int pageSize = 2;
+        // 测试数据
+        Long userId = (long) 1;
+        int currentPage = 1;
+        int pageSize = 2;
+
         try {
             Page<CstChance> cstChancePage = iCstChance.getCstChance(userId, currentPage, pageSize);
             Boolean by = ObjectUtil.isNotNull(cstChancePage);
@@ -78,10 +81,12 @@ public class CstChanceController extends BaseController {
     }
 
     //按机会id查询机会的详细信息
+//    Long chId
     @RequestMapping("/getCstChanceId")
-    public Map getCstChanceId(Long chId) {
+    public Map getCstChanceId() {
         Map map=result();
-  //      Long chId = (long) 1;
+        //测试数据
+        Long chId =  1L;
         try{
             CstChance cstChance = iCstChance.getCstChanceId(chId);
             Boolean by = ObjectUtil.isNotNull(cstChance);
@@ -133,10 +138,13 @@ public class CstChanceController extends BaseController {
     }
 
     //查询有多少条机会信息
+//    Long userId
     @RequestMapping("/getCstChanceCount")
-    public Map getCstChanceCount( Long userId) {
+    public Map getCstChanceCount() {
         Map map=result();
-   //     Long userId = (long) 1;
+        //测试数据
+        Long userId = (long) 1;
+
         try {
             int count = iCstChance.getCstChanceCount(userId);
             map.put("count", count);
@@ -147,13 +155,16 @@ public class CstChanceController extends BaseController {
     }
 
     //根据条件查询
+//    CstChance cstChance, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize
     @RequestMapping("/getCstChanceTo")
-    public Map getCstChanceTo(CstChance cstChance, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+    public Map getCstChanceTo() {
         Map map=result();
- //  CstChance cstChance = new CstChance();
-    //    cstChance.setUserId((long) 1);
-     //   int currentPage = 1;
-   //     int pageSize = 2;
+        //测试数据
+   CstChance cstChance = new CstChance();
+        cstChance.setUserId((long) 1);
+        int currentPage = 1;
+        int pageSize = 2;
+
         try {
             Page<CstChance> ChancePage = iCstChance.getCstChanceTo(cstChance, currentPage, pageSize);
             Boolean by = ObjectUtil.isNotNull(ChancePage);

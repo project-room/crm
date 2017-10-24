@@ -73,8 +73,8 @@
 
     <!--保存公海客户信息-->
     <insert id="saveCstCustomer" parameterType="CstCustomer" useGeneratedKeys="true" keyProperty="custId">
-INSERT INTO cst_customer (cust_email,cust_company,cust_address,cust_industry,cust_pic,cust_sales,user_id,cust_classify,cust_content,cust_lifecycle,cust_website,cust_type)
-VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{custSales},#{userId},#{custClassify},#{custContent},#{custLifecycle},#{custWebsite},#{custType})
+INSERT INTO cst_customer (cust_email,cust_company,cust_address,cust_industry,cust_pic,cust_sales,user_id,cust_classify,cust_content,cust_lifecycle,cust_website,cust_type,cust_date)
+VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{custSales},#{userId},#{custClassify},#{custContent},#{custLifecycle},#{custWebsite},#{custType},#{custDate})
     </insert>
 
     <!--公海客户分页-->
@@ -106,4 +106,21 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <insert id="saveCstCustomerAndLabel" parameterType="map">
         INSERT INTO cst_ref_label (cust_id,label_id) VALUES (#{cstCustId},#{labelId})
     </insert>
+
+    <!--根据条件筛选公海客户-->
+    <select id="selectCstCustomerByCondition" parameterType="map" resultMap="BaseResultMap">
+      SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` HAVING
+cc.`cust_company` LIKE #{cstCustomer.custCompany} OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone}
+ OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}  OR cl.`link_qq` LIKE #{chLinkman.linkQq} OR
+ cl.`link_email` LIKE #{chLinkman.linkEmail} LIMIT #{currentPage},#{pageSize}
+    </select>
+
+    <!--获取筛选count-->
+    <select id="getCountByCondition" parameterType="map" resultType="Long" >
+ SELECT count(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND
+cc.`cust_company` LIKE #{cstCustomer.custCompany} OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone}
+ OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}  OR cl.`link_qq` LIKE #{chLinkman.linkQq} OR
+ cl.`link_email` LIKE #{chLinkman.linkEmail}
+    </select>
+
 </mapper>

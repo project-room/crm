@@ -11,6 +11,7 @@ import com.crm.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -110,6 +111,43 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
 
 
 
+    }
+
+    /**
+     * 创建客户
+     * @param cstCustomer
+     * @param chLinkman
+     */
+    @Override
+    public void createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman) {
+        cstCustomerMapper.saveCstCustomer(cstCustomer);
+        Long custId=cstCustomer.getCustId();
+        chLinkman.setCustId(custId);
+        chLinkmanMapper.saveChLinkman(chLinkman);
+
+    }
+
+    /**
+     * 筛选客户
+     * @param cstCustomer
+     * @param chLinkman
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Page<CstCustomer> selectCstCustomerByCondition(CstCustomer cstCustomer, ChLinkman chLinkman,Integer currentPage,Integer pageSize) {
+       Integer currentPageLimit=(currentPage-1)*pageSize;
+       List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
+        cstCustomer.setCustCompany("%"+cstCustomer.getCustCompany()+"%");
+        chLinkman.setLinkName("%"+chLinkman.getLinkName()+"%");
+        chLinkman.setLinkPhone("%"+chLinkman.getLinkPhone()+"%");
+        chLinkman.setLinkLandlinePhone("%"+chLinkman.getLinkLandlinePhone()+"%");
+        chLinkman.setLinkQq("%"+chLinkman.getLinkQq()+"%");
+        chLinkman.setLinkEmail("%"+chLinkman.getLinkEmail()+"%");
+        cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(cstCustomer,chLinkman,currentPageLimit,pageSize);
+        Long count=cstCustomerMapper.getCountByCondition(cstCustomer,chLinkman);
+       return new Page<CstCustomer>(currentPageLimit,pageSize,cstCustomers,count);
     }
 
 

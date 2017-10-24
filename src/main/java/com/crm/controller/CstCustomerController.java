@@ -19,18 +19,94 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/9/19.
  */
-@RestController
+@Controller
 @RequestMapping("/cstCustomer")
 public class CstCustomerController extends BaseController{
 
     @Autowired
     private  ICstCustomerService cstCustomerService;
+
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "index/index";
+    }
+
+    /**
+     * 新建公海客户
+     * @return
+     */
+    @RequestMapping("/createCstCustomer")
+    public Map createCstCustomer(){
+        Map map=result();
+        try {
+            CstCustomer cstCustomer=new CstCustomer();
+            cstCustomer.setCustCompany("新建客户");
+            cstCustomer.setCustDate(new Date(System.currentTimeMillis()));
+            cstCustomer.setCustType("2");
+            cstCustomer.setCustWebsite("www.waizhan");
+            cstCustomer.setCustLifecycle("潜在客户");
+            cstCustomer.setCustClassify(2);
+            cstCustomer.setCustSales("销售商");
+            cstCustomer.setCustContent("详细");
+            cstCustomer.setCustPic("/img/1.jpg");
+            cstCustomer.setCustAddress("广州");
+            cstCustomer.setCustEmail("2343@qq.com");
+            cstCustomer.setCustIndustry("软件");
+            cstCustomer.setUserId(1L);
+
+            ChLinkman chLinkman=new ChLinkman();
+            chLinkman.setLinkWechat("联系人微信");
+
+
+            cstCustomerService.createCstCustomer(cstCustomer,chLinkman);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code","-1");
+            map.put("msg","新建客户失败");
+        }
+
+        return map;
+
+    }
+
+    /**
+     * 筛选公海客户
+     * @return
+     */
+    @RequestMapping("/selectCstCustomersByCondition")
+    public Map selectCstCustomersByCondition(){
+        Map map=result();
+        try {
+            CstCustomer cstCustomer=new CstCustomer();
+            ChLinkman chLinkman=new ChLinkman();
+
+            Integer currentPage=2;
+            Integer pageSize=2;
+            cstCustomer.setCustCompany("公司");
+            chLinkman.setLinkName("111");
+            chLinkman.setLinkPhone("111");
+            chLinkman.setLinkLandlinePhone("111");
+            chLinkman.setLinkQq("111");
+            chLinkman.setLinkEmail("111");
+            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(cstCustomer,chLinkman,currentPage,pageSize);
+            map.put("returnCstCustomer",returnCstCustomer);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code","-1");
+            map.put("msg","筛选客户失败");
+        }
+
+        return map;
+    }
+
     /**
      * 查看所有认领的公海客户
      * @return
@@ -218,7 +294,6 @@ public class CstCustomerController extends BaseController{
            String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
                 cstCustomer.setRevertDate(afterDate);
             }
-            
             model.addAttribute("cstCustomerPage",cstCustomerPage);
             map.put("cstCustomerPage",cstCustomerPage);
         } catch (Exception e) {

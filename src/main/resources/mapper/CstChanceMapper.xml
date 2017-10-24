@@ -98,7 +98,7 @@
 
        <!--根据机会id查询机会的详细信息-->
         <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
-          SELECT * from cst_chance c,cst_customer u ,ch_linkman l,cst_low_customer w,cst_label a,cst_ref_label b  WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id and l.ch_id=c.ch_id AND u.cust_id=w.high_cust_id AND
+          SELECT * from cst_chance c,cst_customer u ,ch_linkman l,cst_low_customer w,cst_label a,cst_ref_label b  WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id and l.ch_id=c.ch_id AND u.cust_id=w.high_id AND
           u.cust_id=b.cust_id AND a.label_id=b.label_id
         </select>
 

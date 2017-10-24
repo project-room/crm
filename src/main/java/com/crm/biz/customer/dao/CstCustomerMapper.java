@@ -43,4 +43,10 @@ public interface CstCustomerMapper{
 
     //根据机会对象里的客户id修改客户表里的用户id
     int updateCstCustomer(CstChance cstChance);
+
+    //根据条件筛选客户
+    List<CstCustomer>  selectCstCustomerByCondition( @Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman,@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
+
+    //筛选客户
+    Long getCountByCondition(@Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman);
 }

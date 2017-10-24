@@ -33,9 +33,13 @@ public class UserTaskController {
     }
 
     //根据机会id查询任务
+//    Long chId
     @RequestMapping("/getUserTask")
-    public Map getUserTask(Long chId) {
+    public Map getUserTask() {
         Map map = TypeUtil.successMap();
+        //测试数据
+        Long chId=1L;
+
         List<UserTask> userTasksList = iUserTaskService.getUserTask(chId);
         Boolean by = ObjectUtil.isNotNull(userTasksList);
         if (by == true) {

@@ -49,9 +49,13 @@ public class CstRecordController extends BaseController{
     }
 
     //根据机会id查询记录表
+//    Long id
     @RequestMapping("/getCstRecord")
-    public  Map getCstRecord(Long id){
+    public  Map getCstRecord(){
         Map map= TypeUtil.successMap();
+        //测试数据
+        Long id=1L;
+
         List<CstRecord> RecordList=iCstRecordService.getCstRecord(id);
         Boolean by= ObjectUtil.isNotNull(RecordList);
         if(by==true){

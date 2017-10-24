@@ -22,7 +22,7 @@
 
   <!--按机会id查询任务表-->
   <select id="getUserTask" parameterType="Long" resultMap="BaseResultMap">
-     select * from user_task where ch_id=1
+     select * from user_task where ch_id=#{chId}
   </select>
 
   <!--添加一条任务-->
