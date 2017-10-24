@@ -1,0 +1,83 @@
+body { font-size: 0; }
+p { margin-bottom: 0; }
+.leftContent { display: inline-block; width: 10%; background: #7460ee; color: #fff;
+	text-align: center; height: 100%; vertical-align: top; }
+.logo { height: 60px; line-height: 60px; font-size: 18px; }
+.leftContent ul li { height: 48px; line-height: 48px; font-size: 16px; }
+.leftContent ul li.active { background: #594aba; }
+/*.leftContent ul li img { width: 30px; }*/
+.navTxt { vertical-align: middle; margin-left: 14px;}
+
+.rightContent { display: inline-block; width: 90%; font-size: 12px; }
+
+.rightContent .header { height: 60px; text-align: right; padding: 12px;}
+.rightContent .header > div { float: right; line-height: 36px; width: 50%; }
+.rightContent .header input, .rightContent .header button { float: left; outline: none; }
+.rightContent .header .mail, .rightContent .header .user { display: inline-block; position: relative; }
+.rightContent .header input { width: 65%; border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px; border: 1px solid #666; padding-left: 20px;
+	border-right: none; font-size: 14px; color: #333}
+.rightContent .header button { width: 10%; background: #7460ee; border: 1px solid #7460ee; 
+	padding-right: 10px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;}
+.rightContent .header .mail { background: url(../img/mail.png) center no-repeat;
+	width: 36px; height: 36px; margin-right: 20px; top: 5px; }
+.rightContent .header .mail span { background: red; width: 18px; height: 18px;
+	color: #fff; border-radius: 50%; display: inline-block; text-align: center;
+	line-height: 18px; vertical-align: top; }
+.rightContent .header .mail div { width: 260px; position: absolute;
+	top: 35px; right: 0; overflow: hidden; text-align: left; background: #fff;
+	padding: 10px; box-shadow: 0 0 10px #eee; display: none; z-index: 2; }
+.rightContent .header .mail div li { text-overflow: ellipsis; white-space: nowrap;
+	overflow: hidden; height: 30px; line-height: 2; }
+.rightContent .header .mail div li a { color: #333; font-size: 14px; }	
+.rightContent .header .mail div li:hover a { color: #7460ee; text-decoration: none; }
+.rightContent .header .mail .lookMore { text-align: center; font-size: 14px; height: 30px; line-height: 30px; }
+.rightContent .header .mail .lookMore:hover a { color: #999; text-decoration: none; }
+
+.rightContent .header .user .detail { display: none; position: absolute; width: 70px;
+	background: #fff; box-shadow: 0 0 10px #eee; text-align: left; padding: 10px;
+	top: 30px; z-index: 2; }
+.rightContent .header .user .userName { font-size: 16px; vertical-align: sub; }
+.rightContent .header .user .xiala { vertical-align: middle; }
+
+.rightContent .main { background: #dde1eb; }
+.rightContent .main > div { margin-top: 30px; margin-left: 1.56%; display: inline-block;
+	width: 47.45%; background: #fff;}
+
+
+
+.rightContent .dynamicHeader { height: 40px; background: #eef1f7; line-height: 38px; }
+.rightContent .dynamicHeader li { color: #999; border-bottom: 2px solid transparent;
+	display: inline-block; font-size: 16px; margin-left: 2.5%; cursor: pointer;}
+.rightContent .dynamicHeader li.active { color: #7460ee; border-color: #7460ee; }
+.rightContent .dynamicContent { overflow-y: scroll; }
+.rightContent .dynamicContent li { border-bottom: 1px solid #eee; padding: 10px; }
+.rightContent .dynamicContent li:hover { background: #eee; }
+.rightContent .dynamicContent li > div { padding-left: 10px; }
+.rightContent .dynamicContent .icon { vertical-align: middle; }
+.rightContent .dynamicContent .msg { display: inline-block; vertical-align: middle; padding-left: 10px;}
+.rightContent .dynamicContent .msg .employee { font-size: 14px }
+.rightContent .dynamicContent .description { color: #333; }
+.rightContent .dynamicContent .msg p { line-height: 1.8; }
+.rightContent .dynamicContent .addTime { float: right; }
+
+.rightContent .daily { vertical-align: top; margin-bottom: 0; height: 40px;
+	border-bottom: 1px solid #eee; position: relative;}
+.rightContent .daily .dailyHeader { height: 40px; line-height: 40px; font-size: 14px;
+	padding-left: 20px; color: #666; border-bottom: 1px solid #eee }
+.rightContent .daily .dailyHeader span { color: #000; }
+.rightContent .dailyContent { overflow-y: scroll; }
+.rightContent .daily ul { background: #fff; }
+.rightContent .daily ul li { border-bottom: 1px solid #eee; padding: 10px; }
+.rightContent .dailyContent li:hover { background: #eee; }
+.rightContent .dailyContent li:hover .operate { display: block; }
+.rightContent .daily ul li div { display: inline-block; vertical-align: middle; padding-left: 10px; line-height: 1.5; }
+.rightContent .daily ul li div p { font-size: 14px; }
+.rightContent .daily ul li div .createTime { float: right; }
+.rightContent .daily ul li .operate { float: right; display: none; }
+.rightContent .daily ul li .operate span { display: inline-block; margin-right: 5px; line-height: 3; cursor: pointer; }
+.rightContent .daily .dailyContent label { height: 14px; width: 14px; display: inline-block;
+	border: 1px solid #ccc; border-radius: 2px; box-shadow: inset 0 0 4px #ccc;
+	vertical-align: middle; }
+.rightContent .daily .dailyContent label.borderRed { border: 1px solid red; box-shadow: inset 0 0 4px red; }
+.rightContent .daily .dailyContent label input { visibility: hidden;	}

@@ -60,4 +60,18 @@ public interface ICstCustomerService {
      * @param cstLabels
      */
     void editCstCustomerInfo(Long custId,Long userId,CstCustomer cstCustomer,List<CstLowCustomer> cstLowCustomers,ChLinkman chLinkman,List<CstLabel> cstLabels);
+
+    /**
+     * 新建公海客户
+     * @param cstCustomer
+     */
+    void createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman);
+
+    /**
+     * 筛选公海客户
+     * @param cstCustomer
+     * @param chLinkman
+     * @return
+     */
+    Page<CstCustomer> selectCstCustomerByCondition(CstCustomer cstCustomer,ChLinkman chLinkman,Integer currentPage,Integer pageSize );
 }
