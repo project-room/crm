@@ -29,4 +29,6 @@ public interface SysDynamicMapper {
     List<UserTask> selectTaskListByUserId(@Param("userId")Long userId,@Param("taskStatus")Integer taskStatus);
 
     void insertTaskTest(UserTask userTask);
+
+    void updateTask(@Param("taskId")Long taskId,@Param("taskStatus")Integer taskStatus);
 }

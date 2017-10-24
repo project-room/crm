@@ -50,8 +50,19 @@
   </update>
 
   <select id="selectDynamicListByUserId"  resultMap="BaseDynamicResultMap">
-    select dy_id,user_id,user_name,dy_content,dy_date,dy_classify,dy_classify_id
-    from sys_dynamic where user_id = #{userId} limit #{limitId},10
+    SELECT
+	dy_id,
+	user_id,
+	user_name,
+	dy_content,
+	dy_date,
+	dy_classify,
+	dy_classify_id
+FROM
+	sys_dynamic
+WHERE
+	user_id = #{userId} order by dy_id DESC limit #{limitId},10
+
   </select>
 
   <select id="selectTaskListByUserId" resultMap="BaseUserTaskResultMap">
@@ -79,6 +90,15 @@
     ORDER BY
 	task_date ASC
   </select>
+
+  <update id="updateTask" >
+UPDATE user_task
+SET task_status = #{taskStatus}
+WHERE
+	task_id = #{taskId}
+  </update>
+
+
 
   <!--测试用需删除-->
   <insert id="insertTaskTest" parameterType="com.crm.entity.UserTask" useGeneratedKeys="true" keyProperty="taskId">

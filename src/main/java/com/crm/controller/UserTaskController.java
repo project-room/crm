@@ -3,6 +3,7 @@ package com.crm.controller;
 import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.biz.user.dao.UserTaskMapper;
 import com.crm.biz.user.service.IUserTaskService;
+import com.crm.common.BaseController;
 import com.crm.entity.SysUser;
 import com.crm.entity.UserTask;
 import com.crm.utils.ObjectUtil;
@@ -17,7 +18,7 @@ import java.util.*;
  * Created by Administrator on 2017/9/14.
  */
 @RestController
-public class UserTaskController {
+public class UserTaskController extends BaseController {
     @Autowired
     private UserTaskMapper userTaskMapper;
 
@@ -26,40 +27,42 @@ public class UserTaskController {
 
     @RequestMapping("selectUserTaskById")
     public Map selectById() {
-        Map map = TypeUtil.successMap();
+        Map map =result();
         UserTask userTask = userTaskMapper.findById(1l);
         map.put("userTask", userTask);
         return map;
     }
 
     //根据机会id查询任务
-//    Long chId
     @RequestMapping("/getUserTask")
-    public Map getUserTask() {
-        Map map = TypeUtil.successMap();
-        //测试数据
-        Long chId=1L;
-
-        List<UserTask> userTasksList = iUserTaskService.getUserTask(chId);
-        Boolean by = ObjectUtil.isNotNull(userTasksList);
-        if (by == true) {
-            map.put("userTasksList", userTasksList);
-        } else {
-            map.put("userTasksList", "查询失败，对象为空");
-        }
+    public Map getUserTask(Long chId) {
+        Map map =result();
+         try {
+             List<UserTask> userTasksList = iUserTaskService.getUserTask(chId);
+             Boolean by = ObjectUtil.isNotNull(userTasksList);
+             if (by) {
+                 map.put("userTasksList", userTasksList);
+             } else {
+                 map.put("-1", "查询失败，对象为空");
+             }
+         }  catch (Exception e) {
+             e.printStackTrace();
+         }
         return map;
     }
 
     //添加一条任务
     @RequestMapping("/addUserTask")
     public Map addUserTask(UserTask userTask) {
-        Map map = TypeUtil.successMap();
-        boolean mak = false;
-        mak = iUserTaskService.addUserTask(userTask);
-        if (mak == true) {
-            map.put("mak", "添加成功");
-        } else {
-            map.put("mak", "添加失败");
+        Map map = result();
+        try {
+            boolean mak = iUserTaskService.addUserTask(userTask);
+            if (mak == false) {
+                map.put("code", "-1");
+                map.put("msg", "添加失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return map;
     }
@@ -67,42 +70,47 @@ public class UserTaskController {
     //删除一条任务
     @RequestMapping("/deleteUserTask")
     public Map deleteUserTask(Long taskId) {
-        Map map = TypeUtil.successMap();
-        boolean mak = false;
-        mak = iUserTaskService.deleteUserTask(taskId);
-        if (mak == true) {
-            map.put("mak", "删除成功");
-        } else {
-            map.put("mak", "删除失败");
-        }
+        Map map = result();
+         try {
+             boolean mak = iUserTaskService.deleteUserTask(taskId);
+             if (mak == false) {
+                 map.put("code", "-1");
+                 map.put("msg", "删除失败");
+             }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
         return map;
     }
 
     //修改任务
     @RequestMapping("/updateUserTask")
     public Map updateUserTask(UserTask userTask) {
-        Map map = TypeUtil.successMap();
-        boolean mak = false;
-        mak = iUserTaskService.updateUserTask(userTask);
-        if (mak == true) {
-            map.put("mak", "修改成功");
-        } else {
-            map.put("mak", "修改失败");
-        }
+        Map map = result();
+       try {
+           boolean mak = iUserTaskService.updateUserTask(userTask);
+           if (mak == false) {
+               map.put("code", "-1");
+               map.put("msg", "修改失败");
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
         return map;
     }
 
     //修改任务的状态（未完成任务改为已完成）
     @RequestMapping("/updateUserTasktaskStatus")
     public Map updateUserTasktaskStatus(Long taskId) {
-        Map map = TypeUtil.successMap();
-        boolean mak = false;
-        mak = iUserTaskService.updateUserTasktaskStatus(taskId);
-
-        if (mak == true) {
-            map.put("mak", "修改状态成功");
-        } else {
-            map.put("mak", "修改状态失败");
+        Map map = result();
+        try {
+            boolean mak = iUserTaskService.updateUserTasktaskStatus(taskId);
+            if (mak == false) {
+                map.put("code", "-1");
+                map.put("msg", "修改失败");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
         return map;
     }

@@ -33,7 +33,7 @@
 
   <!--按任务id删除任务-->
    <delete id="deleteUserTask" parameterType="Long">
-      delete from user_task where task_id =2
+      delete from user_task where task_id =#{taskId}
    </delete>
 
   <delete id="deleteUserTaskChId" parameterType="Long">
@@ -44,8 +44,9 @@
   <update id="updateUserTask" parameterType="UserTask">
     UPDATE user_task SET task_status=#{taskStatus},task_content=#{taskContent},task_date=#{taskDate},user_id=#{userId},ch_id=#{chId} WHERE task_id=#{taskId}
   </update>
-   
+
+  <!--修改任务的状态（未完成任务改为已完成）-->
   <update id="updateUserTasktaskStatus" parameterType="Long">
-     update user_task set task_status=1 where task_id=5
+     update user_task set task_status=1 where task_id=#{taskId}
   </update>
 </mapper>
