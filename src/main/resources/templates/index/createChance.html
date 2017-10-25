@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户关系管理系统</title>
+	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+	<script th:src="@{/js/jquery.nicescroll.js}"></script>
+	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/css/default.css}" />
+	<link rel="stylesheet" th:href="@{/css/createChance.css}"/>
+	<script th:src="@{/js/default.js}"></script>
+	<script th:src="@{/js/createChance.js}"></script>
+</head>
+<body>
+	<div class="leftContent">
+		<div class="logo">
+			<img th:src="@{/img/logo.png}" alt="logo"/>
+			<span class="logoTxt">润普CRM</span>
+		</div>
+		<ul>
+			<li><a href="index.html"><img th:src="@{/img/index.png}" alt="首页"/><span class="navTxt">首页</span></a></li>
+			<li><a href="seas.html"><img th:src="@{/img/seas.png}" alt="公海"/><span class="navTxt">公海</span></a></li>
+			<li class="active"><a href="chance.html"><img th:src="@{/img/chance.png}" alt="机会"/><span class="navTxt">机会</span></a></li>
+			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
+			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
+			<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
+			<li><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></li>
+		</ul>
+	</div>
+	<div class="rightContent">
+		<div class="header">
+			<div>
+				<!-- <input type="text" placeholder="请输入客户名称">
+				<button><img src="img/searchIcon.png" alt=""></button> -->
+				<div class="mail">
+					<span class="msgNum">1</span>
+					<div>
+						<ul>
+							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
+							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
+							<li><a href="">聂宇豪创建了新</a></li>
+						</ul>
+						<p class="lookMore"><a href="" class="grey">查看更多</a></p>
+					</div>
+				</div>
+				<div class="user">
+					<span class="userName">聂宇豪</span>
+					<span class="xiala"><img th:src="@{/img/xiala.png}"/></span>
+					<ul class="detail">
+						<li><a href="">个人资料</a></li>
+						<li><a href="">系统设置</a></li>
+						<li><a href="">退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="main" >
+			<div class="baseInfo">
+				<div>
+					<label for="customerLogo">
+						<img th:src="@{/img/unknow.png}" alt=""/>
+						<p>上传客户logo</p>
+					</label>
+					<input type="file" name="" id="customerLogo"/>
+				</div>
+				<div>
+					<input type="text" class="customerName" placeholder="请输入客户名称" />
+					<input type="text" class="introduction" placeholder="请输入公司简介" />
+				</div>
+			</div>
+
+			<ul>
+				<li>
+					<div class="saleMsg">
+						<h4>销售机会信息</h4>
+						<ul>
+							<li><label><input type="text" placeholder="机会简述" name=""/></label></li>
+							<li><label><select><option selected="selected">阶段</option></select></label></li>
+							<li>
+								<label>
+									<select>
+										<option selected="selected">分类</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+									</select>
+								</label>
+							</li>
+							<li><label><input type="text" placeholder="上级客户"/><img src="" /></label></li>
+							<li><label><select><option selected="selected">生命周期</option></select></label></li>
+							<li><label><input type="text" placeholder="客户官网" name=""/></label></li>
+							<li><label><input type="text" placeholder="所在省份" name=""/></label></li>
+							<li><label><input type="text" placeholder="地址" name=""/></label></li>
+						</ul>
+						<h5>标签</h5>
+						<ul>
+							<li>
+								<select name="" id="">
+									<option value="">意向度</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">客户类型</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">重要性</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">产品需求</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">购买意向</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">所在省份</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">所属行业</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">跟进结果</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">客户性质</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">成交年份</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">丢单类型</option>
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<select name="" id="">
+									<option value="">丢单原因</option>
+									<option value=""></option>
+								</select>
+							</li>
+						</ul>
+					</div>
+				
+				</li>
+				<li>
+					<div class="contactMsg">
+						<h4>主要联系人信息</h4>
+						<ul>
+							<li><label><input type="text" placeholder="姓名"/></label></li>
+							<li><label><input type="text" placeholder="手机"/></label></li>
+							<li><label><input type="text" placeholder="固话"/></label></li>
+							<li><label><input type="text" placeholder="邮箱"/></label></li>
+							<li><label><input type="text" placeholder="QQ"/></label></li>
+							<li><label><input type="text" placeholder="微信"/></label></li>
+						</ul>
+						<br />
+						<br />
+						<h4>其他联系人信息</h4>
+						<ul>
+							<li><label><input type="text" placeholder="姓名"/></label></li>
+							<li><label><input type="text" placeholder="手机"/></label></li>
+							<li><label><input type="text" placeholder="固话"/></label></li>
+							<li><label><input type="text" placeholder="邮箱"/></label></li>
+							<li><label><input type="text" placeholder="QQ"/></label></li>
+							<li><label><input type="text" placeholder="微信"/></label></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<div class="detailMsg">
+						<h4>详细信息</h4>
+						<ul>
+							<li><label><input type="text" placeholder="立项背景"/></label></li>
+							<li>
+								<p>主要联系人所在部门、职位</p>
+								<ul>
+									<li><label><input type="text" placeholder="请输入部门名称"/></label></li>
+									<li><label><input type="text" placeholder="职位名称"/></label></li>
+								</ul>
+							</li>
+							<li><label><input type="text" placeholder="主要使用部门"/></label></li>
+							<li><label><input type="text" placeholder="客户预算"/></label></li>
+							<li>
+								<label>
+									<select>
+										<option selected="selected">是否存在详细需求文档</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+									</select>
+								</label>
+							</li>
+							<li>
+								<label>
+									<select>
+										<option selected="selected">是否了解其他供应商</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+									</select>
+								</label>
+							</li>
+							<li><label><input type="text" placeholder="期望何时上线"/></label></li>
+							<li><label><input type="text" placeholder="我们有哪些客户属于这个行业"/></label></li>
+						</ul>
+						<div class="btngroup">
+							<input type="button" class="save" value="保存"/>
+							<input type="button" class="cancel" value="取消"/>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</body>
+</html>

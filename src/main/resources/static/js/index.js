@@ -1,18 +1,23 @@
 $(function() {
 	var windowH = $(document).height();
 	var windowW = $(window).width();
-	console.log(windowH);
 	$('.leftContent').height(windowH);
 	var rightHeaderH = $('.rightContent .header').height();
-	$('.rightContent .main').height(windowH - rightHeaderH - 24);
-	$('.rightContent .main > div').height((windowH - rightHeaderH - 24 - 60) );
+	$('.rightContent .main').css({
+		'min-height': windowH - rightHeaderH - 24
+	});
+	$('.rightContent .main > div').css({
+		'min-height': windowH - rightHeaderH - 24 -60
+	});
 	$('.dynamicContent').height($('.dynamic').height() - $('.dynamic .dynamicHeader').height());
 	$('.dailyContent').height($('.daily').height() - $('.daily .dailyHeader').height());
-	
+	$('.dynamicHeader').find('li').click(function() {
+		$(this).addClass('active').siblings().removeClass('active');
+		//需要ajax
+	});
 
 	scroll($('.dynamicContent'));
 	scroll($('.dailyContent'));
-	RightHeaderClick();
 	myDaily.dailyDel();
 	myDaily.checkboxClick();
 	myDaily.checkboxColor();
@@ -32,50 +37,7 @@ function scroll(ele) {
 	});
 }
 
-//右边头部email和user
-function RightHeaderClick() {
-	$('.mail').click(function() {
-		$(this).find('div').css({
-			display: 'block'
-		});
-  }).mouseout(function() {
-	 $(this).find('div').css({
-			display: 'none'
-		});
-  });
-  $('.mail div').mouseover(function() {
-	 $(this).css({
-			display: 'block'
-	 });
-  }).mouseout(function(){
-	 $(this).css({
-			display: 'none'
-		});
-  });
 
-  $('.user').click(function() {
-	 $(this).find('.xiala').find('img').attr('src','img/shangla.png');
-	 $(this).find('.detail').css({
-			display: 'block'
-	 });
-  }).mouseout(function() {
-	 $(this).find('.xiala').find('img').attr('src','img/xiala.png');
-	 $(this).find('.detail').css({
-			display: 'none'
-		});
-  });
-  $('.user .detail').mouseover(function() {
-	 $(this).siblings('.xiala').find('img').attr('src','img/shangla.png');
-	 $(this).css({
-			display: 'block'
-	 });
-  }).mouseout(function(){
-	 $(this).siblings('.xiala').find('img').attr('src','img/xiala.png');
-	 $(this).css({
-			display: 'none'
-		});
-  });
-}
 
 //daily部分
 var myDaily = {
@@ -109,25 +71,16 @@ var myDaily = {
 		$('.daily input[type=checkbox]').click(function() {
 			if ($(this).prop('checked') === true) {
 				//需要ajax
-				$(this).parent().css({
-					'border-color': '#7460ee',
-					'box-shadow': 'none',
-					background: 'url(img/checkedPurple.png) center no-repeat'
-				});
 				$(this).parent().siblings('div').find('p').css({
 					'text-decoration': 'line-through'
 				});
 				$(this).parent().siblings('div').find('.createTime').addClass('dnone').removeClass('dblock');
 			} else {
 				//需要ajax
-				$(this).parent().css({
-					'border-color': '#ccc',
-					'box-shadow': 'inset 0 0 4px #ccc',
-					background: 'none'
-				});
 				$(this).parent().siblings('div').find('p').css({
 					'text-decoration': 'none'
 				});
+				$(this).parent().siblings('div').find('.createTime').addClass('dblock').removeClass('dnone');
 			}
 		});
 	},

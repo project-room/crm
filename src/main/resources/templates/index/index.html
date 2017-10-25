@@ -70,10 +70,10 @@
 						<div>
 							<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
 							<div class="msg">
-								<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-								<p class="addWhat grey">添加了机会：<span class="description">广州润普网络科技有限公司：文档管理</span></p>
+								<p class="employee" th:text="${sysDynamic[0].userName}"><span class="career">（销售人员）</span></p>
+								<p class="addWhat grey" th:text="${sysDynamic[0].dyClassifyId==0?'进度':sysDynamic[0].dyClassifyId==1?'记录':sysDynamic[0].dyClassifyId==2?'机会':sysDynamic[0].dyClassifyId==3?'合同':'回款'}"><span class="description" th:text="${sysDynamic[0].dyContent}"></span></p>
 							</div>
-							<span class="addTime">08/23 16:30</span>
+							<span class="addTime" th:text="${sysDynamic[0].dyDate}"></span>
 						</div>
 					</li>
 					<li>

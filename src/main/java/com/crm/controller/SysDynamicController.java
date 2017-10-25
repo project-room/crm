@@ -8,6 +8,7 @@ import com.crm.entity.SysDynamic;
 import com.crm.entity.UserTask;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import java.util.Random;
  * Created by Administrator on 2017/9/15.
  */
 @RestController
+@RequestMapping("/sysDynamicController")
 public class SysDynamicController {
 
     @Autowired
