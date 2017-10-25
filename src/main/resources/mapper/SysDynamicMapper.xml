@@ -61,7 +61,7 @@
 FROM
 	sys_dynamic
 WHERE
-	user_id = #{userId} order by dy_id DESC limit #{limitId},10
+	user_id = #{userId} order by dy_id DESC limit #{limitId},3
 
   </select>
 
