@@ -31,7 +31,7 @@ public class SysDynamicController {
     public Map selectDynamicByUserId(Long userId,Integer lastId,Integer classify){//classify:分类，当为Null时查所有数据
         Map map= TypeUtil.successMap();
         try {
-            List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)1,999888,classify);
+            List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)userId,lastId,classify);
             map.put("sysDynamic",sysDynamicList);
         } catch (Exception e) {
             e.printStackTrace();
