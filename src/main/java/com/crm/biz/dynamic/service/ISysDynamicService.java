@@ -11,7 +11,7 @@ import java.util.List;
 public interface ISysDynamicService {
 
     //通过用户id查询所有动态
-    List<SysDynamic> selectDynamicListByUserId(Long userId,Integer limitId,Integer classify);
+    List<SysDynamic> selectDynamicListByUserId(Long userId,Integer lastId,Integer classify);
 
     //通过用户id查询当前日期的任务表
     List<UserTask> selectTaskListByUserId(Long userId);
