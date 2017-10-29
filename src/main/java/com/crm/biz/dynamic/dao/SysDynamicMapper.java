@@ -23,7 +23,7 @@ public interface SysDynamicMapper {
     void updateSysDynamicById(SysDynamic sysDynamic);
 
     //根据用户id查询所有动态
-    List<SysDynamic> selectDynamicListByUserId(@Param("userId") Long userId,@Param("limitId")int limitId);
+    List<SysDynamic> selectDynamicListByUserId(@Param("userId") Long userId,@Param("lastId")int lastId);
 
     //根据用户Id查询当前日期的任务
     List<UserTask> selectTaskListByUserId(@Param("userId")Long userId,@Param("taskStatus")Integer taskStatus);

@@ -61,7 +61,11 @@
 FROM
 	sys_dynamic
 WHERE
-	user_id = #{userId} order by dy_id DESC limit #{limitId},10
+	user_id = #{userId}
+    <if test="lastId != -1">
+      AND dy_id &lt; #{lastId}
+    </if>
+    order by dy_id DESC LIMIT 0 ,10
 
   </select>
 
@@ -101,7 +105,7 @@ WHERE
 
 
   <!--测试用需删除-->
-  <insert id="insertTaskTest" parameterType="com.crm.entity.UserTask" useGeneratedKeys="true" keyProperty="taskId">
+  <insert id="insertDataTest" parameterType="com.crm.entity.UserTask" useGeneratedKeys="true" keyProperty="taskId">
     INSERT INTO user_task (task_status,task_content,task_date,user_id)
     VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId})
   </insert>

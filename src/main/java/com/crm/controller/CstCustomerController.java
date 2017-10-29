@@ -38,6 +38,23 @@ public class CstCustomerController extends BaseController{
     public String toIndex(){
         return "index/index";
     }
+    @RequestMapping("/toAddNewCustomer")
+    public String toAddNewCustomer(){
+        return "index/addNewCustomer";
+    }
+
+    @RequestMapping("/toCreateChance")
+    public String toCreateChance(){
+        return "index/createChance";
+    }
+    @RequestMapping("/toEditCustomer")
+    public String toEditCustomer(){
+        return "index/editCustomer";
+    }
+    @RequestMapping("/toSeas")
+    public String toSeas(){
+        return "index/seas";
+    }
 
 
     /**
