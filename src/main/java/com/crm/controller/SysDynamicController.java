@@ -8,7 +8,6 @@ import com.crm.entity.SysDynamic;
 import com.crm.entity.UserTask;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,26 +21,22 @@ import java.util.Random;
  * Created by Administrator on 2017/9/15.
  */
 @RestController
-@RequestMapping("/sysDynamicController")
 public class SysDynamicController {
 
     @Autowired
     private ISysDynamicService iSysDynamicService;
 
-    //根据用户id以及limitId和分类查看全部动态，limitId为第几页
+    //根据用户id以及lastId和分类查看全部动态，lastId为最后一个值的dy_id
     @RequestMapping("/getDynamicListById")
-    public Map selectDynamicByUserId(Long userId,Integer limitId,Integer classify){//classify:分类，当为Null时查所有数据
-        userId=1L;
-        limitId=0;
-        classify=null;
+    public Map selectDynamicByUserId(Long userId,Integer lastId,Integer classify){//classify:分类，当为Null时查所有数据
         Map map= TypeUtil.successMap();
         try {
-            List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)userId,limitId,classify);
+            List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)userId,lastId,classify);
             map.put("sysDynamic",sysDynamicList);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
-            map.put("msg","批量删除公海客户失败");
+            map.put("msg","查询动态表失败");
         }
         return map;
 }

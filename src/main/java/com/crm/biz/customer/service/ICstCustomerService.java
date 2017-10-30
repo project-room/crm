@@ -39,7 +39,7 @@ public interface ICstCustomerService {
      * @param custCompany
      * @return
      */
-    List<CstCustomer> selectCstCustomerByName(String custCompany);
+    List<CstCustomer> selectCstCustomerByName(String custCompany,Integer currentPage,Integer pageSize);
 
     /**
      * 查看所有认领的公海客户
@@ -74,4 +74,11 @@ public interface ICstCustomerService {
      * @return
      */
     Page<CstCustomer> selectCstCustomerByCondition(CstCustomer cstCustomer,ChLinkman chLinkman,Integer currentPage,Integer pageSize );
+
+    /**
+     * 根据模糊客户名来获取count
+     * @param custCompany
+     * @return
+     */
+    Long selectCountByCstCustomerName(String custCompany);
 }

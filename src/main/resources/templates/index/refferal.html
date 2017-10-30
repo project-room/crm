@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+            <title>
+                客户关系管理系统
+            </title>
+            <script src="js/jquery-1.8.3.min.js">
+            </script>
+            <script src="bootstrap/js/bootstrap.js">
+            </script>
+            <script src="bootstrap/js/bootstrap-table.js">
+            </script>
+            <script src="js/jquery.nicescroll.js">
+            </script>
+            <script src="laydate/laydate.js">
+            </script>
+            <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
+            <link href="css/default.css" rel="stylesheet"/>
+            <link href="css/refferal.css" rel="stylesheet"/>
+            <script src="js/default.js">
+            </script>
+            <script src="js/refferal.js">
+            </script>
+        </meta>
+    </head>
+    <body>
+        <div class="chehuiPop dnone">
+            <div class="shelter">
+            </div>
+            <div class="chehuiMain">
+                <svg class="cancel" viewbox="0 0 20 20">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </svg>
+                <p>
+                    是否通过审批？
+                </p>
+                <div class="btngroup">
+                    <input class="sure" type="button" value="是"/>
+                    <input class="cancel" type="button" value="否"/>
+                </div>
+            </div>
+        </div>
+        <div class="shenpiPop dnone">
+            <div class="shelter">
+            </div>
+            <div class="shenpiMain">
+                <svg class="cancel" viewbox="0 0 20 20">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </svg>
+                <p>
+                    是否通过审批？
+                </p>
+                <div class="btngroup">
+                    <input class="yes" type="button" value="通过"/>
+                    <input class="no" type="button" value="不通过"/>
+                    <input class="cancel" type="button" value="取消"/>
+                </div>
+            </div>
+        </div>
+        <div class="zhuanjiao dnone">
+            <div class="shelter">
+            </div>
+            <div class="zhuanjiaoMain">
+                <h4>
+                    客户转交
+                    <svg class="cancel" viewbox="0 0 20 20">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </svg>
+                </h4>
+                <form>
+                    <label>
+                        原始负责人
+                        <input type="text"/>
+                    </label>
+                    <label>
+                        新负责人
+                        <input type="text"/>
+                    </label>
+                    <div class="stageSelect">
+                        <p>
+                            阶段选择
+                        </p>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            初期沟通
+                        </label>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            理想评估
+                        </label>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            需求分析
+                        </label>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            方案制定
+                        </label>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            竞标中
+                        </label>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            商务谈判
+                        </label>
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                            合同签订
+                        </label>
+                    </div>
+                    <div class="btngroup">
+                        <input class="sure" type="button" value="确定"/>
+                        <input class="cancel" type="button" value="取消"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="filterPop dnone" style="font-size: 14px;">
+            <div class="shelter">
+            </div>
+            <div class="filtermain">
+                <h4>
+                    高级筛选
+                    <svg class="cancel" viewbox="0 0 20 20">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </svg>
+                </h4>
+                <form>
+                    <label>
+                        原始负责人
+                        <input type="text"/>
+                    </label>
+                    <label>
+                        新负责人
+                        <input type="text"/>
+                    </label>
+                    <label>
+                        客户名称
+                        <input type="text"/>
+                    </label>
+                    <label>
+                        阶段
+                        <select>
+                            <option>
+                                123456789
+                            </option>
+                            <option>
+                                23456789
+                            </option>
+                            <option>
+                                asdfghj
+                            </option>
+                            <option>
+                                eawrytygkyfgd
+                            </option>
+                            <option>
+                                sdfkhjgdfdsa
+                            </option>
+                        </select>
+                    </label>
+                    <label>
+                        当前步骤
+                        <select>
+                            <option>
+                                123456789
+                            </option>
+                            <option>
+                                23456789
+                            </option>
+                            <option>
+                                asdfghj
+                            </option>
+                            <option>
+                                eawrytygkyfgd
+                            </option>
+                            <option>
+                                sdfkhjgdfdsa
+                            </option>
+                        </select>
+                    </label>
+                    <label class="day" for="day">
+                        创建日期
+                        <input id="day" name="" placeholder="年/月/日" type="text"/>
+                    </label>
+                    <label class="hour" for="hour">
+                        <input id="hour" placeholder="00:00-00:00" type="text"/>
+                    </label>
+                    <div class="btngroup">
+                        <input class="sure" type="button" value="确定"/>
+                        <input class="cancel" type="button" value="取消"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" src="img/logo.png"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
+            </div>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <img alt="首页" src="img/index.png"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="seas.html">
+                        <img alt="公海" src="img/seas.png"/>
+                        <span class="navTxt">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="chance.html">
+                        <img alt="机会" src="img/chance.png"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <img alt="合同" src="img/contract.png"/>
+                    <span class="navTxt">
+                        合同
+                    </span>
+                </li>
+                <li>
+                    <img alt="财务" src="img/financial.png"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" src="img/support.png"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li>
+                    <img alt="设置" src="img/setting.png"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent">
+            <div class="header">
+                <div>
+                    <input placeholder="请输入客户名称" type="text"/>
+                    <button>
+                        <img alt="" src="img/searchIcon.png"/>
+                    </button>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName">
+                            聂宇豪
+                        </span>
+                        <span class="xiala">
+                            <img src="img/xiala.png"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a href="">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div>
+                    <div class="chanceHeader">
+                        <div class="fleft">
+                            <div class="tag">
+                                转交客户v
+                                <ul class="dnone">
+                                    <li>
+                                        <a href="chance.html">
+                                            我的机会
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            全部机会
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="refferal.html" style="color: #7460ee;">
+                                            转交客户
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="customerNum">
+                                <span>
+                                    1000
+                                </span>
+                                条客户信息
+                            </p>
+                        </div>
+                        <div class="fright">
+                            <button class="filter">
+                                <img src="img/filter.png"/>
+                                筛选
+                            </button>
+                            <button class="createZhuanjiao">
+                                <a href="#">
+                                    <img src="img/addCustomer.png"/>
+                                    新建转交
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="allOperate dnone">
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                        </label>
+                        <button class="delete">
+                            <img src="img/delete.png"/>
+                            删除
+                        </button>
+                        <button class="edit">
+                            <img src="img/edit.png"/>
+                            编辑
+                        </button>
+                        <button>
+                            <img src="img/chancePurple.png"/>
+                            转交机会
+                        </button>
+                    </div>
+                    <div class="chanceContent">
+                        <table class="table table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th data-field="select" style="">
+                                        <div class="th-inner ">
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="origin" data-field="origin" style="">
+                                        <div class="th-inner ">
+                                            原始负责人
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="newMan" data-field="newMan" style="">
+                                        <div class="th-inner ">
+                                            新负责人
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="client" data-field="client" style="">
+                                        <div class="th-inner ">
+                                            客户
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="stage" data-field="stage" style="">
+                                        <div class="th-inner ">
+                                            阶段
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="current" data-field="current" style="">
+                                        <div class="th-inner ">
+                                            当前步骤
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="createTime" data-field="createTime" style="">
+                                        <div class="th-inner ">
+                                            创建时间
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th data-field="operate" style="">
+                                        <div class="th-inner ">
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="origin" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="newMan" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="client" style="">
+                                        <p>
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone clientYinc">
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="stage" style="">
+                                        <ul>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone stageYinc">
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="current" style="">
+                                        <p>
+                                            待审批（水水水）
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p>
+                                            2101-11-11 11-11
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <button class="shenpi">
+                                            审批
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="origin" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="newMan" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="client" style="">
+                                        <p>
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone clientYinc">
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="stage" style="">
+                                        <ul>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone stageYinc">
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="current" style="">
+                                        <p>
+                                            待审批（水水水）
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p>
+                                            2101-11-11 11-11
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <button class="shenpi">
+                                            审批
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="origin" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="newMan" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="client" style="">
+                                        <p>
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone clientYinc">
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="stage" style="">
+                                        <ul>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone stageYinc">
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="current" style="">
+                                        <p>
+                                            待审批（水水水）
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p>
+                                            2101-11-11 11-11
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <button class="shenpi">
+                                            审批
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="origin" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="newMan" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="client" style="">
+                                        <p>
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone clientYinc">
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="stage" style="">
+                                        <ul>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone stageYinc">
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="current" style="">
+                                        <p>
+                                            待审批（水水水）
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p>
+                                            2101-11-11 11-11
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <button class="shenpi">
+                                            审批
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="origin" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="newMan" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="client" style="">
+                                        <p>
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone clientYinc">
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                            <li>
+                                                广州润普网络科技有限公司
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="stage" style="">
+                                        <ul>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                        <span>
+                                            · · ·
+                                        </span>
+                                        <ul class="dnone stageYinc">
+                                            <li>
+                                                一二三四
+                                            </li>
+                                            <li>
+                                                一二三四
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="current" style="">
+                                        <p>
+                                            待审批（水水水）
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p>
+                                            2101-11-11 11-11
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <button class="shenpi">
+                                            审批
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="fixed-table-pagination">
+                            <div class="pull-left pagination-detail">
+                                <span class="pagination-info">
+                                    Showing 1 to 10 of 78 rows
+                                </span>
+                                <span class="page-list">
+                                    <span class="btn-group dropup">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+                                            <span class="page-size">
+                                                10
+                                            </span>
+                                            <span class="caret">
+                                            </span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li class="active" role="menuitem">
+                                                <a href="#">
+                                                    10
+                                                </a>
+                                            </li>
+                                            <li role="menuitem">
+                                                <a href="#">
+                                                    25
+                                                </a>
+                                            </li>
+                                            <li role="menuitem">
+                                                <a href="#">
+                                                    50
+                                                </a>
+                                            </li>
+                                            <li role="menuitem">
+                                                <a href="#">
+                                                    100
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                    rows per page
+                                </span>
+                            </div>
+                            <div class="pull-right pagination">
+                                <ul class="pagination">
+                                    <li class="page-pre disabled">
+                                        <a href="#">
+                                            上一页
+                                        </a>
+                                    </li>
+                                    <li class="page-number active">
+                                        <a href="#">
+                                            1
+                                        </a>
+                                    </li>
+                                    <li class="page-number">
+                                        <a href="#">
+                                            2
+                                        </a>
+                                    </li>
+                                    <li class="page-number">
+                                        <a href="#">
+                                            3
+                                        </a>
+                                    </li>
+                                    <li class="page-number">
+                                        <a href="#">
+                                            4
+                                        </a>
+                                    </li>
+                                    <li class="page-number">
+                                        <a href="#">
+                                            5
+                                        </a>
+                                    </li>
+                                    <li class="page-last-separator disabled">
+                                        <a href="#">
+                                            ...
+                                        </a>
+                                    </li>
+                                    <li class="page-last">
+                                        <a href="#">
+                                            8
+                                        </a>
+                                    </li>
+                                    <li class="page-next">
+                                        <a href="#">
+                                            下一页
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <nav aria-label="Page navigation">
+               <ul class="pagination">
+                    <li class="page-first"><a href="#">首页</a></li>
+                    <li class="page-pre"><a href="#">上一页</a></li>
+                    <li class="page-first"><a href="#">1</a></li>
+                    <li class="page-first-separator disabled"><a href="#">...</a></li>
+                    <li class="page-number"><a href="#">4</a></li>
+                    <li class="page-number active"><a href="#">5</a></li>
+                    <li class="page-number"><a href="#">6</a></li>
+                    <li class="page-last-separator disabled"><a href="#">...</a></li>
+                    <li class="page-last"><a href="#">1000</a></li>
+                    <li class="page-next"><a href="#">下一页</a></li>
+                    <li class="page-first"><a href="#">尾页</a></li>
+               </ul>
+          </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

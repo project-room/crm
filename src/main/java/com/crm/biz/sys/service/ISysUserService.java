@@ -15,7 +15,6 @@ public interface ISysUserService {
 
     int updateSysUserById(SysUser sysUser);
 
-    Long selectSysUserByName(String userName);
-
-    String selectUserNameById(Long userId);
+    //通过用户名获取用户Id
+    Long selectUserIdByUserName(String userName);
 }

@@ -75,13 +75,8 @@
   <select id="findByAccount" parameterType="String" resultMap="BaseResultMap">
     select * from sys_user where user_accounts = #{account}
   </select>
-  <!--根据用户名查询用户id-->
-  <select id="selectSysUserByName" parameterType="String"  resultType="Long">
-      SELECT user_id FROM sys_user WHERE user_name=#{userName}
-  </select>
-
-  <!--根据用户id查询用户名-->
-  <select id="selectUserNameByUserId" parameterType="Long" resultType="String">
-    SELECT user_name FROM sys_user WHERE user_id=#{userId}
+  <!--通过用户名获取用户id-->
+  <select id="selectUserIdByUserName" parameterType="String"  resultType="Long">
+        SELECT user_id FROM sys_user WHERE user_name=#{userName}
   </select>
 </mapper>

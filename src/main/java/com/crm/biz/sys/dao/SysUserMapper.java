@@ -22,7 +22,6 @@ public interface SysUserMapper {
 
     SysUser findByAccount(String account);
 
-    Long selectSysUserByName(String userName);
-
-    String selectUserNameByUserId(Long userId);
+    //通过用户名获取用户Id
+    Long selectUserIdByUserName(@Param("userName") String userName);
 }

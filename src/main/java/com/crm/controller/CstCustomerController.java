@@ -55,6 +55,12 @@ public class CstCustomerController extends BaseController{
     public String toSeas(){
         return "index/seas";
     }
+    @RequestMapping("/toRefferal")
+    public String toRefferal(){return "index/refferal";}
+    @RequestMapping("/toChance")
+    public String toChance(){
+        return "index/chance";
+    }
 
 
     /**
@@ -62,15 +68,13 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("/createCstCustomer")
-    public String createCstCustomer(String userId,CstCustomer cstCustomer,ChLinkman chLinkman){
+    public String createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman){
         Map map=result();
         try {
+
             cstCustomer.setCustDate(new Date(System.currentTimeMillis()));
             cstCustomer.setCustType("2");
             cstCustomer.setCustClassify(2);
-            cstCustomer.setUserId(new Long(userId));
-
-
             cstCustomerService.createCstCustomer(cstCustomer,chLinkman);
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +82,7 @@ public class CstCustomerController extends BaseController{
             map.put("msg","新建客户失败");
         }
 
-        return "index/index";
+        return "redirect:" + "/cstCustomer/getPage/1/7";
 
     }
 
@@ -313,45 +317,47 @@ public class CstCustomerController extends BaseController{
      * 根据id查看认领公海客户信息
      * @return
      */
-    @RequestMapping("lookCstCustomerInfo/{cstCustomerId}")
-    public String lookCstCustomerInfo(@PathVariable("cstCustomerId") String cstCustomerId,Model model){
+    @RequestMapping("/lookCstCustomerInfo/{cstCustomerId}")
+    public Map lookCstCustomerInfo(@PathVariable("cstCustomerId") Long cstCustomerId){
 //        Map map= TypeUtil.successMap();
         Map map=result();
         try {
-            CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(new Long(cstCustomerId));
+            CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(cstCustomerId);
             //转换创建日期格式
             CstCustomerConverter.dateConvertor(cstCustomer);
             map.put("cstCustomer",cstCustomer);
-            model.addAttribute("cstCustomer",cstCustomer);
-
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","查看公海客户信息失败");
         }
-        return "index/editCustomer";
+        return map;
     }
 
     /**
      * 输入认领客户名称模糊搜索客户
      * @return
      */
-    @RequestMapping("selectCstCustomerByName/{custCompany}")
-    public Map selectCstCustomerByName(@PathVariable("custCompany") String custCompany){
+    @RequestMapping("/selectCstCustomerByName/{custCompany}/{currentPage}/{pageSize}")
+    public String  selectCstCustomerByName(@PathVariable("custCompany") String custCompany,@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize,Model model){
         Map map=result();
+        Long count=cstCustomerService.selectCountByCstCustomerName(custCompany);
         try {
-            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(custCompany);
+            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(custCompany,currentPage,pageSize);
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
                 CstCustomerConverter.dateConvertor(cstCustomer);
             }
-            map.put("cstCustomers",cstCustomers);
+
+           Page<CstCustomer> pageCstCustomerByName= new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
+            map.put("cstCustomerPage",pageCstCustomerByName);
+            model.addAttribute("cstCustomerPage",pageCstCustomerByName);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","按客户名称搜索失败");
         }
-        return map;
+        return "index/seas";
     }
 
     /**
@@ -488,6 +494,5 @@ public class CstCustomerController extends BaseController{
         }
         return map;
     }
-
 
 }

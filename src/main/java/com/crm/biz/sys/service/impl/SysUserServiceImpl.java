@@ -47,20 +47,10 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public Long selectSysUserByName(String userName) {
+    public Long selectUserIdByUserName(String userName) {
         Long userId=null;
-        userId=sysUserMapper.selectSysUserByName(userName);
-        if(userId==null){
-            // TODO: 2017/10/26 用户不存在
-        }
+        userId=sysUserMapper.selectUserIdByUserName(userName);
         return userId;
-    }
-
-    @Override
-    public String selectUserNameById(Long userId) {
-        String userName="";
-        userName=sysUserMapper.selectUserNameByUserId(userId);
-        return userName;
     }
 
 

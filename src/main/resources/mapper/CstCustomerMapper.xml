@@ -93,8 +93,8 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     </select>
 
     <!--根据客户名称模糊查询客户-->
-    <select id="selectCstCustomerByName" parameterType="String" resultMap="BaseResultMap">
-      SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  AND cc.`cust_company` LIKE #{custCompany}
+    <select id="selectCstCustomerByName"  resultMap="BaseResultMap">
+      SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany} LIMIT #{currentPage},#{pageSize}
     </select>
 
     <!--根据客户id删除客户信息以及与之关联的联系人信息-->
@@ -123,4 +123,8 @@ cc.`cust_company` LIKE #{cstCustomer.custCompany} OR cl.`link_name` LIKE #{chLin
  cl.`link_email` LIKE #{chLinkman.linkEmail}
     </select>
 
+    <!--根据模糊客户名获取count-->
+    <select id="selectCountByCstCustomerName" parameterType="String" resultType="Long">
+        SELECT COUNT(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany}
+    </select>
 </mapper>

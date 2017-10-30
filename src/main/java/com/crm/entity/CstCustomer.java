@@ -38,6 +38,9 @@ public class  CstCustomer {
     //时期为字符串格式
     private String revertDate;
 
+    //用户id转换成用户名格式
+    private String revertUserNameFromId;
+
     private List<CstLabel> labelList;
 
     private List<CstLowCustomer>  lowCustomerList;
@@ -186,5 +189,13 @@ public class  CstCustomer {
 
     public void setRevertDate(String revertDate) {
         this.revertDate = revertDate;
+    }
+
+    public String getRevertUserNameFromId() {
+        return revertUserNameFromId;
+    }
+
+    public void setRevertUserNameFromId(String revertUserNameFromId) {
+        this.revertUserNameFromId = revertUserNameFromId;
     }
 }
