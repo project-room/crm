@@ -8,18 +8,20 @@ import java.util.Date;
  * Created by Administrator on 2017/9/13.
  * 任务表
  */
+
+
 public class UserTask {
-    private Long taskId;
+    private Long taskId;      //任务id
 
-    private Integer taskStatus;
+    private Integer taskStatus; //任务状态
 
-    private String taskContent;
+    private String taskContent;  //任务内容
 
-    private Date taskDate;
+    private Date taskDate;     //添加时间
 
-    private Long userId;
+    private Long userId;       //用户id
 
-    private Long chId;
+    private Long chId;         //机会id
 
     private CstChance chance;
 

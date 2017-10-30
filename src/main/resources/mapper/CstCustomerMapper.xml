@@ -66,6 +66,11 @@
             update cst_customer set user_id=#{userId} where cust_id=#{custId}
         </update>
 
+     <!-- 机会新建前的查询客户-->
+      <select id="getCstCustomer" parameterType="Long" resultMap="BaseResultMap">
+          select * from cst_customer where user_id=#{userId}
+      </select>
+
   <!--查询所有公海客户-->
   <select id="selectAllCstCutomer" resultMap="BaseResultMap">
     SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`

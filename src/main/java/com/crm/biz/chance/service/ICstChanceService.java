@@ -2,6 +2,7 @@ package com.crm.biz.chance.service;
 
 import com.crm.common.Page;
 import com.crm.entity.CstChance;
+import com.crm.entity.CstCustomer;
 import com.crm.entity.CstSchedule;
 
 import java.util.List;
@@ -28,5 +29,7 @@ public interface ICstChanceService {
     public boolean updateChance(CstChance cst);
 
    public  boolean updateCst(CstChance cstChance);
+
+   public CstCustomer getCstCustomer(long id);
 
 }

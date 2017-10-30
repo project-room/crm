@@ -65,8 +65,8 @@
 					<input type="file" name="" id="customerLogo"/>
 				</div>
 				<div>
-					<input type="text" class="customerName" placeholder="请输入客户名称" />
-					<input type="text" class="introduction" placeholder="请输入公司简介" />
+					<input type="text" name="custCompany" class="customerName" placeholder="请输入客户名称" />
+					<input type="text" name="custContent" class="introduction" placeholder="请输入公司简介" />
 				</div>
 			</div>
 
@@ -75,29 +75,47 @@
 					<div class="saleMsg">
 						<h4>销售机会信息</h4>
 						<ul>
-							<li><label><input type="text" placeholder="机会简述" name=""/></label></li>
-							<li><label><select><option selected="selected">阶段</option></select></label></li>
+							<li><label><input type="text" placeholder="机会简述" name="chContent"/></label></li>
+							<li><label>
+								<select name="chStage">
+									<option value="" selected="selected">阶段</option>
+									<option value="初期沟通">初期沟通</option>
+									<option value="立项评估">立项评估</option>
+									<option value="需求分析">需求分析</option>
+									<option value="合同签订">合同签订</option>
+								</select>
+							   </label>
+							</li>
 							<li>
 								<label>
-									<select>
+									<select name="custType">
 										<option selected="selected">分类</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
 									</select>
 								</label>
 							</li>
 							<li><label><input type="text" placeholder="上级客户"/><img src="" /></label></li>
-							<li><label><select><option selected="selected">生命周期</option></select></label></li>
-							<li><label><input type="text" placeholder="客户官网" name=""/></label></li>
+							<li>
+								<label>
+								 <select>
+									<option value="" selected="selected">生命周期</option>
+									 <option value="成交客户" >成交客户</option>
+									 <option value="潜在客户" >潜在客户</option>
+									 <option value="失效客户" >失效客户</option>
+								 </select>
+							    </label>
+							</li>
+							<li><label><input type="text" placeholder="客户官网" name="custWebsite"/></label></li>
 							<li><label><input type="text" placeholder="所在省份" name=""/></label></li>
-							<li><label><input type="text" placeholder="地址" name=""/></label></li>
+							<li><label><input type="text" placeholder="地址" name="custAddress"/></label></li>
 						</ul>
 						<h5>标签</h5>
 						<ul>
 							<li>
-								<select name="" id="">
+								<select id="" name="" >
 									<option value="">意向度</option>
 									<option value=""></option>
 								</select>

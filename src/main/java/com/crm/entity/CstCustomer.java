@@ -7,31 +7,31 @@ import java.util.Date;
 import java.util.List;
 
 public class  CstCustomer {
-    private Long custId;
+    private Long custId;    //客户id
 
-    private String custEmail;
+    private String custEmail;  //邮箱
 
-    private String custCompany;
+    private String custCompany;   //客户名称
 
-    private String custAddress;
+    private String custAddress;    //客户地址
 
-    private String custIndustry;
+    private String custIndustry;      //客户行业
 
-    private String custPic;
+    private String custPic;       //图片地址
 
-    private String custSales;
+    private String custSales;      //销售渠道
 
-    private Long userId;
+    private Long userId;       //用户id
 
-    private Integer custClassify;
+    private Integer custClassify;   //类型
 
-    private String custContent;
+    private String custContent;     //客户详细信息
 
-    private String custLifecycle;
+    private String custLifecycle;    //生命周期
 
-    private String custWebsite;
+    private String custWebsite;      //官网
 
-    private String custType;
+    private String custType;        //分类
 
     private Date custDate;
 

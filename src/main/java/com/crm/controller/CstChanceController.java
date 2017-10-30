@@ -8,13 +8,17 @@ import com.crm.biz.user.service.IUserTaskService;
 import com.crm.common.BaseController;
 import com.crm.common.Page;
 import com.crm.entity.CstChance;
+import com.crm.entity.CstCustomer;
 import com.crm.entity.CstSchedule;
 import com.crm.utils.ObjectUtil;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +28,7 @@ import java.util.Map;
  * Created by Administrator on 2017/9/12.
  * ZHB
  */
-@RestController
+@Controller
 public class CstChanceController extends BaseController {
 
     @Autowired
@@ -40,11 +44,16 @@ public class CstChanceController extends BaseController {
     private ICstScheduleService iCstScheduleService;
 
 
+    @RequestMapping("/to")
+    public String to(){
+        return "index/createChance";
+    }
+
     //查询我的机会方法
 //    Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize
     @RequestMapping("/getCstChance")
     public Map getCstChance() {
-        Map map = TypeUtil.successMap();
+        Map map = result();
         // 测试数据
         Long userId = (long) 1;
         int currentPage = 1;
@@ -220,6 +229,25 @@ public class CstChanceController extends BaseController {
              e.printStackTrace();
          }
         return map;
+    }
+    //根据用户id查询已分配客户
+    @RequestMapping("/getCstCustomer")
+    public String  getCstCustomer(Model model){
+        Long id=(long)1;
+        Map map=result();
+        try {
+            CstCustomer cstCustomer=iCstChance.getCstCustomer(id);
+            Boolean by = ObjectUtil.isNotNull(cstCustomer);
+            if(by){
+                map.put("cstCustomer",cstCustomer);
+            } else {
+                map.put("-1", "查询失败，对象为空");
+            }
+            model.addAllAttributes(map);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "index/createChance";
     }
 }
 

@@ -2,20 +2,22 @@ package com.crm.entity;
 
 import java.util.Date;
 
+
 public class SysDynamic {
-    private Long dyId;
+    private Long dyId;       //动态id
 
-    private Long userId;
+    private Long userId;       //用户id
 
-    private String userName;
+    private String userName;     //用户名称
 
-    private String dyContent;
+    private String dyContent;      //动态内容
 
-    private Date dyDate;
+    private Date dyDate;             //创建时间
 
-    private Integer dyClassify;
+    private Integer dyClassify;       //分类
 
-    private Long dyClassifyId;
+    private Long dyClassifyId;          //分类详细id
+
 
     public Long getDyId() {
         return dyId;

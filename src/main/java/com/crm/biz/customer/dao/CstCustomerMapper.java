@@ -17,6 +17,9 @@ import java.util.List;
 @Component
 public interface CstCustomerMapper{
 
+    //此方法是机会新建查询客户
+     CstCustomer  getCstCustomer(long id);
+
     CstCustomer findById(Long id);
 
     void addCstCustomer(CstCustomer cstCustomer);

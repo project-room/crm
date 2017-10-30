@@ -4,31 +4,31 @@ import java.util.Date;
 import java.util.List;
 
 public class CstChance {
-    private Long chId;
+    private Long chId;     //机会id
 
-    private String chContent;
+    private String chContent;   //机会简述
 
-    private Long custId;
+    private Long custId;     //客户id
 
-    private Date chDate;
+    private Date chDate;     //创建时间
 
-    private Double chMoney;
+    private Double chMoney;    //合同金额
 
-    private String userName;
+    private String userName;    //负责人
 
-    private Long userId;
+    private Long userId;      //用户id
 
-    private String chDept;
+     private String chDept;     //使用部门
 
-    private Integer chDoc;
+    private Integer chDoc;        //是否有需求文档
 
-    private Integer chSupplier;
+    private Integer chSupplier;    //是否了解供应商
 
-    private String chUptime;
+    private String chUptime;      //期望上线时间
 
-    private String chBackground;
+    private String chBackground;   //立项背景
 
-    private String chStage;
+    private String chStage;    //阶段
 
     private List<CstRecord> recordList;
 

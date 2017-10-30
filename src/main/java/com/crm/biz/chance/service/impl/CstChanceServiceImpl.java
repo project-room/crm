@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/9/12.
  */
+
 @Service
 public class CstChanceServiceImpl implements ICstChanceService {
 
@@ -49,6 +50,7 @@ public class CstChanceServiceImpl implements ICstChanceService {
 
         return cstChanceMapper.getCstChanceId(chId);
     }
+
 
     //根据机会id删除机会
     @Override
@@ -96,6 +98,13 @@ public class CstChanceServiceImpl implements ICstChanceService {
             return true;
         }
         return false;
+    }
+
+    //机会新建查询客户
+    @Override
+    public CstCustomer getCstCustomer(long id) {
+
+        return cstCustomerMapper.getCstCustomer(id);
     }
 
     //查询总共有多少条机会
