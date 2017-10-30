@@ -55,6 +55,12 @@ public class CstCustomerController extends BaseController{
     public String toSeas(){
         return "index/seas";
     }
+    @RequestMapping("/toRefferal")
+    public String toRefferal(){return "index/refferal";}
+    @RequestMapping("/toChance")
+    public String toChance(){
+        return "index/chance";
+    }
 
 
     /**
@@ -62,28 +68,13 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("/createCstCustomer")
-    public Map createCstCustomer(){
+    public String createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman){
         Map map=result();
         try {
-            CstCustomer cstCustomer=new CstCustomer();
-            cstCustomer.setCustCompany("新建客户");
+
             cstCustomer.setCustDate(new Date(System.currentTimeMillis()));
             cstCustomer.setCustType("2");
-            cstCustomer.setCustWebsite("www.waizhan");
-            cstCustomer.setCustLifecycle("潜在客户");
             cstCustomer.setCustClassify(2);
-            cstCustomer.setCustSales("销售商");
-            cstCustomer.setCustContent("详细");
-            cstCustomer.setCustPic("/img/1.jpg");
-            cstCustomer.setCustAddress("广州");
-            cstCustomer.setCustEmail("2343@qq.com");
-            cstCustomer.setCustIndustry("软件");
-            cstCustomer.setUserId(1L);
-
-            ChLinkman chLinkman=new ChLinkman();
-            chLinkman.setLinkWechat("联系人微信");
-
-
             cstCustomerService.createCstCustomer(cstCustomer,chLinkman);
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +82,7 @@ public class CstCustomerController extends BaseController{
             map.put("msg","新建客户失败");
         }
 
-        return map;
+        return "redirect:" + "/cstCustomer/getPage/1/7";
 
     }
 
@@ -296,7 +287,7 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("/getPage/{currentPage}/{pageSize}")
-    public Map getPage(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize, Model model){
+    public String getPage(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize, Model model){
         Map map=result();
         Set<String> date=null;
         Page<CstCustomer> cstCustomerPage=null;
@@ -319,14 +310,14 @@ public class CstCustomerController extends BaseController{
             map.put("code","-1");
             map.put("msg","获取分页公海客户失败");
         }
-        return map;
+        return "index/seas";
     }
 
     /**
      * 根据id查看认领公海客户信息
      * @return
      */
-    @RequestMapping("lookCstCustomerInfo/{cstCustomerId}")
+    @RequestMapping("/lookCstCustomerInfo/{cstCustomerId}")
     public Map lookCstCustomerInfo(@PathVariable("cstCustomerId") Long cstCustomerId){
 //        Map map= TypeUtil.successMap();
         Map map=result();
@@ -347,22 +338,26 @@ public class CstCustomerController extends BaseController{
      * 输入认领客户名称模糊搜索客户
      * @return
      */
-    @RequestMapping("selectCstCustomerByName/{custCompany}")
-    public Map selectCstCustomerByName(@PathVariable("custCompany") String custCompany){
+    @RequestMapping("/selectCstCustomerByName/{custCompany}/{currentPage}/{pageSize}")
+    public String  selectCstCustomerByName(@PathVariable("custCompany") String custCompany,@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize,Model model){
         Map map=result();
+        Long count=cstCustomerService.selectCountByCstCustomerName(custCompany);
         try {
-            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(custCompany);
+            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(custCompany,currentPage,pageSize);
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
                 CstCustomerConverter.dateConvertor(cstCustomer);
             }
-            map.put("cstCustomers",cstCustomers);
+
+           Page<CstCustomer> pageCstCustomerByName= new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
+            map.put("cstCustomerPage",pageCstCustomerByName);
+            model.addAttribute("cstCustomerPage",pageCstCustomerByName);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","按客户名称搜索失败");
         }
-        return map;
+        return "index/seas";
     }
 
     /**

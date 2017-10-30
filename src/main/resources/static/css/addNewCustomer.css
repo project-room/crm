@@ -3,7 +3,7 @@
 label { display: block; margin: 10px; border-bottom: 1px solid #e9ecf2; color: #999; padding-bottom: 5px; font-size: 14px; }
 label:hover { border-color: #999; }
 label input { border: none; display: inline-block; margin-left: 10px; outline: none; width: 50%; background: #fff; }
-input[type=button] { width: 60px; height: 30px; border-radius: 4px; border: 1px solid #7460ee; margin-left: 10px; outline: none; }
+input[type=button] { width: 60px; height: 30px; border-radius: 4px; border: 1px solid #7460ee; margin-left: 10px; outline: none; margin-top: 40px; }
 input.save { background: #7460ee; color: #fff; }
 input.cancel { background: #fff; color: #7460ee; border-color: #b9aff6 }
 
@@ -13,3 +13,4 @@ input.cancel { background: #fff; color: #7460ee; border-color: #b9aff6 }
 .main h4 span ul { position: absolute; left: -20px; display: none; }
 .main h4 span ul li { color: #666; border: 1px solid #ccc; width: 70px; display: block; background: #fff; text-align: center; padding: 3px 0; box-shadow: 3px 3px 5px #ccc; }
 .main .editMsgForm label { border: none; }
+.main .editMsgForm label input { color: #333; margin-left: 60px; }

@@ -16,7 +16,7 @@ nav { text-align: center; }
 .pagination > li:first-child > a, .pagination > li:first-child > span {border-radius: 0;}
 .pagination > li:last-child > a, .pagination > li:last-child > span {border-radius: 0;}
 
-div.fixed-table-pagination { text-align: center }
+div.fixed-table-pagination { text-align: center; margin-bottom: 40px; }
 div.pull-left.pagination-detail { display: none; }
 div.pull-right.pagination { float: none !important; text-align: center; margin: 0 auto; display: inline-block !important; }
 
@@ -28,28 +28,30 @@ div.pull-right.pagination { float: none !important; text-align: center; margin: 
 .table > tfoot > tr > td { vertical-align: middle; }
 .table { margin-bottom: 0; }
 
-
-.modify { position: relative; }
-.modify:hover+ul { display: block; }
-.modify+ul:hover { display: block; }
+.table th { color: #999; background: #eef1f7; }
+td.contactWay, td.mail { color: #999; }
+.table td { position: relative; }
+.modify { font-weight: 900; color: #b3b3b3; }
+/* .modify:hover+ul { display: block; } */
+/* .modify+ul:hover { display: block; } */
 .modify+ul { position: absolute; display: none; background: #fff; width: 50px; text-align: center; z-index: 2; }
 .modify+ul li { height: 30px; line-height: 30px; }
 
-.filterPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 2; }
-/* .filterPop .shelter {  } */
-.filterPop .filtermain { width: 600px; min-height: 350px; background: #fff; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -175px; }
-.filterPop h4 { height: 40px; width: 100%; line-height: 40px; background: #7460ee; color: #fff; padding: 0 20px; }
-.filterPop .itemgroup { margin-top: 20px; padding-left: 20px; }
+.filterPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 4; }
+.filterPop .shelter { height: 100%; width: 100%; }
+.filterPop .filtermain { width: 600px; height: 500px; background: #fff; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -250px; }
+.filterPop h4 { height: 40px; width: 100%; line-height: 40px; background: #eee; color: #000; padding: 0 20px; }
 
-.filterPop .col_1 { width: 160px; height: 30px; margin-right: 15px; }
-.filterPop .col_2 { width: 100px; height: 30px; margin-right: 15px; }
-.filterPop .col_3 { width: 258px; height: 30px;}
-.filterPop .col_4 { width: 380px; height: 30px;}
+.filterPop form label {display: block; width: 560px; margin: 20px auto 0; border-bottom: 1px  solid #eee;}
+.filterPop form label input[type=text] { border: none; width: 440px; margin-left: 20px; outline: none; }
+.filterPop form label.day,.filterPop form label.hour { width: 270px; display: inline-block; margin-left: 20px; }
+.filterPop form label.day input,.filterPop form label.hour input { width: 170px; text-align: right; } 
 
-.filterPop .addCondition { margin: 20px; color: #7469ee; font-size: 16px; }
-.filterPop .btngroup input { width: 100px; height: 30px; border: 1px solid #7460ee; border-radius: 4px; background: #7460ee; color: #fff; margin-bottom: 20px; }
+.filterPop .btngroup input { width: 100px; height: 30px; margin-top: 70px; border: 1px solid #7460ee; border-radius: 4px; background: #7460ee; color: #fff; margin-bottom: 20px; }
 .filterPop .btngroup input.cancel { color: #7460ee; background: #fff; margin-right: 140px; float: right; }
 .filterPop .btngroup input.sure { margin-left: 140px; }
+
+
 
 
 

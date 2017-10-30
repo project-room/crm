@@ -2,177 +2,176 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"/>
-	<title>首页</title>
-	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-
-	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
-	<script th:src="@{/js/bootstrap.js}"></script>
-
+	<title>客户关系管理系统</title>
+	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
 	<script th:src="@{/js/jquery.nicescroll.js}"></script>
-	<link rel="stylesheet" th:href="@{/css/default.css}"/>
-	<link rel="stylesheet" th:href="@{/css/index.css}"/>
+	<script th:src="@{/js/default.js}"></script>
 	<script th:src="@{/js/index.js}"></script>
+	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/css/default.css}" />
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
 </head>
 <body>
-<div class="leftContent">
-	<div class="logo">
-		<img th:src="@{/img/logo.png}"/>
-		<span class="logoTxt">润普CRM</span>
+	<div class="leftContent">
+		<div class="logo">
+			<img th:src="@{/img/logo.png}" alt="logo" />
+			<span class="logoTxt">润普CRM</span>
+		</div>
+		<ul>
+			<li class="active"><a href="/crm/cstCustomer/toIndex"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
+			<li><a href="/crm/cstCustomer/getPage/1/7"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt" id="gongHai">公海</span></a></li>
+			<li><a href="chance.html"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
+			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
+			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
+			<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
+			<li><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></li>
+		</ul>
 	</div>
-	<ul>
-		<li class="active"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></li>
-		<li><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt">公海</span></li>
-		<li><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></li>
-		<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
-		<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
-		<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
-		<li><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></li>
-	</ul>
-</div>
-<div class="rightContent">
-	<div class="header">
-		<div>
-			<input type="text" placeholder="请输入客户名称" />
-			<button><img th:src="@{/img/searchIcon.png}" alt="" /></button>
-			<div class="mail">
-				<span class="msgNum">1</span>
-				<div>
-					<ul>
-						<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-						<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-						<li><a href="">聂宇豪创建了新</a></li>
+	<div class="rightContent">
+		<div class="header">
+			<div>
+				<input type="text" placeholder="请输入客户名称" />
+				<button><img th:src="@{/img/searchIcon.png}" alt="" /></button>
+				<div class="mail">
+					<span class="msgNum">1</span>
+					<div>
+						<ul>
+							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
+							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
+							<li><a href="">聂宇豪创建了新</a></li>
+						</ul>
+						<p class="lookMore"><a href="" class="grey">查看更多</a></p>
+					</div>
+				</div>
+				<div class="user">
+					<span class="userName">聂宇豪</span>
+					<span class="xiala"><img th:src="@{/img/xiala.png}" /></span>
+					<ul class="detail">
+						<li><a href="">个人资料</a></li>
+						<li><a href="">系统设置</a></li>
+						<li><a href="">退出</a></li>
 					</ul>
-					<p class="lookMore"><a href="" class="grey">查看更多</a></p>
 				</div>
 			</div>
-			<div class="user">
-				<span class="userName">聂宇豪</span>
-				<span class="xiala"><img th:src="@{/img/xiala.png}" /></span>
-				<ul class="detail">
-					<li><a href="">个人资料</a></li>
-					<li><a href="">系统设置</a></li>
-					<li><a href="">退出</a></li>
-				</ul>
+		</div>
+		<div class="main">
+			<div class="dynamic">
+				<div class="dynamicHeader">
+					<ul>
+						<li class="allDynamic active">全部动态</li>
+						<li class="aboutChance">机会相关</li>
+					</ul>
+				</div>
+				<div class="dynamicContent">
+					<ul>
+						<li>
+							<div>
+								<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
+								<div class="msg">
+									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
+									<p class="addWhat grey">添加了机会：<a href="" class="description">广州润普网络科技有限公司：文档管理</a></p>
+								</div>
+								<span class="addTime">08/23 16:30</span>
+							</div>
+						</li>
+						<li>
+							<div>
+								<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
+								<div class="msg">
+									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
+									<p class="addWhat grey">添加了合同：<a href="" class="description">201708220001</a></p>
+								</div>
+								<span class="addTime">08/23 16:30</span>
+							</div>
+						</li>
+						<li>
+							<div>
+								<span class="icon"><img th:src="@{/img/financialIcon.png}" alt="" /></span>
+								<div class="msg">
+									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
+									<p class="addWhat grey">添加了合同：<a href="" class="description">201708220001</a></p>
+								</div>
+								<span class="addTime">08/23 16:30</span>
+							</div>
+						</li>
+						<li>
+							<div>
+								<span class="icon"><img th:src="@{/img/contractIcon.png}" alt="" /></span>
+								<div class="msg">
+									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
+									<p class="addWhat grey">添加了合同：<a href="" class="description">201708220001</a></p>
+								</div>
+								<span class="addTime">08/23 16:30</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="daily">
+				<div class="dailyHeader">今天<span>( 5/6 )</span></div>
+				<div class="dailyContent">
+					<ul>
+						<li>
+							<label class="forCheckbox">
+									<input type="checkbox" name="complete" id="" />
+							</label>
+							<div>
+								<p>早上9点打电话给联通客服</p>
+								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
+								<span class="createTime red dblock">1天前</span>
+							</div>
+							<p class="operate">
+								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
+								<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
+							</p>
+						</li>
+						<li>
+							<label class="forCheckbox">
+									<input type="checkbox" name="complete" id="" />
+							</label>
+							<div>
+								<p>早上9点打电话给联通客服</p>
+								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
+								<span class="createTime red dnone"></span>
+							</div>
+							<p class="operate">
+								<span class="edit"><img src="img/edit.png" alt="" /></span>
+								<span class="del"><img src="img/delete.png" alt="" /></span>
+							</p>
+						</li>
+						<li>
+							<label class="forCheckbox">
+									<input type="checkbox" name="complete" id="" />
+							</label>
+							<div>
+								<p>早上9点打电话给联通客服</p>
+								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
+								<span class="createTime red dnone"></span>
+							</div>
+							<p class="operate">
+								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
+								<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
+							</p>
+						</li>
+						<li>
+							<label class="forCheckbox">
+									<input type="checkbox" name="complete" id="" />
+							</label>
+							<div>
+								<p>早上9点打电话给联通客服</p>
+								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
+								<span class="createTime red dnone"></span>
+							</div>
+							<p class="operate">
+								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
+								<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
+							</p>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="main">
-		<div class="dynamic">
-			<div class="dynamicHeader">
-				<ul>
-					<li class="allDynamic active">全部动态</li>
-					<li class="aboutChance">机会相关</li>
-				</ul>
-			</div>
-			<div class="dynamicContent">
-				<ul>
-					<li>
-						<div>
-							<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
-							<div class="msg">
-								<p class="employee" th:text="${sysDynamic[0].userName}"><span class="career">（销售人员）</span></p>
-								<p class="addWhat grey" th:text="${sysDynamic[0].dyClassifyId==0?'进度':sysDynamic[0].dyClassifyId==1?'记录':sysDynamic[0].dyClassifyId==2?'机会':sysDynamic[0].dyClassifyId==3?'合同':'回款'}"><span class="description" th:text="${sysDynamic[0].dyContent}"></span></p>
-							</div>
-							<span class="addTime" th:text="${sysDynamic[0].dyDate}"></span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
-							<div class="msg">
-								<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-								<p class="addWhat grey">添加了合同：<span class="description">201708220001</span></p>
-							</div>
-							<span class="addTime">08/23 16:30</span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="icon"><img th:src="@{/img/financialIcon.png}" alt="" /></span>
-							<div class="msg">
-								<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-								<p class="addWhat grey">添加了合同：<span class="description">201708220001</span></p>
-							</div>
-							<span class="addTime">08/23 16:30</span>
-						</div>
-					</li>
-					<li>
-						<div>
-							<span class="icon"><img th:src="@{/img/contractIcon.png}" alt="" /></span>
-							<div class="msg">
-								<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-								<p class="addWhat grey">添加了合同：<span class="description">201708220001</span></p>
-							</div>
-							<span class="addTime">08/23 16:30</span>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="daily">
-			<div class="dailyHeader">今天<span>( 5/6 )</span></div>
-			<div class="dailyContent">
-				<ul>
-					<li>
-						<label>
-							<input type="checkbox" name="complete" id="" />
-						</label>
-						<div>
-							<p>早上9点打电话给联通客服</p>
-							<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-							<span class="createTime red dblock">1天前</span>
-						</div>
-						<p class="operate">
-							<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
-							<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-						</p>
-					</li>
-					<li>
-						<label>
-							<input type="checkbox" name="complete" id="" />
-						</label>
-						<div>
-							<p>早上9点打电话给联通客服</p>
-							<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-							<span class="createTime red dnone"></span>
-						</div>
-						<p class="operate">
-							<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
-							<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-						</p>
-					</li>
-					<li>
-						<label>
-							<input type="checkbox" name="complete" id="" />
-						</label>
-						<div>
-							<p>早上9点打电话给联通客服</p>
-							<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-							<span class="createTime red dnone"></span>
-						</div>
-						<p class="operate">
-							<span class="edit"><img th:src="@{img/edit.png}" alt="" /></span>
-							<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-						</p>
-					</li>
-					<li>
-						<label>
-							<input type="checkbox" name="complete" id="" />
-						</label>
-						<div>
-							<p>早上9点打电话给联通客服</p>
-							<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-							<span class="createTime red dnone"></span>
-						</div>
-						<p class="operate">
-							<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
-							<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-						</p>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
 </body>
 </html>

@@ -4,915 +4,7 @@ $(function() {
     $('.main').niceScroll({
         cursorcolor: '#ccc'
     });
-//
-    var tableTitle = [{
-        field: "select",
-        title: "",
-    }, {
-        field: "contact",
-        title: "联系人",
-    }, {
-        field: "contactWay",
-        title: "移动/固定电话",
-    }, {
-        field: "companyName",
-        title: "公司名称",
-    }, {
-        field: "customerClaim",
-        title: "客户认领",
-    }, {
-        field: "mail",
-        title: "QQ/邮箱",
-    }, {
-        field: "province",
-        title: "所在省份",
-    }, {
-        field: "createTime",
-        title: "创建时间",
-    }, {
-        field: "operate",
-        title: "",
-        formatter:function(value,row,index){
-            console.log(row.id);
-            var dopt = '<p class="modify"> · · · </p>';
-            var e = '<a href="editCustomer.html" mce_href="#">编辑</a> ';  
-            var d = '<a href="#" mce_href="#" class="delete">删除</a> ';
-            var u = '<ul><li>'+e+'</li><li>'+d+'</li></ul>'
-            return dopt+u;  
-        } 
-    }];
-//
-    var tableData = [{
-        "id": 0,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    },{
-        "id": 1,
-        "select": "<label class='forCheckbox'><input type='checkbox'></label>",
-        "contact": "<p>汤姆斯1</p>",
-        "contactWay": "<p>123123</p><p>123456798</p>",
-        "companyName": "<p class=''>广州润普网络科技有限公司<p>",
-        "customerClaim": "<p class=''>张三</p>",
-        "mail": "<p class=''>1231321321</p><p class=''>1321313213</p>",
-        "province": "<p class=''>广东省</p>",
-        "createTime": "<p class='createTime'>2017/9/18 10:00<p>",
-        "operate": "<p class='modify'> · · · </p>",
-    }];
-//
-    $('#table').bootstrapTable('destroy').bootstrapTable({
-        columns: tableTitle,
-        data: tableData,
-        pagination: true,
-        paginationPreText: '上一页',
-        paginationNextText: '下一页',
-        formatLoadingMessage: function(){
-            return null;
-        }
-        // url: 'js/data.json'
-    });
+
     $('.customerNum span').text($('#table tbody tr').length);
     checkboxClick();
 
@@ -921,28 +13,15 @@ $(function() {
         $('.filterPop').addClass('dblock').removeClass('dnone');
     });
 
+    $('.shelter').click(function(event) {
+        $('.filterPop').addClass('dnone').removeClass('dblock');
+    });
+
     $('.filterPop .sure').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
     });
     $('.filterPop .cancel').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
-    });
-
-    $('.addCondition').click(function() {
-        $(this).before('<div class="itemgroup">' +
-            '<select class="col_1">' +
-                '<option>客户名称</option>' +
-                '<option>标签</option>' +
-                '<option>地区</option>' +
-                '<option>联系人</option>' +
-                '<option>联系方式</option>' +
-            '</select>' +
-            '<select class="col_2">' +
-                '<option>包含</option>' +
-                '<option>不包含</option>' +
-            '</select>' +
-            '<input type="text" class="col_3">' +
-        '</div>')
     });
 
     $('.allOperate .delete').click(function() {
@@ -954,30 +33,38 @@ $(function() {
         });
     });
 
-    $('tbody tr .delete').click(function() {
-        $(this).parents('tr').remove();
+    forTable();
+
+    //新建客户
+   $("#addCstCustomer").click(function () {
+       location.href="/crm/cstCustomer/toAddNewCustomer";
+   });
+
+   //根据客户名来模糊搜所客户信息
+    $("#search").click(function () {
+     var custCompany=$("#searchName").val();
+     location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
     });
+    
+    //查看单个客户的详细信息
+    $("tr").click(function () {
 
-    $('tbody').on('click', 'tr input[type=checkbox]', function(event) {
-        event.stoppropagation();
-        event.preventDefault();
-        allOperateShowHide();
-    })
-
-    // $('body').on('click', 'tbody tr', function() {
-    //     location.href="editCustomer.html";
-    // })
-
-
+        alert(zhi)
+    });
 });
 
 
-
-
-
-
-
-
+window.onload = function() {
+    laydate.render({
+        elem: '#hour',
+        type: 'time',
+        range: true
+    });
+    laydate.render({
+        elem: '#day',
+        format: 'yyyy年MM月dd日'
+    });
+};
 
 
 
@@ -992,11 +79,6 @@ function allOperateShowHide() {
         }
     }
 }
-
-
-
-
-
 
 
 function checkboxClick() {
@@ -1018,12 +100,10 @@ function checkboxClick() {
 
 function allCheck() {
     $('.allOperate input').click(function() {
-        if($(this).prop('checked') == true) {
-            for(var i = 0; i < $('tbody').find('tr').length; i++) {
+        for(var i = 0; i < $('tbody').find('tr').length; i++) {
+            if($(this).prop('checked') == true) {
                 $('tbody').find('input[type=checkbox]').eq(i).prop('checked', true);
-            }
-        } else {
-            for(var i = 0; i < $('tbody').find('tr').length; i++) {
+            } else {
                 $('tbody').find('input[type=checkbox]').eq(i).prop('checked', false);
             }
         }
@@ -1031,8 +111,40 @@ function allCheck() {
     });
 }
 
+function forTable() {
+    var slideBool = false;
+    $('tbody').on('click', 'tr .delete', function() {
+        $(this).parents('tr').remove();
+        allOperateShowHide();
+    });
 
+    $('tbody').on('click', 'tr input[type=checkbox]', function(event) {
+        event.stopPropagation();
+        allOperateShowHide();
+    });
 
-// function del(id){
-//     $(this).parents('tr').remove();
-// }
+    $('tbody').on('click', 'tr a', function(event) {
+        event.stopPropagation();
+    });
+
+    $('tbody').on('click', '.modify', function(event) {
+        event.stopPropagation();
+        $('.slideEdit').slideUp(100);
+        if (!slideBool) {
+            $(this).siblings('.slideEdit').slideDown(100);
+            slideBool = true;
+        } else {
+            slideBool = false;
+        }
+    });
+
+    $('body').click(function() {
+        event.stopPropagation();
+        $('.slideEdit').slideUp(100);
+        slideBool = false;
+    });
+
+    $('body').on('click', 'tbody tr', function() {
+        location.href="editCustomer.html";
+    });
+}

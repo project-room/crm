@@ -16,9 +16,30 @@ $(function() {
 		console.log(companyName, contactName, mobilephone, telephone, mail, province);
 		//location.href = 'seas.html';
 	});
-	$('.cancel').click(function(){
+	$('.addNew .cancel').click(function(){
 		location.href = 'seas.html';
-	}) 
+	})
+
+	//通过用户名换取用户id
+	var userName=$("#userNameRevertUserId").text();
+    $.ajax({
+        url: "/crm/sysUser/userNameRevertUserId",
+        data:{"userName":userName},
+        type: "POST",
+        success: function (data) {
+			$("#forUserId").val(data.toString());
+        }, fail: function (data) {
+        }
+    });
+    
+    //保存客户
+	$("#save").click(function () {
+		$("#saveForm").submit();
+    });
+	//取消保存客户
+	$("#cancel").click(function () {
+		location.href="/crm/cstCustomer/getPage/1/7";
+    });
 });
 
 
@@ -28,15 +49,24 @@ $(function() {
 		// for (var i = 0; i < $('form label').length; i++) {
 
 		// }
-		$('input').attr('disabled',false)
+		$('input').attr('disabled',false);
 		$('input[type=button]').addClass('di_block').removeClass('dnone');
+		$('.main .editMsgForm label').css({
+			'border-bottom': '1px solid #eee'
+		});
 	});
 	$('.editMsgForm').find('.save').click(function() {
 		$('.editMsgForm').find('input').attr('disabled',true);
 		$('input[type=button]').addClass('dnone').removeClass('di_block');
+		$('.main .editMsgForm label').css({
+			'border-bottom': 'none'
+		});
 	});
 	$('.editMsgForm').find('.cancel').click(function() {
 		$('.editMsgForm').find('input').attr('disabled',true);
 		$('input[type=button]').addClass('dnone').removeClass('di_block');
+		$('.main .editMsgForm label').css({
+			'border-bottom': 'none'
+		});
 	});
 })

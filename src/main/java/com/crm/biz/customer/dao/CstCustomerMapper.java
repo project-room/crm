@@ -35,7 +35,8 @@ public interface CstCustomerMapper{
 
     CstCustomer selectCstCustomerInfo(@Param("cstCustomerId") Long cstCustomerId);
 
-    List<CstCustomer> selectCstCustomerByName(@Param("custCompany") String custCompany);
+    //根据模糊客户名来获取客户信息
+    List<CstCustomer> selectCstCustomerByName(@Param("custCompany") String custCompany,@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 
     void deleteCstCustomerAndChLinkmanById(Long id);
 
@@ -49,4 +50,7 @@ public interface CstCustomerMapper{
 
     //筛选客户
     Long getCountByCondition(@Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman);
+
+    //根据模糊客户名来获取count
+    Long selectCountByCstCustomerName(String custCompany);
 }

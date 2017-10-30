@@ -7,9 +7,9 @@
 	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
 	<script th:src="@{/js/jquery.nicescroll.js}"></script>
 	<script th:src="@{/js/default.js}"></script>
-	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
-	<link rel="stylesheet" th:href="@{/css/default.css}"/>
-	<link rel="stylesheet" th:href="@{/css/addNewCustomer.css}"/>
+	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/css/default.css}" />
+	<link rel="stylesheet" th:href="@{/css/addNewCustomer.css}" />
 	<script th:src="@{/js/addNewCustomer.js}"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 			<span class="logoTxt">润普CRM</span>
 		</div>
 		<ul>
-			<li><a href="index.html"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
+			<li><a href="/crm/cstCustomer/toIndex"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
 			<li class="active"><a href="seas.html"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt">公海</span></a></li>
 			<li><a href="chance.html"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
 			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div class="user">
-					<span class="userName">聂宇豪</span>
+					<span class="userName" id="userNameRevertUserId">聂宇豪</span>
 					<span class="xiala"><img th:src="@{/img/xiala.png}" /></span>
 					<ul class="detail">
 						<li><a href="">个人资料</a></li>
@@ -54,20 +54,20 @@
 			</div>
 		</div>
 		<div class="main">
-			<div style="background: #fff">
+			<div style="background: #fff" >
 				<h4>基本信息</h4>
-				<form>
-					<label for="companyName">公司名称&emsp;<input type="text" id="companyName"/></label>
-					<label for="contactName">联系人名称<input type="text" id="contactName"/></label>
-					<label for="mobilephone">移动电话&emsp;<input type="text" id="mobilephone"/></label>
-					<label for="telephone">固定电话&emsp;<input type="text" id="telephone"/></label>
-					<label for="mail">QQ/邮箱&emsp;<input type="text" id="mail"/></label>
-					<label for="province">所在省份&emsp;<input type="text" id="province"/></label>
+				<form class="addNew" id="saveForm" action="/crm/cstCustomer/createCstCustomer">
+					<label for="companyName">公司名称&emsp;<input type="text" id="companyName" name="custCompany"/></label>
+					<label for="contactName">联系人名称<input type="text" id="contactName" name="linkName" /></label>
+					<label for="mobilephone">移动电话&emsp;<input type="text" id="mobilephone" name="linkPhone"/></label>
+					<label for="telephone">固定电话&emsp;<input type="text" id="telephone" name="linkLandlinePhone"/></label>
+					<label for="mail">QQ/邮箱&emsp;<input type="text" id="mail" name="linkEmail"/></label>
+					<label for="province">所在省份&emsp;<input type="text" id="province" name="custAddress"/></label>
+					<input type="text" id="forUserId" name="userId" hidden="hidden"  value=""/>
 
-					<input type="button" class="save" value="保存" />
-					<input type="button" class="cancel" value="取消" />
+					<input type="button" class="save" value="保存" id="save"/>
+					<input type="button" class="cancel" value="取消" id="cancel"/>
 				</form>
-				
 
 			</div>
 		</div>

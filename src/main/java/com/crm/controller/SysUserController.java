@@ -12,12 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.Map;
 
 /**
  * Created by Administrator on 2017/9/14.
  */
 @RestController
+@RequestMapping("sysUser")
 public class SysUserController extends BaseController {
     @Autowired
     private SysUserMapper sysUserMappers;
@@ -107,7 +111,18 @@ public class SysUserController extends BaseController {
         return map;
     }
 
+    //根据用户名获取用户id
+    @RequestMapping("/userNameRevertUserId")
+    public void userNameRevertUserId(HttpServletRequest request, HttpServletResponse response){
+        String userName=request.getParameter("userName");
+        try {
+            Long userId= iSysUserService.selectUserIdByUserName(userName);
+           PrintWriter out= response.getWriter();
+            out.print(userId);
+        } catch (Exception e) {e.printStackTrace();
 
+        }
+    }
 
 
 }

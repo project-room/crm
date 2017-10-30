@@ -29,6 +29,11 @@ $(function() {
 	// 	event.stopPropagation();
 	// 	dailyNum();
 	// })
+
+    // //点击公海跳转到公海首页
+    // $("#gongHai").click(function () {
+		// location.href="/crm/cstCustomer/toSeas";
+    // });
 });
 
 function scroll(ele) {
