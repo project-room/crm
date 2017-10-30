@@ -10,8 +10,13 @@ import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 /**
@@ -108,6 +113,31 @@ public class SysUserController extends BaseController {
     }
 
 
+    //通过用户名来获取用户的id
+   @RequestMapping( value = "userNameConvertUserId" ,method=RequestMethod.POST)
+   public void userNameConvertUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+       try {
+           String userName=request.getParameter("userName");
+           Long userId=iSysUserService.selectSysUserByName(userName);
+           String userIdStr=String.valueOf(userId);
+           PrintWriter out=response.getWriter();
+           out.print(userIdStr);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+
+   @RequestMapping(value = "userIdConvertUserName",method=RequestMethod.POST)
+   public void userIdConvertUserName(HttpServletRequest request,HttpServletResponse response){
+       try {
+           String userId=request.getParameter("userId");
+           String userName=iSysUserService.selectUserNameById(new Long(userId));
+           PrintWriter out= response.getWriter();
+           out.print(userName);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
 
 
 }

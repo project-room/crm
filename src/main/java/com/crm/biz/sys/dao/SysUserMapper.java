@@ -22,4 +22,7 @@ public interface SysUserMapper {
 
     SysUser findByAccount(String account);
 
+    Long selectSysUserByName(String userName);
+
+    String selectUserNameByUserId(Long userId);
 }

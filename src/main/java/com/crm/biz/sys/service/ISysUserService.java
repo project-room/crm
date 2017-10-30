@@ -15,4 +15,7 @@ public interface ISysUserService {
 
     int updateSysUserById(SysUser sysUser);
 
+    Long selectSysUserByName(String userName);
+
+    String selectUserNameById(Long userId);
 }

@@ -62,26 +62,13 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("/createCstCustomer")
-    public Map createCstCustomer(){
+    public String createCstCustomer(String userId,CstCustomer cstCustomer,ChLinkman chLinkman){
         Map map=result();
         try {
-            CstCustomer cstCustomer=new CstCustomer();
-            cstCustomer.setCustCompany("新建客户");
             cstCustomer.setCustDate(new Date(System.currentTimeMillis()));
             cstCustomer.setCustType("2");
-            cstCustomer.setCustWebsite("www.waizhan");
-            cstCustomer.setCustLifecycle("潜在客户");
             cstCustomer.setCustClassify(2);
-            cstCustomer.setCustSales("销售商");
-            cstCustomer.setCustContent("详细");
-            cstCustomer.setCustPic("/img/1.jpg");
-            cstCustomer.setCustAddress("广州");
-            cstCustomer.setCustEmail("2343@qq.com");
-            cstCustomer.setCustIndustry("软件");
-            cstCustomer.setUserId(1L);
-
-            ChLinkman chLinkman=new ChLinkman();
-            chLinkman.setLinkWechat("联系人微信");
+            cstCustomer.setUserId(new Long(userId));
 
 
             cstCustomerService.createCstCustomer(cstCustomer,chLinkman);
@@ -91,7 +78,7 @@ public class CstCustomerController extends BaseController{
             map.put("msg","新建客户失败");
         }
 
-        return map;
+        return "index/index";
 
     }
 
@@ -296,7 +283,7 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("/getPage/{currentPage}/{pageSize}")
-    public Map getPage(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize, Model model){
+    public String getPage(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize, Model model){
         Map map=result();
         Set<String> date=null;
         Page<CstCustomer> cstCustomerPage=null;
@@ -319,7 +306,7 @@ public class CstCustomerController extends BaseController{
             map.put("code","-1");
             map.put("msg","获取分页公海客户失败");
         }
-        return map;
+        return "index/seas";
     }
 
     /**
@@ -327,20 +314,22 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("lookCstCustomerInfo/{cstCustomerId}")
-    public Map lookCstCustomerInfo(@PathVariable("cstCustomerId") Long cstCustomerId){
+    public String lookCstCustomerInfo(@PathVariable("cstCustomerId") String cstCustomerId,Model model){
 //        Map map= TypeUtil.successMap();
         Map map=result();
         try {
-            CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(cstCustomerId);
+            CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(new Long(cstCustomerId));
             //转换创建日期格式
             CstCustomerConverter.dateConvertor(cstCustomer);
             map.put("cstCustomer",cstCustomer);
+            model.addAttribute("cstCustomer",cstCustomer);
+
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","查看公海客户信息失败");
         }
-        return map;
+        return "index/editCustomer";
     }
 
     /**
@@ -499,5 +488,6 @@ public class CstCustomerController extends BaseController{
         }
         return map;
     }
+
 
 }

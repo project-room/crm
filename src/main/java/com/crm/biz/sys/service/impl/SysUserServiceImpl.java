@@ -46,5 +46,22 @@ public class SysUserServiceImpl implements ISysUserService {
         return sysUserMapper.updateSysUserById(sysUser);
     }
 
+    @Override
+    public Long selectSysUserByName(String userName) {
+        Long userId=null;
+        userId=sysUserMapper.selectSysUserByName(userName);
+        if(userId==null){
+            // TODO: 2017/10/26 用户不存在
+        }
+        return userId;
+    }
+
+    @Override
+    public String selectUserNameById(Long userId) {
+        String userName="";
+        userName=sysUserMapper.selectUserNameByUserId(userId);
+        return userName;
+    }
+
 
 }
