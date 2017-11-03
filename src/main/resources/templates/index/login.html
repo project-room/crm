@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户关系管理系统</title>
+	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}"/>
+	<script th:src="@{/js/default.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/login.css}"/>
+	<script th:src="@{/js/login.js}"></script>
+</head>
+<body>
+	<div class="content">
+		<span class="pic">
+			<img th:src="@{/img/login.png}" alt="" />
+		</span>
+		<div class="logMsg">
+			<h4>润普CRM</h4>
+			<form action="/crm/sysUser/userLogin" method="post" id="loginForm">
+				<label>
+					<input type="text" placeholder="请输入账号" name="username"/>
+				</label>
+				<label>
+					<input type="text" placeholder="请输入密码" name="password"/>
+				</label>
+				<p>
+					<label class="forCheckbox">
+						<input type="checkbox"/>
+					</label>
+					下次自动登录
+				</p>
+				<a class="login" id="loginButton">登录</a>
+				<a href="/crm/cstCustomer/toFindPsd" class="findPsd">找回密码</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+.main{padding: 0 30px;}
+
+.mainHeaderDropDown{position:relative;font-size: 18px;line-height: 60px;color:#7460EE;cursor: pointer;}
+.mainHeaderDropDowning{display:none;position: absolute;width: 100px;padding:10px 0;border: 1px solid #b9aff6;border-radius: 3px;background-color: #fff;top:0;right: 0;margin: 50px -32px 0 0;z-index: 9;}
+.mainHeaderDropDowning p{display:block;line-height: 30px;text-align: center;font-size: 14px;color: #333;}
+.mainHeaderDropDowning p.active,
+.mainHeaderDropDowning p:hover{color: #7460ee;}
+.mainHeaderDropDown img{margin: 0 10px;}
+.mainHeaderState{color: #999;line-height: 60px;}
+.mainHeaderMore{width: 32px;height: 32px;margin-top: 14px;}
+.mainHeaderBtn{display:block;height: 32px;margin-top: 14px;border: 1px solid #7460ee;padding:0 10px;margin-right:10px;border-radius: 5px;color:#7460ee;}
+.mainHeaderBtn img{margin-right: 5px;}
+.mainHeaderBtn:active{opacity: 0.8;filter:alpha(opacity=80);}
+.editAndDeleteBtn{position:relative;display:none;clear:both;padding: 0 0 10px 8px;margin-bottom: 20px;}
+.editAndDeleteBtn img{cursor: pointer;}
+.cantDeleteTip{display:none;position: absolute;top:0;left:0;margin: 40px 0 0 172px;border: 1px solid #333;border-radius: 3px;padding: 3px;background-color: #eef1f7;}
+.bgceef1f7{background-color: #eef1f7;}
+.textRight{text-align: right;}
+
+.mainTable{}
+input[type="checkbox"]{width:18px;height: 18px;vertical-align: -4px;margin-right: 10px;cursor: pointer;}
+.mainTableAdd2Pic{margin-right: 10px;}
+.mainLeftSide{width: 40%;float: left;min-height: 400px;background-color: #fff;margin-top: 30px;}
+.mainRightSide{width: 58%;float: left;margin-left: 2%;min-height: 400px;background-color: #fff;margin-top: 30px;}
+.mainLeftSideTable{}
+.mainLeftSideTable td,.mainLeftSideTable th{height: 30px; }
+.mainLeftSideTableTitle{padding: 10px;font-weight: 600;border-bottom: 1px solid #ccc;}
+.mainLeftSideTableTitle .operation{color: #7460ee;cursor: pointer;}
+.mainLeftSideTableTitle .operation img{margin-left: 6px;}
+.mainLeftSideTable td{padding: 10px;color: #999;}
+.mainLeftSideTable th{font-weight: 600;}
+.mainLeftSideTable .cancel{float:right;padding: 5px 10px;border-radius: 2px;border: 1px solid #7460ee;background-color: #fff;color: #7460ee;}
+.mainLeftSideTable .save{float:right;margin-right: 30px;padding: 5px 10px;border-radius: 2px;border: 1px solid #7460ee;background-color: #7460ee;color: #fff;}
+.colorBlue{color:#7460ee;}
+
+.mainRightSideNav{background-color: #eef1f7;overflow: hidden;}
+.mainRightSideNav li{float:left;margin-right: 60px;height: 40px;line-height: 40px;cursor: pointer;}
+.mainRightSideNav li:first-child{margin-left: 10px;}
+.mainRightSideNav li.active{border-bottom: 2px solid #7460ee;color: #7460ee;}
+.mainRightSideReceivables{overflow: hidden;margin-top: 40px;}
+.mainRightSideReceivables li{float: left;text-align: center;color: #999;width: 20%;}
+.mainRightSideReceivables li span{font-size: 24px;color: #333;}
+.mainRightSideReceivables li .addReceivables{width:100px;height:30px;cursor:pointer;border: 1px solid #b9aff6;border-radius: 5px;line-height: 30px;text-align: center;color:#7460ee;margin: 0 auto;}
+.mainRightSideReceivables li .addReceivables img{margin-right: 5px;vertical-align: -3px;}
+.mainRightSideChart{margin-top: 50px;padding-left: 18px;}
+.mainRightSideChart li{position:relative;height: 60px;overflow: hidden;}
+.mainRightSideChart li .line{position:absolute;width: 2px;height: 100%;left:6px;top:2px;background-color: #d5dae6;z-index: 1;}
+.mainRightSideChart li .boll{position:relative;z-index: 2;margin-right: 10px;}
+.mainRightSideChart li .text{vertical-align: -1px;}
+.mainRightSideChart li .clock{margin-left: 10px;}
+.mainRightSideChart li:last-child{height: 18px;}
+
+.navDetail{display: none;}
+.navDetail0{display: block;}
+.mainRightSideChart2{margin-top:20px;padding-bottom: 20px;}
+.mainRightSideChart2 li{height: 110px;padding-top:18px;border-bottom: 1px solid #e9ecf2;}
+.mainRightSideChart2 li table{margin-left: 20px;}
+.mainRightSideChart2 li table td{height: 30px;}
+.navDetail .titleTip{margin: 20px 0 0 20px;font-size: 16px;}
+.mainRightSideChart3{margin: 20px 0 0 20px;}
+.mainRightSideChart3 li{float: left;width: 70px;margin-right: 20px;text-align: center;}
+.mainRightSideChart3 li p{margin-top: 10px;}
+.contractApprovalDetail{clear: both;margin-top: -20px;}
+.contractApprovalDetail:after{content: "";display: block;width: 0;clear: both;}
+.contractApprovalDetail li{position:relative;float:left;width: 380px;height:150px;padding:20px;background-color: #fff;margin: 0 40px 40px 0;}
+.contractApprovalDetail li.active{border: 1px solid #a8a0ed;box-shadow: 0 3px 3px #b6b4e6;}
+
+.approvalDetailTip{display:none;position: absolute;width: 100px;height: 82px;padding-top:10px;background-color:#fff;border: 1px solid #b9aff6;top:0;left: 0;margin: 36px 0 0 294px;}
+.approvalDetailTip p{padding-left: 10px;line-height: 20px;}
+.approvalDetailTop{height: 46px;overflow: hidden;}
+.approvalDetailTop .nameBlue{float:left;width: 46px;height: 46px;border-radius: 50%;border: 1px solid #7460ee;line-height: 46px;text-align: center;color: #7460ee;font-size: 16px;}
+.approvalDetailTop .nameRed{float:left;width: 46px;height: 46px;border-radius: 50%;border: 1px solid #ed5f5f;line-height: 46px;text-align: center;color: #ed5f5f;font-size: 16px;}
+.approvalDetailTop .text{float:left;width: 200px;height: 46px;margin-left: 10px;}
+.approvalDetailTop .text p{color: #999;margin-top: 10px;}
+.approvalDetailTop .text p:first-child{color: #333;margin-top: 4px;font-size: 16px}
+.approvalDetailTop .more{float: right;width: 30px;height: 10px;margin-top: 4px;cursor: pointer;}
+.approvalDetailBody{float:left;margin-top: 40px;font-size: 14px;}
+.approvalDetailBody .text{vertical-align: -1px;margin: 0 2px;}
+.approvalDetailCheckbox{float:right;width: 18px;height: 18px;margin-top: 34px;}
+.approvalDetailCheckbox input{width: 18px;height: 18px;}
+.approvalDetailMoreMsg{display:none;position: absolute;top:0;left: 0;width: 380px;padding-bottom:10px;margin: 148px 0 0 -1px;border:1px solid #7460ee;padding-left:20px;background-color: #fff;z-index: 9;}
+.approvalDetailMoreMsg .word2{margin-top: 10px;}
+.approvalDetailMoreMsg .word2 img{margin-right: 10px;}
+.approvalDetailMoreMsg .state{color:#999;margin-top: 10px;}
+.approvalDetailMoreMsg .state2{color:#333;margin-top: 10px;line-height: 20px;}
+
+.shelter{position: fixed;width: 100%;height: 100%;top:0;left: 0;background-color: #000;opacity: 0.4;filter:alpha(opacity=40);z-index: 10;}
+.advancedScreening{position: fixed;width: 600px;height: 350px;top:50%;left: 50%;margin: -175px 0 0 -300px;background-color: #fff;z-index: 11;}
+.advancedScreening .headerTitle{height: 40px;line-height: 40px;padding: 0 20px;background-color: #eef1f7;color: #333;font-size: 14px;}
+.advancedScreeningTable{font-size: 14px;width: 96%;margin: 0 auto;}
+.advancedScreeningTable td{border-bottom: 1px solid #ccc;height: 40px;line-height: 40px;}
+.advancedScreeningTable td:first-child{width: 30%;padding-left: 20px;}
+.advancedScreeningTable td select{width: 100%;height: 20px;border: none;}
+.advancedScreeningTable td input{width: 100%;height: 20px;border: none;}
+.advancedScreeningTable td.btns{border-bottom: none;}
+.advancedScreeningTable td.btns button{width: 100px;height: 30px;border-radius: 5px;line-height: 20px;background-color: #fff;color: #7460ee;margin-left: 100px;margin-top: 20px;border: 1px solid #b9aff6;}
+.advancedScreeningTable td.btns button:first-child{background-color: #7460ee;color: #fff;margin-left: 135px;}
