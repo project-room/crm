@@ -28,6 +28,7 @@ public class CstCustomerController extends BaseController{
     @Autowired
     private  ICstCustomerService cstCustomerService;
 
+
     @RequestMapping("/toIndex")
     public String toIndex(){
         return "index/index";

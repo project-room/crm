@@ -30,6 +30,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     private CstLowCustomerMapper cstLowCustomerMapper;
     @Autowired
     private CstLabelMapper cstLabelMapper;
+
     @Override
     public void cliamCstCustomer(CstCustomer cstCustomer, ChLinkman chLinkman) {
 
