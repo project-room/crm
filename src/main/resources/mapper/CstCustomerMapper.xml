@@ -127,4 +127,8 @@ cc.`cust_company` LIKE #{cstCustomer.custCompany} OR cl.`link_name` LIKE #{chLin
     <select id="selectCountByCstCustomerName" parameterType="String" resultType="Long">
         SELECT COUNT(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany}
     </select>
+
+    <update id="updateCstCustomerWithId" parameterType="map">
+         UPDATE cst_customer SET cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},user_id=#{cstCustomer.userId},cust_type=#{cstCustomer.custType},cust_date=#{cstCustomer.custDate} WHERE cust_id=#{cstcustId}
+    </update>
 </mapper>

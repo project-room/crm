@@ -24,4 +24,7 @@ public interface SysUserMapper {
 
     //通过用户名获取用户Id
     Long selectUserIdByUserName(@Param("userName") String userName);
+
+    //根据用户名和密码登录
+    SysUser loginAccountAndUserName(@Param("account") String account,@Param("password") String password);
 }

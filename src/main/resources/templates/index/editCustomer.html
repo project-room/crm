@@ -7,6 +7,7 @@
 	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
 	<script th:src="@{/js/jquery.nicescroll.js}"></script>
 	<script th:src="@{/js/default.js}"></script>
+	<script th:src="@{/js/editCustomer.js}"></script>
 	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
 	<link rel="stylesheet" th:href="@{/css/default.css}" />
 	<link rel="stylesheet" th:href="@{/css/addNewCustomer.css}" />
@@ -19,8 +20,8 @@
 			<span class="logoTxt">润普CRM</span>
 		</div>
 		<ul>
-			<li><a href="index.html"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
-			<li class="active"><a href="seas.html"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt">公海</span></a></li>
+			<li><a href="/crm/cstCustomer/toIndex"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
+			<li class="active"><a href="/crm/cstCustomer/getPage/1/7"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt">公海</span></a></li>
 			<li><a href="chance.html"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
 			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
 			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
@@ -62,16 +63,18 @@
 						</ul>
 					</span>
 				</h4>
-				<form class="editMsgForm">
-					<label for="companyName">公司名称&emsp;<input type="text" id="companyName" value="广州润普网络科技有限公司" disabled="disabled" /></label>
-					<label for="contactName">联系人名称<input type="text" id="contactName" value="汤姆斯" disabled="disabled" /></label>
-					<label for="mobilephone">移动电话&emsp;<input type="text" id="mobilephone" value="12311145678" disabled="disabled" /></label>
-					<label for="telephone">固定电话&emsp;<input type="text" id="telephone" value="020-12345678" disabled="disabled" /></label>
-					<label for="mail">QQ/邮箱&emsp;<input type="text" id="mail" value="12345678@qq.com" disabled="disabled" /></label>
-					<label for="province">所在省份&emsp;<input type="text" id="province" value="北京市" disabled="disabled" /></label>
-					<label for="createTime">创建时间&emsp;<input type="text" id="createTime" value="2017/08/19 10:25" disabled="disabled" /></label>
+				<form class="editMsgForm" id="editMsgForm" action="/crm/cstCustomer/editCustomerById">
+					<label for="companyName">公司名称&emsp;<input type="text" id="companyName" th:value="${cstCustomer.custCompany}" disabled="disabled" name="custCompany"/></label>
+					<label for="contactName">联系人名称<input type="text" id="contactName" th:value="${cstCustomer.linkmanList[0].linkName}" disabled="disabled" name="linkName" /></label>
+					<label for="mobilephone">移动电话&emsp;<input type="text" id="mobilephone" th:value="${cstCustomer.linkmanList[0].linkPhone}" disabled="disabled" name="linkPhone"/></label>
+					<label for="telephone">固定电话&emsp;<input type="text" id="telephone" th:value="${cstCustomer.linkmanList[0].linkLandlinePhone}" disabled="disabled" name="linkLandlinePhone"/></label>
+					<label for="mail">QQ/邮箱&emsp;<input type="text" id="mail" th:value="${cstCustomer.linkmanList[0].linkEmail}" disabled="disabled" name="linkEmail"/></label>
+					<label for="province">所在省份&emsp;<input type="text" id="province" th:value="${cstCustomer.custAddress}" disabled="disabled" name="custAddress"/></label>
+					<label for="createTime">创建时间&emsp;<input type="text" id="createTime" th:value="${cstCustomer.revertDate}" disabled="disabled" name="custDateStr"/></label>
+					<input type="hidden" th:value="${cstCustomer.userId}" name="userId"/>
+					<input type="hidden" th:value="${cstCustomer.custId}" name="custId"/>
 
-					<input type="button" class="save dnone" value="保存" />
+					<input type="button" class="save dnone" value="保存" id="saveEditCustomer"/>
 					<input type="button" class="cancel dnone" value="取消" />
 				</form>
 				

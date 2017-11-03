@@ -8,6 +8,7 @@ import com.crm.biz.customer.service.ICstCustomerService;
 import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.common.Page;
 import com.crm.entity.*;
+import com.crm.enums.ChLinkmanStatusEnums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,6 +130,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      */
     @Override
     public void createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman) {
+        chLinkman.setLinkStatus(ChLinkmanStatusEnums.MASTER_CHLINKMAN.getCode());
         cstCustomerMapper.saveCstCustomer(cstCustomer);
         Long custId=cstCustomer.getCustId();
         chLinkman.setCustId(custId);
@@ -169,6 +171,32 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
        String  custCompanyStr="%"+custCompany+"%";
        Long count= cstCustomerMapper.selectCountByCstCustomerName(custCompanyStr);
         return count;
+    }
+
+    /**
+     * 根据客户id编辑客户信息
+     * @param cstCustomer
+     * @param chLinkman
+     */
+    @Override
+    public void editCustomerById(CstCustomer cstCustomer, ChLinkman chLinkman) {
+
+       Long cstCustId=cstCustomer.getCustId();
+        //目标获取认领公海客户的主联系人
+        CstCustomer cstCustomerResult=cstCustomerMapper.selectCstCustomerInfo(cstCustId);
+        List<ChLinkman> chLinkmans=cstCustomerResult.getLinkmanList();
+        ChLinkman chLinkmanFinal=null;
+        for (ChLinkman chLinkmanFor:chLinkmans){
+            if(chLinkmanFor.getLinkStatus()==0){
+                chLinkmanFinal=chLinkmanFor;
+            }
+        }
+        //获得的主联系人id
+        Long chLinkmanId=chLinkmanFinal.getLinkId();
+        //根据客户id更改客户信息
+        cstCustomerMapper.updateCstCustomerWithId(cstCustId,cstCustomer);
+        //根据主联系人id更改主联系人信息
+        chLinkmanMapper.updateChLinkmanWithIdAndChLinkman(chLinkmanId,chLinkman);
     }
 
 

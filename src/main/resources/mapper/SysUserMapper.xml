@@ -79,4 +79,8 @@
   <select id="selectUserIdByUserName" parameterType="String"  resultType="Long">
         SELECT user_id FROM sys_user WHERE user_name=#{userName}
   </select>
+
+  <select id="loginAccountAndUserName" parameterType="map" resultMap="BaseResultMap">
+      SELECT * FROM sys_user WHERE user_accounts=#{account} AND user_password=#{password}
+  </select>
 </mapper>

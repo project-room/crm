@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
             <title>
                 客户关系管理系统
             </title>
-            <script src="js/jquery-1.8.3.min.js">
+            <script th:src="@{/js/jquery-1.8.3.min.js}">
             </script>
-            <script src="bootstrap/js/bootstrap.js">
+            <script th:src="@{/bootstrap/js/bootstrap.js}">
             </script>
-            <script src="bootstrap/js/bootstrap-table.js">
+            <script th:src="@{/bootstrap/js/bootstrap-table.js}">
             </script>
-            <script src="js/jquery.nicescroll.js">
+            <script th:src="@{/js/jquery.nicescroll.js}">
             </script>
-            <script src="laydate/laydate.js">
+            <script th:src="@{/laydate/laydate.js}">
             </script>
-            <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
-            <link href="css/default.css" rel="stylesheet"/>
-            <link href="css/refferal.css" rel="stylesheet"/>
-            <script src="js/default.js">
+            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+            <link th:href="@{/css/default.css}" rel="stylesheet"/>
+            <link th:href="@{/css/refferal.css}" rel="stylesheet"/>
+            <script th:src="@{/js/default.js}">
             </script>
-            <script src="js/refferal.js">
+            <script th:src="@{/js/refferal.js}">
             </script>
         </meta>
     </head>
@@ -200,7 +200,7 @@
         </div>
         <div class="leftContent">
             <div class="logo">
-                <img alt="logo" src="img/logo.png"/>
+                <img alt="logo" th:src="@{/img/logo.png}"/>
                 <span class="logoTxt">
                     润普CRM
                 </span>
@@ -208,7 +208,7 @@
             <ul>
                 <li>
                     <a href="index.html">
-                        <img alt="首页" src="img/index.png"/>
+                        <img alt="首页" th:src="@{/img/index.png}"/>
                         <span class="navTxt">
                             首页
                         </span>
@@ -216,7 +216,7 @@
                 </li>
                 <li>
                     <a href="seas.html">
-                        <img alt="公海" src="img/seas.png"/>
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
                         <span class="navTxt">
                             公海
                         </span>
@@ -224,32 +224,32 @@
                 </li>
                 <li class="active">
                     <a href="chance.html">
-                        <img alt="机会" src="img/chance.png"/>
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
                         <span class="navTxt">
                             机会
                         </span>
                     </a>
                 </li>
                 <li>
-                    <img alt="合同" src="img/contract.png"/>
+                    <img alt="合同" th:src="@{/img/contract.png}"/>
                     <span class="navTxt">
                         合同
                     </span>
                 </li>
                 <li>
-                    <img alt="财务" src="img/financial.png"/>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
                     <span class="navTxt">
                         财务
                     </span>
                 </li>
                 <li>
-                    <img alt="支持" src="img/support.png"/>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
                     <span class="navTxt">
                         支持
                     </span>
                 </li>
                 <li>
-                    <img alt="设置" src="img/setting.png"/>
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
                     <span class="navTxt">
                         设置
                     </span>
@@ -261,7 +261,7 @@
                 <div>
                     <input placeholder="请输入客户名称" type="text"/>
                     <button>
-                        <img alt="" src="img/searchIcon.png"/>
+                        <img alt="" th:src="@{/img/searchIcon.png}"/>
                     </button>
                     <div class="mail">
                         <span class="msgNum">
@@ -297,7 +297,7 @@
                             聂宇豪
                         </span>
                         <span class="xiala">
-                            <img src="img/xiala.png"/>
+                            <img th:src="@{/img/xiala.png}"/>
                         </span>
                         <ul class="detail">
                             <li>
@@ -352,12 +352,12 @@
                         </div>
                         <div class="fright">
                             <button class="filter">
-                                <img src="img/filter.png"/>
+                                <img th:src="@{/img/filter.png}"/>
                                 筛选
                             </button>
                             <button class="createZhuanjiao">
                                 <a href="#">
-                                    <img src="img/addCustomer.png"/>
+                                    <img th:src="@{/img/addCustomer.png}"/>
                                     新建转交
                                 </a>
                             </button>
@@ -368,15 +368,15 @@
                             <input type="checkbox"/>
                         </label>
                         <button class="delete">
-                            <img src="img/delete.png"/>
+                            <img th:src="@{/img/delete.png}"/>
                             删除
                         </button>
                         <button class="edit">
-                            <img src="img/edit.png"/>
+                            <img th:src="@{/img/edit.png}"/>
                             编辑
                         </button>
                         <button>
-                            <img src="img/chancePurple.png"/>
+                            <img th:src="@{/img/chancePurple.png}"/>
                             转交机会
                         </button>
                     </div>

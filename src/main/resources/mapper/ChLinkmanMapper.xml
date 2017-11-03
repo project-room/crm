@@ -23,4 +23,9 @@ VALUES (#{linkName},#{linkPhone},#{linkLandlinePhone},#{linkEmail},#{linkQq},#{l
   <update id="updateChLinkmanByIdAndChLinkman" parameterType="map">
    UPDATE ch_linkman SET link_name=#{chLinkman.linkName},link_phone=#{chLinkman.linkPhone},link_landline_phone=#{chLinkman.linkLandlinePhone},link_email=#{chLinkman.linkEmail},link_qq=#{chLinkman.linkQq},link_wechat=#{chLinkman.linkWechat},link_status=#{chLinkman.linkStatus},ch_id=#{chLinkman.chId},link_department=#{chLinkman.linkDepartment},link_position=#{chLinkman.linkPosition},cust_id=#{chLinkman.custId} WHERE link_id=#{id}
   </update>
+
+  <!--根据联系人id修改联系人信息-->
+  <update id="updateChLinkmanWithIdAndChLinkman" parameterType="map">
+      UPDATE ch_linkman SET link_name=#{chLinkman.linkName},link_phone=#{chLinkman.linkPhone},link_landline_phone=#{chLinkman.linkLandlinePhone},link_email=#{chLinkman.linkEmail},link_status=#{chLinkman.linkStatus},cust_id=#{chLinkman.custId} WHERE link_id=#{id}
+  </update>
 </mapper>

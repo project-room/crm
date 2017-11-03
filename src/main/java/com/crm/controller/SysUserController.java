@@ -1,30 +1,35 @@
 package com.crm.controller;
 
-import com.crm.biz.dynamic.dao.SysDynamicMapper;
 import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.biz.sys.service.ISysUserService;
 import com.crm.common.BaseController;
-import com.crm.entity.SysDynamic;
 import com.crm.entity.SysUser;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2017/9/14.
  */
-@RestController
-@RequestMapping("sysUser")
+@Controller
+@RequestMapping("/sysUser")
 public class SysUserController extends BaseController {
     @Autowired
     private SysUserMapper sysUserMappers;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Autowired
     private ISysUserService iSysUserService;
@@ -37,21 +42,29 @@ public class SysUserController extends BaseController {
     }
 
     //用户登陆
-    @RequestMapping("userLogin")
-    public Map login(String username,String password){
-        Map map= result();
-        try {
-            System.out.println("username:"+username +"    password:"+password);
-            map = TypeUtil.successMap();
-            SysUser sysUser=iSysUserService.login(username,password);
-            map.put("sysUser",sysUser);
-        } catch (Exception e) {
-            map.put("code","-1");
-            map.put("msg","登陆失败");
-            e.printStackTrace();
+    @RequestMapping("/userLogin")
+    public String login(String username,String password ,HttpServletResponse response){
+         Map map= result();
+         SysUser sysUser=iSysUserService.login(username,password);
+         if(sysUser!=null){
+             redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
+             return "index/index";
+         }
+        return "index/login";
+    }
+    //记住登录
+    @RequestMapping("/remenberLogin")
+    public void remenberLogin(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        Map map=result();
+       PrintWriter out= response.getWriter();
+       String userName= request.getParameter("userName");
+       String result= redisTemplate.opsForValue().get(userName);
+       if(result!=null){
+           out.print(true);
+       }else{
+           out.print(false);
+       }
 
-        }
-        return map;
     }
 
     //注册  形式有待商榷
@@ -123,6 +136,4 @@ public class SysUserController extends BaseController {
 
         }
     }
-
-
 }

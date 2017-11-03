@@ -53,4 +53,8 @@ public interface CstCustomerMapper{
 
     //根据模糊客户名来获取count
     Long selectCountByCstCustomerName(String custCompany);
+
+    //根据公海客户id修改客户信息
+    void updateCstCustomerWithId(@Param("cstcustId") Long cstcustId,@Param("cstCustomer") CstCustomer cstCustomer);
+
 }

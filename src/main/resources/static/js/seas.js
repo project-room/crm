@@ -5,7 +5,7 @@ $(function() {
         cursorcolor: '#ccc'
     });
 
-    $('.customerNum span').text($('#table tbody tr').length);
+
     checkboxClick();
 
     // $('.pull-right.pagination').append('<ul>1234</ul>')
@@ -34,7 +34,7 @@ $(function() {
     });
 
     forTable();
-
+    fenye();
     //新建客户
    $("#addCstCustomer").click(function () {
        location.href="/crm/cstCustomer/toAddNewCustomer";
@@ -45,11 +45,10 @@ $(function() {
      var custCompany=$("#searchName").val();
      location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
     });
-    
-    //查看单个客户的详细信息
-    $("tr").click(function () {
 
-        alert(zhi)
+    //筛选客户
+    $("#confirm").click(function () {
+        $("#filterForm").submit();
     });
 });
 
@@ -144,7 +143,9 @@ function forTable() {
         slideBool = false;
     });
 
-    $('body').on('click', 'tbody tr', function() {
-        location.href="editCustomer.html";
+    //单击单条记录获取该条记录的信息
+    $('tbody').on('click', 'tr', function() {
+       var custId= $(this).children("input[type=hidden]").val().toString();
+        location.href="/crm/cstCustomer/lookCstCustomerInfo/"+custId;
     });
 }
