@@ -67,6 +67,19 @@
 			<artifactId>nekohtml</artifactId>
 			<version>1.9.22</version>
 		</dependency>
+		<!--redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+		<!--  阿里大于JAR-->
+		<dependency>
+			<groupId>my-jar</groupId>   <!--  自己随便取-->
+			<artifactId>my-jar</artifactId> <!-- 自己随便取-->
+			<version>1.0</version><!-- 自己随便取-->
+			<scope>system</scope>
+			<systemPath>${project.basedir}/doc/lib/taobao-1.0.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>
