@@ -4,10 +4,14 @@ import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.biz.sys.service.ISysUserService;
 import com.crm.common.BaseController;
 import com.crm.entity.SysUser;
+import com.crm.utils.AliSms;
+import com.crm.utils.SixCaptchaUtil;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +36,7 @@ public class SysUserController extends BaseController {
     private StringRedisTemplate redisTemplate;
 
     @Autowired
-    private ISysUserService iSysUserService;
+    private ISysUserService sysUserService;
     @RequestMapping("selectSysUserById")
     public Map selectById(){
         Map map= TypeUtil.successMap();
@@ -45,7 +49,7 @@ public class SysUserController extends BaseController {
     @RequestMapping("/userLogin")
     public String login(String username,String password ,HttpServletResponse response){
          Map map= result();
-         SysUser sysUser=iSysUserService.login(username,password);
+         SysUser sysUser=sysUserService.login(username,password);
          if(sysUser!=null){
              redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
              return "index/index";
@@ -72,7 +76,7 @@ public class SysUserController extends BaseController {
     public Map register(SysUser sysUser){
         Map map = result();
         try {
-            int state = iSysUserService.register(sysUser); //state是判断是否添加成功。 以后或许有用
+            int state = sysUserService.register(sysUser); //state是判断是否添加成功。 以后或许有用
             map= TypeUtil.successMap();
             map.put("sysUser",sysUser);
         } catch (Exception e) {
@@ -91,7 +95,7 @@ public class SysUserController extends BaseController {
         //到时候要么前端判断用户状态，要么在service判断状态，当状态为0时就不进行操作
         Map map = result();
         try{
-            int state = iSysUserService.deleteById(userId);
+            int state = sysUserService.deleteById(userId);
 
 //            if(state == 0){//删除失败
 //            }else{//删除成功
@@ -112,7 +116,7 @@ public class SysUserController extends BaseController {
     public Map update(SysUser sysUser){
         Map map = result();
         try{
-            int state =iSysUserService.updateSysUserById(sysUser);
+            int state =sysUserService.updateSysUserById(sysUser);
             map= TypeUtil.successMap();
         } catch (Exception e) {
             map.put("code","-1");
@@ -129,11 +133,71 @@ public class SysUserController extends BaseController {
     public void userNameRevertUserId(HttpServletRequest request, HttpServletResponse response){
         String userName=request.getParameter("userName");
         try {
-            Long userId= iSysUserService.selectUserIdByUserName(userName);
+            Long userId= sysUserService.selectUserIdByUserName(userName);
            PrintWriter out= response.getWriter();
             out.print(userId);
         } catch (Exception e) {e.printStackTrace();
 
         }
+    }
+
+    /**
+     * 获取发送短信验证码
+     * @param phone
+     * @return
+     */
+    @RequestMapping("/sendSmsCaptcha/{phone}")
+//    13307278157
+    public String sendSmsCaptche(@PathVariable("phone") String phone,Model model){
+       String captCha= SixCaptchaUtil.getRandNum(6);
+       //发短手机信息验证码
+       AliSms.sendSmsByPhone(phone,captCha);
+       redisTemplate.opsForValue().set("captCha",captCha,120,TimeUnit.SECONDS);
+       redisTemplate.opsForValue().set("phone",phone,120,TimeUnit.SECONDS);
+        System.out.println("captCha:"+captCha);
+        model.addAttribute("phone",phone);
+       return "index/findPsd";
+    }
+    /**
+     * 根据用户号码和验证码来提交
+     * @param phone
+     * @param captCha
+     * @return
+     */
+    @RequestMapping("/findByPhoneAndCaptCha/{phone}/{captCha}")
+    public String findByPhoneAndCaptCha(@PathVariable("phone") String phone,@PathVariable("captCha") String captCha){
+        String captChaRedis= null;
+        String phoneChaRedis= null;
+        try {
+            captChaRedis = redisTemplate.opsForValue().get("captCha").toString();
+            phoneChaRedis = redisTemplate.opsForValue().get("phone").toString();
+            if(captChaRedis.equals(captCha.trim())&&phoneChaRedis.equals(phone.trim())){
+                session.setAttribute("sysUserPhone",phone);
+                return "index/newPsd";
+            }else{
+                return "index/findPsd";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "index/findPsd";
+        }
+
+    }
+
+    /**
+     * 创建新的密码
+     * @param newPassword
+     */
+    @RequestMapping("/createNewPassword/{newPassword}")
+    public String createNewPassword(@PathVariable("newPassword") String newPassword){
+      String sysUserPhone= session.getAttribute("sysUserPhone").toString();
+       //根据用户号码查出用户
+      SysUser sysUser= sysUserService.selectSysUserByUserPhone(sysUserPhone);
+      //改变用户的密码
+      sysUser.setUserPassword(newPassword);
+      //修改用户密码
+      sysUserService.updateSysUserById(sysUser);
+      session.setAttribute("sysUserPhone",null);
+      return "index/login";
     }
 }

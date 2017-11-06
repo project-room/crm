@@ -18,13 +18,13 @@
 			<h4>润普CRM</h4>
 			<form>
 				<label>
-					<input type="text" placeholder="请输入手机号" />
-					<a href="#" class="getCode">发送验证码</a>
+					<input type="text" name="phone" placeholder="请输入手机号" th:value="${phone}"/>
+					<a href="#" class="getCode" id="sendCaptcha">发送验证码</a>
 				</label>
 				<label>
-					<input type="password" placeholder="请输入验证码" />
+					<input type="password" placeholder="请输入验证码" name="captCha" />
 				</label>
-				<a class="submit" href="/crm/cstCustomer/toNewPsd">提交</a>
+				<a class="submit" href="#" id="commitCaptcha" >提交</a>
 			</form>
 		</div>
 	</div>

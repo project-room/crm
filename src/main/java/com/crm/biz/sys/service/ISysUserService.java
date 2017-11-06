@@ -17,4 +17,7 @@ public interface ISysUserService {
 
     //通过用户名获取用户Id
     Long selectUserIdByUserName(String userName);
+
+    //根据用户手机号码来获取用户
+    SysUser selectSysUserByUserPhone(String userPhone);
 }

@@ -27,4 +27,7 @@ public interface SysUserMapper {
 
     //根据用户名和密码登录
     SysUser loginAccountAndUserName(@Param("account") String account,@Param("password") String password);
+
+    //根据用户手机号码来获取用户
+    SysUser selectSysUserByPhone(@Param("phone") String phone);
 }

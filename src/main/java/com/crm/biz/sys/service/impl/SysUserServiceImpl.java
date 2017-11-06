@@ -54,5 +54,10 @@ public class SysUserServiceImpl implements ISysUserService {
         return userId;
     }
 
+    @Override
+    public SysUser selectSysUserByUserPhone(String userPhone) {
+        return  sysUserMapper.selectSysUserByPhone(userPhone);
+    }
+
 
 }

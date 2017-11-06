@@ -72,13 +72,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-redis</artifactId>
 		</dependency>
-		<!--  阿里大于JAR-->
+		<!--yuntongxun-->
 		<dependency>
-			<groupId>my-jar</groupId>   <!--  自己随便取-->
-			<artifactId>my-jar</artifactId> <!-- 自己随便取-->
-			<version>1.0</version><!-- 自己随便取-->
+			<groupId>alicore</groupId>
+			<artifactId>alicore</artifactId>
+			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/doc/lib/taobao-1.0.jar</systemPath>
+			<systemPath>${project.basedir}/doc/lib/aliyun-java-sdk-core-3.3.1.jar</systemPath>
+		</dependency>
+		<!--yuntongxun-->
+		<dependency>
+			<groupId>alidys</groupId>
+			<artifactId>alidys</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/doc/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 
@@ -94,7 +102,6 @@
 					<exclude>bootstrap.properties</exclude>
 				</excludes>
 			</resource>
-
 		</resources>
 		<plugins>
 			<plugin>
@@ -106,6 +113,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
