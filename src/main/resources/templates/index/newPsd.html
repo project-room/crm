@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户关系管理系统</title>
+	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}"/>
+	<script th:src="@{/js/default.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/newPsd.css}" />
+	<script th:src="@{/js/login.js}"></script>
+</head>
+<body>
+	<div class="content">
+		<span class="pic">
+			<img th:src="@{/img/login.png}" alt="" />
+		</span>
+		<div class="logMsg">
+			<h4>润普CRM</h4>
+			<form>
+				<label>
+					<input type="password" placeholder="输入新密码" name="newPsd"/>
+				</label>
+				<label>
+					<input type="password" placeholder="再次输入新密码" name="againNewPsd"/>
+				</label>
+				<a class="submit" href="#" id="newPsdCommit">提交</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

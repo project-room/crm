@@ -18,14 +18,15 @@ public class SysUserServiceImpl implements ISysUserService {
     private SysUserMapper sysUserMapper;
 
     public SysUser login(String account,String password){
-        SysUser byAccount = sysUserMapper.findByAccount(account);
-        if(byAccount != null){
-            //密码判断，到时候要进行加密
-            if(byAccount.getUserPassword().equals(password)){
-                return byAccount;
-            }
-        }
-        return null;
+//        SysUser byAccount = sysUserMapper.findByAccount(account);
+//        if(byAccount != null){
+//            //密码判断，到时候要进行加密
+//            if(byAccount.getUserPassword().equals(password)){
+//                return byAccount;
+//            }
+//        }
+//        return null;
+        return  sysUserMapper.loginAccountAndUserName(account,password);
     }
 
     public int register(SysUser sysUser){
@@ -51,6 +52,11 @@ public class SysUserServiceImpl implements ISysUserService {
         Long userId=null;
         userId=sysUserMapper.selectUserIdByUserName(userName);
         return userId;
+    }
+
+    @Override
+    public SysUser selectSysUserByUserPhone(String userPhone) {
+        return  sysUserMapper.selectSysUserByPhone(userPhone);
     }
 
 
