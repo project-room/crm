@@ -13,5 +13,11 @@ public interface ChLinkmanMapper {
 
   void updateChLinkmanByIdAndChLinkman(@Param("id") Long id,@Param("chLinkman") ChLinkman chLinkman);
 
+   int addChLinkman(ChLinkman chLinkman);
 
+   int updateChLinkman(ChLinkman linkman);
+
+   int updateLinkman(ChLinkman chLinkmanTo);
+
+    int updateChId(Long chId);
 }

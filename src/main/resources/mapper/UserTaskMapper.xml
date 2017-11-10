@@ -36,6 +36,7 @@
       delete from user_task where task_id =#{taskId}
    </delete>
 
+  <!--按机会id来删除任务表-->
   <delete id="deleteUserTaskChId" parameterType="Long">
     delete from user_task where ch_id=#{chId}
   </delete>

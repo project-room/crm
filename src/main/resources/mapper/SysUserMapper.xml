@@ -46,14 +46,24 @@
       <result column="cust_id" property="custId" jdbcType="BIGINT" />
       <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
       <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
-      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="userTo_id" property="userToId" jdbcType="BIGINT"/>
       <result column="user_id" property="userId" jdbcType="BIGINT" />
       <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
       <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
       <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
       <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
       <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+      <result column="ch_Intentionality" property="chIntentionality" jdbcType="VARCHAR" />
       <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+      <result column="ch_importance" property="chImportance" jdbcType="VARCHAR"/>
+      <result column="ch_requirement" property="requirement" jdbcType="VARCHAR"/>
+      <result column="ch_Follow" property="chFollow" jdbcType="VARCHAR"/>
+      <result column="ch_Transaction" property="chTransaction" jdbcType="VARCHAR"/>
+      <result column="ch_LostSingleType" property="chLostSingleType" jdbcType="VARCHAR"/>
+      <result column="ch_ReasonsForLosingOrders" property="chReasonsForLosingOrders" jdbcType="VARCHAR"/>
+      <result column="ch_status" property="chStatus" jdbcType="VARCHAR"/>
+      <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
+      <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
     </collection>
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
@@ -74,5 +84,9 @@
   </update>
   <select id="findByAccount" parameterType="String" resultMap="BaseResultMap">
     select * from sys_user where user_accounts = #{account}
+  </select>
+  <!--通过用户名获取用户id-->
+  <select id="selectUserIdByUserName" parameterType="String"  resultType="Long">
+        SELECT user_id FROM sys_user WHERE user_name=#{userName}
   </select>
 </mapper>

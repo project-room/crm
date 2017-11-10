@@ -18,7 +18,18 @@ import java.util.List;
 public interface CstCustomerMapper{
 
     //此方法是机会新建查询客户
-     CstCustomer  getCstCustomer(long id);
+     List<CstCustomer>  getCstCustomer(Long id);
+
+     //添加机会时完善客户资料
+     int updateCustomer(CstCustomer cstCustomer);
+
+    //根据机会对象里的客户id修改客户表里的用户id
+    /*int updateCstCustomer(CstChance cstChance);*/
+
+    //根据客户id查询客户关关联信息
+    CstCustomer getCstCustomerCustId(Long custId);
+
+    int updatecstCustomer(CstCustomer customer);
 
     CstCustomer findById(Long id);
 
@@ -38,18 +49,20 @@ public interface CstCustomerMapper{
 
     CstCustomer selectCstCustomerInfo(@Param("cstCustomerId") Long cstCustomerId);
 
-    List<CstCustomer> selectCstCustomerByName(@Param("custCompany") String custCompany);
+    //根据模糊客户名来获取客户信息
+    List<CstCustomer> selectCstCustomerByName(@Param("custCompany") String custCompany,@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 
     void deleteCstCustomerAndChLinkmanById(Long id);
 
     void saveCstCustomerAndLabel(@Param("cstCustId") Long cstCustId,@Param("labelId") Integer labelId);
 
-    //根据机会对象里的客户id修改客户表里的用户id
-    int updateCstCustomer(CstChance cstChance);
 
     //根据条件筛选客户
     List<CstCustomer>  selectCstCustomerByCondition( @Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman,@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 
     //筛选客户
     Long getCountByCondition(@Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman);
+
+    //根据模糊客户名来获取count
+    Long selectCountByCstCustomerName(String custCompany);
 }

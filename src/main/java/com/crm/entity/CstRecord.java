@@ -10,8 +10,6 @@ public class CstRecord {
 
     private Long chId;
 
-    private String userName;
-
     private Date reDate;
 
     private List<SysAttachment> attachmentList;
@@ -48,13 +46,6 @@ public class CstRecord {
         this.chId = chId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
 
     public Date getReDate() {
         return reDate;

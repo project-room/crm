@@ -1,0 +1,76 @@
+.chanceHeader { height: 50px; padding: 0 30px; }
+.allOperate { clear: both; margin: 0 30px 20px;}
+.chanceContent { clear: both; margin: 0 30px 30px; background: #fff}
+
+.chanceHeader .fleft p { display: inline-block; line-height: 50px;  }
+.chanceHeader .tag { font-size: 18px; color: #7460ee; display: inline-block; position: relative; z-index: 4; }
+.chanceHeader .tag ul { position: absolute; font-size: 14px; padding: 4px; right: 0; background: #fff; color: #666; line-height: 1.8;}
+.chanceHeader .customerNum { color: #999; }
+.chanceHeader .fright button,.allOperate button { height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; color: #7460ee; margin-top: 10px; }
+.chanceHeader .fright button.moreOperate { background: #7460ee; color: #fff; font-weight: 900; padding: 0; }
+.chanceHeader .fright a { color: #7460ee; height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; vertical-align: middle; display: inline-block; line-height: 28px; padding: 0 3px; }
+
+.allOperate label{ vertical-align: middle }
+.allOperate button { margin-left: 10px; }
+nav { text-align: center; }
+.pagination > li > a, .pagination > li > span { margin-left: 10px;}
+.pagination > li:first-child > a, .pagination > li:first-child > span {border-radius: 0;}
+.pagination > li:last-child > a, .pagination > li:last-child > span {border-radius: 0;}
+
+div.fixed-table-pagination { text-align: center; margin-bottom: 40px; }
+div.pull-left.pagination-detail { display: none; }
+div.pull-right.pagination { float: none !important; text-align: center; margin: 0 auto; display: inline-block !important; }
+
+
+.jump { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; height: 30px; line-height: 30px; vertical-align: top; }
+.jump label { height: 30px; line-height: 30px; }
+.jump select { height: 30px; line-height: 30px; width: 65px; text-align: center; }
+
+.table > thead > tr > th, 
+.table > tbody > tr > th, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > tbody > tr > td, 
+.table > tfoot > tr > td { vertical-align: middle; }
+.table { margin-bottom: 0; }
+
+.table th { color: #999; background: #eef1f7; }
+td.contactWay, td.mail { color: #999; }
+.table td { position: relative; }
+
+.table .follow { max-width: 600px; }
+.table .follow p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 600px; }
+
+.table tbody .stage p { background: #eee; display: inline-block; padding: 3px 6px; font-size: 12px; border-radius: 12px; color: #666; }
+
+
+.modify { font-weight: 900; color: #b3b3b3; }
+.modify+ul { position: absolute; display: none; background: #fff; width: 50px; text-align: center; z-index: 2; }
+.modify+ul li { height: 30px; line-height: 30px; }
+
+.filterPop { min-height: 740px; height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
+.filterPop .shelter { height: 100%; width: 100%; }
+.filterPop .filtermain { width: 600px; height: 740px; background: #fff; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -370px; }
+.filterPop h4 { height: 40px; width: 100%; line-height: 40px; background: #eee; color: #000; padding: 0 20px; }
+.filterPop h4 svg { width: 14px; float: right; margin-top: 10px; }
+
+.filterPop form label {display: block; width: 560px; margin: 17px auto 0; border-bottom: 1px  solid #eee; color: #999; padding-bottom: 5px; }
+.filterPop form label span { width: 120px; display: inline-block; }
+.filterPop form label input[type=text], .filterPop form label select { border: none; width: 430px; outline: none; color: #333; }
+.filterPop form label.day,.filterPop form label.hour { width: 270px; display: inline-block; margin-left: 20px; }
+.filterPop form label.day input,.filterPop form label.hour input { width: 170px; text-align: right; } 
+
+.filterPop .btngroup input { width: 100px; height: 30px; margin-top: 70px; border: 1px solid #7460ee; border-radius: 4px; background: #7460ee; color: #fff; margin-bottom: 20px; }
+.filterPop .btngroup input.cancel { color: #7460ee; background: #fff; margin-right: 140px; float: right; }
+.filterPop .btngroup input.sure { margin-left: 140px; }
+
+
+
+
+
+
+
+
+
+
+

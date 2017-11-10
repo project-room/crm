@@ -45,6 +45,14 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         Long count=cstCustomerMapper.getCstCustomerCount();
        int currentPageLimit=(currentPage-1)*pageSize;
        List<CstCustomer> cstCustomers= cstCustomerMapper.getPageCstCustomerInfo(currentPageLimit,pageSize);
+     //通过用户id获取用户名
+        for (CstCustomer cstCustomer:cstCustomers
+             ) {
+            Long userId=cstCustomer.getUserId();
+           SysUser sysUser= sysUserMapper.findById(userId);
+            String userName=sysUser.getUserName();
+            cstCustomer.setRevertUserNameFromId(userName);
+        }
         return new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
     }
 
@@ -55,9 +63,10 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     }
 
     @Override
-    public List<CstCustomer> selectCstCustomerByName(String custCompany) {
+    public List<CstCustomer> selectCstCustomerByName(String custCompany,Integer currentPage,Integer pageSize) {
+        Integer currentPageInt=(currentPage-1)*pageSize;
         custCompany="%"+custCompany+"%";
-     List<CstCustomer>  cstCustomers= cstCustomerMapper.selectCstCustomerByName(custCompany);
+        List<CstCustomer>  cstCustomers= cstCustomerMapper.selectCstCustomerByName(custCompany,currentPageInt,pageSize);
         return cstCustomers;
     }
 
@@ -150,5 +159,16 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
        return new Page<CstCustomer>(currentPageLimit,pageSize,cstCustomers,count);
     }
 
+    /**
+     * 根据模糊客户名来获取count
+     * @param custCompany
+     * @return
+     */
+    @Override
+    public Long selectCountByCstCustomerName(String custCompany) {
+       String  custCompanyStr="%"+custCompany+"%";
+       Long count= cstCustomerMapper.selectCountByCstCustomerName(custCompanyStr);
+        return count;
+    }
 
 }

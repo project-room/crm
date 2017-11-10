@@ -1,0 +1,126 @@
+.refferalHeader { height: 50px; padding: 0 30px; }
+.allOperate { clear: both; margin: 0 30px 20px;}
+.chanceContent { clear: both; margin: 0 30px 30px; background: #fff}
+
+.refferalHeader .fleft p { display: inline-block; line-height: 50px;  }
+.refferalHeader .tag { font-size: 18px; color: #7460ee; display: inline-block; position: relative; z-index: 4; background: url('../img/dropDown.png') right center no-repeat; padding-right: 15px; margin-right: 5px; }
+.refferalHeader .tag ul { position: absolute; font-size: 14px; padding: 4px; right: 0; background: #fff; color: #666; line-height: 1.8;}
+.refferalHeader .customerNum { color: #999; }
+.refferalHeader .fright button,.allOperate button { height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; color: #7460ee; margin-top: 10px; }
+.refferalHeader .fright button.moreOperate { background: #7460ee; color: #fff; font-weight: 900; padding: 0; }
+.refferalHeader .fright a { color: #7460ee; height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; vertical-align: middle; display: inline-block; line-height: 28px; padding: 0 3px; }
+
+
+.allOperate label{ vertical-align: middle }
+.allOperate button { margin-left: 10px; }
+nav { text-align: center; }
+.pagination > li > a, .pagination > li > span { margin-left: 10px;}
+.pagination > li:first-child > a, .pagination > li:first-child > span {border-radius: 0;}
+.pagination > li:last-child > a, .pagination > li:last-child > span {border-radius: 0;}
+
+div.fixed-table-pagination { text-align: center; margin-bottom: 40px; }
+div.pull-left.pagination-detail { display: none; }
+div.pull-right.pagination { float: none !important; text-align: center; margin: 0 auto; display: inline-block !important; }
+
+.jump { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; height: 30px; line-height: 30px; vertical-align: top; }
+.jump label { height: 30px; line-height: 30px; }
+.jump select { height: 30px; line-height: 30px; width: 65px; text-align: center; }
+
+.table > thead > tr > th, 
+.table > tbody > tr > th, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > tbody > tr > td, 
+.table > tfoot > tr > td { vertical-align: middle; }
+.table { margin-bottom: 0; }
+
+.table th { color: #999; background: #eef1f7; }
+td.contactWay, td.mail { color: #999; }
+.table td { position: relative; }
+
+.table .follow { max-width: 600px; }
+.table .follow p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 600px; }
+
+
+.modify { font-weight: 900; color: #b3b3b3; }
+.modify+ul { position: absolute; display: none; background: #fff; width: 50px; text-align: center; z-index: 2; }
+.modify+ul li { height: 30px; line-height: 30px; }
+
+.filterPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
+.filterPop .shelter { height: 100%; width: 100%; }
+.filterPop .filtermain { width: 600px; height: 420px; background: #fff; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -210px; }
+.filterPop h4 { height: 40px; width: 100%; line-height: 40px; background: #eee; color: #000; padding: 0 20px; }
+.filterPop h4 svg { width: 16px; float: right; margin-top: 10px; }
+
+.filterPop form label {display: block; width: 560px; margin: 20px auto 0; border-bottom: 1px  solid #eee; color: #999;}
+.filterPop form label span { width: 135px; display: inline-block;  }
+.filterPop form label input[type=text],.filterPop form label select { border: none; width: 420px;  outline: none; color: #333; }
+.filterPop form label.day,.filterPop form label.hour { width: 270px; display: inline-block; margin-left: 20px; }
+.filterPop form label.day input,.filterPop form label.hour input { width: 170px; text-align: right; } 
+/* .filterPop form label select { border: none; width: 440px; margin-left: 20px; outline: none; } */
+
+.filterPop .oldSalerSearch, .filterPop .newSalerSearch { display: none; border: 1px solid #eee; box-shadow: 3px 3px 3px #eee; margin: 0 20px; padding: 5px; position: absolute; top: 123px; width: 560px; max-height: 285px; overflow-y: hidden; background: #fff; }
+.filterPop .oldSalerSearch { top: 81px; }
+.filterPop .oldSalerSearch label, .filterPop .newSalerSearch label { width: 100%; border-bottom: 1px solid #eee; }
+.filterPop .oldSalerSearch label input[type=text], .filterPop .newSalerSearch label input[type=text] { width: 530px; border: none; height: 30px; line-height: 30px; background: transparent; outline: none; background: url('../img/search.png') no-repeat right center; }
+
+.filterPop .oldSalerSearch ul, .filterPop .newSalerSearch ul { width: 530px; line-height: 30px; }
+.filterPop .oldSalerSearch ul span, .filterPop .newSalerSearch ul span { width: 10px; display: inline-block;font-weight: 700; }
+.filterPop .oldSalerSearch ul li, .filterPop .newSalerSearch ul li { width: 100%; margin-left: 20px; height: 30px; line-height: 30px; display: none;}
+/* .filterPop .newSalerSearch ul li:hover { color: #7460ee; } */
+
+.btngroup input { width: 100px; height: 30px; margin-top: 40px; border: 1px solid #7460ee; border-radius: 4px; background: #7460ee; color: #fff; margin-bottom: 20px; }
+.btngroup input.cancel { color: #7460ee; background: #fff; margin-right: 140px; float: right; }
+.btngroup input.sure { margin-left: 140px; }
+
+
+/* .stage div { position: relative; z-index: 4; } */
+.stage ul:first-child { display: inline-block; }
+.stage ul:first-child li { display: inline-block; width: 80px; height: 30px; text-align: center; line-height: 30px; border-radius: 15px; background: #e9ecf3; margin-right: 10px; }
+.stage span { display: inline-block; font-weight: 900; }
+.stage ul.stageYinc { position: absolute; background: #fff; width: 200px; right: 0; border: 1px solid #999; z-index: 5; }
+.stage ul.stageYinc li { display: inline-block; width: 99px; height: 24px; text-align: center; line-height: 24px; overflow: hidden; }
+
+
+/* .client div { position: relative; z-index: 4; } */
+.client p {display: inline-block;}
+.client span { font-weight: 900; }
+.client ul {position: absolute; right: 0; top: 20px; background: #fff; padding:0 20px; border: 1px solid #999; z-index: 4;}
+.client ul li { line-height: 24px; }
+
+
+.shenpi, .chehui { color: #fff; width: 60px; height: 30px; border: none; border-radius: 4px; }
+.shenpi { background: #755fee; }
+.chehui { background: #7db343; }
+
+.zhuanjiao { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
+.zhuanjiao .shelter { height: 100%; width: 100%; }
+.zhuanjiaoMain { height: 350px; width: 600px; font-size: 12px; color: #333; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -175px; background: #fff; z-index: 5; }
+.zhuanjiao h4 { height: 40px; line-height: 40px; padding: 0 20px; background: #eef1f7; font-size: 16px }
+.zhuanjiao svg { width: 16px; text-align: right; float: right; margin-top: 10px; }
+
+.zhuanjiao form { padding: 20px; }
+.zhuanjiao form>label { border-bottom: 1px solid #eef1f7; width: 100%; margin-bottom: 20px; padding-bottom: 10px; color: #999; }
+.zhuanjiao form>label input { border: none; background: #fff; outline: none; margin-left: 20px; }
+
+.zhuanjiao .stageSelect p { color: #999; }
+.zhuanjiao .stageSelect ul li { display: inline-block; width: 120px; margin-top: 20px; }
+.zhuanjiao .stageSelect input { margin-right: 10px; }
+
+
+.shenpiPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
+.shenpiPop .shelter { height: 100%; width: 100%; }
+.shenpiMain { height: 220px; width: 460px; font-size: 14px; color: #333; position: absolute; left: 50%; margin-left: -230px; top: 50%; margin-top: -110px; background: #fff; z-index: 5; padding: 20px; }
+.shenpiMain svg { width: 16px; text-align: right; float: right; }
+.shenpiMain p { text-align: center; font-size: 16px; line-height: 135px; }
+.shenpiMain .btngroup { text-align: center; }
+.shenpiMain .btngroup input[type=button] { margin: 0 37px; float: none }
+.shenpiMain .no { background: red; border-color: red; }
+
+.chehuiPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
+.chehuiPop .shelter { height: 100%; width: 100%; }
+.chehuiMain { height: 220px; width: 460px; font-size: 14px; color: #333; position: absolute; left: 50%; margin-left: -230px; top: 50%; margin-top: -110px; background: #fff; z-index: 5; padding: 20px; }
+.chehuiMain svg { width: 16px; text-align: right; float: right; }
+.chehuiMain p { text-align: center; font-size: 16px; line-height: 135px; }
+.chehuiMain .btngroup { text-align: center; }
+.chehuiMain .btngroup input[type=button] { margin: 0 37px; float: none }

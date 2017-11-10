@@ -15,6 +15,8 @@ public class  CstCustomer {
 
     private String custAddress;    //客户地址
 
+    private String custprovinceChar; //所在省份
+
     private String custIndustry;      //客户行业
 
     private String custPic;       //图片地址
@@ -35,8 +37,15 @@ public class  CstCustomer {
 
     private Date custDate;
 
+    private String custCustomerNature; //客户性质
+
+    private  String  custCustomerBudget;//客户预算
+
     //时期为字符串格式
     private String revertDate;
+
+    //用户id转换成用户名格式
+    private String revertUserNameFromId;
 
     private List<CstLabel> labelList;
 
@@ -186,5 +195,37 @@ public class  CstCustomer {
 
     public void setRevertDate(String revertDate) {
         this.revertDate = revertDate;
+    }
+
+    public String getRevertUserNameFromId() {
+        return revertUserNameFromId;
+    }
+
+    public void setRevertUserNameFromId(String revertUserNameFromId) {
+        this.revertUserNameFromId = revertUserNameFromId;
+    }
+
+    public String getCustCustomerNature() {
+        return custCustomerNature;
+    }
+
+    public void setCustCustomerNature(String custCustomerNature) {
+        this.custCustomerNature = custCustomerNature;
+    }
+
+    public String getCustCustomerBudget() {
+        return custCustomerBudget;
+    }
+
+    public void setCustCustomerBudget(String custCustomerBudget) {
+        this.custCustomerBudget = custCustomerBudget;
+    }
+
+    public String getCustprovinceChar() {
+        return custprovinceChar;
+    }
+
+    public void setCustprovinceChar(String custprovinceChar) {
+        this.custprovinceChar = custprovinceChar;
     }
 }

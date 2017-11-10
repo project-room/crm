@@ -24,14 +24,24 @@
       <result column="cust_id" property="custId" jdbcType="BIGINT" />
       <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
       <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
-      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="userTo_id" property="userToId" jdbcType="BIGINT"/>
       <result column="user_id" property="userId" jdbcType="BIGINT" />
       <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
       <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
       <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
       <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
       <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+      <result column="ch_Intentionality" property="chIntentionality" jdbcType="VARCHAR" />
       <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+      <result column="ch_importance" property="chImportance" jdbcType="VARCHAR"/>
+      <result column="ch_requirement" property="requirement" jdbcType="VARCHAR"/>
+      <result column="ch_Follow" property="chFollow" jdbcType="VARCHAR"/>
+      <result column="ch_Transaction" property="chTransaction" jdbcType="VARCHAR"/>
+      <result column="ch_LostSingleType" property="chLostSingleType" jdbcType="VARCHAR"/>
+      <result column="ch_ReasonsForLosingOrders" property="chReasonsForLosingOrders" jdbcType="VARCHAR"/>
+      <result column="ch_status" property="chStatus" jdbcType="VARCHAR"/>
+      <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
+      <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
     </collection>
   </resultMap>
 
@@ -50,8 +60,7 @@
   </update>
 
   <select id="selectDynamicListByUserId"  resultMap="BaseDynamicResultMap">
-    SELECT
-	dy_id,
+    SELECT dy_id,
 	user_id,
 	user_name,
 	dy_content,
@@ -61,9 +70,14 @@
 FROM
 	sys_dynamic
 WHERE
-	user_id = #{userId} order by dy_id DESC limit #{limitId},3
+	user_id = #{userId}
+    <if test="lastId != -1">
+      AND dy_id &lt; #{lastId}
+    </if>
+    order by dy_id DESC LIMIT 0 ,10
 
   </select>
+
 
   <select id="selectTaskListByUserId" resultMap="BaseUserTaskResultMap">
     select
@@ -101,7 +115,7 @@ WHERE
 
 
   <!--测试用需删除-->
-  <insert id="insertTaskTest" parameterType="com.crm.entity.UserTask" useGeneratedKeys="true" keyProperty="taskId">
+  <insert id="insertDataTest" parameterType="com.crm.entity.UserTask" useGeneratedKeys="true" keyProperty="taskId">
     INSERT INTO user_task (task_status,task_content,task_date,user_id)
     VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId})
   </insert>

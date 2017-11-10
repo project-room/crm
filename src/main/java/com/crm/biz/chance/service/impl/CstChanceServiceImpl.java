@@ -2,11 +2,11 @@ package com.crm.biz.chance.service.impl;
 
 import com.crm.biz.chance.dao.CstChanceMapper;
 import com.crm.biz.chance.service.ICstChanceService;
+import com.crm.biz.customer.dao.ChLinkmanMapper;
 import com.crm.biz.customer.dao.CstCustomerMapper;
+import com.crm.biz.customer.dao.CstLowCustomerMapper;
 import com.crm.common.Page;
-import com.crm.entity.CstChance;
-import com.crm.entity.CstCustomer;
-import com.crm.entity.CstSchedule;
+import com.crm.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,12 @@ public class CstChanceServiceImpl implements ICstChanceService {
     @Autowired
     private CstCustomerMapper cstCustomerMapper;
 
+    @Autowired
+    private ChLinkmanMapper chLinkmanMapper;
+
+    @Autowired
+    private CstLowCustomerMapper cstLowCustomerMapper;
+
     //根据用户id查询机会
     @Override
     public Page<CstChance> getCstChance(Long userId, int currentPage, int pageSize) {
@@ -34,10 +40,33 @@ public class CstChanceServiceImpl implements ICstChanceService {
         return new Page<CstChance>(currentPage, pageSize, cstChances, count);
     }
 
+    //转交的客户查询
+    @Override
+    public Page<CstChance> getCstChanceUserId(Long userId, int currentPage, int pageSize) {
+        System.out.println(userId);
+        Long count = (long) cstChanceMapper.getCstChanceCountTo(userId);
+        int currentPageLimit = (currentPage - 1) * pageSize;
+        List<CstChance>  cstChancesList=cstChanceMapper.getCstChanceUserId(userId, currentPageLimit, pageSize);
+        return new Page<CstChance>(currentPage, pageSize, cstChancesList, count);
+    }
     //添加机会
     @Override
-    public boolean addCstChance(CstChance cstChance) {
+    public boolean addCstChance(CstChance cstChance,CstCustomer cstCustomer,ChLinkman chLinkman,CstLowCustomer cstLowCustomer,Long linkIdTo,String linkDepartmentTo,String linkPositionTo){
         int count = cstChanceMapper.addCstChance(cstChance);
+        Long chId=cstChance.getChId();
+        ChLinkman chLinkmanTo=new ChLinkman();
+        chLinkmanTo.setLinkId(linkIdTo);
+        chLinkmanTo.setLinkDepartment(linkDepartmentTo);
+        chLinkmanTo.setLinkPosition(linkPositionTo);
+        chLinkmanTo.setChId(chId);
+        cstCustomerMapper.updateCustomer(cstCustomer);
+        chLinkman.setChId(chId);
+        chLinkmanMapper.updateLinkman(chLinkmanTo);
+        System.out.println(chLinkman.getLinkName()+"这个值");
+        if(chLinkman.getLinkName()!=""){
+            chLinkmanMapper.addChLinkman(chLinkman);
+        }
+        cstLowCustomerMapper.addCstLowCust(cstLowCustomer);
         if (count > 0) {
             return true;
         }
@@ -46,9 +75,27 @@ public class CstChanceServiceImpl implements ICstChanceService {
 
     //根据机会id查询机会的详细信息
     @Override
-    public CstChance getCstChanceId(Long chId) {
+    public List<CstChance> getCstChanceId(Long chId) {
 
         return cstChanceMapper.getCstChanceId(chId);
+    }
+
+    //机会新建查询客户
+    @Override
+    public List<CstCustomer> getCstCustomer(Long id) {
+
+        List<CstCustomer> cstCustomerList=cstCustomerMapper.getCstCustomer(id);
+
+        return cstCustomerList;
+    }
+
+    //根据机会id查询客户关联信息
+    @Override
+    public CstCustomer getCstCustomerCustId(Long custId) {
+
+        CstCustomer cstCustomerList=cstCustomerMapper.getCstCustomerCustId(custId);
+
+        return cstCustomerList;
     }
 
 
@@ -57,7 +104,7 @@ public class CstChanceServiceImpl implements ICstChanceService {
     public boolean deleteCstChance(Long id) {
 
         int count = cstChanceMapper.deleteCstChance(id);
-
+        chLinkmanMapper.updateChId(id);
         if (count > 0) {
             return true;
         }
@@ -66,10 +113,13 @@ public class CstChanceServiceImpl implements ICstChanceService {
 
     //根据机会id修改机会
     @Override
-    public boolean updateCstChance(CstChance cstChance) {
+    public boolean updateCstChance(CstChance cstChance,CstCustomer customer,ChLinkman linkman) {
 
         int count = cstChanceMapper.updateCstChance(cstChance);
-
+        int cou=cstCustomerMapper.updatecstCustomer(customer);
+        System.out.println(linkman.getLinkPosition());
+        System.out.println(linkman.getLinkId());
+        chLinkmanMapper.updateChLinkman(linkman);
         if (count > 0) {
             return true;
         }
@@ -80,8 +130,8 @@ public class CstChanceServiceImpl implements ICstChanceService {
     @Override
     public boolean updateChance(CstChance cst) {
         int count = cstChanceMapper.updateChance(cst);
-        int cou = cstCustomerMapper.updateCstCustomer(cst);
-        if (count > 0 && cou > 0) {
+     /*   int cou = cstCustomerMapper.updateCstCustomer(cst);*/
+        if (count > 0 ) {
             return true;
         }
         return false;
@@ -92,20 +142,14 @@ public class CstChanceServiceImpl implements ICstChanceService {
     public boolean updateCst(CstChance cstChance) {
         int count=cstChanceMapper.updateCst(cstChance);
 
-        int cou=cstCustomerMapper.updateCstCustomer(cstChance);
+       /* int cou=cstCustomerMapper.updateCstCustomer(cstChance);*/
 
-        if (count > 0 && cou > 0) {
+        if (count > 0 /*&& cou > 0*/) {
             return true;
         }
         return false;
     }
 
-    //机会新建查询客户
-    @Override
-    public CstCustomer getCstCustomer(long id) {
-
-        return cstCustomerMapper.getCstCustomer(id);
-    }
 
     //查询总共有多少条机会
     @Override
@@ -118,11 +162,13 @@ public class CstChanceServiceImpl implements ICstChanceService {
 
     //机会的条件查询
     @Override
-    public Page<CstChance> getCstChanceTo(CstChance cstChance, int currentPage, int pageSize) {
+    public Page<CstChance> getCstChanceTo(CstChance cstChance,ChLinkman chLinkman, int currentPage, int pageSize) {
         Long count = (long) cstChanceMapper.getCstChanceCount(cstChance.getUserId());
         int currentPageLimit = (currentPage - 1) * pageSize;
-        List<CstChance> cstChances = cstChanceMapper.getCstChanceTo(cstChance, currentPageLimit, pageSize);
-        return new Page<CstChance>(currentPage, pageSize, cstChances, count);
+        List<CstChance> cst = cstChanceMapper.getCstChanceTo(cstChance,chLinkman,currentPageLimit, pageSize);
+        return new Page<CstChance>(currentPage, pageSize, cst, count);
 
     }
+
+
 }

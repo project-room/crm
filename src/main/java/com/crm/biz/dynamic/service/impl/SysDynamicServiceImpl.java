@@ -19,16 +19,18 @@ public class SysDynamicServiceImpl implements ISysDynamicService {
     @Autowired
     private SysDynamicMapper sysDynamicMapper;
 
-    public List<SysDynamic> selectDynamicListByUserId(Long userId,Integer limitId,Integer classify){
+    public List<SysDynamic> selectDynamicListByUserId(Long userId,Integer lastId,Integer classify){
         if(classify != null){
             //在这里判断当有分类传进来时传出带有分类的数据
         }
-        return sysDynamicMapper.selectDynamicListByUserId(userId,limitId);
+        return sysDynamicMapper.selectDynamicListByUserId(userId,lastId);
     }
 
     public List<UserTask> selectTaskListByUserId(Long userId){
+        System.out.println(userId);
         return sysDynamicMapper.selectTaskListByUserId(userId,0);
     }
+
 
     public void updateTask(Long taskId,Integer taskStatus){
         if(taskStatus == 0){//0：未完成   1:已完成

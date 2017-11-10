@@ -45,14 +45,21 @@ table {
 a { color: #333; }
 a:hover { text-decoration: none; }
 
+::-webkit-input-placeholder { color:#999; }
+::-moz-placeholder { color:#999; } /* firefox 19+ */
+:-ms-input-placeholder { color:#999; } /* ie */
+input:-moz-placeholder { color:#999; }
+
+
 .grey { color: #999999; }
 .red { color: #ff0000; }
 .blue { color: #7460ee; }
 
 .dblock { display: block; }
 .di_block { display: inline-block; }
-.dnone { display: none; }
-
+.dnone { display: none !important; }
+.fl{ float: left; }
+.fr{ float: right; }
 .fleft { float: left; }
 .fright { float: right; }
 
@@ -103,12 +110,15 @@ p { margin-bottom: 0; }
 .rightContent .main { background: #dde1eb; }
 
 
-/* label.forCheckbox { height: 14px; width: 14px; display: inline-block;
+label.forCheckbox { height: 14px; width: 14px; display: inline-block;
 	border: 1px solid #ccc; border-radius: 2px; box-shadow: inset 0 0 4px #ccc;
-	vertical-align: middle; } */
-label.forCheckbox input:before {display: block; content: ''; height: 14px; width: 14px; display: inline-block; border: 1px solid #ccc; border-radius: 2px; box-shadow: inset 0 0 4px #ccc; vertical-align: middle; visibility: visible;  }
+	vertical-align: middle; }
+/* label.forCheckbox input:before {display: block; content: ''; height: 14px; width: 14px; display: inline-block; border: 1px solid #ccc; border-radius: 2px; box-shadow: inset 0 0 4px #ccc; vertical-align: middle; visibility: visible;  }
 label.forCheckbox input:checked:before { display: none; }
 label.forCheckbox input:checked:after { content: ''; height: 14px; width: 14px; display: inline-block; border: 1px solid #7460ee; border-radius: 2px; box-shadow: inset 0 0 4px #7460ee; vertical-align: middle; visibility: visible; background: url('../img/checkedPurple.png') center no-repeat; }
-label.borderRed input:before { border: 1px solid red; box-shadow: inset 0 0 4px red; }
+label.borderRed input:before { border: 1px solid red; box-shadow: inset 0 0 4px red; } */
+
+label.borderRed { border-color: red; box-shadow: inset 0 0 4px red; }
+label.borderPurple { border-color: #7460ee; box-shadow: inset 0 0 4px #7460ee; background: url('../img/checked.png') no-repeat center; }
 label.forCheckbox input { visibility: hidden; }
 

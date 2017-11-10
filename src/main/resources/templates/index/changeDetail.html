@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>客户关系管理系统</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" th:href="@{/css/change.css}"/>
+    <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <script th:src="@{/js/jquery.nicescroll.js}"></script>
+    <script th:src="@{/js/default.js}"></script>
+    <script th:src="@{/js/change.js}"></script>
+</head>
+<body>
+<div class="leftContent">
+    <div class="logo">
+        <img th:src="@{/img/logo.png}" alt="logo"/>
+        <span class="logoTxt">润普CRM</span>
+    </div>
+    <ul>
+        <li><a href="index.html"><img th:src="@{/img/index.png}" alt="首页"/><span class="navTxt">首页</span></a></li>
+        <li><a href="seas.html"><img th:src="@{/img/seas.png}" alt="公海"/><span class="navTxt">公海</span></a></li>
+        <li  class="active"><a th:href="@{/cstChance/getCstChance/1/1/10}"><img th:src="@{/img/chance.png}" alt="机会"/><span class="navTxt">机会</span></a></li>
+        <li><img th:src="@{/img/contract.png}" alt="合同"/><span class="navTxt">合同</span></li>
+        <li><img th:src="@{/img/financial.png}" alt="财务"/><span class="navTxt">财务</span></li>
+        <li><img th:src="@{/img/support.png}" alt="支持"/><span class="navTxt">支持</span></li>
+        <li><img th:src="@{/img/setting.png}" alt="设置"/><span class="navTxt">设置</span></li>
+    </ul>
+</div>
+<div class="rightContent" th:each="cstChanceList:${cstChanceList}">
+    <div class="header">
+        <div>
+            <input type="text" placeholder="请输入客户名称"/>
+            <button><img th:src="@{/img/searchIcon.png}" alt=""/></button>
+            <div class="mail">
+                <span class="msgNum">1</span>
+                <div>
+                    <ul>
+                        <li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
+                        <li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
+                        <li><a href="">聂宇豪创建了新</a></li>
+                    </ul>
+                    <p class="lookMore"><a href="" class="grey">查看更多</a></p>
+                </div>
+            </div>
+            <div class="user">
+                <span class="userName">聂宇豪</span>
+                <span class="xiala"><img th:src="@{/img/xiala.png}"/></span>
+                <ul class="detail">
+                    <li><a href="">个人资料</a></li>
+                    <li><a href="">系统设置</a></li>
+                    <li><a href="">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main" >
+        <div class="customerMsg clearAfter">
+            <div class="customerLogo"><img th:src="@{/img/chinaUnicom.png}" height="86" width="154"/></div>
+            <div class="customerDetailMsg" >
+                <h3><p th:text="${cstChanceList.chCustomer.custCompany}"></p></h3>
+                <p th:text="${cstChanceList.chCustomer.custContent}"></p>
+                <a class="dropDown"><img th:src="@{/img/dropDown2.png}" height="8" width="15"/></a>
+            </div>
+        </div>
+        <div class="leftSide">
+            <form action="/cstChance/updateCstChance">
+            <div class="leftSideHeader">
+                <p>销售机会信息</p>
+                <a class="leftSideEdit">操作<img th:src="@{/img/arrowDown.png}" height="8" width="10"/></a>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
+                <tr>
+                    <td>机会简述<input type="hidden" name="chId" th:value="${cstChanceList.chId}"/></td>
+                    <td><input type="text" name="chContent" th:value="${cstChanceList.chContent}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>阶段</td>
+                    <td>
+                     <div class="disabledShelter"></div>
+                    <select name="chStage" disabled="disabled">
+                        <option th:value="${cstChanceList.chStage}"><p th:text="${cstChanceList.chStage}"></p></option>
+                        <option value="初期沟通">初期沟通</option>
+                        <option value="立项评估">立项评估</option>
+                        <option value="需求分析">需求分析</option>
+                        <option value="合同签订">合同签订</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分类</td>
+                    <td>
+                        <div class="disabledShelter"></div>
+                        <input type="hidden" name="custId" th:value="${cstChanceList.chCustomer.custId}"/>
+                        <select name="custType" disabled="disabled">
+                            <option th:value="${cstChanceList.chCustomer.custType}"><p th:text="${cstChanceList.chCustomer.custType}"></p></option>
+                            <option value="代理商">代理商</option>
+                            <option value="客户">客户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>下级客户</td>
+                    <td><input type="text" th:value="广州润普网络科技" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>生命周期</td>
+                    <td>
+                        <div class="disabledShelter"></div>
+                        <select name="custLifecycle" disabled="disabled">
+                            <option><p th:text="${cstChanceList.chCustomer.custLifecycle}" disabled="disabled"></p></option>
+                            <option value="成交客户" >成交客户</option>
+                            <option value="潜在客户" >潜在客户</option>
+                            <option value="失效客户" >失效客户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>客户官网</td>
+                    <td><input type="text" name="custWebsite" th:value="${cstChanceList.chCustomer.custWebsite}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>所在省份</td>
+                    <td>
+                        <input type="text" name="custprovinceChar" th:value="${cstChanceList.chCustomer.custprovinceChar}" disabled="disabled"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td><input type="text" name="custAddress" th:value="${cstChanceList.chCustomer.custAddress}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>标签</td>
+                    <td><span class="changeLabel">意愿很强</span><span class="changeLabel">企业文档管理</span></td>
+                </tr>
+            </table>
+
+            <div class="leftSideHeader">
+                <p>主要联系人</p>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
+                <tr>
+                    <td>姓名<input type="text" name="linkId" th:value="${cstChanceList.linkmanList[0].linkId}"/></td>
+                    <td><input type="text" name="linkName" th:value="${cstChanceList.linkmanList[0].linkName}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>手机</td>
+                    <td><input type="text" name="linkPhone" th:value="${cstChanceList.linkmanList[0].linkPhone}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>固话</td>
+                    <td><input type="text" name="linkLandlinePhone" th:value="${cstChanceList.linkmanList[0].linkLandlinePhone}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>邮箱</td>
+                    <td><input type="text" name="linkEmail" th:value="${cstChanceList.linkmanList[0].linkEmail}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>QQ</td>
+                    <td><input type="text" name="linkQq" th:value="${cstChanceList.linkmanList[0].linkQq}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>微信</td>
+                    <td><input type="text" name="linkWechat" th:value="${cstChanceList.linkmanList[0].linkWechat}" disabled="disabled"/></td>
+                </tr>
+            </table>
+
+            <div class="leftSideHeader">
+                <p>详细信息</p>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
+                <tr>
+                    <td>立项背景</td>
+                    <td><input type="text" name="chBackground" th:value="${cstChanceList.chBackground}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>主要联系人所在部门、职位</td>
+                    <td><input type="text" name="linkDepartment"  th:value="${cstChanceList.linkmanList[0].linkDepartment}" disabled="disabled"/>
+                        <input type="text" name="linkPosition"  th:value="${cstChanceList.linkmanList[0].linkPosition}" disabled="disabled"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>主要使用部门</td>
+                    <td><input type="text" name="chDept" th:value="${cstChanceList.chDept}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>客户预算</td>
+                    <td><input type="text" name="custCustomerBudget" th:value="${cstChanceList.chCustomer.custCustomerBudget}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>是否存在详细需求文档</td>
+                    <td><div class="disabledShelter"></div>
+                        <select name="chDoc" disabled="disabled">
+                            <option><p th:text="${cstChanceList.chDoc}"></p></option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>是否了解其他供应商</td>
+                    <td>
+                        <div class="disabledShelter"></div>
+                        <select name="chSupplier" disabled="disabled">
+                            <option><p th:text="${cstChanceList.chSupplier}"></p></option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>期望何时上线</td>
+                    <td><input type="text" name="chUptime" th:value="${cstChanceList.chUptime}" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>我们有哪些客户属于这个行业</td>
+                    <td><input type="text" value="移动中国服务有限公司 移动中国服务有限公司 移动中国服务有限公司 移动中国服务有限公司" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td>机会负责人</td>
+                    <td><input type="text" th:value="${cstChanceList.sysUser.userName}" disabled="disabled"/></td>
+                </tr>
+            </table>
+            <div class="leftSideBtn">
+                <input class="sure" type="submit" value="修改"/>
+               <button>取消</button>
+            </div>
+                </form>
+        </div>
+        <div class="rightSide">
+            <ul class="headerNav">
+                <li class="active">进度</li>
+                <li>记录</li>
+                <li>合同</li>
+                <li>关联</li>
+                <li>文件</li>
+                <li>任务</li>
+            </ul>
+            <div class="rightSideProgress progressNavDetail progressNavDetail0">
+                <p class="progressTitle">8月，2017</p>
+                <ul>
+                    <li>
+                        <div class="progressList"></div>
+                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
+                        <div>
+                            <span>22日 16:00</span>
+                            <img class="detailPic" th:src="@{/img/payment.png}" height="16" width="18"/>
+                            <span>跟进回款</span>
+                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="progressList"></div>
+                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
+                        <div>
+                            <span>22日 16:00</span>
+                            <img class="detailPic" th:src="@{/img/followUp.png}" height="18" width="19"/>
+                            <span>跟进回款</span>
+                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="progressList"></div>
+                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
+                        <div>
+                            <span>22日 16:00</span>
+                            <img class="detailPic" th:src="@{/img/clock.png}" height="18" width="18"/>
+                            <span>跟进回款</span>
+                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="progressList"></div>
+                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
+                        <div>
+                            <span>22日 16:00</span>
+                            <img class="detailPic" th:src="@{/img/payment.png}" height="16" width="18"/>
+                            <span>跟进回款</span>
+                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
+                        <div>
+                            <span>22日 16:00</span>
+                            <img class="detailPic" th:src="@{/img/addMsg.png}" height="18" width="16"/>
+                            <span>跟进回款</span>
+                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="progressTitle">7月，2017</p>
+            </div>
+            <div class="rightSideRecord progressNavDetail progressNavDetail1">
+                <textarea class="recordTextarea"></textarea>
+                <div class="upload"><img th:src="@{/img/upload.png}" height="16" width="16"/>上传附件</div>
+                <a class="fabu">发布</a>
+                <div class="clearfix"></div>
+                <p class="recordNum"><span>记录</span>（15）</p>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+                <div class="msg">
+                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
+                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
+                </div>
+            </div>
+            <div class="rightSideContract progressNavDetail progressNavDetail2">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <td>合同类型</td>
+                        <td>购买合同</td>
+                    </tr>
+                    <tr>
+                        <td>合同名称</td>
+                        <td>易度文档管理系统购买服务合同</td>
+                    </tr>
+                    <tr>
+                        <td>合同金额</td>
+                        <td>￥140000</td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <td>合同类型</td>
+                        <td>购买合同</td>
+                    </tr>
+                    <tr>
+                        <td>合同名称</td>
+                        <td>易度文档管理系统购买服务合同</td>
+                    </tr>
+                    <tr>
+                        <td>合同金额</td>
+                        <td>￥140000</td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <td>合同类型</td>
+                        <td>购买合同</td>
+                    </tr>
+                    <tr>
+                        <td>合同名称</td>
+                        <td>易度文档管理系统购买服务合同</td>
+                    </tr>
+                    <tr>
+                        <td>合同金额</td>
+                        <td>￥140000</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="rightSideRelation progressNavDetail progressNavDetail3">
+                <p>关联流程</p>
+                <ul class="clearAfter">
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                    <li>销售合同审批</li>
+                </ul>
+                <p>已建流程</p>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td>流程</td>
+                        <td>标题</td>
+                        <td>创建人</td>
+                        <td>提交时间</td>
+                        <td>当前步骤</td>
+                    </tr>
+                    <tr>
+                        <td>技术支持</td>
+                        <td>客户需要把步骤及审核人导出来</td>
+                        <td>张三三</td>
+                        <td>2017-09-12</td>
+                        <td>处理中</td>
+                    </tr>
+                    <tr>
+                        <td>技术支持</td>
+                        <td>客户需要把步骤及审核人导出来</td>
+                        <td>张三三</td>
+                        <td>2017-09-12</td>
+                        <td>处理中</td>
+                    </tr>
+                    <tr>
+                        <td>技术支持</td>
+                        <td>客户需要把步骤及审核人导出来</td>
+                        <td>张三三</td>
+                        <td>2017-09-12</td>
+                        <td>处理中</td>
+                    </tr>
+                    <tr>
+                        <td>技术支持</td>
+                        <td>客户需要把步骤及审核人导出来</td>
+                        <td>张三三</td>
+                        <td>2017-09-12</td>
+                        <td>处理中</td>
+                    </tr>
+                    <tr>
+                        <td>技术支持</td>
+                        <td>客户需要把步骤及审核人导出来</td>
+                        <td>张三三</td>
+                        <td>2017-09-12</td>
+                        <td>处理中</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="rightSideEnclosure progressNavDetail progressNavDetail4">
+                <p class="title">记录附件(10)</p>
+                <ul class="clearAfter">
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/ppt3.png}"  height="18" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                </ul>
+                <p class="title">记录附件(10)</p>
+                <ul class="clearAfter">
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                </ul>
+                <p class="title">记录附件(10)</p>
+                <ul class="clearAfter">
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
+                </ul>
+            </div>
+            <div class="rightSideTask progressNavDetail progressNavDetail5"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
