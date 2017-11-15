@@ -1,32 +1,38 @@
 $(function() {
     allCheck();
 
-
+    $('.chanceContent').css({
+        'min-height': $(window).height() - 130 + 'px',
+        'margin-bottom': '25px'
+    });
 
     $('.main').niceScroll({
         cursorcolor: '#ccc'
     });
-//
-   
-//
+
+
     
     checkboxClick();
-    $('.customerNum span').text($('#table tbody tr').length);
+    // $('.customerNum span').text($('#table tbody tr').length);
     
     // $('.pull-right.pagination').append('<ul>1234</ul>')
     $('.filter').click(function(){
         $('.filterPop').addClass('dblock').removeClass('dnone');
+        $('.laydate-btns-clear').trigger('click');
     });
 
     $('.shelter').click(function(event) {
         $('.filterPop').addClass('dnone').removeClass('dblock');
+        $('.laydate-btns-clear').trigger('click');
     });
 
     $('.filterPop .sure').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
+        $('.laydate-btns-clear').trigger('click');
     });
     $('.filterPop .cancel').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
+        $('.laydate-btns-clear').trigger('click');
     });
 
     $('.allOperate .delete').click(function() {
@@ -39,7 +45,7 @@ $(function() {
     });
 
     forTable();
-
+    fenye();
     $('#table').find('.follow').width($('#table').width() / 2);
 
     $('.tag').click(function() {
@@ -55,6 +61,11 @@ $(function() {
         $('.tag').find('ul').addClass('dnone').removeClass('dblock');
     });
 
+    $('tbody').on('click', 'tr', function() {
+        var chId=$(this).children("input[type=hidden]").val();
+        location.href = "/cstChance/getCstChanceId/"+chId;
+    });
+
 });
 
 
@@ -62,11 +73,13 @@ window.onload = function() {
     laydate.render({
         elem: '#hour',
         type: 'time',
-        range: true
+        range: true,
+        theme: '#7460ee'
     });
     laydate.render({
         elem: '#day',
-        format: 'yyyy年MM月dd日'
+        format: 'yyyy年MM月dd日',
+        theme: '#7460ee'
     });
 };
 
@@ -84,21 +97,25 @@ function allOperateShowHide() {
     }
 }
 
-
 function checkboxClick() {
-    $('body').on('click', 'tbody input[type=checkbox]', function() {
-        alert(1)
-        var x = 0;
-        var mx = $('tbody tr').length;
-        for (var i = 0; i < mx; i++) {
-            if ($('tbody tr').eq(i).find('input[type=checkbox]').prop('checked') == true) {
-                x++;
+    $('tbody').on('click', '.forCheckbox', function(event) {
+        event.stopPropagation()
+        setTimeout(forDel, 10);
+        function forDel() {
+            var x = 0;
+            var mx = $('tbody tr').length;
+            for (var i = 0; i < mx; i++) {
+                if ($('tbody tr').eq(i).find('input[type=checkbox]').prop('checked') == true) {
+                    x++;
+                }
             }
-        }
-        if (x != (mx - 1)) {
-            $('.allOperate input').prop('checked', false);
-        } else {
-            $('.allOperate input').prop('checked', true);
+            if (x != mx) {
+                $('.allOperate input').prop('checked', false);
+                $('.allOperate .forCheckbox').removeClass('borderPurple');
+            } else {
+                $('.allOperate input').prop('checked', true);
+                $('.allOperate .forCheckbox').addClass('borderPurple');
+            }
         }
     })
 }
@@ -107,9 +124,11 @@ function allCheck() {
     $('.allOperate input').click(function() {
         for(var i = 0; i < $('tbody').find('tr').length; i++) {
             if($(this).prop('checked') == true) {
-                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', true);
+                $(this).parents('label').addClass('borderPurple');
+                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', true).parents('.forCheckbox').addClass('borderPurple');
             } else {
-                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', false);
+                $(this).parents('label').removeClass('borderPurple');
+                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', false).parents('.forCheckbox').removeClass('borderPurple');
             }
         }
         allOperateShowHide();
@@ -141,11 +160,5 @@ function forTable() {
         } else {
             slideBool = false;
         }
-    });
-
-    
-
-    $('body').on('click', 'tbody tr', function() {
-        location.href="editCustomer.html";
     });
 }

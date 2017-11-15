@@ -24,4 +24,10 @@
   <insert id="saveCstLowCustomerInfo" parameterType="CstLowCustomer">
       INSERT INTO cst_low_customer (high_id,cust_company,cust_low_id) VALUES (#{highId},#{custLowCompany},#{custLowId})
   </insert>
+
+  <!--添加机会时添加下级客户-->
+  <insert id="addCstLowCust" parameterType="CstLowCustomer">
+    INSERT INTO cst_low_customer (high_cust_id,cust_company,cust_id)
+    VALUES (#{highId},#{custLowCompany},#{custLowId})
+  </insert>
 </mapper>

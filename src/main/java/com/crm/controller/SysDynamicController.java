@@ -8,6 +8,9 @@ import com.crm.entity.SysDynamic;
 import com.crm.entity.UserTask;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +23,8 @@ import java.util.Random;
 /**
  * Created by Administrator on 2017/9/15.
  */
-@RestController
+/*@RestController*/
+@Controller
 public class SysDynamicController {
 
     @Autowired
@@ -42,24 +46,30 @@ public class SysDynamicController {
 }
 
     //根据用户Id查询当前日期任务表也要根据状态将不是当前日期的给查出来
-    @RequestMapping("/getTaskListByUserId")
-    public Map selectTaskByUserId(Long userId){
+    @RequestMapping("/getTaskListByUserId/{userId}")
+    public String selectTaskByUserId(Model model, @PathVariable("userId") Long userId){
         Map map= TypeUtil.successMap();
         try {
-
-
-
-        List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId((long)userId);
+            System.out.println(userId);
+          List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId((long)userId);
+            System.out.println("到了吗");
+            if(sysDynamicList!=null){
+                model.addAttribute("sysDynamicList",sysDynamicList);
+            }
+            else {
+                System.out.println("对象为空");
+                model.addAttribute("对象为空",sysDynamicList);
+            }
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  //data里返回的是时间戳
 //        String s = formatter.format(sysDynamicList.get(0).getTaskDate());
 //        System.out.println("日期:" + s);
-        map.put("sysDynamic",sysDynamicList);
-        } catch (Exception e) {
+         /*  map.put("sysDynamic",sysDynamicList);*/
+         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","任务列表查询失败");
         }
-        return map;
+        return "index/index";
     }
 
 

@@ -35,40 +35,70 @@
                         X
                     </span>
                 </h4>
-                <form>
+                <form class="addNew" action="/cstChance/getCstChanceTo/1/10">
                     <label for="name">
-                        客户名称
-                        <input id="name" name="" type="text"/>
+                        <input type="hidden" name="userId" value="1"/>
+                        <span>客户名称</span>
+                        <input id="name" name="custCompany" type="text"/>
                     </label>
-                    <label for="contact">
-                        联系人
-                        <input id="contact" name="" type="text"/>
+                    <label>
+                        <span>阶段</span>
+                        <select name="chStage" >
+                            <option value="" selected="selected">请选择阶段</option>
+                            <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chStage}"><p th:text="${cstChance.chStage}"></p></option>
+                        </select>
                     </label>
-                    <label for="mobile">
-                        移动电话
-                        <input id="mobile" name="" type="text"/>
+                    <label>
+                        <span>机会简述</span>
+                        <input type="text" name="chContent" />
                     </label>
-                    <label for="telphone">
-                        固定电话
-                        <input id="telphone" name="" type="text"/>
+                    <label>
+                        <span>客户类型</span>
+                        <select name="custType">
+                            <option value="" selected="selected">请选择客户类型</option>
+                            <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chCustomer.custClassify}"><p th:text="${cstChance.chCustomer.custClassify}"></p></option>
+                        </select>
                     </label>
-                    <label for="renlingren">
-                        客户认领人
-                        <input id="renlingren" name="" type="text"/>
+                    <label>
+                        <span>生命周期</span>
+                        <select name="custLifecycle">
+                            <option value="" selected="selected">请选择客户生命周期</option>
+                            <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chCustomer.custLifecycle}"><p th:text="${cstChance.chCustomer.custLifecycle}"></p></option>
+                        </select>
                     </label>
-                    <label for="mail">
-                        QQ/邮箱
-                        <input id="mail" name="" type="text"/>
+                    <label>
+                        <span>客户地址</span>
+                        <input name="custAddress" type="text"/>
                     </label>
-                    <label class="day" for="day">
-                        创建日期
-                        <input id="day" name="" placeholder="年/月/日" type="text"/>
+                    <label>
+                        <span>标签</span><img th:src="@{/img/add_grey.png}" class="fr" alt="" />
                     </label>
-                    <label class="hour" for="hour">
-                        <input id="hour" placeholder="00:00-00:00" type="text"/>
+                   <label>
+                        <span>联系人名字</span>
+                        <input type="text" name="linkName"/>
+                    </label>
+                    <label>
+                        <span>联系人手机</span>
+                        <input type="text" name="linkPhone"/>
+                    </label>
+                    <label>
+                        <span>联系人固话</span>
+                        <input type="text" name="linkLandlinePhone"/>
+                    </label>
+                    <label>
+                        <span>联系人邮箱</span>
+                        <input type="text" name="linkEmail" />
+                    </label>
+                    <label>
+                        <span>联系人QQ</span>
+                        <input type="text" name="linkQq"/>
+                    </label>
+                    <label>
+                        <span>客户行业</span>
+                        <input type="text" name="custIndustry"/>
                     </label>
                     <div class="btngroup">
-                        <input class="sure" type="button" value="确定"/>
+                        <input class="sure" type="submit" value="确定"/>
                         <input class="cancel" type="button" value="取消"/>
                     </div>
                 </form>
@@ -99,12 +129,13 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="chance.html">
+                    <!--<a href="@{'/cstChance/getCstChance/'+${userId}+'/'+${currentPage}+'/'+${pageSize}}"></a>-->
+                   <!-- <a th:href="@{/cstChance/getCstChance/1/1/10}">-->
                         <img alt="机会" th:src="@{/img/chance.png}"/>
                         <span class="navTxt">
                             机会
                         </span>
-                    </a>
+
                 </li>
                 <li>
                     <img alt="合同" th:src="@{/img/contract.png}"/>
@@ -200,28 +231,28 @@
                     <div class="chanceHeader">
                         <div class="fleft">
                             <div class="tag">
-                                我的机会v
+                                我的机会
                                 <ul class="dnone">
                                     <li>
-                                        <a href="chance.html" style="color: #7460ee;">
+                                        <a th:href="@{/cstChance/getCstChance/1/1/10}" style="color: #7460ee;">
                                             我的机会
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
+                                    <!--<li>
+                                        <a th:href="">
                                             全部机会
                                         </a>
-                                    </li>
+                                    </li>-->
                                     <li>
-                                        <a href="refferal.html">
+                                        <a th:href="@{/cstChance/getCstChanceUserId/1/1/10}">
                                             机会转交
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                             <p class="customerNum">
-                                <span>
-                                    1000
+                                <span th:text="${cstChancePage.recTotal}">
+
                                 </span>
                                 条客户信息
                             </p>
@@ -232,9 +263,9 @@
                                 筛选
                             </button>
                             <button>
-                                <a href="addNewCustomer.html">
+                                <a th:href="@{/cstChance/getCstCustomer/1}">
                                     <img th:src="@{/img/addCustomer.png}"/>
-                                    新建客户
+                                    新建机会
                                 </a>
                             </button>
                             <button class="moreOperate">
@@ -306,36 +337,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr data-index="0">
+                                <tr th:each="cstChance:${cstChancePage.List}" th:data-index="${cstChance.chId}">
+                                    <input type="hidden" th:value="${cstChance.chId}"/>
                                     <td style="">
                                         <label class="forCheckbox">
                                             <input type="checkbox"/>
                                         </label>
                                     </td>
                                     <td class="client" style="">
-                                        <p>
-                                            汤姆斯
+                                        <p th:text="${cstChance.chCustomer.custCompany}">
                                         </p>
                                     </td>
                                     <td class="jihuifuzeren" style="">
-                                        <p>
-                                            123123
-                                        </p>
-                                        <p>
-                                            123456798
+                                        <p th:text="${cstChance.sysUser.userName}">
                                         </p>
                                     </td>
                                     <td class="stage" style="">
-                                        <p>
-                                            一二三四
+                                        <p th:text="${cstChance.chStage}">
                                         </p>
+
                                     </td>
                                     <td class="follow" style="width: 601px;">
-                                        <p title="等人提出关于必红的看着就不敢打开哈哈是贺卡和福克斯发卡行付款哈咯加分哈首付款 喝咖啡哈伦裤就发贺卡和发卡行东方卡上课啊客户发卡号都发卡号发卡卡的话费卡好的">
-                                            等人提出关于必红的看着就不敢打开哈哈是贺卡和福克斯发卡行付款哈咯加分哈首付款 喝咖啡哈伦裤就发贺卡和发卡行东方卡上课啊客户发卡号都发卡号发卡卡的话费卡好的
+                                        <p th:text="${cstChance.recordList[0].reContent}">
+
                                         </p>
-                                        <p>
-                                            2101-11-11 11-11
+                                        <p class="createTime" th:text="${cstChance.recordList[0].reDate}">
                                         </p>
                                     </td>
                                     <td style="">
@@ -344,12 +370,12 @@
                                         </p>
                                         <ul class="slideEdit">
                                             <li>
-                                                <a href="editCustomer.html" mce_href="#">
+                                                <a class="update" th:href="@{'/cstChance/getCstChanceId/'+${cstChance.chId}}" mce_href="#">
                                                     编辑
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="delete" href="#" mce_href="#">
+                                                <a class="delete" th:href="@{'/cstChance/deleteCstChance/'+${cstChance.chId}+'/1/'+${cstChancePage.currentPage}+'/'+${cstChancePage.pageSize}}" mce_href="#">
                                                     删除
                                                 </a>
                                             </li>
@@ -403,74 +429,28 @@
                                     rows per page
                                 </span>
                             </div>
-                            <div class="pull-right pagination">
-                                <ul class="pagination">
-                                    <li class="page-pre disabled">
-                                        <a href="#">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="page-number active">
-                                        <a href="#">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            4
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            5
-                                        </a>
-                                    </li>
-                                    <li class="page-last-separator disabled">
-                                        <a href="#">
-                                            ...
-                                        </a>
-                                    </li>
-                                    <li class="page-last">
-                                        <a href="#">
-                                            8
-                                        </a>
-                                    </li>
-                                    <li class="page-next">
-                                        <a href="#">
-                                            下一页
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- <nav aria-label="Page navigation">
-          	<ul class="pagination">
-          		<li class="page-first"><a href="#">首页</a></li>
-          		<li class="page-pre"><a href="#">上一页</a></li>
-          		<li class="page-first"><a href="#">1</a></li>
-          		<li class="page-first-separator disabled"><a href="#">...</a></li>
-          		<li class="page-number"><a href="#">4</a></li>
-          		<li class="page-number active"><a href="#">5</a></li>
-          		<li class="page-number"><a href="#">6</a></li>
-          		<li class="page-last-separator disabled"><a href="#">...</a></li>
-          		<li class="page-last"><a href="#">1000</a></li>
-          		<li class="page-next"><a href="#">下一页</a></li>
-          		<li class="page-first"><a href="#">尾页</a></li>
-          	</ul>
-          </nav> -->
+                            <div class="fixed-table-pagination">
+                                <div class="pull-right pagination">
+                                    <ul class="pagination">
+                                        <li class="page-first"><a th:href="@{/cstChance/getCstChance/1/1/10}">首页</a></li>
+                                        <li class="page-pre"><a th:href="@{'/cstChance/getCstChance/1/'+${((cstChancePage.currentPage-1) le 0?1:(cstChancePage.currentPage-1))}+'/'+${cstChancePage.pageSize}}">上一页</a></li>
+                                        <li class="page-number" th:each="arr:${arrList}"><a th:href="@{'/cstChance/getCstChance/1/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}" ></a></li>
+                                        <li class="page-next"><a th:href="@{'/cstChance/getCstChance/1/'+${((cstChancePage.currentPage+1) ge (cstChancePage.totalPage)?(cstChancePage.totalPage):(cstChancePage.currentPage+1))}+'/'+${cstChancePage.pageSize}}">下一页</a></li>
+                                        <li class="page-last"><a th:href="@{'/cstChance/getCstChance/1/'+${cstChancePage.totalPage}+'/'+${cstChancePage.pageSize}}">尾页</a></li>
+                                    </ul>
+                                    <div class="jump">
+                                        <label>调转
+                                            <select>
+                                                <option th:each="arr:${arrList}" th:value="${arr}"><a th:href="@{'/cstChance/getCstChance/1/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}"></a></option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
+        </div>
+     </div>
         </div>
     </body>
 </html>

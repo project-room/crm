@@ -1,3 +1,4 @@
+/*
 package com.crm.controller;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -23,9 +24,11 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by Administrator on 2017/11/2.
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CstCustomerControllerTest {
@@ -92,4 +95,4 @@ public class CstCustomerControllerTest {
             e.printStackTrace();
         }
     }
-}
+}*/

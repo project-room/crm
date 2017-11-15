@@ -8,7 +8,7 @@
 	<script th:src="@{/js/jquery.nicescroll.js}"></script>
 	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
 	<link rel="stylesheet" th:href="@{/css/default.css}" />
-	<link rel="stylesheet" th:href="@{/css/createChance.css}" />
+	<link rel="stylesheet" th:href="@{/css/createChance.css}"/>
 	<script th:src="@{/js/default.js}"></script>
 	<script th:src="@{/js/createChance.js}"></script>
 </head>
@@ -21,11 +21,11 @@
 		<ul>
 			<li><a href="index.html"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
 			<li><a href="seas.html"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt">公海</span></a></li>
-			<li class="active"><a href="chance.html"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
-			<li><img th:src="img/contract.png" alt="合同" /><span class="navTxt">合同</span></li>
-			<li><img src="img/financial.png" alt="财务" /><span class="navTxt">财务</span></li>
-			<li><img src="img/support.png" alt="支持" /><span class="navTxt">支持</span></li>
-			<li><img src="img/setting.png" alt="设置" /><span class="navTxt">设置</span></li>
+			<li class="active"><a th:href="@{/cstChance/getCstChance/1/1/15}"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
+			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
+			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
+			<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
+			<li><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></li>
 		</ul>
 	</div>
 	<div class="rightContent">
@@ -46,7 +46,7 @@
 				</div>
 				<div class="user">
 					<span class="userName">聂宇豪</span>
-					<span class="xiala"><img src="img/xiala.png" /></span>
+					<span class="xiala"><img th:src="@{/img/xiala.png}"/></span>
 					<ul class="detail">
 						<li><a href="">个人资料</a></li>
 						<li><a href="">系统设置</a></li>
@@ -55,117 +55,144 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="main" >
+			<form class="addNew" action="/cstChance/addCstChance">
 			<div class="baseInfo">
 				<div>
 					<label for="customerLogo">
-						<img src="img/unknow.png" alt="" />
+						<img th:src="@{/img/unknow.png}" alt="" />
 						<p>上传客户logo</p>
 					</label>
 					<input type="file" name="" id="customerLogo" />
 				</div>
 				<div>
-					<input type="text" class="customerName" placeholder="请输入客户名称" />
-					<input type="text" class="introduction" placeholder="请输入公司简介" />
+					<li style="list-style:none;"><label  style="border:none;width: 100%;border: none;outline: none;border-bottom: 1px solid #eee;font-size: 14px; margin-bottom: 20px;">
+						<select name="custId" style="width:100%; border:none;">
+							<option value="" selected="selected">请选择客户名称</option>
+							<option th:each="cstCustomer:${cstCustomerList}" th:value="${cstCustomer.custId}"><p th:text="${cstCustomer.custCompany}"></p></option>
+						</select>
+					</label>
+					</li>
+					<input type="text" name="custContent" class="introduction" placeholder="请输入公司简介" />
 				</div>
 			</div>
-
 			<ul>
 				<li>
 					<div class="saleMsg">
 						<h4>销售机会信息</h4>
 						<ul>
-							<li><label><input type="text" placeholder="机会简述" name="" /></label></li>
-							<li><label><select><option selected="selected">阶段</option></select></label></li>
+							<li><label><input type="text" placeholder="机会简述" name="chContent"/></label></li>
+							<input type="hidden" name="userId" value="1"/>
+							<li><label>
+								<select name="chStage">
+									<option value="" selected="selected">阶段</option>
+									<option value="初期沟通">初期沟通</option>
+									<option value="立项评估">立项评估</option>
+									<option value="需求分析">需求分析</option>
+									<option value="合同签订">合同签订</option>
+								</select>
+							   </label>
+							</li>
 							<li>
 								<label>
-									<select>
-										<option selected="selected">分类</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
+									<select name="custType">
+										<option value="" >分类</option>
+										<option value="客户">客户</option>
+										<option value="代理商">代理商</option>
 									</select>
 								</label>
 							</li>
-							<li><label><input type="text" placeholder="上级客户" /><img src="" /></label></li>
-							<li><label><select><option selected="selected">生命周期</option></select></label></li>
-							<li><label><input type="text" placeholder="客户官网" name="" /></label></li>
-							<li><label><input type="text" placeholder="所在省份" name="" /></label></li>
-							<li><label><input type="text" placeholder="地址" name="" /></label></li>
+
+							<li><label><input type="text" name="highId" placeholder="上级客户" /><img src="" /></label></li>
+							<li>
+								<label>
+								 <select name="custLifecycle">
+									<option value="" selected="selected">生命周期</option>
+									 <option value="成交客户" >成交客户</option>
+									 <option value="潜在客户" >潜在客户</option>
+									 <option value="失效客户" >失效客户</option>
+								 </select>
+							    </label>
+							</li>
+							<li><label><input type="text" placeholder="客户官网" name="custWebsite"/></label></li>
+							<li><label><input type="text" placeholder="所在省份" name="custprovinceChar"/></label></li>
+							<li><label><input type="text" placeholder="地址" name="custAddress"/></label></li>
+
 						</ul>
 						<h5>标签</h5>
 						<ul>
 							<li>
-								<select name="" id="">
+								<select name="chIntentionality" >
 									<option value="">意向度</option>
-									<option value=""></option>
+									<option value="80%">80%</option>
+									<option value="50%">50%</option>
+									<option value="20%">20%</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
-									<option value="">客户类型</option>
-									<option value=""></option>
+								<select name="custClassify">
+									<option value="" >客户类型</option>
+									<option value="0">公海客户</option>
+									<option value="1">我的客户</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="chImportance" >
 									<option value="">重要性</option>
-									<option value=""></option>
+									<option value="非常重要">非常重要</option>
+									<option value="一般客户">一般客户</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="requirement" >
 									<option value="">产品需求</option>
-									<option value=""></option>
+									<option value="需要实现功能">需要实现功能</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
-									<option value="">购买意向</option>
-									<option value=""></option>
-								</select>
-							</li>
+							<select name="" >
+								<option value="">购买意向</option>
+								<option value=""></option>
+							</select>
+						</li>
 							<li>
-								<select name="" id="">
-									<option value="">所在省份</option>
-									<option value=""></option>
-								</select>
-							</li>
-							<li>
-								<select name="" id="">
+								<select name="custIndustry">
 									<option value="">所属行业</option>
-									<option value=""></option>
+									<option value="通讯">通讯</option>
+									<option value="铁路">铁路</option>
+									<option value="能源">能源</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="chFollow">
 									<option value="">跟进结果</option>
-									<option value=""></option>
+									<option value="无">无</option>
+									<option value="有">有</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="custCustomerNature">
 									<option value="">客户性质</option>
-									<option value=""></option>
+									<option value="老客户">老客户</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="chTransaction">
 									<option value="">成交年份</option>
-									<option value=""></option>
+									<option value="2017">2017</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="chLostSingleType">
 									<option value="">丢单类型</option>
-									<option value=""></option>
+									<option value="难搞">难搞</option>
 								</select>
 							</li>
 							<li>
-								<select name="" id="">
+								<select name="chReasonsForLosingOrders" >
 									<option value="">丢单原因</option>
-									<option value=""></option>
+									<option value="价格高">价格高</option>
 								</select>
 							</li>
 						</ul>
@@ -175,24 +202,26 @@
 				<li>
 					<div class="contactMsg">
 						<h4>主要联系人信息</h4>
-						<ul>
-							<li><label><input type="text" placeholder="姓名" /></label></li>
-							<li><label><input type="text" placeholder="手机" /></label></li>
-							<li><label><input type="text" placeholder="固话" /></label></li>
-							<li><label><input type="text" placeholder="邮箱" /></label></li>
-							<li><label><input type="text" placeholder="QQ" /></label></li>
-							<li><label><input type="text" placeholder="微信" /></label></li>
+						<ul >
+							  <input type="text" name="linkIdTo" class="majorId"/>
+							<li><label><input type="text" class="majorName" placeholder="姓名" /></label></li>
+							<li><label><input type="text" class="majorPhone" placeholder="手机" /></label></li>
+							<li><label><input type="text" class="majorTel"  placeholder="固话" /></label></li>
+							<li><label><input type="text" class="majorMail"   placeholder="邮箱" /></label></li>
+							<li><label><input type="text" class="majorQQ"   placeholder="QQ" /></label></li>
+							<li><label><input type="text" class="majorWechat"  placeholder="微信" /></label></li>
 						</ul>
 						<br />
 						<br />
 						<h4>其他联系人信息</h4>
 						<ul>
-							<li><label><input type="text" placeholder="姓名" /></label></li>
-							<li><label><input type="text" placeholder="手机" /></label></li>
-							<li><label><input type="text" placeholder="固话" /></label></li>
-							<li><label><input type="text" placeholder="邮箱" /></label></li>
-							<li><label><input type="text" placeholder="QQ" /></label></li>
-							<li><label><input type="text" placeholder="微信" /></label></li>
+							<li><label><input type="text" name="linkName" placeholder="姓名"/></label></li>
+							<li><label><input type="text" name="linkPhone" placeholder="手机"/></label></li>
+							<li><label><input type="text"  name="linkLandlinePhone"  placeholder="固话" /></label></li>
+							<li><label><input type="text"  name="linkEmail" placeholder="邮箱" /></label></li>
+							<li><label><input type="text"  name="linkQq"  placeholder="QQ" /></label></li>
+							<input type="hidden" name="linkStatus" value="0"/>
+							<li><label><input type="text" name="linkWechat" placeholder="微信" /></label></li>
 						</ul>
 					</div>
 				</li>
@@ -200,50 +229,46 @@
 					<div class="detailMsg">
 						<h4>详细信息</h4>
 						<ul>
-							<li><label><input type="text" placeholder="立项背景" /></label></li>
+							<li><label><input type="text" name="chBackground" placeholder="立项背景" /></label></li>
 							<li>
 								<p>主要联系人所在部门、职位</p>
 								<ul>
-									<li><label><input type="text" placeholder="请输入部门名称" /></label></li>
-									<li><label><input type="text" placeholder="职位名称" /></label></li>
+									<li><label><input type="text" name="linkDepartmentTo" placeholder="请输入部门名称" /></label></li>
+									<li><label><input type="text" name="linkPositionTo" placeholder="职位名称" /></label></li>
 								</ul>
 							</li>
-							<li><label><input type="text" placeholder="主要使用部门" /></label></li>
-							<li><label><input type="text" placeholder="客户预算" /></label></li>
+							<li><label><input type="text" name="chDept" placeholder="主要使用部门" /></label></li>
+							<li><label><input type="text" name="custCustomerBudget" placeholder="客户预算" /></label></li>
 							<li>
 								<label>
-									<select>
-										<option selected="selected">是否存在详细需求文档</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
+									<select name="chDoc">
+										<option  value="0" selected="selected">是否存在详细需求文档</option>
+										<option value="1" >是</option>
+										<option value="0">否</option>
 									</select>
 								</label>
 							</li>
 							<li>
 								<label>
-									<select>
-										<option selected="selected">是否了解其他供应商</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
+									<select name="chSupplier">
+										<option value="0" selected="selected">是否了解其他供应商</option>
+										<option value="1">是</option>
+										<option value="0" >否</option>
 									</select>
 								</label>
 							</li>
-							<li><label><input type="text" placeholder="期望何时上线" /></label></li>
+							<li><label><input type="text" name="chUptime" placeholder="期望何时上线" /></label></li>
 							<li><label><input type="text" placeholder="我们有哪些客户属于这个行业" /></label></li>
 						</ul>
 						<div class="btngroup">
-							<input type="button" class="save" value="保存" />
+							<input type="submit" class="save" value="保存" />
 							<input type="button" class="cancel" value="取消" />
 						</div>
 					</div>
 				</li>
-			</ul>
-
-		</div>
+			 </ul>
+			</form>
+	  </div>
 	</div>
 </body>
 </html>

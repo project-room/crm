@@ -5,6 +5,7 @@
     <id column="cust_id" property="custId" jdbcType="BIGINT" />
     <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
     <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
+      <result column="cust_provinceChar" property="custprovinceChar" jdbcType="VARCHAR"></result>
     <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
     <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
     <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
@@ -16,7 +17,8 @@
     <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
     <result column="cust_type" property="custType" jdbcType="VARCHAR" />
     <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
-
+    <result column="cust_CustomerNature" property="custCustomerNature" jdbcType="VARCHAR"/>
+    <result column="cust_CustomerBudget" property="custCustomerBudget" jdbcType="VARCHAR"/>
       <!--客户表和标签表之间的关联-->
       <collection property="labelList" ofType="com.crm.entity.CstLabel">
           <id column="label_id" property="labelId" jdbcType="INTEGER" />
@@ -61,10 +63,30 @@
     UPDATE cst_customer SET cust_email=#{cstCustomer.custEmail},cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},cust_industry=#{cstCustomer.custIndustry},cust_pic=#{cstCustomer.custPic},cust_sales=#{cstCustomer.custSales},user_id=#{cstCustomer.userId},cust_classify=#{cstCustomer.custClassify},cust_content=#{cstCustomer.custContent},cust_lifecycle=#{cstCustomer.custLifecycle},cust_website=#{cstCustomer.custWebsite},cust_type=#{cstCustomer.custType} WHERE cust_id=#{cstcustId}
   </update>
 
-       <!--根据机会对象里的客户id修改客户表的用户id-->
+     <!--  &lt;!&ndash;根据机会对象里的客户id修改客户表的用户id&ndash;&gt;
         <update id="updateCstCustomer" parameterType="CstChance">
             update cst_customer set user_id=#{userId} where cust_id=#{custId}
+        </update>-->
+
+       <!--添加机会时完善客户资料-->
+        <update id="updateCustomer" parameterType="CstCustomer">
+            update cst_customer set cust_email=#{custEmail},cust_provinceChar=#{custprovinceChar},cust_address=#{custAddress},cust_industry=#{custIndustry},cust_pic=#{custPic},cust_sales=#{custSales},cust_classify=#{custClassify},cust_content=#{custContent},cust_lifecycle=#{custLifecycle},cust_website=#{custWebsite},cust_type=#{custType},cust_CustomerNature=#{custCustomerNature},cust_CustomerBudget=#{custCustomerBudget} WHERE
+            cust_Id=#{custId}
         </update>
+
+    <update id="updatecstCustomer" parameterType="CstCustomer">
+        update cst_customer set cust_provinceChar=#{custprovinceChar},cust_address=#{custAddress},cust_lifecycle=#{custLifecycle},cust_website=#{custWebsite},cust_type=#{custType} WHERE
+        cust_Id=#{custId}
+    </update>
+
+     <!-- 机会新建前的查询客户-->
+     <select id="getCstCustomer" parameterType="Long" resultMap="BaseResultMap">
+           SELECT * FROM cst_customer t,ch_linkman l WHERE t.user_id=#{userId} and t.cust_id=l.cust_id
+      </select>
+      <!--根据客户id查询客户的关联信息-->
+       <select id="getCstCustomerCustId" parameterType="Long" resultMap="BaseResultMap">
+           select * from cst_customer t,ch_linkman l where t.cust_id=#{custId} and t.cust_id=l.cust_id and l.link_status=1
+       </select>
 
   <!--查询所有公海客户-->
   <select id="selectAllCstCutomer" resultMap="BaseResultMap">

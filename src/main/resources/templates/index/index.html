@@ -6,7 +6,7 @@
 	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
 	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
 	<script th:src="@{/js/jquery.nicescroll.js}"></script>
-	<script th:src="@{/js/default.js}" th:inline="javascript"></script>
+	<script th:src="@{/js/default.js}"></script>
 	<script th:src="@{/js/index.js}"></script>
 	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
 	<link rel="stylesheet" th:href="@{/css/default.css}" />
@@ -19,13 +19,13 @@
 			<span class="logoTxt">润普CRM</span>
 		</div>
 		<ul>
-			<li class="active"><a href="/crm/cstCustomer/toIndex"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
-			<li><a href="/crm/cstCustomer/getPage/1/7"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt" id="gongHai">公海</span></a></li>
-			<li><a href="chance.html"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
-			<li><a href="#"><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
-			<li><a href="#"><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></a></li>
-			<li><a href="#"><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></a></li>
-			<li class="settitemdisplay"><a th:href="@{'/sysUser/getSysUserList/1/10'}"><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></a></li>
+			<li class="active"><a th:href="@{/getTaskListByUserId/1}"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
+			<li><a th:href="@{/crm/cstCustomer/getPage/1/7}"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt" id="gongHai">公海</span></a></li>
+			<li><a th:href="@{/chance.html}"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
+			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
+			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
+			<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
+			<li><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></li>
 		</ul>
 	</div>
 	<div class="rightContent">
@@ -45,12 +45,12 @@
 					</div>
 				</div>
 				<div class="user">
-					<span class="userName"></span>
+					<span class="userName">聂宇豪</span>
 					<span class="xiala"><img th:src="@{/img/xiala.png}" /></span>
 					<ul class="detail">
 						<li><a href="">个人资料</a></li>
-						<li><a class="systemSetting">系统设置</a></li>
-						<li><a class="loginOut">退出</a></li>
+						<li><a href="">系统设置</a></li>
+						<li><a href="">退出</a></li>
 					</ul>
 				</div>
 			</div>
@@ -112,56 +112,23 @@
 				<div class="dailyHeader">今天<span>( 5/6 )</span></div>
 				<div class="dailyContent">
 					<ul>
-						<li>
+						<li th:each="sysDynamicList:${sysDynamicList}">
 							<label class="forCheckbox">
-									<input type="checkbox" name="complete" id="" />
+								<input type="checkbox" name="complete" />
 							</label>
 							<div>
-								<p>早上9点打电话给联通客服</p>
-								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
+								<form>
+									<input type="text" disabled="disabled" th:value="${sysDynamicList.taskContent}" name="" />
+									<button class="sure"><img th:src="@{/img/gou.png}"/></button>
+									<button class="cancel">
+										<svg class="fright" viewbox="0 0 20 20">
+											<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+											</path>
+										</svg>
+									</button>
+								</form>
+								<span class="aboutChance grey">关联机会：<p th:text="${sysDynamicList.chance.chContent}"></p></span>
 								<span class="createTime red dblock">1天前</span>
-							</div>
-							<p class="operate">
-								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
-								<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-							</p>
-						</li>
-						<li>
-							<label class="forCheckbox">
-									<input type="checkbox" name="complete" id="" />
-							</label>
-							<div>
-								<p>早上9点打电话给联通客服</p>
-								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-								<span class="createTime red dnone"></span>
-							</div>
-							<p class="operate">
-								<span class="edit"><img src="img/edit.png" alt="" /></span>
-								<span class="del"><img src="img/delete.png" alt="" /></span>
-							</p>
-						</li>
-						<li>
-							<label class="forCheckbox">
-									<input type="checkbox" name="complete" id="" />
-							</label>
-							<div>
-								<p>早上9点打电话给联通客服</p>
-								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-								<span class="createTime red dnone"></span>
-							</div>
-							<p class="operate">
-								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
-								<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-							</p>
-						</li>
-						<li>
-							<label class="forCheckbox">
-									<input type="checkbox" name="complete" id="" />
-							</label>
-							<div>
-								<p>早上9点打电话给联通客服</p>
-								<span class="aboutChance grey">关联机会：xxxxxxxx</span>
-								<span class="createTime red dnone"></span>
 							</div>
 							<p class="operate">
 								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>

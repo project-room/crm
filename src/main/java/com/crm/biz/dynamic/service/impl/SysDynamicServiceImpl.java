@@ -27,8 +27,10 @@ public class SysDynamicServiceImpl implements ISysDynamicService {
     }
 
     public List<UserTask> selectTaskListByUserId(Long userId){
+        System.out.println(userId);
         return sysDynamicMapper.selectTaskListByUserId(userId,0);
     }
+
 
     public void updateTask(Long taskId,Integer taskStatus){
         if(taskStatus == 0){//0：未完成   1:已完成

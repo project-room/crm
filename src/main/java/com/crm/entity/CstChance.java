@@ -4,31 +4,51 @@ import java.util.Date;
 import java.util.List;
 
 public class CstChance {
-    private Long chId;
+    private Long chId;     //机会id
 
-    private String chContent;
+    private String chContent;   //机会简述
 
-    private Long custId;
+    private Long custId;     //客户id
 
-    private Date chDate;
+    private Date chDate;     //创建时间
 
-    private Double chMoney;
+    private Double chMoney;    //合同金额
 
-    private String userName;
+    private Long userToId;   //新用户id
 
-    private Long userId;
+    private Long userId;      //用户id
 
-    private String chDept;
+     private String chDept;     //使用部门
 
-    private Integer chDoc;
+    private Integer chDoc;        //是否有需求文档
 
-    private Integer chSupplier;
+    private Integer chSupplier;    //是否了解供应商
 
-    private String chUptime;
+    private String chUptime;      //期望上线时间
 
-    private String chBackground;
+    private String chBackground;   //立项背景
 
-    private String chStage;
+    private  String chIntentionality;  //意向度
+
+    private String chStage;    //阶段
+
+    private  String chImportance; //重要性
+
+    private  String  requirement;  //产品需求
+
+    private String chFollow ;//  跟进结果
+
+    private String chTransaction;//成交年份
+
+    private  String chLostSingleType;//丢单类型
+
+    private  String chReasonsForLosingOrders;//丢单原因
+
+    private  String chStatus;   //状态
+
+    private  Date TransferTime;//机会转交创建时间
+
+    private  Long chExamine;//机会转交审批人
 
     private List<CstRecord> recordList;
 
@@ -39,6 +59,8 @@ public class CstChance {
     private List<ChLinkman> linkmanList;
 
     private CstCustomer chCustomer;
+
+    private SysUser sysUser;
 
     public CstCustomer getChCustomer() {
         return chCustomer;
@@ -120,14 +142,6 @@ public class CstChance {
         this.chMoney = chMoney;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
     public Long getUserId() {
         return userId;
     }
@@ -182,5 +196,101 @@ public class CstChance {
 
     public void setChStage(String chStage) {
         this.chStage = chStage == null ? null : chStage.trim();
+    }
+
+    public SysUser getSysUser() {
+        return sysUser;
+    }
+
+    public void setSysUser(SysUser sysUser) {
+        this.sysUser = sysUser;
+    }
+
+    public String getChIntentionality() {
+        return chIntentionality;
+    }
+
+    public void setChIntentionality(String chIntentionality) {
+        this.chIntentionality = chIntentionality;
+    }
+
+    public String getChImportance() {
+        return chImportance;
+    }
+
+    public void setChImportance(String chImportance) {
+        this.chImportance = chImportance;
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
+    }
+
+    public String getChFollow() {
+        return chFollow;
+    }
+
+    public void setChFollow(String chFollow) {
+        this.chFollow = chFollow;
+    }
+
+    public String getChTransaction() {
+        return chTransaction;
+    }
+
+    public void setChTransaction(String chTransaction) {
+        this.chTransaction = chTransaction;
+    }
+
+    public String getChLostSingleType() {
+        return chLostSingleType;
+    }
+
+    public void setChLostSingleType(String chLostSingleType) {
+        this.chLostSingleType = chLostSingleType;
+    }
+
+    public String getChReasonsForLosingOrders() {
+        return chReasonsForLosingOrders;
+    }
+
+    public void setChReasonsForLosingOrders(String chReasonsForLosingOrders) {
+        this.chReasonsForLosingOrders = chReasonsForLosingOrders;
+    }
+
+    public Long getUserToId() {
+        return userToId;
+    }
+
+    public void setUserToId(Long userToId) {
+        this.userToId = userToId;
+    }
+
+    public String getChStatus() {
+        return chStatus;
+    }
+
+    public void setChStatus(String chStatus) {
+        this.chStatus = chStatus;
+    }
+
+    public Date getTransferTime() {
+        return TransferTime;
+    }
+
+    public void setTransferTime(Date transferTime) {
+        TransferTime = transferTime;
+    }
+
+    public Long getChExamine() {
+        return chExamine;
+    }
+
+    public void setChExamine(Long chExamine) {
+        this.chExamine = chExamine;
     }
 }

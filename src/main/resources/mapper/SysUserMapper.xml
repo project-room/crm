@@ -56,14 +56,24 @@
       <result column="cust_id" property="custId" jdbcType="BIGINT" />
       <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
       <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
-      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="userTo_id" property="userToId" jdbcType="BIGINT"/>
       <result column="user_id" property="userId" jdbcType="BIGINT" />
       <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
       <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
       <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
       <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
       <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+      <result column="ch_Intentionality" property="chIntentionality" jdbcType="VARCHAR" />
       <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+      <result column="ch_importance" property="chImportance" jdbcType="VARCHAR"/>
+      <result column="ch_requirement" property="requirement" jdbcType="VARCHAR"/>
+      <result column="ch_Follow" property="chFollow" jdbcType="VARCHAR"/>
+      <result column="ch_Transaction" property="chTransaction" jdbcType="VARCHAR"/>
+      <result column="ch_LostSingleType" property="chLostSingleType" jdbcType="VARCHAR"/>
+      <result column="ch_ReasonsForLosingOrders" property="chReasonsForLosingOrders" jdbcType="VARCHAR"/>
+      <result column="ch_status" property="chStatus" jdbcType="VARCHAR"/>
+      <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
+      <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
     </collection>
 
 
@@ -136,5 +146,10 @@ SELECT * FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id` HAVING use
   <!--根据用户id获取用户的信息-->
   <select id="selectSysUserById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM sys_user su ,sys_role sr WHERE su.`role_id`=sr.`role_id` AND su.`user_id`=#{userId}
+  </select>
+
+
+  <select id="getSysUser" parameterType="Long" resultMap="BaseResultMap">
+    select user_id,user_name from sys_user where user_id!=#{userId}
   </select>
 </mapper>

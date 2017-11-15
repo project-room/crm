@@ -67,27 +67,33 @@
 			<artifactId>nekohtml</artifactId>
 			<version>1.9.22</version>
 		</dependency>
-		<!--redis-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
 		</dependency>
 		<!--yuntongxun-->
 		<dependency>
 			<groupId>alicore</groupId>
 			<artifactId>alicore</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/doc/lib/aliyun-java-sdk-core-3.3.1.jar</systemPath>
+			<!--<version>1.0</version>-->
+			<!--<scope>system</scope>-->
+			<!--<systemPath>${project.basedir}/docb/aliyun-java-sdk-core-3.3.1.jar</systemPath>-->
 		</dependency>
 		<!--yuntongxun-->
 		<dependency>
 			<groupId>alidys</groupId>
 			<artifactId>alidys</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/doc/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
+			<!--<version>1.0</version>-->
+			<!--<scope>system</scope>-->
+			<!--<systemPath>${project.basedir}/docb/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>-->
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -102,6 +108,7 @@
 					<exclude>bootstrap.properties</exclude>
 				</excludes>
 			</resource>
+
 		</resources>
 		<plugins>
 			<plugin>
@@ -112,5 +119,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 </project>

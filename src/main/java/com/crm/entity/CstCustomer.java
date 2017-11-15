@@ -7,33 +7,39 @@ import java.util.Date;
 import java.util.List;
 
 public class  CstCustomer {
-    private Long custId;
+    private Long custId;    //客户id
 
-    private String custEmail;
+    private String custEmail;  //邮箱
 
-    private String custCompany;
+    private String custCompany;   //客户名称
 
-    private String custAddress;
+    private String custAddress;    //客户地址
 
-    private String custIndustry;
+    private String custprovinceChar; //所在省份
 
-    private String custPic;
+    private String custIndustry;      //客户行业
 
-    private String custSales;
+    private String custPic;       //图片地址
 
-    private Long userId;
+    private String custSales;      //销售渠道
 
-    private Integer custClassify;
+    private Long userId;       //用户id
 
-    private String custContent;
+    private Integer custClassify;   //类型
 
-    private String custLifecycle;
+    private String custContent;     //客户详细信息
 
-    private String custWebsite;
+    private String custLifecycle;    //生命周期
 
-    private String custType;
+    private String custWebsite;      //官网
+
+    private String custType;        //分类
 
     private Date custDate;
+
+    private String custCustomerNature; //客户性质
+
+    private  String  custCustomerBudget;//客户预算
 
     //时期为字符串格式
     private String revertDate;
@@ -197,5 +203,29 @@ public class  CstCustomer {
 
     public void setRevertUserNameFromId(String revertUserNameFromId) {
         this.revertUserNameFromId = revertUserNameFromId;
+    }
+
+    public String getCustCustomerNature() {
+        return custCustomerNature;
+    }
+
+    public void setCustCustomerNature(String custCustomerNature) {
+        this.custCustomerNature = custCustomerNature;
+    }
+
+    public String getCustCustomerBudget() {
+        return custCustomerBudget;
+    }
+
+    public void setCustCustomerBudget(String custCustomerBudget) {
+        this.custCustomerBudget = custCustomerBudget;
+    }
+
+    public String getCustprovinceChar() {
+        return custprovinceChar;
+    }
+
+    public void setCustprovinceChar(String custprovinceChar) {
+        this.custprovinceChar = custprovinceChar;
     }
 }

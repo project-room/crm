@@ -18,6 +18,20 @@ import java.util.List;
 @Component
 public interface CstCustomerMapper{
 
+    //此方法是机会新建查询客户
+     List<CstCustomer>  getCstCustomer(Long id);
+
+     //添加机会时完善客户资料
+     int updateCustomer(CstCustomer cstCustomer);
+
+    //根据机会对象里的客户id修改客户表里的用户id
+    /*int updateCstCustomer(CstChance cstChance);*/
+
+    //根据客户id查询客户关关联信息
+    CstCustomer getCstCustomerCustId(Long custId);
+
+    int updatecstCustomer(CstCustomer customer);
+
     CstCustomer findById(Long id);
 
     void addCstCustomer(CstCustomer cstCustomer);
@@ -43,8 +57,6 @@ public interface CstCustomerMapper{
 
     void saveCstCustomerAndLabel(@Param("cstCustId") Long cstCustId,@Param("labelId") Integer labelId);
 
-    //根据机会对象里的客户id修改客户表里的用户id
-    int updateCstCustomer(CstChance cstChance);
 
     //根据条件筛选客户
     List<CstCustomer>  selectCstCustomerByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userName") String userName, @Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate, @Param("cstCustomer") CstCustomer cstCustomer, @Param("chLinkman") ChLinkman chLinkman, @Param("currentPage") Integer currentPage, @Param("pageSize") Integer pageSize);

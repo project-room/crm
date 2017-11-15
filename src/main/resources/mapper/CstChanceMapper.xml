@@ -7,20 +7,29 @@
     <result column="cust_id" property="custId" jdbcType="BIGINT" />
     <result column="ch_date" property="chDate" jdbcType="TIMESTAMP" />
     <result column="ch_money" property="chMoney" jdbcType="DOUBLE" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="userTo_id" property="userToId" jdbcType="BIGINT"/>
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="ch_dept" property="chDept" jdbcType="VARCHAR" />
     <result column="ch_doc" property="chDoc" jdbcType="INTEGER" />
     <result column="ch_supplier" property="chSupplier" jdbcType="INTEGER" />
     <result column="ch_uptime" property="chUptime" jdbcType="VARCHAR" />
     <result column="ch_background" property="chBackground" jdbcType="VARCHAR" />
+    <result column="ch_Intentionality" property="chIntentionality" jdbcType="VARCHAR" />
     <result column="ch_stage" property="chStage" jdbcType="VARCHAR" />
+    <result column="ch_importance" property="chImportance" jdbcType="VARCHAR"/>
+    <result column="ch_requirement" property="requirement" jdbcType="VARCHAR"/>
+    <result column="ch_Follow" property="chFollow" jdbcType="VARCHAR"/>
+    <result column="ch_Transaction" property="chTransaction" jdbcType="VARCHAR"/>
+    <result column="ch_LostSingleType" property="chLostSingleType" jdbcType="VARCHAR"/>
+    <result column="ch_ReasonsForLosingOrders" property="chReasonsForLosingOrders" jdbcType="VARCHAR"/>
+    <result column="ch_status" property="chStatus" jdbcType="VARCHAR"/>
+    <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
+    <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
     <!--机会表和记录表的关联-->
     <collection property="recordList" ofType="com.crm.entity.CstRecord">
       <id column="re_id" property="reId" jdbcType="BIGINT" />
       <result column="re_content" property="reContent" jdbcType="VARCHAR" />
       <result column="ch_id" property="chId" jdbcType="BIGINT" />
-      <result column="user_name" property="userName" jdbcType="VARCHAR" />
       <result column="re_date" property="reDate" jdbcType="TIMESTAMP" />
     </collection>
     <!--机会表和进度表的关联-->
@@ -75,7 +84,23 @@
       <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
       <result column="cust_type" property="custType" jdbcType="VARCHAR" />
       <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
+      <result column="cust_CustomerNature" property="custCustomerNature" jdbcType="VARCHAR"/>
+      <result column="cust_CustomerBudget" property="custCustomerBudget" jdbcType="VARCHAR"/>
   </collection>
+  <!--机会表和用户表的关系-->
+    <collection property="sysUser" ofType="com.crm.entity.SysUser">
+      <id column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="user_accounts" property="userAccounts" jdbcType="VARCHAR" />
+      <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+      <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+      <result column="user_department" property="userDepartment" jdbcType="VARCHAR" />
+      <result column="user_position" property="userPosition" jdbcType="VARCHAR" />
+      <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+      <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+      <result column="user_workphone" property="userWorkphone" jdbcType="VARCHAR" />
+      <result column="user_state" property="userState" jdbcType="INTEGER" />
+    </collection>
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM cst_chance WHERE cust_id=#{id}
@@ -92,15 +117,19 @@
   </update>
 
     <!--添加机会-->
-      <insert id="addCstChance" parameterType="cstChance" >
-      insert into cst_chance values(null,#{chContent},#{custId},#{chDate},#{chMoney},#{userName},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chStage})
+      <insert id="addCstChance" parameterType="cstChance" useGeneratedKeys="true" keyProperty="chId">
+      insert into cst_chance (ch_content,cust_id,ch_date,ch_money,user_id,ch_dept,ch_doc,ch_supplier,ch_uptime,ch_background,ch_Intentionality,ch_stage,ch_importance,ch_requirement,ch_Follow,ch_Transaction,ch_LostSingleType,ch_ReasonsForLosingOrders) values (#{chContent},#{custId},#{chDate},#{chMoney},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chIntentionality},#{chStage},#{chImportance},#{requirement}
+        ,#{chFollow},#{chTransaction},#{chLostSingleType},#{chReasonsForLosingOrders})
       </insert>
 
+    <!--   <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
+         select * from cst_chance c,cst_customer u ,cst_label a,cst_ref_label b  WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id AND u.cust_id=b.cust_id AND a.label_id=b.label_id
+       </select>-->
        <!--根据机会id查询机会的详细信息-->
-        <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
-          SELECT * from cst_chance c,cst_customer u ,ch_linkman l,cst_low_customer w,cst_label a,cst_ref_label b  WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id and l.ch_id=c.ch_id AND u.cust_id=w.high_id AND
-          u.cust_id=b.cust_id AND a.label_id=b.label_id
-        </select>
+       <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
+         SELECT * from cst_chance c LEFT JOIN ch_linkman l ON l.ch_id=c.ch_id,cst_customer u LEFT JOIN cst_low_customer w ON  u.cust_id=w.high_cust_id,cst_label a,cst_ref_label b ,sys_user s WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id  AND
+         u.cust_id=b.cust_id AND a.label_id=b.label_id and c.user_id=s.user_id
+       </select>
 
      <!--查询机会条数 -->
      <select id="getCstChanceCount" parameterType="Long" resultType="int">
@@ -108,8 +137,8 @@
      </select>
 
   <!-- 根据用户id查询我的所有机会  -->
-   <select id="getCstChance"  resultMap="BaseResultMap">
-     select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u WHERE c.user_id=#{userId} AND c.cust_id =u.cust_id
+   <select id="getCstChance" resultMap="BaseResultMap">
+     select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y WHERE c.user_id=#{userId} AND y.user_id=c.user_id  AND c.cust_id =u.cust_id
      ORDER BY c.ch_id  limit  #{currentPageLimit},#{pageSize}
   </select>
 
@@ -117,44 +146,123 @@
   <delete id="deleteCstChance" parameterType="Long">
     delete from cst_chance where ch_id=#{id}
   </delete>
+
+
   <!--修改我的机会 -->
   <update id="updateCstChance" parameterType="cstChance">
-    update cst_chance set ch_content=#{chContent},cust_id=#{custId},ch_date=#{chDate},ch_money=#{chMoney},user_name=#{userName},user_id=#{userId},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
-  </update>
-  <!--修改机会表的用户id -->
-  <update id="updateChance" parameterType="CstChance">
-    update cst_chance set user_name=#{userName},user_id=#{userId} where ch_id=#{chId}
+    update cst_chance set ch_content=#{chContent},ch_dept=#{chDept},ch_doc=#{chDoc},ch_supplier=#{chSupplier},ch_uptime=#{chUptime},ch_background=#{chBackground},ch_stage=#{chStage} where ch_id=#{chId}
   </update>
 
-  <!--根据机会状态修改机会的负责人-->
+
+  <!--修改机会表的用户id -->
+  <update id="updateChance" parameterType="CstChance">
+    update cst_chance set user_id=#{userToId},userTo_id=null,ch_examine=null,ch_status="已审核" where ch_id=#{chId}
+  </update>
+
+<!--  &lt;!&ndash;根据机会阶段修改机会的负责人&ndash;&gt;
   <update id="updateCst"  parameterType="cstChance">
     UPDATE cst_chance SET  user_name=#{userName},user_id=#{userId} WHERE ch_stage=#{chStage}
-  </update>
+  </update>-->
+
+  <select id="getCstChanceCountTo" parameterType="Long" resultType="int">
+    select count(ch_id) from cst_chance where user_id=#{userId} and ch_status!=""
+  </select>
+
+  <!--机会转交查询-->
+  <select id="getCstChanceUserId"  resultMap="BaseResultMap">
+    SELECT a.*,t.cust_company,u.user_name FROM cst_chance a,cst_customer t,sys_user u where a.user_id=1 and a.user_id=u.user_id AND a.cust_id=t.cust_id  and a.ch_status!=""
+    <!--select c.*,u.user_id,u.user_name,s.user_id,s.user_name,e.user_id,e.user_name  FROM (SELECT a.*,t.cust_company FROM cst_chance a,cst_customer t where a.cust_id=t.cust_id and a.user_id=#{userId} and a.ch_status!="") c
+    LEFT JOIN sys_user u on c.user_id=u.user_id LEFT JOIN sys_user s ON c.userTo_id=s.user_id LEFT JOIN sys_user e on c.ch_examine=e.user_id  limit #{currentPageLimit},#{pageSize}-->
+  </select>
+
+  <!--新建按阶段转交机会-->
+    <update id="addChance" parameterType="CstChance">
+      update cst_chance set userTo_id=#{userToId},ch_status=#{chStatus},ch_TransferTime=#{TransferTime},ch_examine=#{chExamine} where ch_stage=#{chStage}
+    </update>
+
+    <!--机会转交的条件查询-->
+    <select id="getfilterChance"     resultMap="BaseResultMap">
+      select  *  from cst_chance c,sys_user u,cst_customer t
+      <where>
+        <if test="chance.userId!=null and chance.userId!=0">
+          and c.user_id=#{chance.userId} and c.user_id=u.user_id and c.cust_id=t.cust_id
+        </if>
+       <if test="chance.userToId!=null and chance.userToId!=0">
+          and c.userTo_id=#{chance.userToId}
+        </if>
+        <if test="chance.chCustomer!=null and chance.chCustomer.custCompany!=null and chance.chCustomer.custCompany!=''">
+          and t.cust_company like '%${chance.chCustomer.custCompany}%'
+        </if>
+        <if test="chance.chStage!=null and chance.chStage!=''">
+          and  c.ch_stage=#{chance.chStage}
+        </if>
+        <if test="chance.chStatus!=null and chance.chStatus!=''">
+          and c.ch_status=#{chance.chStatus}
+        </if>
+        <!--<if test="begindate!=null and begindate!='' and finishdate!=null and finishdate!=''">
+           and c.ch_TransferTime BETWEEN #{begindate} and #{finishdate}
+        </if>-->
+         <if test="begindate!=null and begindate!=''">
+           and c.ch_TransferTime &gt;= #{begindate}
+         </if>
+        <if test="finishdate!=null and finishdate!=''">
+        and c.ch_TransferTime &lt;=  #{finishdate}
+      </if>
+        limit #{currentPageLimit},#{pageSize}
+      </where>
+    </select>
+
 
   <!--根据字段查询 -->
   <select id="getCstChanceTo"  resultMap="BaseResultMap">
-    select * from cst_customer u ,cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id
+    select * from cst_customer u ,cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id LEFT JOIN ch_linkman l ON c.ch_id=l.ch_id
     <where>
       <if test="cstChance.userId!=null and cstChance.userId!=0">
         and c.user_id=#{cstChance.userId} and c.cust_id =u.cust_id
       </if>
+      <if test="cstChance!=null and cstChance.chCustomer!=null and cstChance.chCustomer.custCompany!=null and cstChance.chCustomer.custCompany!=''">
+        and u.cust_company like '%${cstChance.chCustomer.custCompany}%'
+      </if>
 
-      <if test="cstChance.chStage!=null and cstChance.chStage!=''">
-       and ch_stage=#{chStage}
+      <if test="cstChance!=null and cstChance.chStage!=null and cstChance.chStage!=''">
+       and c.ch_stage=#{cstChance.chStage}
       </if>
 
       <if test="cstChance.chContent!=null and cstChance.chContent!=''">
-        and ch_content like '%${chContent}%'
+        and c.ch_content like '%${chContent}%'
        </if>
 
-       <if test="cstChance.chCustomer!=null and cstChance.chCustomer!='' and cstChance.chCustomer.custLifecycle!=null and cstChance.chCustomer.custLifecycle!=''">
-        and  u.cust_lifecycle =#{cstChance.chCustomer.custLifecycle}
+       <if test="cstChance!=null and cstChance.chCustomer!=null and cstChance.chCustomer.custClassify!=null and cstChance.chCustomer.custClassify!=''">
+          and u.cust_classify=#{cstChance.chCustomer.custClassify}
        </if>
 
-       <if test="cstChance.chCustomer!=null and cstChance.chCustomer!='' and cstChance.chCustomer.custCompany!=null and cstChance.chCustomer.custCompany!=''">
-         and u.cust_company like '%${cstChance.chCustomer.custCompany}%'
+       <if test="cstChance!=null  and cstChance.chCustomer!=null and  cstChance.chCustomer.custLifecycle!=null and cstChance.chCustomer.custLifecycle!=''">
+         AND u.cust_lifecycle=#{cstChance.chCustomer.custLifecycle}
        </if>
+       <if test="cstChance!=null  and cstChance.chCustomer!=null  and  cstChance.chCustomer.custAddress!=null and cstChance.chCustomer.custAddress!=''">
+         AND u.cust_address like '%${cstChance.chCustomer.custAddress}%'
+       </if>
+      <if test="cstChance!=null and cstChance.chCustomer!=null  and  cstChance.chCustomer.custIndustry!=null and cstChance.chCustomer.custIndustry!=''">
+         and u.cust_industry like '%${cstChance.chCustomer.custIndustry}%'
+      </if>
 
+      <if test="chLinkman!=null and chLinkman.linkName!=null and chLinkman.linkName!=''">
+        and l.link_name like '%${chLinkman.linkName}%'
+      </if>
+
+      <if test="chLinkman!=null and chLinkman.linkPhone!=null and chLinkman.linkPhone!=''">
+         and l.link_phone like '%${chLinkman.linkPhone}%'
+      </if>
+
+      <if test="chLinkman!=null and chLinkman.linkLandlinePhone!=null and chLinkman.linkLandlinePhone!=''">
+       and l.link_landline_phone like '%${chLinkman.linkLandlinePhone}%'
+      </if>
+      <if test="chLinkman!=null and chLinkman.linkEmail!=null and chLinkman.linkEmail!=''">
+        and l.link_email like '%${chLinkman.linkEmail}%'
+      </if>
+      <if test="chLinkman!=null and chLinkman.linkQq!=null and chLinkman.linkQq!=''">
+        and l.link_qq like '%${ chLinkman.linkQq}%'
+      </if>
      </where>
        ORDER BY c.ch_id  limit #{currentPageLimit},#{pageSize}
   </select>

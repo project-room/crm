@@ -168,7 +168,7 @@ function fenye() {
         $('.page-number').eq($('.page-number').length - 1).trigger('click');
     });
     $('body').on('click', '.page-number', function(event) {
-        // $(this).addClass('active').siblings('.page-number').removeClass('active');
+        $(this).addClass('active').siblings('.page-number').removeClass('active');
         forFenye();
     });
     forFenye();
@@ -176,13 +176,12 @@ function fenye() {
 }
 
 function forFenye() {
-    var yema = location.href.split('/');
+     var yema = location.href.split('/');
     for (var i = 0; i < $('.page-number').length; i++) {
         if ($('.page-number').eq(i).find('a').text() == yema[yema.length - 2]) {
             $('.page-number').eq(i).addClass('active');
         }
     }
-
     $('.page-number.active').siblings('.page-number').addClass('dnone');
     $('.page-number.active').prev('.page-number').removeClass('dnone');
     $('.page-number.active').prev('.page-number').prev('.page-number').removeClass('dnone');
@@ -211,6 +210,7 @@ function forFenye() {
         }
     } 
     if ($('.page-number.active').find('a').text() == 1) {
+        $('.page-first').addClass('disabled');
         $('.page-number').eq(1).removeClass('dnone');
         $('.page-number').eq(2).removeClass('dnone');
         if ($('.page-number').length <= 5) {
@@ -220,8 +220,11 @@ function forFenye() {
         $('.page-pre').addClass('disabled');
     } else {
         $('.page-pre').removeClass('disabled');
+        $('.page-first').removeClass('disabled');
+
     }
     if ($('.page-number.active').find('a').text() == $('.page-number').eq($('.page-number').length - 1).find('a').text()) {
+        $('.page-last').addClass('disabled');
         $('.page-number').eq($('.page-number').length - 2).removeClass('dnone');
         $('.page-number').eq($('.page-number').length - 3).removeClass('dnone');
         if ($('.page-number').length <= 5) {
@@ -230,6 +233,7 @@ function forFenye() {
         }
         $('.page-next').addClass('disabled');
     } else {
+        $('.page-last').removeClass('disabled');
         $('.page-next').removeClass('disabled');
     }
 }

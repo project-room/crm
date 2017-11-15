@@ -41,7 +41,6 @@ public class CstRecordController extends BaseController{
         CstRecord cstRecord=new CstRecord();
         cstRecord.setReContent("内容");
         cstRecord.setChId(4l);
-        cstRecord.setUserName("李四");
        cstRecordMapper.saveCstRecord(cstRecord);
       Long reId= cstRecord.getReId();
       map.put("reId",reId);

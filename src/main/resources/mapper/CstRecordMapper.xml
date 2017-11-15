@@ -5,7 +5,6 @@
     <id column="re_id" property="reId" jdbcType="BIGINT" />
     <result column="re_content" property="reContent" jdbcType="VARCHAR" />
     <result column="ch_id" property="chId" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="re_date" property="reDate" jdbcType="TIMESTAMP" />
     <!--记录表和附件表的关联-->
     <collection property="attachmentList" ofType="com.crm.entity.SysAttachment">

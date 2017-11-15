@@ -21,4 +21,6 @@ public interface CstLowCustomerMapper  {
     void updateCstLowCustomerById(CstLowCustomer cstLowCustomer);
 
     void saveCstLowCustomerInfo(CstLowCustomer cstLowCustomer);
+
+    int addCstLowCust(CstLowCustomer cstLowCustomer);
 }

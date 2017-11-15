@@ -11,6 +11,7 @@
             </script>
             <script th:src="@{/bootstrap/js/bootstrap-table.js}">
             </script>
+            <script th:src="@{/js/simpleAlert.js}"></script>
             <script th:src="@{/js/jquery.nicescroll.js}">
             </script>
             <script th:src="@{/laydate/laydate.js}">
@@ -25,7 +26,7 @@
         </meta>
     </head>
     <body>
-        <div class="chehuiPop dnone">
+<!--         <div class="chehuiPop dnone">
             <div class="shelter">
             </div>
             <div class="chehuiMain">
@@ -34,14 +35,14 @@
                     </path>
                 </svg>
                 <p>
-                    是否通过审批？
+                    是否撤回？
                 </p>
                 <div class="btngroup">
                     <input class="sure" type="button" value="是"/>
                     <input class="cancel" type="button" value="否"/>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="shenpiPop dnone">
             <div class="shelter">
             </div>
@@ -56,7 +57,6 @@
                 <div class="btngroup">
                     <input class="yes" type="button" value="通过"/>
                     <input class="no" type="button" value="不通过"/>
-                    <input class="cancel" type="button" value="取消"/>
                 </div>
             </div>
         </div>
@@ -71,50 +71,66 @@
                         </path>
                     </svg>
                 </h4>
-                <form>
+                <form action="/cstChance/addChance/1/10">
                     <label>
                         原始负责人
-                        <input type="text"/>
+                        <input type="text" name="userId" />
                     </label>
                     <label>
-                        新负责人
-                        <input type="text"/>
+                        新负责人&emsp;
+                        <input type="text" name="userToId" />
                     </label>
                     <div class="stageSelect">
                         <p>
                             阶段选择
                         </p>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            初期沟通
-                        </label>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            理想评估
-                        </label>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            需求分析
-                        </label>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            方案制定
-                        </label>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            竞标中
-                        </label>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            商务谈判
-                        </label>
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                            合同签订
-                        </label>
+                        <ul>
+                            <li>
+                                <label class="forCheckbox">
+                                    <input type="checkbox" name="chStage" value="初期沟通"/>
+                                </label>
+                                    初期沟通
+                            </li>
+                            <li>
+                                <label class="forCheckbox">
+                                <input type="checkbox" name="chStage" value="理想评估"/>
+                            </label>
+                                理想评估
+                            </li>
+                            <li>
+                                <label class="forCheckbox">
+                                    <input type="checkbox"/>
+                                </label>
+                                    需求分析
+                            </li>
+                            <li>
+                                <label class="forCheckbox">
+                                    <input type="checkbox"/>
+                                </label>
+                                    方案制定
+                            </li>
+                            <li>
+                                <label class="forCheckbox">
+                                    <input type="checkbox"/>
+                                </label>
+                                    竞标中
+                            </li>
+                            <li>
+                                <label class="forCheckbox">
+                                    <input type="checkbox"/>
+                                </label>
+                                    商务谈判
+                            </li>
+                            <li>
+                                <label class="forCheckbox">
+                                    <input type="checkbox"/>
+                                </label>
+                                    合同签订
+                            </li>
+                        </ul>      
                     </div>
                     <div class="btngroup">
-                        <input class="sure" type="button" value="确定"/>
+                        <input class="sure" type="submit" value="确定"/>
                         <input class="cancel" type="button" value="取消"/>
                     </div>
                 </form>
@@ -131,68 +147,92 @@
                         </path>
                     </svg>
                 </h4>
-                <form>
+                <form  action="/cstChance/getfilterChance/1/10">
                     <label>
-                        原始负责人
-                        <input type="text"/>
+                        <span>原始负责人</span>
+                        <input type="text" name="userId" value="1"  class="oldSaler" />
+                    </label>
+                    <div class="oldSalerSearch">
+                        <label>
+                            <input type="text" placeholder="请输入销售员名字" />
+                        </label>
+                        <ul>
+                            <span>+</span>A区
+                            <li th:each="cstChancesPageList:${cstChancesPageList.List}">
+                                <p th:text="${cstChancesPageList.sysUser.userName}"></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <span>+</span>B区
+                            <li th:each="cstChancesPageList:${cstChancesPageList.List}">
+                                <p th:text="${cstChancesPageList.sysUser.userName}"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <label>
+                        <span>新负责人</span>
+                        <input type="text" name="userToId" value="3" class="newSaler" />
+                    </label>
+                    <div class="newSalerSearch">
+                        <label>
+                            <input type="text" placeholder="请输入销售员名字" />
+                        </label>
+                        <ul  >
+                            <span>+</span>A区
+                            <li th:each="SysUser:${SysUserList}"><p th:text="${SysUser.userName}"></p></li>
+                        </ul>
+                        <ul >
+                            <span>+</span>B区
+                            <li th:each="SysUser:${SysUserList}"><p th:text="${SysUser.userName}"></p></li>
+                        </ul>
+                    </div>
+                    <label>
+                        <span>客户名称</span>
+                        <input type="text" name="custCompany" />
                     </label>
                     <label>
-                        新负责人
-                        <input type="text"/>
-                    </label>
-                    <label>
-                        客户名称
-                        <input type="text"/>
-                    </label>
-                    <label>
-                        阶段
-                        <select>
-                            <option>
-                                123456789
+                        <span>阶段</span>
+                        <select name="chStage">
+                            <option value="初期沟通">
+                               初期沟通
                             </option>
-                            <option>
-                                23456789
+                            <option value="理想评估">
+                                理想评估
                             </option>
-                            <option>
-                                asdfghj
+                            <option value="需求分析">
+                               需求分析
                             </option>
-                            <option>
-                                eawrytygkyfgd
+                            <option value="方案制定">
+                                方案制定
                             </option>
-                            <option>
-                                sdfkhjgdfdsa
+                            <option value="竞标中">
+                                竞标中
+                            </option>
+                            <option value="商务谈判">
+                                商务谈判
+                            </option>
+                            <option value="合同签订">
+                                合同签订
                             </option>
                         </select>
                     </label>
                     <label>
-                        当前步骤
-                        <select>
-                            <option>
-                                123456789
-                            </option>
-                            <option>
-                                23456789
-                            </option>
-                            <option>
-                                asdfghj
-                            </option>
-                            <option>
-                                eawrytygkyfgd
-                            </option>
-                            <option>
-                                sdfkhjgdfdsa
+                        <span>当前步骤</span>
+                        <select name="chStatus">
+                            <option value="审核中">
+                                审核中
                             </option>
                         </select>
                     </label>
                     <label class="day" for="day">
                         创建日期
-                        <input id="day" name="" placeholder="年/月/日" type="text"/>
+                        <input id="day" name="begindate" placeholder="年/月/日" type="text"/>
                     </label>
                     <label class="hour" for="hour">
-                        <input id="hour" placeholder="00:00-00:00" type="text"/>
+                        <input id="hour" name="finishdate" placeholder="00:00-00:00" type="text"/>
                     </label>
                     <div class="btngroup">
-                        <input class="sure" type="button" value="确定"/>
+                        <input class="sure" type="submit" value="确定"/>
                         <input class="cancel" type="button" value="取消"/>
                     </div>
                 </form>
@@ -207,7 +247,7 @@
             </div>
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a th:href="@{/index.html}">
                         <img alt="首页" th:src="@{/img/index.png}"/>
                         <span class="navTxt">
                             首页
@@ -215,7 +255,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="seas.html">
+                    <a th:href="@{/seas.html}">
                         <img alt="公海" th:src="@{/img/seas.png}"/>
                         <span class="navTxt">
                             公海
@@ -223,19 +263,14 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="chance.html">
-                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                    <a th:href="@{'/cstChance/getCstChance/1/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}">
+                        <img alt="机会" th:src="@{/img/chance.png}" />
                         <span class="navTxt">
                             机会
                         </span>
                     </a>
                 </li>
-                <li>
-                    <img alt="合同" th:src="@{/img/contract.png}"/>
-                    <span class="navTxt">
-                        合同
-                    </span>
-                </li>
+                <li><a th:href="@{/contract.html}"><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
                 <li>
                     <img alt="财务" th:src="@{/img/financial.png}"/>
                     <span class="navTxt">
@@ -321,23 +356,23 @@
             </div>
             <div class="main">
                 <div>
-                    <div class="chanceHeader">
+                    <div class="refferalHeader">
                         <div class="fleft">
                             <div class="tag">
-                                转交客户v
+                                转交客户
                                 <ul class="dnone">
                                     <li>
-                                        <a href="chance.html">
+                                        <a th:href="@{'/cstChance/getCstChance/1/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}">
                                             我的机会
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="">
                                             全部机会
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="refferal.html" style="color: #7460ee;">
+                                        <a th:href="@{'/cstChance/getCstChanceUserId/1/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}" style="color: #7460ee;">
                                             转交客户
                                         </a>
                                     </li>
@@ -355,12 +390,10 @@
                                 <img th:src="@{/img/filter.png}"/>
                                 筛选
                             </button>
-                            <button class="createZhuanjiao">
-                                <a href="#">
+                                <a class="createZhuanjiao">
                                     <img th:src="@{/img/addCustomer.png}"/>
                                     新建转交
                                 </a>
-                            </button>
                         </div>
                     </div>
                     <div class="allOperate dnone">
@@ -383,7 +416,7 @@
                     <div class="chanceContent">
                         <table class="table table-hover" id="table">
                             <thead>
-                                <tr>
+                                <tr >
                                     <th data-field="select" style="">
                                         <div class="th-inner ">
                                         </div>
@@ -441,343 +474,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr th:each="cstChancesPageList:${cstChancesPageList.List}" th:data-index="cstChancesPageList.chId">
                                     <td>
                                         <label class="forCheckbox">
                                             <input type="checkbox"/>
                                         </label>
                                     </td>
                                     <td class="origin" style="">
-                                        <p>
-                                            汤姆斯
+                                        <p th:text="${cstChancesPageList.sysUser.userName}">
                                         </p>
                                     </td>
                                     <td class="newMan" style="">
-                                        <p>
-                                            汤姆斯
+                                        <p th:text="${cstChancesPageList.userToId}">
                                         </p>
                                     </td>
                                     <td class="client" style="">
-                                        <p>
-                                            广州润普网络科技有限公司
+                                        <p th:text="${cstChancesPageList.chCustomer.custCompany}">
                                         </p>
                                         <span>
                                             · · ·
                                         </span>
-                                        <ul class="dnone clientYinc">
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                        </ul>
                                     </td>
                                     <td class="stage" style="">
                                         <ul>
                                             <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
+                                                <p th:text="${cstChancesPageList.chStage}"></p>
                                             </li>
                                         </ul>
                                         <span>
                                             · · ·
                                         </span>
-                                        <ul class="dnone stageYinc">
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
                                     </td>
                                     <td class="current" style="">
-                                        <p>
-                                            待审批（水水水）
+                                        <p th:text="${cstChancesPageList.chStatus}">
                                         </p>
+                                        <p th:text="${cstChancesPageList.chExamine}"></p>
                                     </td>
                                     <td class="createTime" style="">
-                                        <p>
-                                            2101-11-11 11-11
-                                        </p>
-                                    </td>
-                                    <td style="">
-                                        <button class="shenpi">
-                                            审批
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="forCheckbox">
-                                            <input type="checkbox"/>
-                                        </label>
-                                    </td>
-                                    <td class="origin" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="newMan" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="client" style="">
-                                        <p>
-                                            广州润普网络科技有限公司
-                                        </p>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone clientYinc">
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="stage" style="">
-                                        <ul>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone stageYinc">
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="current" style="">
-                                        <p>
-                                            待审批（水水水）
-                                        </p>
-                                    </td>
-                                    <td class="createTime" style="">
-                                        <p>
-                                            2101-11-11 11-11
-                                        </p>
-                                    </td>
-                                    <td style="">
-                                        <button class="shenpi">
-                                            审批
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="forCheckbox">
-                                            <input type="checkbox"/>
-                                        </label>
-                                    </td>
-                                    <td class="origin" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="newMan" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="client" style="">
-                                        <p>
-                                            广州润普网络科技有限公司
-                                        </p>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone clientYinc">
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="stage" style="">
-                                        <ul>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone stageYinc">
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="current" style="">
-                                        <p>
-                                            待审批（水水水）
-                                        </p>
-                                    </td>
-                                    <td class="createTime" style="">
-                                        <p>
-                                            2101-11-11 11-11
-                                        </p>
-                                    </td>
-                                    <td style="">
-                                        <button class="shenpi">
-                                            审批
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="forCheckbox">
-                                            <input type="checkbox"/>
-                                        </label>
-                                    </td>
-                                    <td class="origin" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="newMan" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="client" style="">
-                                        <p>
-                                            广州润普网络科技有限公司
-                                        </p>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone clientYinc">
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="stage" style="">
-                                        <ul>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone stageYinc">
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="current" style="">
-                                        <p>
-                                            待审批（水水水）
-                                        </p>
-                                    </td>
-                                    <td class="createTime" style="">
-                                        <p>
-                                            2101-11-11 11-11
-                                        </p>
-                                    </td>
-                                    <td style="">
-                                        <button class="shenpi">
-                                            审批
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="forCheckbox">
-                                            <input type="checkbox"/>
-                                        </label>
-                                    </td>
-                                    <td class="origin" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="newMan" style="">
-                                        <p>
-                                            汤姆斯
-                                        </p>
-                                    </td>
-                                    <td class="client" style="">
-                                        <p>
-                                            广州润普网络科技有限公司
-                                        </p>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone clientYinc">
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                            <li>
-                                                广州润普网络科技有限公司
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="stage" style="">
-                                        <ul>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                        <span>
-                                            · · ·
-                                        </span>
-                                        <ul class="dnone stageYinc">
-                                            <li>
-                                                一二三四
-                                            </li>
-                                            <li>
-                                                一二三四
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="current" style="">
-                                        <p>
-                                            待审批（水水水）
-                                        </p>
-                                    </td>
-                                    <td class="createTime" style="">
-                                        <p>
-                                            2101-11-11 11-11
+                                        <p th:text="${cstChancesPageList.TransferTime}">
                                         </p>
                                     </td>
                                     <td style="">
@@ -789,113 +523,26 @@
                             </tbody>
                         </table>
                         <div class="fixed-table-pagination">
-                            <div class="pull-left pagination-detail">
-                                <span class="pagination-info">
-                                    Showing 1 to 10 of 78 rows
-                                </span>
-                                <span class="page-list">
-                                    <span class="btn-group dropup">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-                                            <span class="page-size">
-                                                10
-                                            </span>
-                                            <span class="caret">
-                                            </span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li class="active" role="menuitem">
-                                                <a href="#">
-                                                    10
-                                                </a>
-                                            </li>
-                                            <li role="menuitem">
-                                                <a href="#">
-                                                    25
-                                                </a>
-                                            </li>
-                                            <li role="menuitem">
-                                                <a href="#">
-                                                    50
-                                                </a>
-                                            </li>
-                                            <li role="menuitem">
-                                                <a href="#">
-                                                    100
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </span>
-                                    rows per page
-                                </span>
-                            </div>
                             <div class="pull-right pagination">
                                 <ul class="pagination">
-                                    <li class="page-pre disabled">
-                                        <a href="#">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="page-number active">
-                                        <a href="#">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            4
-                                        </a>
-                                    </li>
-                                    <li class="page-number">
-                                        <a href="#">
-                                            5
-                                        </a>
-                                    </li>
-                                    <li class="page-last-separator disabled">
-                                        <a href="#">
-                                            ...
-                                        </a>
-                                    </li>
-                                    <li class="page-last">
-                                        <a href="#">
-                                            8
-                                        </a>
-                                    </li>
-                                    <li class="page-next">
-                                        <a href="#">
-                                            下一页
-                                        </a>
-                                    </li>
+                                    <li class="page-first"><a th:href="@{/cstChance/getCstChanceUserId/1/1/10}">首页</a></li>
+                                    <li class="page-pre"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${((cstChancesPageList.currentPage-1) le 0?1:(cstChancesPageList.currentPage-1))}+'/'+${cstChancesPageList.pageSize}}">上一页</a></li>
+                                    <li class="page-number" th:each="arr:${arrList}"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${arr}+'/'+${cstChancesPageList.pageSize}}" th:text="${arr}" ></a></li>
+                                    <li class="page-next"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${((cstChancesPageList.currentPage+1) ge (cstChancesPageList.totalPage)?(cstChancesPageList.totalPage):(cstChancesPageList.currentPage+1))}+'/'+${cstChancesPageList.pageSize}}">下一页</a></li>
+                                    <li class="page-last"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${cstChancesPageList.totalPage}+'/'+${cstChancesPageList.pageSize}}">尾页</a></li>
                                 </ul>
+                                <div class="jump">
+                                    <label>调转
+                                        <select>
+                                            <option th:each="arr:${arrList}" th:value="${arr}"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${arr}+'/'+${cstChancesPageList.pageSize}}" th:text="${arr}"></a></option>
+                                        </select>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <!-- <nav aria-label="Page navigation">
-               <ul class="pagination">
-                    <li class="page-first"><a href="#">首页</a></li>
-                    <li class="page-pre"><a href="#">上一页</a></li>
-                    <li class="page-first"><a href="#">1</a></li>
-                    <li class="page-first-separator disabled"><a href="#">...</a></li>
-                    <li class="page-number"><a href="#">4</a></li>
-                    <li class="page-number active"><a href="#">5</a></li>
-                    <li class="page-number"><a href="#">6</a></li>
-                    <li class="page-last-separator disabled"><a href="#">...</a></li>
-                    <li class="page-last"><a href="#">1000</a></li>
-                    <li class="page-next"><a href="#">下一页</a></li>
-                    <li class="page-first"><a href="#">尾页</a></li>
-               </ul>
-          </nav> -->
-                    </div>
                 </div>
             </div>
+        </div>
         </div>
     </body>
 </html>

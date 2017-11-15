@@ -24,8 +24,25 @@ VALUES (#{linkName},#{linkPhone},#{linkLandlinePhone},#{linkEmail},#{linkQq},#{l
    UPDATE ch_linkman SET link_name=#{chLinkman.linkName},link_phone=#{chLinkman.linkPhone},link_landline_phone=#{chLinkman.linkLandlinePhone},link_email=#{chLinkman.linkEmail},link_qq=#{chLinkman.linkQq},link_wechat=#{chLinkman.linkWechat},link_status=#{chLinkman.linkStatus},ch_id=#{chLinkman.chId},link_department=#{chLinkman.linkDepartment},link_position=#{chLinkman.linkPosition},cust_id=#{chLinkman.custId} WHERE link_id=#{id}
   </update>
 
-  <!--根据联系人id修改联系人信息-->
-  <update id="updateChLinkmanWithIdAndChLinkman" parameterType="map">
-      UPDATE ch_linkman SET link_name=#{chLinkman.linkName},link_phone=#{chLinkman.linkPhone},link_landline_phone=#{chLinkman.linkLandlinePhone},link_email=#{chLinkman.linkEmail},link_status=#{chLinkman.linkStatus},cust_id=#{chLinkman.custId} WHERE link_id=#{id}
-  </update>
+   <!-- 添加机会时添加联系人-->
+    <insert id="addChLinkman" parameterType="ChLinkman">
+      INSERT INTO ch_linkman (link_name,link_phone,link_landline_phone,link_email,link_qq,link_wechat,link_status,ch_id,cust_id)
+      VALUES (#{linkName},#{linkPhone},#{linkLandlinePhone},#{linkEmail},#{linkQq},#{linkWechat},#{linkStatus},#{chId},#{custId})
+    </insert>
+
+    <!-- 修改机会时修改修改机会的主要联系人-->
+     <update id="updateChLinkman" parameterType="ChLinkman">
+       UPDATE ch_linkman SET link_name=#{linkName},link_phone=#{linkPhone},link_landline_phone=#{linkLandlinePhone},link_email=#{linkEmail},link_qq=#{linkQq},link_wechat=#{linkWechat},link_department=#{linkDepartment},link_position=#{linkPosition}  WHERE link_id=#{linkId}
+     </update>
+
+      <!--添加机会时插入主要联系人的机会id,主要联系人的所在部门和职位-->
+      <update id="updateLinkman" parameterType="ChLinkman">
+        UPDATE ch_linkman set ch_id=#{chId},link_department=#{linkDepartment},link_position=#{linkPosition} where link_id=#{linkId}
+      </update>
+
+      <!--删除机会表时将联系人表中chid设置为空-->
+       <update id="updateChId" parameterType="Long">
+         update ch_linkman set ch_id=null where ch_id=#{chId}
+       </update>
+
 </mapper>
