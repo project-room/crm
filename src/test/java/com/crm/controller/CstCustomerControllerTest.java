@@ -1,3 +1,4 @@
+/*
 package com.crm.controller;
 
 import com.taobao.api.ApiException;
@@ -19,9 +20,11 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by Administrator on 2017/11/2.
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CstCustomerControllerTest {
@@ -56,4 +59,4 @@ public class CstCustomerControllerTest {
         AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
         System.out.println(rsp.getBody());
     }
-}
+}*/

@@ -65,7 +65,7 @@ window.onload = function() {
     });
     laydate.render({
         elem: '#day',
-        format: 'yyyy年MM月dd日',
+        format: 'yyyy-MM-dd ',
         theme: '#7460ee',
     });
 };

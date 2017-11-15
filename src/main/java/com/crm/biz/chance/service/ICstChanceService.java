@@ -3,6 +3,7 @@ package com.crm.biz.chance.service;
 import com.crm.common.Page;
 import com.crm.entity.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +27,8 @@ public interface ICstChanceService {
 
     public boolean updateChance(CstChance cst);
 
+    public  List<SysUser>  getSysUser(Long userId);
+
    public  boolean updateCst(CstChance cstChance);
 
     public List<CstCustomer>  getCstCustomer(Long id);
@@ -33,4 +36,9 @@ public interface ICstChanceService {
     public CstCustomer getCstCustomerCustId(Long custId);
 
     public  Page<CstChance> getCstChanceUserId(Long userId, int currentPage, int pageSize);
+
+    public boolean  addChance(CstChance cstChance);
+
+    public  Page<CstChance> getfilterChance(CstChance chance,String begindate, String finishdate, int currentPage, int pageSize);
+
 }

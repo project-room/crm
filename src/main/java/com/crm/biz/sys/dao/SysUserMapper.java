@@ -51,4 +51,7 @@ public interface SysUserMapper {
 
     //根据用户id获取用户信息
     SysUser selectSysUserById(Long userId);
+
+    //机会查询所有用户
+    List<SysUser> getSysUser(Long userId);
 }

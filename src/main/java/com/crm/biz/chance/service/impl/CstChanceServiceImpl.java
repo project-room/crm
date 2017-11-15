@@ -5,11 +5,14 @@ import com.crm.biz.chance.service.ICstChanceService;
 import com.crm.biz.customer.dao.ChLinkmanMapper;
 import com.crm.biz.customer.dao.CstCustomerMapper;
 import com.crm.biz.customer.dao.CstLowCustomerMapper;
+import com.crm.biz.dynamic.dao.SysDynamicMapper;
+import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.common.Page;
 import com.crm.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +34,9 @@ public class CstChanceServiceImpl implements ICstChanceService {
     @Autowired
     private CstLowCustomerMapper cstLowCustomerMapper;
 
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
     //根据用户id查询机会
     @Override
     public Page<CstChance> getCstChance(Long userId, int currentPage, int pageSize) {
@@ -49,6 +55,19 @@ public class CstChanceServiceImpl implements ICstChanceService {
         List<CstChance>  cstChancesList=cstChanceMapper.getCstChanceUserId(userId, currentPageLimit, pageSize);
         return new Page<CstChance>(currentPage, pageSize, cstChancesList, count);
     }
+
+    //新建按阶段转交机会
+    @Override
+    public boolean addChance(CstChance cstChance) {
+        int count=cstChanceMapper.addChance(cstChance);
+        if (count>0){
+            return true;
+        }
+        return false;
+    }
+
+
+
     //添加机会
     @Override
     public boolean addCstChance(CstChance cstChance,CstCustomer cstCustomer,ChLinkman chLinkman,CstLowCustomer cstLowCustomer,Long linkIdTo,String linkDepartmentTo,String linkPositionTo){
@@ -137,6 +156,11 @@ public class CstChanceServiceImpl implements ICstChanceService {
         return false;
     }
 
+    @Override
+    public List<SysUser> getSysUser(Long userId) {
+        return sysUserMapper.getSysUser(userId);
+    }
+
     //根据状态来同时修改机会和客户的负责人
     @Override
     public boolean updateCst(CstChance cstChance) {
@@ -170,5 +194,15 @@ public class CstChanceServiceImpl implements ICstChanceService {
 
     }
 
+    //机会转交的条件查询
+    @Override
+    public Page<CstChance> getfilterChance(CstChance chance,String begindate,String finishdate, int currentPage, int pageSize) {
+        System.out.println(chance.getUserId());
+        Long count = (long) cstChanceMapper.getCstChanceCountTo(chance.getUserId());
+        System.out.println(begindate+"-----"+finishdate);
+        int currentPageLimit = (currentPage - 1) * pageSize;
+        List<CstChance> ChanceList=cstChanceMapper.getfilterChance(chance,begindate,finishdate,currentPageLimit,pageSize);
+        return new Page<CstChance>(currentPage, pageSize, ChanceList, count);
+    }
 
 }

@@ -605,7 +605,7 @@ public class CstCustomerController extends BaseController{
             String formatCustDateStr=custDateStr.replace("：",":");
             Date date = sdf.parse(" "+formatCustDateStr+" ");
             cstCustomer.setCustDate(date);
-            cstCustomerService.editCustomerById(cstCustomer,chLinkman);
+            /*cstCustomerService.editCustomerById(cstCustomer,chLinkman);*/
         } catch (ParseException e) {
             e.printStackTrace();
         }

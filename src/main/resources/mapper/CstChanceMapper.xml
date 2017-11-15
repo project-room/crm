@@ -156,13 +156,13 @@
 
   <!--修改机会表的用户id -->
   <update id="updateChance" parameterType="CstChance">
-    update cst_chance set user_id=#{userId} where ch_id=#{chId}
+    update cst_chance set user_id=#{userToId},userTo_id=null,ch_examine=null,ch_status="已审核" where ch_id=#{chId}
   </update>
 
-  <!--根据机会阶段修改机会的负责人-->
+<!--  &lt;!&ndash;根据机会阶段修改机会的负责人&ndash;&gt;
   <update id="updateCst"  parameterType="cstChance">
     UPDATE cst_chance SET  user_name=#{userName},user_id=#{userId} WHERE ch_stage=#{chStage}
-  </update>
+  </update>-->
 
   <select id="getCstChanceCountTo" parameterType="Long" resultType="int">
     select count(ch_id) from cst_chance where user_id=#{userId} and ch_status!=""
@@ -170,9 +170,48 @@
 
   <!--机会转交查询-->
   <select id="getCstChanceUserId"  resultMap="BaseResultMap">
-    select c.*,u.user_id,u.user_name,s.user_id,s.user_name,e.user_id,e.user_name  FROM (SELECT a.*,t.cust_company FROM cst_chance a,cst_customer t where a.cust_id=t.cust_id and a.user_id=#{userId} and a.ch_status!="") c
-    LEFT JOIN sys_user u on c.user_id=u.user_id LEFT JOIN sys_user s ON c.userTo_id=s.user_id LEFT JOIN sys_user e on c.ch_examine=e.user_id  limit #{currentPageLimit},#{pageSize}
+    SELECT a.*,t.cust_company,u.user_name FROM cst_chance a,cst_customer t,sys_user u where a.user_id=1 and a.user_id=u.user_id AND a.cust_id=t.cust_id  and a.ch_status!=""
+    <!--select c.*,u.user_id,u.user_name,s.user_id,s.user_name,e.user_id,e.user_name  FROM (SELECT a.*,t.cust_company FROM cst_chance a,cst_customer t where a.cust_id=t.cust_id and a.user_id=#{userId} and a.ch_status!="") c
+    LEFT JOIN sys_user u on c.user_id=u.user_id LEFT JOIN sys_user s ON c.userTo_id=s.user_id LEFT JOIN sys_user e on c.ch_examine=e.user_id  limit #{currentPageLimit},#{pageSize}-->
   </select>
+
+  <!--新建按阶段转交机会-->
+    <update id="addChance" parameterType="CstChance">
+      update cst_chance set userTo_id=#{userToId},ch_status=#{chStatus},ch_TransferTime=#{TransferTime},ch_examine=#{chExamine} where ch_stage=#{chStage}
+    </update>
+
+    <!--机会转交的条件查询-->
+    <select id="getfilterChance"     resultMap="BaseResultMap">
+      select  *  from cst_chance c,sys_user u,cst_customer t
+      <where>
+        <if test="chance.userId!=null and chance.userId!=0">
+          and c.user_id=#{chance.userId} and c.user_id=u.user_id and c.cust_id=t.cust_id
+        </if>
+       <if test="chance.userToId!=null and chance.userToId!=0">
+          and c.userTo_id=#{chance.userToId}
+        </if>
+        <if test="chance.chCustomer!=null and chance.chCustomer.custCompany!=null and chance.chCustomer.custCompany!=''">
+          and t.cust_company like '%${chance.chCustomer.custCompany}%'
+        </if>
+        <if test="chance.chStage!=null and chance.chStage!=''">
+          and  c.ch_stage=#{chance.chStage}
+        </if>
+        <if test="chance.chStatus!=null and chance.chStatus!=''">
+          and c.ch_status=#{chance.chStatus}
+        </if>
+        <!--<if test="begindate!=null and begindate!='' and finishdate!=null and finishdate!=''">
+           and c.ch_TransferTime BETWEEN #{begindate} and #{finishdate}
+        </if>-->
+         <if test="begindate!=null and begindate!=''">
+           and c.ch_TransferTime &gt;= #{begindate}
+         </if>
+        <if test="finishdate!=null and finishdate!=''">
+        and c.ch_TransferTime &lt;=  #{finishdate}
+      </if>
+        limit #{currentPageLimit},#{pageSize}
+      </where>
+    </select>
+
 
   <!--根据字段查询 -->
   <select id="getCstChanceTo"  resultMap="BaseResultMap">

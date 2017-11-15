@@ -77,7 +77,24 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-    </dependencies>
+		<!--yuntongxun-->
+		<dependency>
+			<groupId>alicore</groupId>
+			<artifactId>alicore</artifactId>
+			<!--<version>1.0</version>-->
+			<!--<scope>system</scope>-->
+			<!--<systemPath>${project.basedir}/docb/aliyun-java-sdk-core-3.3.1.jar</systemPath>-->
+		</dependency>
+		<!--yuntongxun-->
+		<dependency>
+			<groupId>alidys</groupId>
+			<artifactId>alidys</artifactId>
+			<!--<version>1.0</version>-->
+			<!--<scope>system</scope>-->
+			<!--<systemPath>${project.basedir}/docb/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>-->
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<resources>
@@ -102,5 +119,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 </project>

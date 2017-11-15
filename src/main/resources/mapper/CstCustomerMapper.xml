@@ -80,7 +80,7 @@
     </update>
 
      <!-- 机会新建前的查询客户-->
-         <select id="getCstCustomer" parameterType="Long" resultMap="BaseResultMap">
+     <select id="getCstCustomer" parameterType="Long" resultMap="BaseResultMap">
            SELECT * FROM cst_customer t,ch_linkman l WHERE t.user_id=#{userId} and t.cust_id=l.cust_id
       </select>
       <!--根据客户id查询客户的关联信息-->

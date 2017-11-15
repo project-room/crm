@@ -4,8 +4,10 @@ package com.crm.biz.chance.dao;
  * Created by Administrator on 2017/9/12.
  */
 import com.crm.common.Page;
+import com.crm.entity.ChLinkman;
 import com.crm.entity.CstChance;
 
+import java.util.Date;
 import java.util.List;
 
 import com.crm.entity.CstCustomer;
@@ -31,7 +33,7 @@ public interface CstChanceMapper {
     int addCstChance(CstChance cstChance);
 
     //根据机会id查询机会的详细信息
-    CstChance getCstChanceId(Long chId);
+    List<CstChance> getCstChanceId(Long chId);
 
     //根据机会id删除机会
     int deleteCstChance(Long id);
@@ -49,6 +51,18 @@ public interface CstChanceMapper {
     int  getCstChanceCount(Long userId);
 
     //机会的条件查询
-    List<CstChance> getCstChanceTo(@Param("cstChance") CstChance cstChance,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
+    List<CstChance> getCstChanceTo(@Param("cstChance") CstChance cstChance, @Param("chLinkman") ChLinkman chLinkman, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
+
+    //转交机会的总条数
+    int getCstChanceCountTo(Long userId);
+
+    //转交机会的查询
+    List<CstChance> getCstChanceUserId(@Param("userId") Long userId, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
+
+    //新建转交机会
+    int  addChance(CstChance chance);
+
+    //机会转交的条件查询
+    List<CstChance> getfilterChance(@Param("chance") CstChance chance,@Param("begindate") String begindate,@Param("finishdate") String finishdate, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 }
