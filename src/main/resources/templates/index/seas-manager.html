@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="renderer" content="webkit" />
+        <meta charset="utf-8"/>
+
+        <title>
+            客户关系管理系统
+        </title>
+        <script th:src="@{/js/jquery-1.8.3.min.js}">
+        </script>
+        <script th:src="@{/bootstrap/js/bootstrap.js}">
+        </script>
+        <script th:src="@{/bootstrap/js/bootstrap-table.js}">
+        </script>
+        <script th:src="@{js/simpleAlert.js}"></script>
+        <script th:src="@{/js/jquery.nicescroll.js}">
+        </script>
+        <script th:src="@{/laydate/laydate.js}">
+        </script>
+        <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+        <link th:href="@{/css/default.css}" rel="stylesheet"/>
+        <link th:href="@{/css/seas.css}" rel="stylesheet"/>
+        <script th:src="@{/js/default.js}">
+        </script>
+        <script th:src="@{/js/seas.js}">
+        </script>
+    </head>
+    <body>
+
+        
+        
+        <div class="dealingPop dnone"  style="font-size: 14px;">
+            <div class="shelter"></div>
+            <div class="dealingmain">
+                <h4>
+                    分配公海客户
+                    <svg class="fright cancel" viewbox="0 0 20 20">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </svg>
+                </h4>
+                <form>
+                    <label>
+                        <span>客户类型</span>
+                        <select>
+                            <option>有效客户</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>分配销售员</span>
+                        <input type="text" class="saler" />
+                    </label>
+                    <div class="btngroup">
+                        <input class="sure" type="button" value="确定"/>
+                        <input class="cancel" type="button" value="取消"/>
+                    </div>
+                </form>
+                <div class="salerSearch">
+                    <label>
+                        <input type="text" placeholder="请输入销售员名字" />
+                    </label>
+                    <ul>
+                        <span>+</span>A区
+                        <li>小姐A</li>
+                        <li>小姐B</li>
+                    </ul>
+                    <ul>
+                        <span>+</span>B区
+                        <li>小姐C</li>
+                        <li>小姐D</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="filterPop dnone" style="font-size: 14px;">
+            <div class="shelter">
+            </div>
+            <div class="filtermain">
+                <h4>
+                    高级筛选
+                    <svg class="fright cancel" viewbox="0 0 20 20">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </svg>
+                </h4>
+                <form>
+                    <label for="name">
+                        <span>客户名称</span>
+                        <input id="name" name="" type="text"/>
+                    </label>
+                    <label for="contact">
+                        <span>联系人</span>
+                        <input id="contact" name="" type="text"/>
+                    </label>
+                    <label for="mobile">
+                        <span>移动电话</span>
+                        <input id="mobile" name="" type="text"/>
+                    </label>
+                    <label for="telphone">
+                        <span>固定电话</span>
+                        <input id="telphone" name="" type="text"/>
+                    </label>
+                    <label for="renlingren">
+                        <span>客户认领人</span>
+                        <input id="renlingren" name="" type="text"/>
+                    </label>
+                    <label for="mail">
+                        <span>QQ/邮箱</span>
+                        <input id="mail" name="" type="text"/>
+                    </label>
+                    <label class="day" for="day">
+                        <span>创建日期</span>
+                        <input id="day" name="" placeholder="年/月/日" type="text"/>
+                    </label>
+                    <label class="hour" for="hour">
+                        <input id="hour" placeholder="00:00-00:00" type="text"/>
+                    </label>
+                    <div class="btngroup">
+                        <input class="sure" type="button" value="确定"/>
+                        <input class="cancel" type="button" value="取消"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" th:src="@{/img/logo.png}"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
+            </div>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <img alt="首页" th:src="@{/img/index.png}"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="seas.html">
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
+                        <span class="navTxt">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chance.html">
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li><a href="contract.html"><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
+                <li>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li>
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent">
+            <div class="header">
+                <div>
+                    <input placeholder="请输入客户名称" type="text"/>
+                    <button>
+                        <img alt="" th:src="@{/img/searchIcon.png}"/>
+                    </button>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName">
+                            聂宇豪
+                        </span>
+                        <span class="xiala">
+                            <img th:src="@{img/xiala.png}"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a href="">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div>
+                    <div class="seasHeader">
+                        <div class="fleft">
+                            <p class="tag">
+                                公海池
+                            </p>
+                            <p class="customerNum">
+                                <span>
+                                    1000
+                                </span>
+                                条客户信息
+                            </p>
+                        </div>
+                        <div class="fright">
+                            <button class="filter">
+                                <img th:src="@{/img/filter.png}"/>
+                                筛选
+                            </button>
+                            <a href="addNewCustomer.html">
+                                <img th:src="@{/img/addCustomer.png}"/>
+                                新建客户
+                            </a>
+                            <img class="moreOperate" th:src="@{/img/more.png}"/>
+                        </div>
+                    </div>
+                    <div class="allOperate dnone">
+                        <label class="forCheckbox">
+                            <input type="checkbox"/>
+                        </label>
+                        <button class="dealing">
+                            <img th:src="@{/img/allocation.png}"/>
+                            分配
+                        </button>
+                        <button class="edit">
+                            <img th:src="@{/img/edit.png}"/>
+                            编辑
+                        </button>
+                        <button class="delete">
+                            <img th:src="@{/img/delete.png}"/>
+                            删除
+                        </button>
+                    </div>
+                    <div class="seasContent">
+                        <table class="table table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th data-field="select" style="">
+                                        <div class="th-inner ">
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="contact" data-field="contact" style="">
+                                        <div class="th-inner ">
+                                            联系人
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="contactWay" data-field="contactWay" style="">
+                                        <div class="th-inner ">
+                                            移动/固定电话
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="companyName" data-field="companyName" style="">
+                                        <div class="th-inner ">
+                                            公司名称
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="customerClaim" data-field="customerClaim" style="">
+                                        <div class="th-inner ">
+                                            客户认领
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="mail" data-field="mail" style="">
+                                        <div class="th-inner ">
+                                            QQ/邮箱
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="province" data-field="province" style="">
+                                        <div class="th-inner ">
+                                            所在省份
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th class="createTime" data-field="createTime" style="">
+                                        <div class="th-inner ">
+                                            创建时间
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th data-field="operate" style="">
+                                        <div class="th-inner ">
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="">
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="contact" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="contactWay" style="">
+                                        <p>
+                                            123123
+                                        </p>
+                                        <p>
+                                            123456798
+                                        </p>
+                                    </td>
+                                    <td class="companyName" style="">
+                                        <p class="">
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <p>
+                                        </p>
+                                    </td>
+                                    <td class="customerClaim" style="">
+                                        <p class="">
+                                            张三
+                                        </p>
+                                    </td>
+                                    <td class="mail" style="">
+                                        <p class="">
+                                            1231321321
+                                        </p>
+                                        <p class="">
+                                            1321313213
+                                        </p>
+                                    </td>
+                                    <td class="province" style="">
+                                        <p class="">
+                                            广东省
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p class="createTime">
+                                            2017/9/18 10:00
+                                        </p>
+                                        <p>
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <p class="modify">
+                                            <img th:src="@{/img/more3.png}"/>
+                                        </p>
+                                        <ul class="slideEdit">
+                                            <li>
+                                                <a class="dealing" href="#" mce_href="#">
+                                                    分配
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="editCustomer.html" mce_href="#">
+                                                    编辑
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="delete" href="#" mce_href="#">
+                                                    删除
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="">
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td class="contact" style="">
+                                        <p>
+                                            汤姆斯
+                                        </p>
+                                    </td>
+                                    <td class="contactWay" style="">
+                                        <p>
+                                            123123
+                                        </p>
+                                        <p>
+                                            123456798
+                                        </p>
+                                    </td>
+                                    <td class="companyName" style="">
+                                        <p class="">
+                                            广州润普网络科技有限公司
+                                        </p>
+                                        <p>
+                                        </p>
+                                    </td>
+                                    <td class="customerClaim" style="">
+                                        <p class="">
+                                            张三
+                                        </p>
+                                    </td>
+                                    <td class="mail" style="">
+                                        <p class="">
+                                            1231321321
+                                        </p>
+                                        <p class="">
+                                            1321313213
+                                        </p>
+                                    </td>
+                                    <td class="province" style="">
+                                        <p class="">
+                                            广东省
+                                        </p>
+                                    </td>
+                                    <td class="createTime" style="">
+                                        <p class="createTime">
+                                            2017/9/18 10:00
+                                        </p>
+                                        <p>
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <p class="modify">
+                                            <img th:src="@{/img/more3.png}"/>
+                                        </p>
+                                        <ul class="slideEdit">
+                                            <li>
+                                                <a class="dealing" href="#" mce_href="#">
+                                                    分配
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="editCustomer.html" mce_href="#">
+                                                    编辑
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="delete" href="#" mce_href="#">
+                                                    删除
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="fixed-table-pagination">
+                            <div class="pull-right pagination">
+                                <ul class="pagination">
+                                    <li class="page-first"><a href="#">首页</a></li>
+                                    <li class="page-pre"><a href="#">上一页</a></li>
+                                    <li class="page-number"><a href="#">1</a></li>
+                                    <!-- <li class="page-first-separator disabled"><a href="#">...</a></li> -->
+                                    <li class="page-number"><a href="#">2</a></li>
+                                    <li class="page-number"><a href="#">3</a></li>
+                                    <li class="page-number"><a href="#">4</a></li>
+                                    <li class="page-number active"><a href="#">5</a></li>
+                                    <li class="page-number"><a href="#">6</a></li>
+                                    <li class="page-number"><a href="#">7</a></li>
+                                    <li class="page-number"><a href="#">8</a></li>
+                                    <li class="page-number"><a href="#">9</a></li>
+                                    <li class="page-number"><a href="#">10</a></li>
+                                    <li class="page-number"><a href="#">11</a></li>
+                                    <li class="page-number"><a href="#">12</a></li>
+                                    <li class="page-number"><a href="#">13</a></li>
+                                    <li class="page-number"><a href="#">14</a></li>
+                                    <li class="page-number"><a href="#">15</a></li>
+                                    <li class="page-number"><a href="#">16</a></li>
+                                    <li class="page-number"><a href="#">17</a></li>
+                                    <li class="page-number"><a href="#">18</a></li>
+                                    <li class="page-number"><a href="#">19</a></li>
+                                    <!-- <li class="page-last-separator disabled"><a href="#">...</a></li> -->
+                                    <li class="page-number"><a href="#">20</a></li>
+                                    <li class="page-next"><a href="#">下一页</a></li>
+                                    <li class="page-last"><a href="#">尾页</a></li>
+                                </ul>
+                                <div class="jump">
+                                    <label>调转
+                                        <select>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

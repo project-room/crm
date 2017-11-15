@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+            <title>
+                客户关系管理系统
+            </title>
+            <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap-table.js}"></script>
+            <script th:src="@{/js/jquery.nicescroll.js}"></script>
+            <script th:src="@{/laydate/laydate.js}"></script>
+            <script th:src="@{/js/simpleAlert.js}"></script>
+            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+            <link th:href="@{/css/default.css}" rel="stylesheet"/>
+            <link th:href="@{/css/setting.css}" rel="stylesheet"/>
+            <script th:src="@{/js/default.js}"></script>
+            <script th:src="@{/js/setting.js}" ></script>
+        </meta>
+    </head>
+    <body>
+        
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" th:src="@{/img/logo.png}"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
+            </div>
+            <ul>
+                <li>
+                    <a href="/crm/cstCustomer/toIndex">
+                        <img alt="首页" th:src="@{/img/index.png}"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/crm/cstCustomer/getPage/1/7">
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
+                        <span class="navTxt">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chance.html">
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li><a href="contract.html"><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
+                <li>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li class="active">
+                    <a href="/crm/sysUser/getSysUserList/1/10">
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent">
+            <div class="header">
+                <div>
+                    <input placeholder="请输入客户名称" type="text" class="searchName"/>
+                    <button class="search">
+                        <img alt="" th:src="@{/img/searchIcon.png}"/>
+                    </button>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName">
+
+                        </span>
+                        <span class="xiala">
+                            <img th:src="@{/img/xiala.png}"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a href="">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a class="systemSetting">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a class="loginOut">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div>
+                    <div class="mainHeader">
+                        <div class="fleft">
+                            <ul>
+                                <li class="active"><a href="/crm/sysUser/getSysUserList/1/10">用户管理</a></li>
+                                <li class="org"><a href="javascript:void(0);">组织架构管理</a><i></i>
+                                    <ul class="bumen dnone">
+                                        <li>
+                                            <a href="organize.html">销售部</a>
+                                            <ul class="quyu">
+                                                <li><a th:href="@{'/cstCustomer/toOrganize'}">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="organize.html">技术支持</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="organize.html">财务部</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="organize.html">行政部</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="cus"><a href="javascript:void(0);">自定义字段设置</a><i></i>
+                                    <ul class="dnone">
+                                        <li><a href="customField.html">机会</a></li>
+                                        <li><a href="customField.html">合同</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="process.html">业务流程设置</a></li>
+                                <li><a href="argument.html">参数设置</a></li>
+                            </ul>
+                            
+                        </div>
+                        <div class="fright">
+                            <p>
+                                <input type="text" name="userNameOrAccount" placeholder="请输入员工名字或登陆账号"/>
+                                <i id="searchUserNameOrAccount"><img th:src="@{/img/search.png}" alt="搜索"/></i>
+                            </p>
+                            <a th:href="@{'/cstCustomer/toAddEmployee'}">
+                                添加员工
+                            </a>
+                        </div>
+                    </div>
+                    <div class="allOperate dnone">
+                        <label class="forCheckbox">
+                            <input type="checkbox" name="" />
+                        </label>
+                        <a class="editSysUserInfo" ><img th:src="@{/img/edit.png}" />修改信息</a>
+                        <a href="javascript:void(0);" class="stopAccount"><img th:src="@{/img/stopAcc.png}" />停用账号</a>
+                    </div>
+                    <div class="content">
+                        <table class="table table-hover" id="table">
+                            <thead>
+                                <tr >
+                                    <th style="">
+                                        <div class="th-inner ">
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner ">
+                                            员工
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner ">
+                                            登陆账号
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner ">
+                                            状态
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner ">
+                                            手机号
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner ">
+                                            部门
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                    <th style="">
+                                        <div class="th-inner ">
+                                            职位
+                                        </div>
+                                        <div class="fht-cell">
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="sysUser:${sysUserPage.list}">
+                                    <input type="hidden" th:value="${sysUser.userId}"  name="" />
+                                    <td style="">
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userName}"></p>
+                                    </td>
+                                    
+                                    <td style="">
+                                        <p th:text="${sysUser.userAccounts}"></p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userStatus eq 1?'正常':'停用'} "></p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userPhone}"></p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userDepartment}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${sysUser.userPosition}"></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="fixed-table-pagination">
+                            <span class="employeeNum">共<span th:text="${sysUserPage.recTotal}"></span>条员工记录</span>
+                            <div class="pull-right pagination">
+                                <ul class="pagination">
+                                    <li class="page-first"><a th:href="@{'/sysUser/getSysUserList/1/10'}">首页</a></li>
+                                    <li class="page-pre">
+                                        <a th:href="@{'/sysUser/getSysUserList/'+${((sysUserPage.currentPage-1) le 0?1:(sysUserPage.currentPage-1))}+'/10'}">
+                                            上一页
+                                        </a>
+                                    </li>
+                                    <li class="page-number"  th:each="arr:${arrInteger}"><a th:href="@{'/sysUser/getSysUserList/'+${arr}+'/10'}" th:text="${arr}"></a></li>
+                                    <li class="page-next">
+                                        <a th:href="@{'/sysUser/getSysUserList/'+${(sysUserPage.currentPage+1) ge (sysUserPage.totalPage)?(sysUserPage.totalPage):(sysUserPage.currentPage+1)}+'/10'}">
+                                            下一页
+                                        </a>
+                                    </li>
+                                    <li class="page-last"><a th:href="@{'/sysUser/getSysUserList/'+${sysUserPage.totalPage}+'/10'}">尾页</a></li>
+                                </ul>
+                                <div class="jump">
+                                    <label>调转
+                                        <select>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

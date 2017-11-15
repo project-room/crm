@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.orgs">
+    <head>
+        <meta charset="utf-8">
+            <title>
+                客户关系管理系统
+            </title>
+            <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap-table.js}"></script>
+            <script th:src="@{/js/jquery.nicescroll.js}"></script>
+            <script th:src="@{/laydate/laydate.js}"></script>
+            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+            <link th:href="@{/css/default.css}" rel="stylesheet"/>
+            <link th:href="@{/css/setting.css}" rel="stylesheet"/>
+            <script th:src="@{/js/default.js}"></script>
+            <script th:src="@{/js/setting.js}" th:inline="javascript"></script>
+        </meta>
+    </head>
+    <body class="EmployeeMsg">
+        
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" th:src="@{/img/logo.png}"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
+            </div>
+            <ul>
+                <li>
+                    <a href="/crm/cstCustomer/toIndex">
+                        <img alt="首页" th:src="@{/img/index.png}"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/crm/cstCustomer/getPage/1/7">
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
+                        <span class="navTxt">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chance.html">
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li><a href="contract.html"><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
+                <li>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li class="active">
+                    <a href="/crm/sysUser/getSysUserList/1/10">
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent">
+            <div class="header">
+                <div>
+                    <input placeholder="请输入客户名称" type="text"/>
+                    <button>
+                        <img alt="" th:src="@{/img/searchIcon.png}"/>
+                    </button>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName">
+
+                        </span>
+                        <span class="xiala">
+                            <img th:src="@{/img/xiala.png}"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a href="">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a class="systemSetting">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div>
+                    <div class="mainHeader">
+                        <div class="fleft">
+                            <ul>
+                                <li class="active"><a href="/crm/sysUser/getSysUserList/1/10">用户管理</a></li>
+                                <li class="org"><a href="javascript:void(0);">组织架构管理</a><i></i>
+                                    <ul class="bumen dnone">
+                                        <li>
+                                            <a href="organize.html">销售部</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="organize.html">技术支持</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="organize.html">财务部</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="organize.html">行政部</a>
+                                            <ul class="quyu">
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a href="organize.html">1A区</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="cus"><a href="javascript:void(0);">自定义字段设置</a><i></i>
+                                    <ul class="dnone">
+                                        <li><a href="customField.html">机会</a></li>
+                                        <li><a href="customField.html">合同</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="process.html">业务流程设置</a></li>
+                                <li><a href="argument.html">参数设置</a></li>
+                            </ul>
+                            
+                        </div>
+                        <div class="fright">
+                            <a href="#">
+                                添加字段
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="content">
+                        <h4>修改员工</h4>
+                        <form>
+                            <input type="hidden" th:value="${sysUser.userId}"  name="userId" />
+                            <label>
+                                <span>员工名字</span>
+                                <input type="text" name="userName" th:value="${sysUser.userName}" />
+                            </label>
+                            <label>
+                                <span>登录账号</span>
+                                <input type="text" name="userAccounts" th:value="${sysUser.userAccounts}" />
+                            </label>
+                            <label>
+                                <span>输入密码</span>
+                                <input type="password" name="userPassword" th:value="${sysUser.userPassword}"/>
+                            </label>
+                            <label>
+                                <span>确认密码</span>
+                                <input type="password" name="" />
+                            </label>
+                            <label>
+                                <span>状态</span>
+                                <select>
+                                    <option selected="selected" th:value="${sysUser.userStatus eq 1?'正常':'停用'}" th:text="${sysUser.userStatus eq 1?'正常':'停用'}"></option>
+                                    <option  th:value="${sysUser.userStatus eq 1?'停用':'正常'}" th:text="${sysUser.userStatus eq 1?'停用':'正常'}"></option>
+                                    <input type="hidden" th:value="${sysUser.userStatus}"  name="userStatus" />
+                                </select>
+                            </label>
+                            <label>
+                                <span>手机号码</span>
+                                <input type="text" name="userPhone" th:value="${sysUser.userPhone}" />
+                            </label>
+                            <label>
+                                <span>部门</span>
+                                <input type="text" name="userDepartment" th:value="${sysUser.userDepartment}" />
+                            </label>
+                            <label>
+                                <span>职位</span>
+                                <input type="text" name="userPosition" th:value="${sysUser.userPosition}" />
+                            </label>
+                            <label>
+                                <span>负责区域</span>
+                                <select>
+                                    <option selected="selected">A区</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>角色</span>
+                                <select class="juese">
+                                    <option value="管理员" th:text="${sysUser.roleId eq 1?'销售经理':(sysUser.roleId eq 2?'销售员':'管理员')}"></option>
+                                    <option value="销售经理" th:text="${sysUser.roleId eq 1?'销售员':(sysUser.roleId eq 2?'管理员':'销售经理')}"></option>
+                                    <option value="销售员" selected="selected" th:text="${sysUser.roleId eq 1?'管理员':(sysUser.roleId eq 2?'销售经理':'销售员')}"></option>
+                                </select>
+                            </label>
+                        </form>
+                        <div class="btngroup">
+                            <button class="save" id="editEmployee">保存</button>
+                            <button class="cancel">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
