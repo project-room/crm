@@ -30,4 +30,25 @@ public interface SysUserMapper {
 
     //根据用户手机号码来获取用户
     SysUser selectSysUserByPhone(@Param("phone") String phone);
+
+    //根据用户id来获取用户和角色信息
+    SysUser selectSysUserAndRoleInfoBySysUserId(Long sysUserId);
+
+    //获取用户列表
+    List<SysUser> selectSysUserList(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
+
+    //添加员工
+    void addSysUserInfo(SysUser sysUser);
+
+    //用户总记录条数
+    Long getCounts();
+
+    //根据用户名或账号获取用户的集合
+    List<SysUser> selectSysUserByUserNameOrAccount(@Param("userNameOrAccount") String userNameOrAccount,@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
+
+    //根据用户名或账号获取用户总记录条数
+    Long  selectCountByUserNameOrAccount(@Param("userNameOrAccount") String userNameOrAccount);
+
+    //根据用户id获取用户信息
+    SysUser selectSysUserById(Long userId);
 }

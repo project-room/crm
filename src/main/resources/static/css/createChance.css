@@ -1,5 +1,8 @@
 .main .baseInfo { margin:30px 1.5%; background: #fff; min-height: 240px; padding: 20px 0; box-sizing: border-box;}
-.main .baseInfo div { float: left; padding: 0 20px; height: 220px; box-sizing: border-box; }
+.main .baseInfo div { float: left; padding: 40px 20px; height: 220px; box-sizing: border-box; text-align: center; }
+.main .baseInfo div img { height: 100px; width: 100px; }
+.main .baseInfo div input[type=file] { visibility: hidden; }
+.main .baseInfo div p { color: #7460ee; font-size: 14px; margin: 10px; }
 .main .baseInfo div:first-child { border-right: 1px solid #eee; }
 .main .baseInfo div input[type=text] { width: 100%; border: none; outline: none; border-bottom: 1px solid #eee; font-size: 14px; margin-bottom: 20px; }
 
@@ -12,7 +15,7 @@
 .saleMsg ul, .contactMsg ul, .detailMsg ul { padding: 0 20px; color: #999; font-size: 14px; }
 .saleMsg ul li, .contactMsg li, .detailMsg li { line-height: 36px; margin-top: 10px; }
 .saleMsg ul li label, .contactMsg ul li label,  .detailMsg ul li label { width: 100%; border-bottom: 1px solid #eee; }
-.saleMsg ul input, .saleMsg ul select, .contactMsg ul input, .detailMsg ul input,  .detailMsg ul select { border: none; outline: none; width: 100%; }
+.saleMsg ul input, .saleMsg ul select, .contactMsg ul input, .detailMsg ul input,  .detailMsg ul select { border: none; outline: none; width: 100%; color: #999; }
 
 .detailMsg ul ul { padding: 0; }
 .detailMsg ul ul li { float: left; width: 40%; margin-right: 20px; }

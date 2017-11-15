@@ -20,17 +20,27 @@ $(function() {
 		location.href = 'seas.html';
 	})
 
-	//通过用户名换取用户id
-	var userName=$("#userNameRevertUserId").text();
+    // //通过用户名换取用户id
+    // var userNameChange=$("#userNameRevertUserId").text();
+    // $.ajax({
+    //     url: "/crm/sysUser/userNameRevertUserId",
+    //     data:{"userName":userNameChange},
+    //     type: "POST",
+    //     success: function (data) {
+    //         $("#forUserId").val(data.toString());
+    //     }, fail: function (data) {
+    //     }
+    // });
+    //获取用户id
     $.ajax({
-        url: "/crm/sysUser/userNameRevertUserId",
-        data:{"userName":userName},
+        url: "/crm/sysUser/loadUserId",
         type: "POST",
         success: function (data) {
-			$("#forUserId").val(data.toString());
+            $("#forUserId").val(data.toString());
         }, fail: function (data) {
         }
     });
+
     
     //保存客户
 	$("#save").click(function () {
@@ -39,6 +49,20 @@ $(function() {
 	//取消保存客户
 	$("#cancel").click(function () {
 		location.href="/crm/cstCustomer/getPage/1/7";
+    });
+
+    //如果没有登录调到登录页面
+    $.ajax({
+        url:"/crm/sysUser/loadUserId",
+        type:"POST",
+        success:function (data) {
+            var userId=data.toString();
+            if(userId=='null'){
+                location.href="/crm/cstCustomer/toLogin";
+            }
+        },fail:function (data) {
+
+        }
     });
 });
 

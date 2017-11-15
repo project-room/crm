@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,10 +44,13 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     }
 
     @Override
-    public Page<CstCustomer> getCstCustomerOnePageInfo(int currentPage, int pageSize) {
-        Long count=cstCustomerMapper.getCstCustomerCount();
+    public Page<CstCustomer> getCstCustomerOnePageInfo(Long userIdForPage,String roleName,int currentPage, int pageSize) {
+
+        Long  count=cstCustomerMapper.getCstCustomerCount(userIdForPage,roleName);
+
+
        int currentPageLimit=(currentPage-1)*pageSize;
-       List<CstCustomer> cstCustomers= cstCustomerMapper.getPageCstCustomerInfo(currentPageLimit,pageSize);
+       List<CstCustomer> cstCustomers= cstCustomerMapper.getPageCstCustomerInfo(userIdForPage,roleName,currentPageLimit,pageSize);
      //通过用户id获取用户名
         for (CstCustomer cstCustomer:cstCustomers
              ) {
@@ -65,10 +69,10 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     }
 
     @Override
-    public List<CstCustomer> selectCstCustomerByName(String custCompany,Integer currentPage,Integer pageSize) {
+    public List<CstCustomer> selectCstCustomerByName(Long userIdForPage,String roleName,String custCompany,Integer currentPage,Integer pageSize) {
         Integer currentPageInt=(currentPage-1)*pageSize;
         custCompany="%"+custCompany+"%";
-        List<CstCustomer>  cstCustomers= cstCustomerMapper.selectCstCustomerByName(custCompany,currentPageInt,pageSize);
+        List<CstCustomer>  cstCustomers= cstCustomerMapper.selectCstCustomerByName(userIdForPage,roleName,custCompany,currentPageInt,pageSize);
         return cstCustomers;
     }
 
@@ -148,17 +152,19 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      * @return
      */
     @Override
-    public Page<CstCustomer> selectCstCustomerByCondition(CstCustomer cstCustomer, ChLinkman chLinkman,Integer currentPage,Integer pageSize) {
-       Integer currentPageLimit=(currentPage-1)*pageSize;
-       List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
+    public Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, Integer currentPage, Integer pageSize) {
+        String userNameLike="%"+userName+"%";
+        Integer currentPageLimit=(currentPage-1)*pageSize;
+        List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
         cstCustomer.setCustCompany("%"+cstCustomer.getCustCompany()+"%");
         chLinkman.setLinkName("%"+chLinkman.getLinkName()+"%");
         chLinkman.setLinkPhone("%"+chLinkman.getLinkPhone()+"%");
         chLinkman.setLinkLandlinePhone("%"+chLinkman.getLinkLandlinePhone()+"%");
         chLinkman.setLinkQq("%"+chLinkman.getLinkQq()+"%");
         chLinkman.setLinkEmail("%"+chLinkman.getLinkEmail()+"%");
-        cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(cstCustomer,chLinkman,currentPageLimit,pageSize);
-        Long count=cstCustomerMapper.getCountByCondition(cstCustomer,chLinkman);
+        cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPageLimit,pageSize);
+
+        Long count=cstCustomerMapper.getCountByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman);
        return new Page<CstCustomer>(currentPageLimit,pageSize,cstCustomers,count);
     }
 
@@ -168,9 +174,9 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      * @return
      */
     @Override
-    public Long selectCountByCstCustomerName(String custCompany) {
+    public Long selectCountByCstCustomerName(Long userIdForPage,String roleName,String custCompany) {
        String  custCompanyStr="%"+custCompany+"%";
-       Long count= cstCustomerMapper.selectCountByCstCustomerName(custCompanyStr);
+       Long count= cstCustomerMapper.selectCountByCstCustomerName(userIdForPage, roleName,custCompanyStr);
         return count;
     }
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.biz.sys.dao.SysRightMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.entity.SysRight" >
+    <id column="right_id" property="rightId" jdbcType="BIGINT" />
+    <result column="right_text" property="rightText" jdbcType="VARCHAR" />
+    <result column="right_url" property="rightUrl" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

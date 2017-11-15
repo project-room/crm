@@ -3,10 +3,14 @@ package com.crm.controller;
 import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.biz.sys.service.ISysUserService;
 import com.crm.common.BaseController;
+import com.crm.common.Page;
+import com.crm.entity.SysRole;
 import com.crm.entity.SysUser;
 import com.crm.utils.AliSms;
 import com.crm.utils.SixCaptchaUtil;
 import com.crm.utils.TypeUtil;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -16,11 +20,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.WebParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -45,13 +54,21 @@ public class SysUserController extends BaseController {
         return map;
     }
 
-    //用户登陆
+    //用户登录
     @RequestMapping("/userLogin")
-    public String login(String username,String password ,HttpServletResponse response){
+    public String login(String username,String password ,HttpServletResponse response,Model model){
          Map map= result();
          SysUser sysUser=sysUserService.login(username,password);
-         if(sysUser!=null){
+         //如果用户为停用状态不能登录
+         if(sysUser!=null&&sysUser.getUserStatus()!=0){
              redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
+            //获取用户的角色
+             Long roleId=sysUser.getRoleId();
+             SysRole sysRole=sysUserService.selectRoleById(roleId);
+             session.setAttribute("roleName",sysRole.getRoleName());
+             session.setAttribute("userId",sysUser.getUserId());
+             model.addAttribute("roleName",sysRole.getRoleName());
+             //用户状态如何为停用状态不能登录成功
              return "index/index";
          }
         return "index/login";
@@ -131,13 +148,14 @@ public class SysUserController extends BaseController {
     //根据用户名获取用户id
     @RequestMapping("/userNameRevertUserId")
     public void userNameRevertUserId(HttpServletRequest request, HttpServletResponse response){
+
         String userName=request.getParameter("userName");
         try {
             Long userId= sysUserService.selectUserIdByUserName(userName);
            PrintWriter out= response.getWriter();
             out.print(userId);
-        } catch (Exception e) {e.printStackTrace();
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -199,5 +217,173 @@ public class SysUserController extends BaseController {
       sysUserService.updateSysUserById(sysUser);
       session.setAttribute("sysUserPhone",null);
       return "index/login";
+    }
+
+    /**
+     * 页面获取session
+     * @param response
+     */
+    @RequestMapping("/getSession")
+    public void toGetSession(HttpServletRequest request,HttpServletResponse response){
+        try {
+            //设置编码为UTF-8
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out= response.getWriter();
+           String roleName= session.getAttribute("roleName").toString();
+           //判读是否为空
+            out.print(roleName);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 获取分页用户列表
+     */
+    @RequestMapping("/getSysUserList/{currentPage}/{pageSize}")
+    public String getSysUserList(Model model,@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize){
+        Map map=result();
+        try {
+            Page<SysUser> sysUserPage= sysUserService.getSysUserPage(currentPage,pageSize);
+            //组装分页数组
+            List<Long> arrInteger=new ArrayList<Long>();
+            Long totalPage=sysUserPage.getTotalPage();
+            for(int i=1;i<=totalPage;i++){
+                arrInteger.add(new Long(i));
+            }
+            model.addAttribute("arrInteger",arrInteger);
+            model.addAttribute("sysUserPage",sysUserPage);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return "index/setting";
+    }
+
+    @RequestMapping("/addSysUser")
+    public void addSysUser(SysUser sysUser,SysRole sysRole){
+        //1-正常用户
+        sysUser.setUserStatus(1);
+        sysUserService.addSysUserBySysUserAndSysRole(sysUser,sysRole);
+    }
+
+    /**
+     * 根据用户名或账号搜索分页用户
+     * @param userNameOrAccount
+     * @param currentPage
+     * @param pageSize
+     */
+    @RequestMapping("/searchUserNameOrAccount/{userNameOrAccount}/{currentPage}/{pageSize}")
+    public String searchUserNameAndAccount(@PathVariable("userNameOrAccount") String userNameOrAccount,@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize,Model model){
+      Page<SysUser> sysUserPage=sysUserService.selectSysUserPageByUserNameAndAccount(userNameOrAccount,currentPage,pageSize);
+        //组装分页数组
+        List<Long> arrInteger=new ArrayList<Long>();
+        Long totalPage=sysUserPage.getTotalPage();
+        for(int i=1;i<=totalPage;i++){
+            arrInteger.add(new Long(i));
+        }
+        model.addAttribute("arrInteger",arrInteger);
+      model.addAttribute("sysUserPage",sysUserPage);
+      return "index/setting";
+    }
+
+    /**
+     * 根据用户id获取用户信息
+     * @param userIdStr
+     */
+    @RequestMapping("/getSysUserInfoById/{userIdStr}")
+    public String getSysUserInfoById(@PathVariable("userIdStr") String userIdStr, Model model){
+
+        Long userId=null;
+        if(userIdStr.contains("-")){
+//            int index= custId.indexOf("-");
+            //去掉首字符"-"
+            String revertSysUserIdArr=userIdStr.substring(1);
+            String[] idArr= revertSysUserIdArr.split("-");
+            userId=new Long(idArr[0]);
+
+        }else{
+            userId=new Long(userIdStr);
+        }
+
+        SysUser sysUser= sysUserService.selectSysUserInfoById(userId);
+        if(sysUser!=null){
+            model.addAttribute("sysUser",sysUser);
+        }
+        return "index/editEmployee";
+    }
+
+    /**
+     * 登出功能
+     * @return
+     */
+    @RequestMapping("/loginOut")
+    public String loginOut(){
+        session.setAttribute("roleName",null);
+        session.setAttribute("userId",null);
+        return "index/login";
+    }
+
+    /**
+     * 编辑用户
+     * @param sysUser
+     */
+    @RequestMapping("/editSysUserInfo")
+    public void editSysUserInfo(SysUser sysUser){
+        if(sysUser.getUserStatus()==0){
+            sysUser.setUserStatus(1);
+        }else{
+            sysUser.setUserStatus(0);
+        }
+       sysUserService.updateSysUserById(sysUser);
+    }
+
+    //加载用户名
+    @RequestMapping("/loadUserName")
+    public void loadUserName(HttpServletRequest request,HttpServletResponse response){
+        try {
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            PrintWriter out=response.getWriter();
+            Long userId=(Long) session.getAttribute("userId");
+            SysUser sysUser=sysUserService.selectSysUserInfoById(userId);
+            //判断是否为空
+            String userName=sysUser.getUserName();
+            out.print(userName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/loadUserId")
+    public void loadUserId(HttpServletRequest request,HttpServletResponse response){
+        try {
+            PrintWriter out=response.getWriter();
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            Long userId=(Long) session.getAttribute("userId");
+            out.print(userId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 用户停用
+     * @param userIdArr
+     */
+    @RequestMapping("/stopSysUserStatus/{userIdArr}")
+    public String stopSysUserStatus(@PathVariable("userIdArr") String userIdArr){
+        //去掉首字符"-"
+        String revertCustIdArr=userIdArr.substring(1);
+        String[] idArr= revertCustIdArr.split("-");
+        for (int i=0;i<idArr.length;i++){
+        Long userId=new Long(idArr[i]);
+        SysUser sysUser=sysUserService.selectSysUserInfoById(userId);
+         sysUser.setUserStatus(0);
+         sysUserService.updateSysUserById(sysUser);
+        }
+        return "redirect:"+"/sysUser/getSysUserList/1/10";
     }
 }

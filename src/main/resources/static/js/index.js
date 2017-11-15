@@ -34,6 +34,36 @@ $(function() {
     // $("#gongHai").click(function () {
 		// location.href="/crm/cstCustomer/toSeas";
     // });
+
+
+    // //未登录进来跳到登录页面
+    // var roleNameSession = sessionStorage.getItem('roleNameSession');
+    // if(roleNameSession!="管理员"&&roleNameSession!="销售经理"&&roleNameSession!="销售员"){
+    //     location.href="/crm/cstCustomer/toLogin";
+    // }
+
+    // //如果用户没有登录跳到用户登录页面
+    // var roleNameSession = sessionStorage.getItem('roleNameSession');
+    // if(roleNameSession==null||roleNameSession==""){
+    //     location.href="/crm/cstCustomer/toLogin"
+    // }
+
+	//如果没有登录调到登录页面
+    $.ajax({
+		url:"/crm/sysUser/loadUserId",
+		type:"POST",
+		success:function (data) {
+            var userId=data.toString();
+            if(userId=='null'){
+            	location.href="/crm/cstCustomer/toLogin";
+			}
+        },fail:function (data) {
+			
+        }
+	});
+
+
+
 });
 
 function scroll(ele) {

@@ -11,6 +11,7 @@ $(function() {
 	//登录
 	$("#loginButton").click(function () {
 		$("#loginForm").submit();
+
     });
 
 	//获取短信验证码
@@ -67,5 +68,4 @@ $(function() {
      //        }
      //    });
 	// }
-
 });

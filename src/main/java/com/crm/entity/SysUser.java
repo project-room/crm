@@ -11,6 +11,9 @@ import java.util.List;
 public class SysUser {
     private Long userId;
 
+    //角色id
+    private Long roleId;
+
     private String userName;
 
     private String userAccounts;
@@ -36,6 +39,9 @@ public class SysUser {
     private List<UserTask> taskList;
 
     private List<CstChance> chanceList;
+
+    //多个用户对应一个角色
+    private SysRole sysRole;
 
     public List<CstChance> getChanceList() {
         return chanceList;
@@ -147,5 +153,21 @@ public class SysUser {
 
     public void setUserState(Integer userState) {
         this.userState = userState;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public SysRole getSysRole() {
+        return sysRole;
+    }
+
+    public void setSysRole(SysRole sysRole) {
+        this.sysRole = sysRole;
     }
 }
