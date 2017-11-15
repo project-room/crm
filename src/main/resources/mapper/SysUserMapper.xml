@@ -3,6 +3,8 @@
 <mapper namespace="com.crm.biz.sys.dao.SysUserMapper" >
   <resultMap id="BaseResultMap" type="com.crm.entity.SysUser" >
     <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <!--角色id-->
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_accounts" property="userAccounts" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
@@ -13,6 +15,14 @@
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_workphone" property="userWorkphone" jdbcType="VARCHAR" />
     <result column="user_state" property="userState" jdbcType="INTEGER" />
+    <!--用户表和角色表的关联-->
+    <association  property="sysRole" column="role_id" javaType="SysRole" >
+      <id property="roleId" column="role_id"/>
+      <result property="roleName" column="role_name" />
+      <result property="roleDesc" column="role_desc" />
+      <result property="roleFlag" column="role_flag" />
+    </association>
+
     <!--用户表和客户表的关联-->
     <collection property="customerList" ofType="com.crm.entity.CstCustomer">
       <id column="cust_id" property="custId" jdbcType="BIGINT" />
@@ -65,6 +75,9 @@
       <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
       <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
     </collection>
+
+
+
   </resultMap>
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM sys_user WHERE user_id=#{id}
@@ -80,7 +93,7 @@
     UPDATE  sys_user SET user_status = 0 WHERE  user_id = #{id}
   </update>
   <update id="updateSysUserById" parameterType="SysUser">
-    UPDATE sys_user SET user_name=#{userName},user_accounts=#{userAccounts},user_password=#{userPassword},user_status=#{userStatus},user_department=#{userDepartment},user_position=#{userPosition},user_email=#{userEmail},user_phone=#{userPhone},user_workphone=#{userWorkphone} WHERE user_id=#{userId}
+    UPDATE sys_user SET user_name=#{userName},user_accounts=#{userAccounts},user_password=#{userPassword},user_status=#{userStatus},user_department=#{userDepartment},user_position=#{userPosition},user_email=#{userEmail},user_phone=#{userPhone},user_workphone=#{userWorkphone},role_id=#{roleId} WHERE user_id=#{userId}
   </update>
   <select id="findByAccount" parameterType="String" resultMap="BaseResultMap">
     select * from sys_user where user_accounts = #{account}
@@ -91,11 +104,47 @@
   </select>
 
   <select id="loginAccountAndUserName" parameterType="map" resultMap="BaseResultMap">
-      SELECT * FROM sys_user WHERE user_accounts=#{account} AND user_password=#{password}
+      SELECT * FROM sys_user  WHERE user_accounts=#{account} AND user_password=#{password}
   </select>
 
   <!--根据手机号码来查询用户-->
   <select id="selectSysUserByPhone" parameterType="String" resultMap="BaseResultMap">
           SELECT * FROM sys_user WHERE user_phone=#{phone}
+  </select>
+
+  <!--根据用户id查询用户和角色信息-->
+  <select id="selectSysUserAndRoleInfoBySysUserId" parameterType="Long" resultMap="BaseResultMap">
+        SELECT * FROM sys_user su ,sys_role sr WHERE su.`role_id`=sr.`role_id` AND su.`user_id`=#{sysUserId}
+  </select>
+
+  <!--获取用户列表-->
+  <select id="selectSysUserList" parameterType="Integer" resultMap="BaseResultMap">
+SELECT * FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id` LIMIT #{currentPage},#{pageSize}
+  </select>
+
+  <!--添加员工-->
+  <insert id="addSysUserInfo" parameterType="SysUser">
+INSERT INTO sys_user(role_id,user_name,user_accounts,user_password,user_status,user_department,user_position,user_phone)
+VALUES(#{roleId},#{userName},#{userAccounts},#{userPassword},#{userStatus},#{userDepartment},#{userPosition},#{userPhone})
+  </insert>
+
+  <!--获取用户总记录条数-->
+  <select id="getCounts" resultType="Long">
+SELECT COUNT(1) FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id`
+  </select>
+
+  <!--根据用户名或账号获取用户的集合-->
+  <select id="selectSysUserByUserNameOrAccount" parameterType="map" resultMap="BaseResultMap">
+SELECT * FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id` HAVING user_name LIKE #{userNameOrAccount} OR user_accounts LIKE #{userNameOrAccount} LIMIT #{currentPage},#{pageSize}
+  </select>
+
+  <!--根据用户名或账号获取用户总录数-->
+  <select id="selectCountByUserNameOrAccount" parameterType="String" resultType="Long">
+    SELECT COUNT(1) FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id`  AND (user_name LIKE #{userNameOrAccount} OR user_accounts LIKE #{userNameOrAccount} )
+  </select>
+
+  <!--根据用户id获取用户的信息-->
+  <select id="selectSysUserById" parameterType="Long" resultMap="BaseResultMap">
+    SELECT * FROM sys_user su ,sys_role sr WHERE su.`role_id`=sr.`role_id` AND su.`user_id`=#{userId}
   </select>
 </mapper>

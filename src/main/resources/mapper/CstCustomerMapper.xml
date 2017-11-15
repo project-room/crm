@@ -100,13 +100,23 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     </insert>
 
     <!--公海客户分页-->
-    <select id="getPageCstCustomerInfo" parameterType="int" resultMap="BaseResultMap">
-      SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  LIMIT #{currentPageLimit},#{pageSize}
+    <select id="getPageCstCustomerInfo" parameterType="map" resultMap="BaseResultMap">
+        <if test="roleName=='管理员'||roleName=='销售经理'">
+            SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  LIMIT #{currentPageLimit},#{pageSize}
+        </if>
+        <if test="roleName=='销售员'">
+            SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`user_id`=#{userIdForPage} LIMIT #{currentPageLimit},#{pageSize}
+        </if>
     </select>
 
     <!--获取公海客户总记录数-->
-    <select id="getCstCustomerCount" resultType="Long">
-        SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`
+    <select id="getCstCustomerCount" parameterType="map" resultType="Long">
+            <if test="roleName=='管理员'||roleName=='销售经理'">
+                SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`
+            </if>
+            <if test="roleName=='销售员'">
+                SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`user_id`=#{userIdForPage}
+            </if>
     </select>
 
     <!--根据id查看公海客户信息-->
@@ -116,7 +126,13 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
 
     <!--根据客户名称模糊查询客户-->
     <select id="selectCstCustomerByName"  resultMap="BaseResultMap">
-      SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany} LIMIT #{currentPage},#{pageSize}
+        <if test="roleName=='管理员'||roleName=='销售经理'">
+            SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany} LIMIT #{currentPage},#{pageSize}
+        </if>
+        <if test="roleName=='销售员'">
+            SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  user_id=#{userIdForPage} AND cust_company LIKE #{custCompany} LIMIT #{currentPage},#{pageSize}
+        </if>
+
     </select>
 
     <!--根据客户id删除客户信息以及与之关联的联系人信息-->
@@ -131,23 +147,43 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
 
     <!--根据条件筛选公海客户-->
     <select id="selectCstCustomerByCondition" parameterType="map" resultMap="BaseResultMap">
-      SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` HAVING
-cc.`cust_company` LIKE #{cstCustomer.custCompany} OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone}
- OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}  OR cl.`link_qq` LIKE #{chLinkman.linkQq} OR
- cl.`link_email` LIKE #{chLinkman.linkEmail} LIMIT #{currentPage},#{pageSize}
+        <if test="roleName=='管理员'||roleName=='销售经理'">
+            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` HAVING cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userName} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate} LIMIT #{currentPage},#{pageSize}
+        </if>
+        <if test="roleName=='销售员'">
+            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage} HAVING cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userName} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate} LIMIT #{currentPage},#{pageSize}
+        </if>
+
     </select>
 
     <!--获取筛选count-->
     <select id="getCountByCondition" parameterType="map" resultType="Long" >
- SELECT count(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND
-cc.`cust_company` LIKE #{cstCustomer.custCompany} OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone}
- OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}  OR cl.`link_qq` LIKE #{chLinkman.linkQq} OR
- cl.`link_email` LIKE #{chLinkman.linkEmail}
+        <if test="roleName=='管理员'||roleName=='销售经理'">
+            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND  (cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userNameLike} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+        </if>
+        <if test="roleName=='销售员'">
+            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage} AND  (cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userNameLike} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+        </if>
+
     </select>
 
     <!--根据模糊客户名获取count-->
-    <select id="selectCountByCstCustomerName" parameterType="String" resultType="Long">
-        SELECT COUNT(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany}
+    <select id="selectCountByCstCustomerName" parameterType="map" resultType="Long">
+        <if test="roleName=='管理员'||roleName=='销售经理'">
+            SELECT COUNT(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND  cust_company LIKE #{custCompany}
+        </if>
+        <if test="roleName=='销售员'">
+            SELECT COUNT(1) FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` AND user_id=#{userIdForPage} AND cust_company LIKE #{custCompany}
+        </if>
+
     </select>
 
     <update id="updateCstCustomerWithId" parameterType="map">

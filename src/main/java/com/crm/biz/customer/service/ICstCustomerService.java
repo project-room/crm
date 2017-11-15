@@ -4,6 +4,7 @@ package com.crm.biz.customer.service;
 import com.crm.common.Page;
 import com.crm.entity.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public interface ICstCustomerService {
      * @param pageSize
      * @return
      */
-    Page<CstCustomer> getCstCustomerOnePageInfo(int currentPage,int pageSize);
+    Page<CstCustomer> getCstCustomerOnePageInfo(Long userIdForPage,String roleName,int currentPage,int pageSize);
 
     /**
      * 根据id显示公海客户信息
@@ -39,7 +40,7 @@ public interface ICstCustomerService {
      * @param custCompany
      * @return
      */
-    List<CstCustomer> selectCstCustomerByName(String custCompany,Integer currentPage,Integer pageSize);
+    List<CstCustomer> selectCstCustomerByName(Long userIdForPage,String roleName,String custCompany,Integer currentPage,Integer pageSize);
 
     /**
      * 查看所有认领的公海客户
@@ -73,13 +74,13 @@ public interface ICstCustomerService {
      * @param chLinkman
      * @return
      */
-    Page<CstCustomer> selectCstCustomerByCondition(CstCustomer cstCustomer,ChLinkman chLinkman,Integer currentPage,Integer pageSize );
+    Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, Integer currentPage, Integer pageSize );
 
     /**
      * 根据模糊客户名来获取count
      * @param custCompany
      * @return
      */
-    Long selectCountByCstCustomerName(String custCompany);
+    Long selectCountByCstCustomerName(Long userIdForPage,String roleName,String custCompany);
 
 }

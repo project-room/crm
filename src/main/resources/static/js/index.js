@@ -22,7 +22,6 @@ $(function() {
 	myDaily.checkboxClick();
 	myDaily.checkboxColor();
 	myDaily.dailyNum();
-	myDaily.edit();
 	$('.dailyContent').find('input[type=checkbox]').click(function(){
 		myDaily.dailyNum();
 	});
@@ -30,6 +29,41 @@ $(function() {
 	// 	event.stopPropagation();
 	// 	dailyNum();
 	// })
+
+    // //点击公海跳转到公海首页
+    // $("#gongHai").click(function () {
+		// location.href="/crm/cstCustomer/toSeas";
+    // });
+
+
+    // //未登录进来跳到登录页面
+    // var roleNameSession = sessionStorage.getItem('roleNameSession');
+    // if(roleNameSession!="管理员"&&roleNameSession!="销售经理"&&roleNameSession!="销售员"){
+    //     location.href="/crm/cstCustomer/toLogin";
+    // }
+
+    // //如果用户没有登录跳到用户登录页面
+    // var roleNameSession = sessionStorage.getItem('roleNameSession');
+    // if(roleNameSession==null||roleNameSession==""){
+    //     location.href="/crm/cstCustomer/toLogin"
+    // }
+
+	//如果没有登录调到登录页面
+    $.ajax({
+		url:"/crm/sysUser/loadUserId",
+		type:"POST",
+		success:function (data) {
+            var userId=data.toString();
+            if(userId=='null'){
+            	location.href="/crm/cstCustomer/toLogin";
+			}
+        },fail:function (data) {
+			
+        }
+	});
+
+
+
 });
 
 function scroll(ele) {
@@ -42,7 +76,6 @@ function scroll(ele) {
 
 //daily部分
 var myDaily = {
-	tip:null,
 	
 	//今日事务数量
 	dailyNum: function() {
@@ -71,14 +104,18 @@ var myDaily = {
 	//选中和非选中的状态
 	checkboxClick: function() {
 		$('.daily input[type=checkbox]').click(function() {
-			if($(this).prop('checked') == true) {
-				$(this).parents('label').addClass('borderPurple').siblings('div').find('input').css({
-				'text-decoration': 'line-through'
-			});
+			if ($(this).prop('checked') === true) {
+				//需要ajax
+				$(this).parent().siblings('div').find('p').css({
+					'text-decoration': 'line-through'
+				});
+				$(this).parent().siblings('div').find('.createTime').addClass('dnone').removeClass('dblock');
 			} else {
-				$(this).parents('label').removeClass('borderPurple').siblings('div').find('input').css({
-				'text-decoration': 'none'
-			});
+				//需要ajax
+				$(this).parent().siblings('div').find('p').css({
+					'text-decoration': 'none'
+				});
+				$(this).parent().siblings('div').find('.createTime').addClass('dblock').removeClass('dnone');
 			}
 		});
 	},
@@ -86,43 +123,16 @@ var myDaily = {
 	//删除
 	dailyDel: function() {
 		$('.operate .del').click(function() {
-			var $this = $(this);
-        var dblChoseAlert = simpleAlert({
-            "content":"确定删除？",
-            "buttons":{
-                "确定":function () {
-                    $this.parents('li').remove();
-                    dblChoseAlert.close();
-                },
-                "取消":function () {
-                    dblChoseAlert.close();
-                }
-            }
-        });
+			$(this).parents('li').remove();
 		});
 	},
 
 	//编辑
 	edit: function() {
 		$('.operate .edit').click(function() {
-			$('form').find('input').attr('disabled', true).removeClass('active');
-			$('form').find('button').css('display','none');
-			$(this).parents('li').find('form').find('input').attr('disabled', false).addClass('active');
-			$(this).parents('li').find('form').find('button').css('display','inline-block')
-			tip = $(this).parents('li').find('form').find('input').val();
+			
 		});
-		$('.sure').click(function() {
-			tip = $(this).siblings('input').val();
-			$(this).parents('li').find('form').find('input').attr('disabled', true).removeClass('active');
-			$(this).parents('li').find('form').find('button').css('display','none')
-		});
-		$('.cancel').click(function() {
-			$(this).siblings('input').val(tip);
-			$(this).parents('li').find('form').find('input').attr('disabled', true).removeClass('active');
-			$(this).parents('li').find('form').find('button').css('display','none')
-		});
-	},
-
+	}
 };
 
 

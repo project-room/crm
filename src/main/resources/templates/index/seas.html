@@ -19,7 +19,7 @@
             <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
             <link th:href="@{/css/default.css}" rel="stylesheet"/>
             <link th:href="@{/css/seas.css}" rel="stylesheet"/>
-            <script th:src="@{/js/default.js}">
+            <script th:src="@{/js/default.js}" th:inline="javascript">
             </script>
             <script th:src="@{/js/seas.js}">
             </script>
@@ -63,10 +63,10 @@
                     </label>
                     <label class="day" for="day">
                         创建日期
-                        <input id="day" name="date" placeholder="年/月/日" type="text"/>
+                        <input id="day" name="year" placeholder="年/月/日" type="text"/>
                     </label>
                     <label class="hour" for="hour">
-                        <input id="hour" placeholder="00:00-00:00" type="text"/>
+                        <input id="hour" name="minute" placeholder="00:00-00:00" type="text"/>
                     </label>
                     <div class="btngroup">
                         <input class="sure" type="button" value="确定" id="confirm"/>
@@ -125,19 +125,21 @@
                         支持
                     </span>
                 </li>
-                <li>
+                <li class="settitemdisplay">
+                    <a href="/crm/sysUser/getSysUserList/1/10">
                     <img alt="设置" th:src="@{/img/setting.png}"/>
                     <span class="navTxt">
                         设置
                     </span>
+                    </a>
                 </li>
             </ul>
         </div>
         <div class="rightContent">
             <div class="header">
                 <div>
-                    <input placeholder="请输入客户名称" type="text" id="searchName"/>
-                    <button id="search">
+                    <input placeholder="请输入客户名称" type="text" class="searchName"/>
+                    <button class="search">
                         <img alt="" th:src="@{/img/searchIcon.png}"/>
                     </button>
                     <div class="mail">
@@ -171,10 +173,10 @@
                     </div>
                     <div class="user">
                         <span class="userName">
-                            聂宇豪
+
                         </span>
                         <span class="xiala">
-                            <img th:src="@{/img/xiala.png}"/>
+                            <img alt="" th:src="@{/img/xiala.png}"/>
                         </span>
                         <ul class="detail">
                             <li>
@@ -183,12 +185,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a class="systemSetting">
                                     系统设置
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a class="loginOut">
                                     退出
                                 </a>
                             </li>
@@ -200,7 +202,7 @@
                 <div>
                     <div class="seasHeader">
                         <div class="fleft">
-                            <p class="tag">
+                            <p class="tag" >
                                 公海
                             </p>
                             <!-- <ul class="dnone">
@@ -220,12 +222,10 @@
                                 <img th:src="@{/img/filter.png}"/>
                                 筛选
                             </button>
-                            <button id="addCstCustomer">
-                                <a href="#">
+                                <a href="#" id="addCstCustomer">
                                     <img th:src="@{/img/addCustomer.png}"/>
                                     新建客户
                                 </a>
-                            </button>
                             <button class="moreOperate">
                                 · · ·
                             </button>
@@ -240,7 +240,7 @@
                             分配
                         </button>
                         <button class="delete">
-                            <img src="img/delete.png"/>
+                            <img th:src="@{/img/delete.png}"/>
                             删除
                         </button>
                         <button class="edit">
@@ -369,7 +369,8 @@
                                     </td>
                                     <td style="">
                                         <p class="modify">
-                                            · · ·
+                                            <!--· · ·-->
+                                            <img th:src="@{/img/more3.png}"/>
                                         </p>
                                         <ul class="slideEdit">
                                             <li>

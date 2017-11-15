@@ -4,22 +4,20 @@ import com.crm.biz.customer.service.ICstCustomerService;
 import com.crm.common.BaseController;
 import com.crm.common.Page;
 import com.crm.converter.CstCustomerConverter;
-import com.crm.dto.CstCustomerDto;
 import com.crm.entity.*;
 import com.crm.enums.ChLinkmanStatusEnums;
 import com.crm.enums.CstCustomerTypeEnums;
-import com.crm.utils.TypeUtil;
-import com.sun.xml.internal.bind.v2.TODO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
@@ -33,6 +31,7 @@ public class CstCustomerController extends BaseController{
 
     @Autowired
     private  ICstCustomerService cstCustomerService;
+
 
     @RequestMapping("/toIndex")
     public String toIndex(){
@@ -61,6 +60,52 @@ public class CstCustomerController extends BaseController{
     public String toChance(){
         return "index/chance";
     }
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "index/login";
+    }
+    @RequestMapping("/toNewPsd")
+    public String toNewPsd(){
+        return "index/newPsd";
+    }
+    @RequestMapping("/toFindPsd")
+    public String toFindPsd(){
+        return "index/findPsd";
+    }
+
+    @RequestMapping("/toAddEmployee")
+    public String toAddEmployee(){
+        return "index/addEmployee";
+    }
+    @RequestMapping("/toAddEmployee_O")
+    public String toAddEmployee_O(){
+        return "index/addEmployee_O";
+    }
+    @RequestMapping("/toEditEmployee")
+    public String toEditEmployee(){
+        return "index/editEmployee";
+    }
+    @RequestMapping("/toEditEmployee_O")
+    public String toEditEmployee_O(){
+        return "index/editEmployee_O";
+    }
+    @RequestMapping("/toOrganize")
+    public String toOrganize(){
+        return "index/organize";
+    }
+    @RequestMapping("/toOrganizeNone")
+    public String toOrganizeNone(){
+        return "index/organizeNone";
+    }
+    @RequestMapping("/toSeasManager")
+    public String toSeasManager(){
+        return "index/seas-manager";
+    }
+    @RequestMapping("/toSetting")
+    public String toSetting(){
+        return "index/setting";
+    }
+
 
 
     /**
@@ -71,7 +116,12 @@ public class CstCustomerController extends BaseController{
     public String createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman){
         Map map=result();
         try {
-
+//            //判断是qq还是邮箱
+//            if(RegexUtil.isNumeric(qqOrLinkEmail)){
+//                chLinkman.setLinkQq(qqOrLinkEmail);
+//            }else{
+//                chLinkman.setLinkEmail(qqOrLinkEmail);
+//            }
             cstCustomer.setCustDate(new Date(System.currentTimeMillis()));
             cstCustomer.setCustType("2");
             cstCustomer.setCustClassify(2);
@@ -91,29 +141,50 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("/selectCstCustomersByCondition")
-    public Map selectCstCustomersByCondition(){
+    public String selectCstCustomersByCondition(String year,String minute,String userName,CstCustomer cstCustomer,ChLinkman chLinkman,Model model){
         Map map=result();
         try {
-            CstCustomer cstCustomer=new CstCustomer();
-            ChLinkman chLinkman=new ChLinkman();
+            //获取角色名
+            String roleName=(String) session.getAttribute("roleName");
+            //获取用户id
+            Long userIdForPage=(Long)session.getAttribute("userId");
+            //年月日
+            String yearStr=year.replace("年","-").replace("月","-").replace("日"," ");
+           //时分秒
+            String[] arrTime=minute.split("-");
+            String startTime=arrTime[0].trim();
+            String endTime=arrTime[1].trim();
 
-            Integer currentPage=2;
-            Integer pageSize=2;
-            cstCustomer.setCustCompany("公司");
-            chLinkman.setLinkName("111");
-            chLinkman.setLinkPhone("111");
-            chLinkman.setLinkLandlinePhone("111");
-            chLinkman.setLinkQq("111");
-            chLinkman.setLinkEmail("111");
-            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(cstCustomer,chLinkman,currentPage,pageSize);
+            //开始字符串时间
+            String startTimeStr=yearStr+startTime;
+            //结束字符串时间
+            String endTimeStr=yearStr+endTime;
+            //开始时间
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date startTimeDate=sdf.parse(startTimeStr);
+            //结束时间
+            Date endTimeDate=sdf.parse(endTimeStr);
+
+            Integer currentPage=1;
+            Integer pageSize=7;
+            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(userIdForPage,roleName,userName,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPage,pageSize);
+            //设置创建时间格式
+            List<CstCustomer> cstCustomers= returnCstCustomer.getList();
+            for (CstCustomer cstCustomerRevert:cstCustomers
+                    ) {
+                Date formation= cstCustomerRevert.getCustDate();
+                String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
+                cstCustomerRevert.setRevertDate(afterDate);
+            }
             map.put("returnCstCustomer",returnCstCustomer);
+            model.addAttribute("cstCustomerPage",returnCstCustomer);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","筛选客户失败");
         }
 
-        return map;
+        return "index/seas";
     }
 
     /**
@@ -292,7 +363,12 @@ public class CstCustomerController extends BaseController{
         Set<String> date=null;
         Page<CstCustomer> cstCustomerPage=null;
         try {
-            cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(currentPage,pageSize);
+            //获取角色名
+            String roleName=(String) session.getAttribute("roleName");
+            //获取用户id
+            Long userIdForPage=(Long)session.getAttribute("userId");
+
+            cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(userIdForPage,roleName,currentPage,pageSize);
 //            map.put("cstCustomerPage",cstCustomerPage);
             //设置创建时间格式
            List<CstCustomer> cstCustomers= cstCustomerPage.getList();
@@ -303,9 +379,14 @@ public class CstCustomerController extends BaseController{
            String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
                 cstCustomer.setRevertDate(afterDate);
             }
-
+            //组装分页数组
+            List<Long> arrInteger=new ArrayList<Long>();
+            Long totalPage=cstCustomerPage.getTotalPage();
+            for(int i=1;i<=totalPage;i++){
+                arrInteger.add(new Long(i));
+            }
+            model.addAttribute("arrInteger",arrInteger);
             model.addAttribute("cstCustomerPage",cstCustomerPage);
-            map.put("cstCustomerPage",cstCustomerPage);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
@@ -318,21 +399,31 @@ public class CstCustomerController extends BaseController{
      * 根据id查看认领公海客户信息
      * @return
      */
-    @RequestMapping("/lookCstCustomerInfo/{cstCustomerId}")
-    public Map lookCstCustomerInfo(@PathVariable("cstCustomerId") Long cstCustomerId){
-//        Map map= TypeUtil.successMap();
+    @RequestMapping("/lookCstCustomerInfo/{custId}")
+    public String lookCstCustomerInfo(@PathVariable("custId") String custId,Model model){
         Map map=result();
+        Long cstCustomerId=null;
+        if(custId.contains("-")){
+            //去掉首字符"-"
+            String revertCustIdArr=custId.substring(1);
+            String[] idArr= revertCustIdArr.split("-");
+            cstCustomerId=new Long(idArr[0]);
+
+        }else{
+           cstCustomerId=new Long(custId);
+        }
         try {
             CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(cstCustomerId);
             //转换创建日期格式
             CstCustomerConverter.dateConvertor(cstCustomer);
+            model.addAttribute("cstCustomer",cstCustomer);
             map.put("cstCustomer",cstCustomer);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
             map.put("msg","查看公海客户信息失败");
         }
-        return map;
+        return "index/editCustomer";
     }
 
     /**
@@ -342,9 +433,13 @@ public class CstCustomerController extends BaseController{
     @RequestMapping("/selectCstCustomerByName/{custCompany}/{currentPage}/{pageSize}")
     public String  selectCstCustomerByName(@PathVariable("custCompany") String custCompany,@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize,Model model){
         Map map=result();
-        Long count=cstCustomerService.selectCountByCstCustomerName(custCompany);
+        //获取角色名
+        String roleName=(String) session.getAttribute("roleName");
+        //获取用户id
+        Long userIdForPage=(Long)session.getAttribute("userId");
+        Long count=cstCustomerService.selectCountByCstCustomerName(userIdForPage,roleName,custCompany);
         try {
-            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(custCompany,currentPage,pageSize);
+            List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(userIdForPage,roleName,custCompany,currentPage,pageSize);
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
                 CstCustomerConverter.dateConvertor(cstCustomer);
@@ -366,7 +461,7 @@ public class CstCustomerController extends BaseController{
      * @return
      */
     @RequestMapping("deleteCstCustomerById/{cstCustomerId}")
-    public Map deleteCstCustomerById(@PathVariable("cstCustomerId") Long cstCustomerId){
+    public String deleteCstCustomerById(@PathVariable("cstCustomerId") Long cstCustomerId){
         Map map=result();
         try {
             cstCustomerService.deleteCstCustomerById(cstCustomerId);
@@ -375,7 +470,7 @@ public class CstCustomerController extends BaseController{
             map.put("code","-1");
             map.put("msg","删除公海客户失败");
         }
-        return map;
+        return "redirect:" + "/cstCustomer/getPage/1/7";
     }
 
     /**
@@ -494,6 +589,45 @@ public class CstCustomerController extends BaseController{
             map.put("msg","编辑失败");
         }
         return map;
+    }
+
+    //根据id编辑公海客户
+    @RequestMapping("editCustomerById")
+    public String editCustomerById(CstCustomer cstCustomer,ChLinkman chLinkman,String custDateStr){
+        Map map=result();
+        try {
+            cstCustomer.setCustType(CstCustomerTypeEnums.GONGHAI_CUSTOMER_TYPE.getCode().toString());
+            chLinkman.setLinkStatus(ChLinkmanStatusEnums.MASTER_CHLINKMAN.getCode());
+            chLinkman.setCustId(cstCustomer.getCustId());
+
+            //把字符串时间转换为Date格式
+            SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd HH:mm " );
+            String formatCustDateStr=custDateStr.replace("：",":");
+            Date date = sdf.parse(" "+formatCustDateStr+" ");
+            cstCustomer.setCustDate(date);
+            cstCustomerService.editCustomerById(cstCustomer,chLinkman);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "redirect:" + "/cstCustomer/getPage/1/7";
+    }
+
+    /**
+     * 根据id批量删除客户
+     * @param custIdArr
+     */
+    @RequestMapping("/deleteAllCustomer/{custIdArr}")
+    public String deleteAllCustomer(@PathVariable("custIdArr") String custIdArr){
+//        int index= custIdArr.indexOf("-");
+        //去掉首字符"-"
+        String revertCustIdArr=custIdArr.substring(1);
+        String[] idArr= revertCustIdArr.split("-");
+        for (int i=0;i<idArr.length;i++){
+            Long custId=new Long(idArr[i]);
+            System.out.println("custId"+custId);
+            cstCustomerService.deleteCstCustomerById(custId);
+        }
+        return "redirect:" + "/cstCustomer/getPage/1/7";
     }
 
 }

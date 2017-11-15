@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.biz.sys.dao.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.entity.SysRole" >
+    <id column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="role_flag" property="roleFlag" jdbcType="INTEGER" />
+    <!--角色表和权限表的关联-->
+    <collection property="sysRights" ofType="com.crm.entity.SysRight">
+      <id column="right_id" property="rightId" jdbcType="BIGINT" />
+      <result column="right_text" property="rightText" jdbcType="VARCHAR" />
+      <result column="right_url" property="rightUrl" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <select id="selectSysRoleById" parameterType="Long" resultMap="BaseResultMap">
+    SELECT * FROM sys_role sr,sys_right sg,sys_role_right srr WHERE sr.`role_id`=srr.`role_id` AND sg.`right_id`=srr.`right_id` AND sr.`role_id`=#{roleId}
+  </select>
+
+  <select id="selectSysRoleByIdInfo" parameterType="Long" resultMap="BaseResultMap" >
+SELECT * FROM sys_role WHERE role_id=#{roleId}
+  </select>
+</mapper>
