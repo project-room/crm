@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -101,12 +102,12 @@ public class CstChanceController extends BaseController {
             boolean mak = iCstChance.addCstChance(cstChance, cstCustomer, chLinkman, cstLowCustomer, linkIdTo, linkDepartmentTo, linkPositionTo);
             if (mak == false) {
                 map.put("code", "-1");
-                map.put("msg", "修改失败");
+                map.put("msg", "添加失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:" + "/cstChance/getCstChance/" + 1 + "/" + 1 + "/" + 15;
+        return "redirect:" + "/cstChance/getCstChance/" + 1 + "/" + 1 + "/" + 10;
     }
 
     //按机会id查询机会的详细信息
@@ -222,11 +223,15 @@ public class CstChanceController extends BaseController {
     @RequestMapping("/updateChance")
     public Map updateChance(CstChance cst) {
         Map map = result();
+        cst.setChId((long)19);
+        cst.setUserToId((long)2);
         try {
             boolean mak = iCstChance.updateChance(cst);
             if (mak == false) {
                 map.put("code", "-1");
                 map.put("msg", "修改失败");
+            }else {
+                map.put("mak","修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,7 +239,7 @@ public class CstChanceController extends BaseController {
         return map;
     }
 
-    //按阶段来转交客户
+/*    //按阶段来转交客户
     @RequestMapping("/updateCst")
     public Map updateCst(CstChance cstChance) {
         Map map = result();
@@ -253,13 +258,14 @@ public class CstChanceController extends BaseController {
             e.printStackTrace();
         }
         return map;
-    }
+    }*/
 
     //根据用户id查询已分配客户
-    @RequestMapping("/getCstCustomer")
-    public String getCstCustomer(Model model,Long id) {
+    @RequestMapping("/getCstCustomer/{id}")
+    public String getCstCustomer(Model model,@PathVariable("id") Long id) {
         Map map = result();
         try {
+            System.out.println(id+"这是id");
             List<CstCustomer> cstCustomerList = iCstChance.getCstCustomer(id);
             if (cstCustomerList != null) {
                 model.addAttribute("cstCustomerList", cstCustomerList);
@@ -284,9 +290,6 @@ public class CstChanceController extends BaseController {
 
             JSONObject JsonObject= JSONObject.fromObject(Customer);
 
-            System.out.println(Customer.getCustType());
-            System.out.println("到了没");
-
             PrintWriter out = response.getWriter();
             out.print(JsonObject);
         } catch (Exception e) {
@@ -300,6 +303,7 @@ public class CstChanceController extends BaseController {
         Map map=result();
         try{
             Page<CstChance> cstChancesPageList=iCstChance.getCstChanceUserId(userId,currentPage,pageSize);
+            List<SysUser> SysUserList=iCstChance.getSysUser(userId);
             if (cstChancesPageList != null) {
                 List<Long> arrList = new ArrayList<>();
                 Long totalPage = cstChancesPageList.getTotalPage();
@@ -312,6 +316,8 @@ public class CstChanceController extends BaseController {
                 model.addAttribute("arrList", arrList);
               /*  map.put("cstChancesPageList",cstChancesPageList);*/
                 model.addAttribute("cstChancesPageList", cstChancesPageList);
+                model.addAttribute("SysUserList",SysUserList);
+                /*map.put("SysUserList",SysUserList);*/
             } else {
                 map.put("-1", "查询失败，对象为空");
             }
@@ -320,6 +326,79 @@ public class CstChanceController extends BaseController {
         }
        /* return map;*/
         return "index/refferal";
+    }
+
+    //新建转交（按阶段转交）
+    @RequestMapping("/addChance/{currentPage}/{pageSize}")
+    public String /*Map*/ addChance(Model model,CstChance chance, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+        Map map = result();
+
+        Long userId=chance.getUserId();
+         chance.setChStatus("审核中");
+         Date date = new Date();
+         date.getTime();
+         chance.setTransferTime(date);
+         chance.setChExamine((long)3);
+        try {
+            System.out.println("到了没");
+            String[] timeStr=chance.getChStage().split(",");
+            System.out.println(timeStr[0]);
+            System.out.println(timeStr[1]);
+            for (int i=0;i<timeStr.length;i++){
+                System.out.println(timeStr[i]);
+               chance.setChStage(timeStr[i]);
+                System.out.println(chance.getChStage()+"值是");
+               boolean mask=iCstChance.addChance(chance);
+            }
+            System.out.println("到了");
+          /*if (mask==false){
+              map.put("code", "-1");
+              map.put("msg", "修改失败");
+          }else {
+              map.put("msg","添加成功");
+          }*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:"+"/cstChance/getCstChanceUserId/"+userId+"/"+currentPage+"/"+pageSize;
+     /*   return map;*/
+    }
+
+    //机会转交后的筛选
+    @RequestMapping("/getfilterChance/{currentPage}/{pageSize}")
+    public /*Map*/String  getfilterChance(Model model,CstChance chance,CstCustomer customer,String begindate,String finishdate,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
+         Map map=result();
+        chance.setChCustomer(customer);
+        System.out.println(begindate);
+
+        System.out.println(finishdate);
+        String[] timeStr=finishdate.split("-");
+        finishdate=begindate+timeStr[1];
+        begindate=begindate+timeStr[0];
+        System.out.println(begindate);
+        System.out.println(finishdate);
+         try{
+             Page<CstChance> cstChancesPageList=iCstChance.getfilterChance(chance,begindate,finishdate,currentPage,pageSize);
+             List<SysUser> SysUserList=iCstChance.getSysUser(chance.getUserId());
+             if (cstChancesPageList!=null) {
+                 List<Long> arrList = new ArrayList<>();
+                 Long totalPage = cstChancesPageList.getTotalPage();
+                 System.out.println(totalPage);
+                 for (int i = 1; i <= totalPage; i++) {
+                     System.out.println(i);
+                     arrList.add(new Long(i));
+                 }
+                 model.addAttribute("arrList", arrList);
+                 model.addAttribute("cstChancesPageList", cstChancesPageList);
+                 /*map.put("cstChancesPageList", cstChancesPageList);*/
+             }else {
+                map.put("ChanceList","查询失败");
+             }
+         }catch (Exception e){
+             e.printStackTrace();
+         }
+       /* return map;*/
+       return "index/refferal";
     }
 
 }
