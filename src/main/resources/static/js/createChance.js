@@ -35,7 +35,7 @@ window.onload = function() {
 	            console.log(e);
 	        }
 	    })*/
-	    $.post("/cstChance/getCstCustomerCustId", {custId: userId}, function(data) {
+	    $.post("/crm/cstChance/getCstCustomerCustId", {custId: userId}, function(data) {
 	        var data = JSON.parse(data);
 	        $('.majorId').val(data.linkmanList[0].linkId);
 	        $('.majorName').val(data.linkmanList[0].linkName);

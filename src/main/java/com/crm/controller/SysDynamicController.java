@@ -3,6 +3,7 @@ package com.crm.controller;
 import com.crm.biz.customer.dao.CstScheduleMapper;
 import com.crm.biz.dynamic.dao.SysDynamicMapper;
 import com.crm.biz.dynamic.service.ISysDynamicService;
+import com.crm.common.BaseController;
 import com.crm.entity.CstSchedule;
 import com.crm.entity.SysDynamic;
 import com.crm.entity.UserTask;
@@ -25,7 +26,7 @@ import java.util.Random;
  */
 /*@RestController*/
 @Controller
-public class SysDynamicController {
+public class SysDynamicController extends BaseController {
 
     @Autowired
     private ISysDynamicService iSysDynamicService;
@@ -46,12 +47,13 @@ public class SysDynamicController {
 }
 
     //根据用户Id查询当前日期任务表也要根据状态将不是当前日期的给查出来
-    @RequestMapping("/getTaskListByUserId/{userId}")
-    public String selectTaskByUserId(Model model, @PathVariable("userId") Long userId){
+    @RequestMapping("/getTaskListByUserId")
+    public String selectTaskByUserId(Model model){
         Map map= TypeUtil.successMap();
+        Long userId=(Long)session.getAttribute("userId");
         try {
             System.out.println(userId);
-          List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId((long)userId);
+          List<UserTask> sysDynamicList = iSysDynamicService.selectTaskListByUserId(userId);
             System.out.println("到了吗");
             if(sysDynamicList!=null){
                 model.addAttribute("sysDynamicList",sysDynamicList);

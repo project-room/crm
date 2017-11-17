@@ -64,7 +64,7 @@ public class SysUserController extends BaseController {
          SysUser sysUser=sysUserService.login(username,password);
          //如果用户为停用状态不能登录
          if(sysUser!=null&&sysUser.getUserStatus()!=0){
-             redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
+            /* redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);*/
             //获取用户的角色
              Long roleId=sysUser.getRoleId();
              SysRole sysRole=sysUserService.selectRoleById(roleId);

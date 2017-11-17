@@ -85,12 +85,12 @@
       </select>
       <!--根据客户id查询客户的关联信息-->
        <select id="getCstCustomerCustId" parameterType="Long" resultMap="BaseResultMap">
-           select * from cst_customer t,ch_linkman l where t.cust_id=#{custId} and t.cust_id=l.cust_id and l.link_status=1
+           select * from cst_customer t,ch_linkman l where t.cust_id=#{custId} and t.cust_id=l.cust_id and l.link_status=0
        </select>
 
   <!--查询所有公海客户-->
   <select id="selectAllCstCutomer" resultMap="BaseResultMap">
-    SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`
+    SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.cust_id`
   </select>
 
     <!--保存公海客户信息-->

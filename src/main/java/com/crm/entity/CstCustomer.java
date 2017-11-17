@@ -35,7 +35,7 @@ public class  CstCustomer {
 
     private String custType;        //分类
 
-    private Date custDate;
+    private Date custDate;        //添加时间
 
     private String custCustomerNature; //客户性质
 

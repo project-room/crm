@@ -35,7 +35,7 @@
                         X
                     </span>
                 </h4>
-                <form class="addNew" action="/cstChance/getCstChanceTo/1/10">
+                <form class="addNew" action="/crm/cstChance/getCstChanceTo/1/10">
                     <label for="name">
                         <input type="hidden" name="userId" value="1"/>
                         <span>客户名称</span>
@@ -113,7 +113,7 @@
             </div>
             <ul>
                 <li>
-                    <a href="index.html" th:href="@{/getTaskListByUserId/1}">
+                    <a th:href="@{/getTaskListByUserId}">
                         <img alt="首页" th:src="@{/img/index.png}"/>
                         <span class="navTxt">
                             首页
@@ -121,7 +121,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="seas.html" th:href="@{/cstCustomer/getPage/1/7}">
+                    <a  th:href="@{/cstCustomer/getPage/1/7}">
                         <img alt="公海" th:src="@{/img/seas.png}"/>
                         <span class="navTxt">
                             公海
@@ -130,12 +130,12 @@
                 </li>
                 <li class="active">
                     <!--<a href="@{'/cstChance/getCstChance/'+${userId}+'/'+${currentPage}+'/'+${pageSize}}"></a>-->
-                   <!-- <a th:href="@{/cstChance/getCstChance/1/1/10}">-->
+                   <a th:href="@{/cstChance/getCstChance/1/10}">
                         <img alt="机会" th:src="@{/img/chance.png}"/>
                         <span class="navTxt">
                             机会
                         </span>
-
+                   </a>
                 </li>
                 <li>
                     <img alt="合同" th:src="@{/img/contract.png}"/>
@@ -236,7 +236,7 @@
                                 我的机会
                                 <ul class="dnone">
                                     <li>
-                                        <a th:href="@{/cstChance/getCstChance/1/1/10}" style="color: #7460ee;">
+                                        <a th:href="@{/cstChance/getCstChance/1/10}" style="color: #7460ee;">
                                             我的机会
                                         </a>
                                     </li>
@@ -246,7 +246,7 @@
                                         </a>
                                     </li>-->
                                     <li>
-                                        <a th:href="@{/cstChance/getCstChanceUserId/1/1/10}">
+                                        <a th:href="@{/cstChance/getCstChanceUserId/1/10}">
                                             机会转交
                                         </a>
                                     </li>
@@ -264,12 +264,10 @@
                                 <img th:src="@{/img/filter.png}"/>
                                 筛选
                             </button>
-                            <button>
-                                <a th:href="@{/cstChance/getCstCustomer/1}">
+                                <a th:href="@{/cstChance/getCstCustomer}">
                                     <img th:src="@{/img/addCustomer.png}"/>
                                     新建机会
                                 </a>
-                            </button>
                             <button class="moreOperate">
                                 · · ·
                             </button>
@@ -377,7 +375,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="delete" th:href="@{'/cstChance/deleteCstChance/'+${cstChance.chId}+'/1/'+${cstChancePage.currentPage}+'/'+${cstChancePage.pageSize}}" mce_href="#">
+                                                <a class="delete" th:href="@{'/cstChance/deleteCstChance/'+${cstChance.chId}+'/'+${cstChancePage.currentPage}+'/'+${cstChancePage.pageSize}}" mce_href="#">
                                                     删除
                                                 </a>
                                             </li>
