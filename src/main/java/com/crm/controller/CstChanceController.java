@@ -63,12 +63,13 @@ public class CstChanceController extends BaseController {
 
     //查询我的机会方法
 //    Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize
-    @RequestMapping("/getCstChance/{userId}/{currentPage}/{pageSize}")
-    public String getCstChance(Model model, @PathVariable("userId") Long userId, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+    @RequestMapping("/getCstChance/{currentPage}/{pageSize}")
+    public String getCstChance(Model model, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
         Map map = result();
         // 测试数据
         try {
             Long userIdLong=(Long) session.getAttribute("userId");
+            System.out.println(userIdLong+"用户id");
             Page<CstChance> cstChancePage = iCstChance.getCstChance(userIdLong, currentPage, pageSize);
             if (cstChancePage.getPageSize() != 0) {
                 List<Long> arrList = new ArrayList<>();
@@ -113,8 +114,9 @@ public class CstChanceController extends BaseController {
     //按机会id查询机会的详细信息
 //    Long chId
     @RequestMapping("/getCstChanceId/{chId}")
-    public String getCstChanceId(Model model, @PathVariable("chId") Long chId) {
+    public String getCstChanceId(Model model,@PathVariable("chId") Long chId) {
         Map map = result();
+        System.out.println("机会详情");
         //测试数据
         try {
             List<CstChance> cstChanceList = iCstChance.getCstChanceId(chId);
@@ -132,8 +134,8 @@ public class CstChanceController extends BaseController {
     }
 
     //删除方法
-    @RequestMapping("/deleteCstChance/{id}/{userId}/{currentPage}/{pageSize}")
-    public String deleteCstChance(@PathVariable("id") Long id, @PathVariable("userId") Long userId, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+    @RequestMapping("/deleteCstChance/{id}/{currentPage}/{pageSize}")
+    public String deleteCstChance(@PathVariable("id") Long id, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
         Map map = result();
         try {
             boolean mak = iCstChance.deleteCstChance(id);
@@ -147,7 +149,7 @@ public class CstChanceController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:" + "/cstChance/getCstChance/" + userId + "/" + currentPage + "/" + pageSize;
+        return "redirect:" + "/cstChance/getCstChance/" + currentPage + "/" + pageSize;
     }
 
     //修改方法
@@ -261,12 +263,12 @@ public class CstChanceController extends BaseController {
     }*/
 
     //根据用户id查询已分配客户
-    @RequestMapping("/getCstCustomer/{id}")
-    public String getCstCustomer(Model model,@PathVariable("id") Long id) {
+    @RequestMapping("/getCstCustomer")
+    public String getCstCustomer(Model model) {
         Map map = result();
         try {
-            System.out.println(id+"这是id");
-            List<CstCustomer> cstCustomerList = iCstChance.getCstCustomer(id);
+            Long userIdLong=(Long) session.getAttribute("userId");
+            List<CstCustomer> cstCustomerList = iCstChance.getCstCustomer(userIdLong);
             if (cstCustomerList != null) {
                 model.addAttribute("cstCustomerList", cstCustomerList);
             } else {
@@ -280,13 +282,14 @@ public class CstChanceController extends BaseController {
 
     //按客户id查询客户关联信息
     @RequestMapping("/getCstCustomerCustId")
-    public void  /* Map*/ getCstCustomerCustId(HttpServletRequest request, HttpServletResponse response,Long custId) {
+    public void  getCstCustomerCustId(HttpServletRequest request, HttpServletResponse response,Long custId) {
         Map map = result();
         try {
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
             System.out.println(custId + "客户id");
             CstCustomer Customer = iCstChance.getCstCustomerCustId(custId);
+            System.out.println("到了没");
 
             JSONObject JsonObject= JSONObject.fromObject(Customer);
 
@@ -298,12 +301,13 @@ public class CstChanceController extends BaseController {
     }
 
     //按用户id查询已转交的机会
-    @RequestMapping("/getCstChanceUserId/{userId}/{currentPage}/{pageSize}")
-    public String /*Map*/  getCstChanceUserId(Model model,@PathVariable("userId") Long userId, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
+    @RequestMapping("/getCstChanceUserId/{currentPage}/{pageSize}")
+    public String /*Map*/  getCstChanceUserId(Model model,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
         Map map=result();
         try{
-            Page<CstChance> cstChancesPageList=iCstChance.getCstChanceUserId(userId,currentPage,pageSize);
-            List<SysUser> SysUserList=iCstChance.getSysUser(userId);
+            Long userIdLong=(Long) session.getAttribute("userId");
+            Page<CstChance> cstChancesPageList=iCstChance.getCstChanceUserId(userIdLong,currentPage,pageSize);
+            List<SysUser> SysUserList=iCstChance.getSysUser(userIdLong);
             if (cstChancesPageList != null) {
                 List<Long> arrList = new ArrayList<>();
                 Long totalPage = cstChancesPageList.getTotalPage();

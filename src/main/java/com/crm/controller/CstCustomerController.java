@@ -365,6 +365,7 @@ public class CstCustomerController extends BaseController{
         try {
             //获取角色名
             String roleName=(String) session.getAttribute("roleName");
+            System.out.println(roleName+"角色名");
             //获取用户id
             Long userIdForPage=(Long)session.getAttribute("userId");
 
@@ -376,7 +377,7 @@ public class CstCustomerController extends BaseController{
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
                 Date formation= cstCustomer.getCustDate();
-           String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
+               String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
                 cstCustomer.setRevertDate(afterDate);
             }
             //组装分页数组

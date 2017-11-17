@@ -60,9 +60,10 @@ $(function() {
         $('.tag').find('ul').addClass('dnone').removeClass('dblock');
     });
 
-    $('tbody').on('click', 'tr', function() {
+    $('tbody').on('click', 'tr',function() {
         var chId=$(this).children("input[type=hidden]").val();
-        location.href = "/cstChance/getCstChanceId/"+chId;
+        alert(chId);
+        location.href ="/crm/cstChance/getCstChanceId/"+chId;
     });
 
 });

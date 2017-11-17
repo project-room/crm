@@ -103,6 +103,7 @@ public class UserTaskController extends BaseController {
     @RequestMapping("/updateUserTasktaskStatus")
     public Map updateUserTasktaskStatus(Long taskId) {
         Map map = result();
+
         try {
             boolean mak = iUserTaskService.updateUserTasktaskStatus(taskId);
             if (mak == false) {
