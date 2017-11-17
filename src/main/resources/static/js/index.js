@@ -63,7 +63,6 @@ $(function() {
 	});
 
 
-
 });
 
 function scroll(ele) {

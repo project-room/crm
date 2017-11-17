@@ -113,7 +113,7 @@
             </div>
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="index.html" th:href="@{/getTaskListByUserId/1}">
                         <img alt="首页" th:src="@{/img/index.png}"/>
                         <span class="navTxt">
                             首页
@@ -121,7 +121,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="seas.html">
+                    <a href="seas.html" th:href="@{/cstCustomer/getPage/1/7}">
                         <img alt="公海" th:src="@{/img/seas.png}"/>
                         <span class="navTxt">
                             公海
@@ -155,11 +155,13 @@
                         支持
                     </span>
                 </li>
-                <li>
+                <li class="settitemdisplay">
+                    <a href="/crm/sysUser/getSysUserList/1/10">
                     <img alt="设置" th:src="@{/img/setting.png}"/>
                     <span class="navTxt">
                         设置
                     </span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -212,13 +214,13 @@
                                     个人资料
                                 </a>
                             </li>
-                            <li>
-                                <a href="">
+                            <li  class="systemSetting">
+                                <a href="/crm/sysUser/getSysUserList/1/10">
                                     系统设置
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a class="loginOut" >
                                     退出
                                 </a>
                             </li>

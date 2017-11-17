@@ -83,6 +83,11 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+		<!--redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
 		<!--yuntongxun-->
 		<dependency>
 			<groupId>alicore</groupId>

@@ -20,4 +20,7 @@ public interface ChLinkmanMapper {
    int updateLinkman(ChLinkman chLinkmanTo);
 
     int updateChId(Long chId);
+
+    //根据联系人的id修改联系人的信息
+    void updateChLinkmanWithIdAndChLinkman(@Param("id") Long id,@Param("chLinkman") ChLinkman chLinkman);
 }

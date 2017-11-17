@@ -10,7 +10,6 @@ $(function() {
         cursorcolor: '#ccc'
     });
 
-
     
     checkboxClick();
     // $('.customerNum span').text($('#table tbody tr').length);

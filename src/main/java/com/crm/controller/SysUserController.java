@@ -8,13 +8,11 @@ import com.crm.common.Page;
 import com.crm.entity.SysRole;
 import com.crm.entity.SysUser;
 import com.crm.utils.AliSms;
-import com.crm.utils.AliSms;
 import com.crm.utils.SixCaptchaUtil;
 import com.crm.utils.TypeUtil;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,7 +64,7 @@ public class SysUserController extends BaseController {
          SysUser sysUser=sysUserService.login(username,password);
          //如果用户为停用状态不能登录
          if(sysUser!=null&&sysUser.getUserStatus()!=0){
-//             redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
+             redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
             //获取用户的角色
              Long roleId=sysUser.getRoleId();
              SysRole sysRole=sysUserService.selectRoleById(roleId);
@@ -172,6 +170,7 @@ public class SysUserController extends BaseController {
      */
 
     @RequestMapping("/sendSmsCaptcha/{phone}")
+//    13307278157
     public String sendSmsCaptche(@PathVariable("phone") String phone,Model model){
        String captCha= SixCaptchaUtil.getRandNum(6);
        //发短手机信息验证码
@@ -182,7 +181,7 @@ public class SysUserController extends BaseController {
         model.addAttribute("phone",phone);
        return "index/findPsd";
     }
-
+//
 /**
      * 根据用户号码和验证码来提交
      * @param phone
@@ -341,11 +340,6 @@ public class SysUserController extends BaseController {
      */
     @RequestMapping("/editSysUserInfo")
     public void editSysUserInfo(SysUser sysUser){
-        if(sysUser.getUserStatus()==0){
-            sysUser.setUserStatus(1);
-        }else{
-            sysUser.setUserStatus(0);
-        }
        sysUserService.updateSysUserById(sysUser);
     }
 

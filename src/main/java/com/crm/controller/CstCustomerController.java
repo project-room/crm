@@ -442,9 +442,14 @@ public class CstCustomerController extends BaseController{
             List<CstCustomer> cstCustomers=  cstCustomerService.selectCstCustomerByName(userIdForPage,roleName,custCompany,currentPage,pageSize);
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
+                //通过用户id获取用户名
+                Long userId=cstCustomer.getUserId();
+                SysUser sysUser= cstCustomerService.selectUserById(userId);
+                String userName=sysUser.getUserName();
+                cstCustomer.setRevertUserNameFromId(userName);
+                //转换时间格式
                 CstCustomerConverter.dateConvertor(cstCustomer);
             }
-
            Page<CstCustomer> pageCstCustomerByName= new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
             map.put("cstCustomerPage",pageCstCustomerByName);
             model.addAttribute("cstCustomerPage",pageCstCustomerByName);
@@ -605,7 +610,7 @@ public class CstCustomerController extends BaseController{
             String formatCustDateStr=custDateStr.replace("：",":");
             Date date = sdf.parse(" "+formatCustDateStr+" ");
             cstCustomer.setCustDate(date);
-            /*cstCustomerService.editCustomerById(cstCustomer,chLinkman);*/
+            cstCustomerService.editCustomerById(cstCustomer,chLinkman);
         } catch (ParseException e) {
             e.printStackTrace();
         }

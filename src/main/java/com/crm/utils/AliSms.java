@@ -11,9 +11,6 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
 
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
-
 /**
  *
  * Created by Administrator on 2017/11/6.
@@ -53,3 +50,4 @@ public class AliSms {
     }
 
 }
+

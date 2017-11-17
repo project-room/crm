@@ -265,33 +265,11 @@ function org() {
         var userPhone=$("input[name='userPhone']").val();
         var userDepartment= $("input[name='userDepartment']").val();
         var userPosition=$("input[name='userPosition']").val();
-        var userStatus=$("input[name='userStatus']").val();
+        // var userStatus=$("input[name='userStatus']").val();
+        var userStatus=$(".opcontroller option:selected").val();
         var userId=$("input[name='userId']").val();
         // //1-管理员，2-销售经理，3-销售员
-        var roleName= $('.juese').val();
-        var roleId="";
-        if(roleName.trim()=="管理员"){
-            roleId=1;
-            //
-            $(".one").val("销售经理");
-            $(".one").text("销售经理");
-            $(".two").val("销售员");
-            $(".two").text("销售员");
-        }else if(roleName.trim()=="销售经理"){
-            roleId=2;
-            //
-            $(".one").val("管理员");
-            $(".one").text("管理员");
-            $(".two").val("销售员");
-            $(".two").text("销售员");
-        }else{
-            roleId=3;
-            //
-            $(".one").val("管理员");
-            $(".one").text("管理员");
-            $(".two").val("销售经理");
-            $(".two").text("销售经理");
-        }
+        var roleId= $('.juese').val();
         $.ajax({
             url:"/crm/sysUser/editSysUserInfo",
             data:{"userName":userName,"userAccounts":userAccounts,"userPassword":userPassword,"userPhone":userPhone,"userDepartment":userDepartment,"userPosition":userPosition,"roleId":roleId,"userStatus":userStatus,"userId":userId},
