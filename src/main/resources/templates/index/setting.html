@@ -312,11 +312,8 @@
                                 </ul>
                                 <div class="jump">
                                     <label>调转
-                                        <select>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
+                                        <select class="dumppage">
+                                            <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/sysUser/getSysUserList/'+${arr}+'/10'}" th:text="${arr}"></a></option>
                                         </select>
                                     </label>
                                 </div>

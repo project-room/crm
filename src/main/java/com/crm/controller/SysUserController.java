@@ -11,6 +11,7 @@ import com.crm.utils.AliSms;
 import com.crm.utils.SixCaptchaUtil;
 import com.crm.utils.TypeUtil;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import net.sf.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -389,5 +390,30 @@ public class SysUserController extends BaseController {
          sysUserService.updateSysUserById(sysUser);
         }
         return "redirect:"+"/sysUser/getSysUserList/1/10";
+    }
+
+    /**
+     * 根据账号查询密码
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/getSysUserByUserName")
+    public void getSysUserByUserName(HttpServletRequest request,HttpServletResponse response){
+        try {
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            PrintWriter out= response.getWriter();
+            String userName= request.getParameter("userName");
+            SysUser sysUser= sysUserService.selectSysUserByAccounts(userName);
+            if(sysUser!=null){
+                JSONObject sysUserJson=JSONObject.fromObject(sysUser);
+                out.print(sysUserJson);
+            }else{
+                out.print("用户不存在");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

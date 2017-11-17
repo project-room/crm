@@ -1,4 +1,14 @@
 $(function() {
+	var account = localStorage.getItem('userName');
+	var accountPsd = localStorage.getItem('userpsd');
+	//
+	if(account!=null&&accountPsd!=null){
+		location.href="/crm/sysUser/userLogin?username="+account+"&&password="+accountPsd;
+	}
+	// $.post('/crm/sysUser/userLogin',{username:account,password:accountPsd},function() {
+	// 	console.log(1)
+	// });
+
 	var windowH = $(window).height();
 	var windowW = $(window).width();
 	var imgH;
@@ -10,8 +20,29 @@ $(function() {
 	
 	//登录
 	$("#loginButton").click(function () {
-		$("#loginForm").submit();
+        var userName = $('#loginForm').find('input[name=username]').val();
+        var userpsd = $('#loginForm').find('input[name=password]').val();
+        $.ajax({
+			url:"/crm/sysUser/getSysUserByUserName",
+			type:"POST",
+			data:{"userName":userName},
+			success:function (data) {
 
+				var data = JSON.parse(data);
+				console.log(data.userPassword)
+				if (data.userPassword == userpsd) {
+                    if ($('.forCheckbox').find('input').prop('checked') == true) {
+                        localStorage.setItem('userName', userName);
+                        localStorage.setItem('userpsd', userpsd);
+                    }
+
+				}
+            },fail:function (e) {
+                console.log(e)
+				alert(e)
+			}
+		});
+        $("#loginForm").submit();
     });
 
 	//获取短信验证码
