@@ -219,10 +219,9 @@
                             </label>
                             <label>
                                 <span>状态</span>
-                                <select>
-                                    <option selected="selected" th:value="${sysUser.userStatus eq 1?'正常':'停用'}" th:text="${sysUser.userStatus eq 1?'正常':'停用'}"></option>
-                                    <option  th:value="${sysUser.userStatus eq 1?'停用':'正常'}" th:text="${sysUser.userStatus eq 1?'停用':'正常'}"></option>
-                                    <input type="hidden" th:value="${sysUser.userStatus}"  name="userStatus" />
+                                <select class="opcontroller">
+                                    <option value="1" th:selected="${sysUser.userStatus eq 1}" >正常</option>
+                                    <option value="0" th:selected="${sysUser.userStatus eq 0}" >停用</option>
                                 </select>
                             </label>
                             <label>
@@ -246,9 +245,9 @@
                             <label>
                                 <span>角色</span>
                                 <select class="juese">
-                                    <option value="管理员" th:text="${sysUser.roleId eq 1?'销售经理':(sysUser.roleId eq 2?'销售员':'管理员')}"></option>
-                                    <option value="销售经理" th:text="${sysUser.roleId eq 1?'销售员':(sysUser.roleId eq 2?'管理员':'销售经理')}"></option>
-                                    <option value="销售员" selected="selected" th:text="${sysUser.roleId eq 1?'管理员':(sysUser.roleId eq 2?'销售经理':'销售员')}"></option>
+                                    <option value="1" th:selected="${sysUser.roleId eq 1}">管理员</option>
+                                    <option value="2" th:selected="${sysUser.roleId eq 2}">销售经理</option>
+                                    <option value="3" th:selected="${sysUser.roleId eq 3}">销售员</option>
                                 </select>
                             </label>
                         </form>

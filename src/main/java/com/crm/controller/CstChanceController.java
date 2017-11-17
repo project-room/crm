@@ -68,8 +68,8 @@ public class CstChanceController extends BaseController {
         Map map = result();
         // 测试数据
         try {
-            Page<CstChance> cstChancePage = iCstChance.getCstChance(userId, currentPage, pageSize);
-            ;
+            Long userIdLong=(Long) session.getAttribute("userId");
+            Page<CstChance> cstChancePage = iCstChance.getCstChance(userIdLong, currentPage, pageSize);
             if (cstChancePage.getPageSize() != 0) {
                 List<Long> arrList = new ArrayList<>();
                 Long totalPage = cstChancePage.getTotalPage();

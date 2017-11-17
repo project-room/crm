@@ -160,7 +160,14 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         chLinkman.setLinkQq("%"+chLinkman.getLinkQq()+"%");
         chLinkman.setLinkEmail("%"+chLinkman.getLinkEmail()+"%");
         cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPageLimit,pageSize);
-
+        //通过用户id获取用户名
+        for (CstCustomer cstCustomerFor:cstCustomers
+                ) {
+            Long userId=cstCustomerFor.getUserId();
+            SysUser sysUser= sysUserMapper.findById(userId);
+            String userNameFor=sysUser.getUserName();
+            cstCustomerFor.setRevertUserNameFromId(userNameFor);
+        }
         Long count=cstCustomerMapper.getCountByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman);
        return new Page<CstCustomer>(currentPageLimit,pageSize,cstCustomers,count);
     }
@@ -175,6 +182,42 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
        String  custCompanyStr="%"+custCompany+"%";
        Long count= cstCustomerMapper.selectCountByCstCustomerName(userIdForPage, roleName,custCompanyStr);
         return count;
+    }
+
+    /**
+     * 根据客户id编辑客户信息
+     * @param cstCustomer
+     * @param chLinkman
+     */
+    @Override
+    public void editCustomerById(CstCustomer cstCustomer, ChLinkman chLinkman) {
+
+        Long cstCustId=cstCustomer.getCustId();
+        //目标获取认领公海客户的主联系人
+        CstCustomer cstCustomerResult=cstCustomerMapper.selectCstCustomerInfo(cstCustId);
+        List<ChLinkman> chLinkmans=cstCustomerResult.getLinkmanList();
+        ChLinkman chLinkmanFinal=null;
+        for (ChLinkman chLinkmanFor:chLinkmans){
+            if(chLinkmanFor.getLinkStatus()==0){
+                chLinkmanFinal=chLinkmanFor;
+            }
+        }
+        //获得的主联系人id
+        Long chLinkmanId=chLinkmanFinal.getLinkId();
+        //根据客户id更改客户信息
+        cstCustomerMapper.updateCstCustomerWithId(cstCustId,cstCustomer);
+        //根据主联系人id更改主联系人信息
+        chLinkmanMapper.updateChLinkmanWithIdAndChLinkman(chLinkmanId,chLinkman);
+    }
+
+    /**
+     * 根据用户id查询用户
+     * @param userId
+     * @return
+     */
+    @Override
+    public SysUser selectUserById(Long userId) {
+        return sysUserMapper.selectSysUserById(userId);
     }
 
 }

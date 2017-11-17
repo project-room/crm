@@ -7,13 +7,13 @@ import com.crm.common.BaseController;
 import com.crm.common.Page;
 import com.crm.entity.SysRole;
 import com.crm.entity.SysUser;
-//import com.crm.utils.AliSms;
+import com.crm.utils.AliSms;
 import com.crm.utils.SixCaptchaUtil;
 import com.crm.utils.TypeUtil;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,8 +44,8 @@ import java.util.concurrent.TimeUnit;
 public class SysUserController extends BaseController {
     @Autowired
     private SysUserMapper sysUserMappers;
-//    @Autowired
-//    private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Autowired
     private ISysUserService sysUserService;
@@ -58,38 +58,38 @@ public class SysUserController extends BaseController {
     }
 
     //用户登录
-//    @RequestMapping("/userLogin")
-//    public String login(String username,String password ,HttpServletResponse response,Model model){
-//         Map map= result();
-//         SysUser sysUser=sysUserService.login(username,password);
-//         //如果用户为停用状态不能登录
-//         if(sysUser!=null&&sysUser.getUserStatus()!=0){
-//             redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
-//            //获取用户的角色
-//             Long roleId=sysUser.getRoleId();
-//             SysRole sysRole=sysUserService.selectRoleById(roleId);
-//             session.setAttribute("roleName",sysRole.getRoleName());
-//             session.setAttribute("userId",sysUser.getUserId());
-//             model.addAttribute("roleName",sysRole.getRoleName());
-//             //用户状态如何为停用状态不能登录成功
-//             return "index/index";
-//         }
-//        return "index/login";
-//    }
-//    //记住登录
-//    @RequestMapping("/remenberLogin")
-//    public void remenberLogin(HttpServletRequest request,HttpServletResponse response) throws IOException {
-//        Map map=result();
-//       PrintWriter out= response.getWriter();
-//       String userName= request.getParameter("userName");
-//       String result= redisTemplate.opsForValue().get(userName);
-//       if(result!=null){
-//           out.print(true);
-//       }else{
-//           out.print(false);
-//       }
-//
-//    }
+    @RequestMapping("/userLogin")
+    public String login(String username,String password ,HttpServletResponse response,Model model){
+         Map map= result();
+         SysUser sysUser=sysUserService.login(username,password);
+         //如果用户为停用状态不能登录
+         if(sysUser!=null&&sysUser.getUserStatus()!=0){
+             redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);
+            //获取用户的角色
+             Long roleId=sysUser.getRoleId();
+             SysRole sysRole=sysUserService.selectRoleById(roleId);
+             session.setAttribute("roleName",sysRole.getRoleName());
+             session.setAttribute("userId",sysUser.getUserId());
+             model.addAttribute("roleName",sysRole.getRoleName());
+             //用户状态如何为停用状态不能登录成功
+             return "index/index";
+         }
+        return "index/login";
+    }
+    //记住登录
+    @RequestMapping("/remenberLogin")
+    public void remenberLogin(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        Map map=result();
+       PrintWriter out= response.getWriter();
+       String userName= request.getParameter("userName");
+       String result= redisTemplate.opsForValue().get(userName);
+       if(result!=null){
+           out.print(true);
+       }else{
+           out.print(false);
+       }
+
+    }
 
     //注册  形式有待商榷
     @RequestMapping("userRegister")
@@ -167,7 +167,7 @@ public class SysUserController extends BaseController {
      * 获取发送短信验证码
      * @param phone
      * @return
-     *//*
+     */
 
     @RequestMapping("/sendSmsCaptcha/{phone}")
 //    13307278157
@@ -181,7 +181,7 @@ public class SysUserController extends BaseController {
         model.addAttribute("phone",phone);
        return "index/findPsd";
     }
-    */
+//
 /**
      * 根据用户号码和验证码来提交
      * @param phone
@@ -189,25 +189,25 @@ public class SysUserController extends BaseController {
      * @return
      */
 
-//    @RequestMapping("/findByPhoneAndCaptCha/{phone}/{captCha}")
-//    public String findByPhoneAndCaptCha(@PathVariable("phone") String phone,@PathVariable("captCha") String captCha){
-//        String captChaRedis= null;
-//        String phoneChaRedis= null;
-//        try {
-//            captChaRedis = redisTemplate.opsForValue().get("captCha").toString();
-//            phoneChaRedis = redisTemplate.opsForValue().get("phone").toString();
-//            if(captChaRedis.equals(captCha.trim())&&phoneChaRedis.equals(phone.trim())){
-//                session.setAttribute("sysUserPhone",phone);
-//                return "index/newPsd";
-//            }else{
-//                return "index/findPsd";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "index/findPsd";
-//        }
-//
-//    }
+    @RequestMapping("/findByPhoneAndCaptCha/{phone}/{captCha}")
+    public String findByPhoneAndCaptCha(@PathVariable("phone") String phone,@PathVariable("captCha") String captCha){
+        String captChaRedis= null;
+        String phoneChaRedis= null;
+        try {
+            captChaRedis = redisTemplate.opsForValue().get("captCha").toString();
+            phoneChaRedis = redisTemplate.opsForValue().get("phone").toString();
+            if(captChaRedis.equals(captCha.trim())&&phoneChaRedis.equals(phone.trim())){
+                session.setAttribute("sysUserPhone",phone);
+                return "index/newPsd";
+            }else{
+                return "index/findPsd";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "index/findPsd";
+        }
+
+    }
 
     /**
      * 创建新的密码
@@ -340,11 +340,6 @@ public class SysUserController extends BaseController {
      */
     @RequestMapping("/editSysUserInfo")
     public void editSysUserInfo(SysUser sysUser){
-        if(sysUser.getUserStatus()==0){
-            sysUser.setUserStatus(1);
-        }else{
-            sysUser.setUserStatus(0);
-        }
        sysUserService.updateSysUserById(sysUser);
     }
 

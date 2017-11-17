@@ -1,4 +1,4 @@
-/*
+
 package com.crm.utils;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -10,11 +10,11 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
-*/
+
 /**
  *
  * Created by Administrator on 2017/11/6.
- *//*
+ */
 
 public class AliSms {
     public static void sendSmsByPhone(String phone,String captcha){
@@ -50,4 +50,4 @@ public class AliSms {
     }
 
 }
-*/
+

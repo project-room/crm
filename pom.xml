@@ -77,21 +77,26 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+		<!--redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
 		<!--yuntongxun-->
 		<dependency>
 			<groupId>alicore</groupId>
 			<artifactId>alicore</artifactId>
-			<!--<version>1.0</version>-->
-			<!--<scope>system</scope>-->
-			<!--<systemPath>${project.basedir}/docb/aliyun-java-sdk-core-3.3.1.jar</systemPath>-->
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/doc/lib/aliyun-java-sdk-core-3.3.1.jar</systemPath>
 		</dependency>
 		<!--yuntongxun-->
 		<dependency>
 			<groupId>alidys</groupId>
 			<artifactId>alidys</artifactId>
-			<!--<version>1.0</version>-->
-			<!--<scope>system</scope>-->
-			<!--<systemPath>${project.basedir}/docb/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>-->
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/doc/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
 		</dependency>
 
 	</dependencies>

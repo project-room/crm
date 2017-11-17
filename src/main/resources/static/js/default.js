@@ -36,7 +36,9 @@ $(function() {
             //把角色名注入到sessionStorage中
             sessionStorage.setItem('roleNameSession', data);
             if(data!="管理员"){
+                //设置模块
                 $(".settitemdisplay").css("display", "none");
+                //用户系统设置
                 $(".systemSetting") .css("display","none");
             }
         },fail:function () {

@@ -82,5 +82,18 @@ public interface ICstCustomerService {
      * @return
      */
     Long selectCountByCstCustomerName(Long userIdForPage,String roleName,String custCompany);
+    /**
+     * 根据客户id编辑客户信息
+     * @param cstCustomer
+     * @param chLinkman
+     */
+    void editCustomerById(CstCustomer cstCustomer,ChLinkman chLinkman);
+
+    /**
+     * 根据用户id查询用户
+     * @param userId
+     * @return
+     */
+    SysUser selectUserById(Long userId);
 
 }
