@@ -63,13 +63,13 @@ public class CstChanceController extends BaseController {
 
     //查询我的机会方法
 //    Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize
-    @RequestMapping("/getCstChance/{userId}/{currentPage}/{pageSize}")
-    public String getCstChance(Model model, @PathVariable("userId") Long userId, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+    @RequestMapping("/getCstChance/{currentPage}/{pageSize}")
+    public String getCstChance(Model model, @PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
         Map map = result();
         // 测试数据
         try {
-            Page<CstChance> cstChancePage = iCstChance.getCstChance(userId, currentPage, pageSize);
-            ;
+            Long userIdLong=(Long) session.getAttribute("userId");
+            Page<CstChance> cstChancePage = iCstChance.getCstChance(userIdLong, currentPage, pageSize);;
             if (cstChancePage.getPageSize() != 0) {
                 List<Long> arrList = new ArrayList<>();
                 Long totalPage = cstChancePage.getTotalPage();
@@ -340,17 +340,12 @@ public class CstChanceController extends BaseController {
          chance.setTransferTime(date);
          chance.setChExamine((long)3);
         try {
-            System.out.println("到了没");
+            System.out.println(chance.getChStage());
             String[] timeStr=chance.getChStage().split(",");
-            System.out.println(timeStr[0]);
-            System.out.println(timeStr[1]);
             for (int i=0;i<timeStr.length;i++){
-                System.out.println(timeStr[i]);
                chance.setChStage(timeStr[i]);
-                System.out.println(chance.getChStage()+"值是");
                boolean mask=iCstChance.addChance(chance);
             }
-            System.out.println("到了");
           /*if (mask==false){
               map.put("code", "-1");
               map.put("msg", "修改失败");
@@ -369,14 +364,11 @@ public class CstChanceController extends BaseController {
     public /*Map*/String  getfilterChance(Model model,CstChance chance,CstCustomer customer,String begindate,String finishdate,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
          Map map=result();
         chance.setChCustomer(customer);
-        System.out.println(begindate);
-
-        System.out.println(finishdate);
+        if (begindate!="" && finishdate!=""){
         String[] timeStr=finishdate.split("-");
         finishdate=begindate+timeStr[1];
         begindate=begindate+timeStr[0];
-        System.out.println(begindate);
-        System.out.println(finishdate);
+        }
          try{
              Page<CstChance> cstChancesPageList=iCstChance.getfilterChance(chance,begindate,finishdate,currentPage,pageSize);
              List<SysUser> SysUserList=iCstChance.getSysUser(chance.getUserId());
@@ -385,7 +377,6 @@ public class CstChanceController extends BaseController {
                  Long totalPage = cstChancesPageList.getTotalPage();
                  System.out.println(totalPage);
                  for (int i = 1; i <= totalPage; i++) {
-                     System.out.println(i);
                      arrList.add(new Long(i));
                  }
                  model.addAttribute("arrList", arrList);
