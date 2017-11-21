@@ -1,34 +1,47 @@
 $(function() {
+    loadData();
     allCheck();
-
     $('.main').niceScroll({
         cursorcolor: '#ccc'
     });
-
-
+    $('.salerSearch').niceScroll({
+        cursorcolor: '#ccc'
+    });
     checkboxClick();
-
     // $('.pull-right.pagination').append('<ul>1234</ul>')
-    $('.filter').click(function(){
+    $('.filter').click(function() {
         $('.filterPop').addClass('dblock').removeClass('dnone');
     });
-
     $('.shelter').click(function(event) {
         $('.filterPop').addClass('dnone').removeClass('dblock');
+        $('.layui-laydate').remove();
     });
-
     $('.filterPop .sure').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
+        $('.layui-laydate').remove();
     });
     $('.filterPop .cancel').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
+        $('.layui-laydate').remove();
     });
 
+    forDealing();
     $('.allOperate .delete').click(function() {
-        $('tbody tr').each(function(index, el) {
-            if ($(this).find('.forCheckbox input').prop('checked') == true) {
-                $(this).remove();
-                //ajax
+        var dblChoseAlert = simpleAlert({
+            "content":"确定删除？",
+            "buttons":{
+                "确定":function () {
+                    $('tbody tr').each(function(index, el) {
+                        if ($(this).find('.forCheckbox input').prop('checked') == true) {
+                            $(this).remove();
+                            //ajax
+                        }
+                    });
+                    dblChoseAlert.close();
+                },
+                "取消":function () {
+                    dblChoseAlert.close();
+                }
             }
         });
     });
@@ -36,15 +49,15 @@ $(function() {
     forTable();
     fenye();
     //新建客户
-   $("#addCstCustomer").click(function () {
-       location.href="/crm/cstCustomer/toAddNewCustomer";
-   });
+    $("#addCstCustomer").click(function () {
+        location.href="/crm/cstCustomer/toAddNewCustomer";
+    });
 
-   // //根据客户名来模糊搜所客户信息
-   //  $("#search").click(function () {
-   //   var custCompany=$("#searchName").val();
-   //   location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
-   //  });
+    // //根据客户名来模糊搜所客户信息
+    //  $("#search").click(function () {
+    //   var custCompany=$("#searchName").val();
+    //   location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
+    //  });
 
     //筛选客户
     $("#confirm").click(function () {
@@ -64,6 +77,13 @@ $(function() {
 
         }
     });
+
+
+
+    $('.page-number').click(function() {
+        var pageN = $(this).find('a').text();
+        loadData(pageN)
+    })
 });
 
 
@@ -71,13 +91,16 @@ window.onload = function() {
     laydate.render({
         elem: '#hour',
         type: 'time',
-        range: true
+        range: true,
+        theme: '#7460ee'
     });
     laydate.render({
         elem: '#day',
-        format: 'yyyy年MM月dd日'
+        format: 'yyyy-MM-dd',
+        theme: '#7460ee'
     });
 };
+
 
 
 
@@ -94,42 +117,64 @@ function allOperateShowHide() {
 }
 
 
+
 function checkboxClick() {
-    $('body').on('click', 'tbody input[type=checkbox]', function() {
-        var x = 0;
-        var mx = $('tbody tr').length;
-        for (var i = 0; i < mx; i++) {
-            if ($('tbody tr').eq(i).find('input[type=checkbox]').prop('checked') === true) {
-                x++
+    $('tbody').on('click', '.forCheckbox', function(event) {
+        event.stopPropagation()
+        setTimeout(forDel, 10);
+        function forDel() {
+            var x = 0;
+            var mx = $('tbody tr').length;
+            for (var i = 0; i < mx; i++) {
+                if ($('tbody tr').eq(i).find('input[type=checkbox]').prop('checked') == true) {
+                    x++;
+                }
             }
-        }
-        if (x != (mx - 1)) {
-            $('.allOperate input').prop('checked', false);
-        } else {
-            $('.allOperate input').prop('checked', true);
+            if (x != mx) {
+                $('.allOperate input').prop('checked', false);
+                $('.allOperate .forCheckbox').removeClass('borderPurple');
+            } else {
+                $('.allOperate input').prop('checked', true);
+                $('.allOperate .forCheckbox').addClass('borderPurple');
+            }
         }
     })
 }
 
+
 function allCheck() {
     $('.allOperate input').click(function() {
-        for(var i = 0; i < $('tbody').find('tr').length; i++) {
-            if($(this).prop('checked') == true) {
-                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', true);
-                $('tbody .forCheckbox').addClass('borderPurple');
+        for (var i = 0; i < $('tbody').find('tr').length; i++) {
+            if ($(this).prop('checked') == true) {
+                $(this).parents('label').addClass('borderPurple');
+                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', true).parents('.forCheckbox').addClass('borderPurple');
             } else {
-                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', false);
-                $('tbody .forCheckbox').removeClass('borderPurple');
+                $(this).parents('label').removeClass('borderPurple');
+                $('tbody').find('input[type=checkbox]').eq(i).prop('checked', false).parents('.forCheckbox').removeClass('borderPurple');
             }
         }
         allOperateShowHide();
     });
 }
 
+
 function forTable() {
     var slideBool = false;
     $('tbody').on('click', 'tr .delete', function() {
-        $(this).parents('tr').remove();
+        var $this = $(this);
+        var dblChoseAlert = simpleAlert({
+            "content":"确定删除？",
+            "buttons":{
+                "确定":function () {
+                    $this.parents('tr').remove();
+                    dblChoseAlert.close();
+                },
+                "取消":function () {
+                    dblChoseAlert.close();
+                }
+            }
+        });
+
         allOperateShowHide();
     });
 
@@ -137,8 +182,9 @@ function forTable() {
     //     event.stopPropagation();
     //     allOperateShowHide();
     // });
-    $('tbody').on('click', '.forCheckbox', function(event) {
-        event.stopPropagation()
+    $('tbody').on('click', 'tr input[type=checkbox]', function(event) {
+        event.stopPropagation();//取消事件冒泡
+        event.preventDefault();//取消默认事件
         setTimeout(forDel, 10);
         function forDel() {
             var userIdStr="";
@@ -203,7 +249,7 @@ function forTable() {
 
     //单击单条记录获取该条记录的信息
     $('tbody').on('click', 'tr', function() {
-       var custId= $(this).children("input[type=hidden]").val().toString();
+        var custId= $(this).children("input[type=hidden]").val().toString();
         location.href="/crm/cstCustomer/lookCstCustomerInfo/"+custId;
     });
 
@@ -212,5 +258,97 @@ function forTable() {
         var val = $(this).val();
         window.location.pathname = '/crm/cstCustomer/getPage/' + val + '/7';
 
+    });
+}
+function forDealing() {
+    $('body').on('click', '.dealing', function() {
+        $('.dealingPop').addClass('dblock').removeClass('dnone');
+    });
+    $('.dealingPop .shelter').click(function(event) {
+        $('.dealingPop').addClass('dnone').removeClass('dblock');
+    });
+    $('.dealingPop .sure').click(function() {
+        $('.dealingPop').addClass('dnone').removeClass('dblock');
+    });
+    $('.dealingPop .cancel').click(function() {
+        $('.dealingPop').addClass('dnone').removeClass('dblock');
+    });
+    $('tbody').on('click', '.dealing', function() {
+        $('.dealingPop').addClass('dblock').removeClass('dnone');
+    });
+
+    $('.dealingPop .saler').click(function() {
+        $('.salerSearch').slideToggle()
+    });
+
+    $('.salerSearch ul').click(function() {
+        if ($(this).find('span').text() == '+') {
+            $(this).find('span').text('-');
+            openOrnot = false;
+        } else {
+            $(this).find('span').text('+');
+            openOrnot = true;
+        }
+        $(this).find('li').slideToggle();
+    });
+
+    $('.salerSearch li').click(function(event) {
+        event.stopPropagation();
+        var text = $(this).text();
+        $('.saler').val(text);
+    });
+}
+
+function delConfirm() {
+    $('.delPop .sure').click(function() {
+        return true;
+    })
+    $('.delPop .cancel').click(function() {
+        return false;
+    })
+}
+
+
+
+function  loadData(pageN) {
+    var getData = {};
+    var sendUrl, sendData;
+    getData.customName = $('#name').val();
+    getData.customContact = $('#contact').val();
+    getData.customMobile = $('#mobile').val();
+    getData.customTelephone = $('#telphone').val();
+    getData.customRenlingren = $('#renlingren').val();
+    getData.customMail = $('#mail').val();
+    getData.customDay = $('#day').val();
+    getData.customHour = $('#hour').val();
+    for(i in getData){
+        if (getData[i] == "") {
+            delete getData[i];
+        }
+    }
+    var pageNumber = pageN || 1;
+    console.log(getData, pageNumber)
+    function isEmptyObject(e) {
+        var t;
+        for (t in e)
+            return !1;
+        return !0
+    }
+
+    if(isEmptyObject(getData)) {
+        sendUrl = "/crm/cstCustomer/getPage";
+        sendData = {"pageNumber":pageNumber};
+    } else {
+        sendUrl = "/crm/cstCustomer/getPage/{currentPage}/{pageSize}";
+        sendData = {"getData":getData,"pageNumber":pageNumber};
+    }
+    $.ajax({
+        type: 'post',
+        url: sendUrl,
+        data:sendData,
+        dataType: 'json',
+        success:function (data) {
+            console.log(data.cstCustomers[0].custAddress);
+        }
     });
 }
