@@ -7,6 +7,7 @@ import com.crm.biz.customer.dao.CstLowCustomerMapper;
 import com.crm.biz.customer.service.ICstCustomerService;
 import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.common.Page;
+import com.crm.dto.DataConditionDto;
 import com.crm.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -219,5 +220,18 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     public SysUser selectUserById(Long userId) {
         return sysUserMapper.selectSysUserById(userId);
     }
+
+    /**
+     * 获取每一页客户的信息
+     * @param dataConditionDto
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<CstCustomer> getCstCustomerOnePageList(DataConditionDto dataConditionDto, Integer pageNumber, Integer pageSize) {
+      return cstCustomerMapper.getCstCustomerOnePageList(dataConditionDto,pageNumber,pageSize);
+    }
+
 
 }
