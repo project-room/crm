@@ -37,12 +37,13 @@ public class CstChanceServiceImpl implements ICstChanceService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
+
     //根据用户id查询机会
     @Override
-    public Page<CstChance> getCstChance(Long userId, int currentPage, int pageSize) {
+    public Page<CstChance> getCstChance(Long userId,String custCompany,int currentPage, int pageSize) {
         Long count = (long) cstChanceMapper.getCstChanceCount(userId);
         int currentPageLimit = (currentPage - 1) * pageSize;
-        List<CstChance> cstChances = cstChanceMapper.getCstChance(userId, currentPageLimit, pageSize);
+        List<CstChance> cstChances = cstChanceMapper.getCstChance(userId,custCompany,currentPageLimit, pageSize);
         return new Page<CstChance>(currentPage, pageSize, cstChances, count);
     }
 
@@ -65,8 +66,6 @@ public class CstChanceServiceImpl implements ICstChanceService {
         }
         return false;
     }
-
-
 
     //添加机会
     @Override
@@ -123,6 +122,7 @@ public class CstChanceServiceImpl implements ICstChanceService {
     public boolean deleteCstChance(Long id) {
 
         int count = cstChanceMapper.deleteCstChance(id);
+        chLinkmanMapper.deleteLinkStatus(id);
         chLinkmanMapper.updateChId(id);
         if (count > 0) {
             return true;
@@ -145,7 +145,7 @@ public class CstChanceServiceImpl implements ICstChanceService {
         return false;
     }
 
-    //同时修改机会表和客户表里的用户id
+    //修改机会表用户id
     @Override
     public boolean updateChance(CstChance cst) {
         int count = cstChanceMapper.updateChance(cst);
@@ -155,6 +155,17 @@ public class CstChanceServiceImpl implements ICstChanceService {
         }
         return false;
     }
+    //不通过时修改机会表
+    @Override
+    public boolean updateChanceTo(Long chId) {
+          int count=cstChanceMapper.updateChanceTo(chId);
+          if (count>0){
+
+              return true;
+          }
+        return false;
+    }
+
 
     @Override
     public List<SysUser> getSysUser(Long userId) {
@@ -193,7 +204,6 @@ public class CstChanceServiceImpl implements ICstChanceService {
         return new Page<CstChance>(currentPage, pageSize, cst, count);
 
     }
-
     //机会转交的条件查询
     @Override
     public Page<CstChance> getfilterChance(CstChance chance,String begindate,String finishdate, int currentPage, int pageSize) {
@@ -204,5 +214,4 @@ public class CstChanceServiceImpl implements ICstChanceService {
         List<CstChance> ChanceList=cstChanceMapper.getfilterChance(chance,begindate,finishdate,currentPageLimit,pageSize);
         return new Page<CstChance>(currentPage, pageSize, ChanceList, count);
     }
-
 }
