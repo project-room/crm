@@ -9,6 +9,7 @@ import com.crm.entity.CstRecord;
 import com.crm.utils.ObjectUtil;
 import com.crm.utils.TypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ import java.util.Map;
  * Created by Administrator on 2017/9/12.
  */
 @RestController
+@RequestMapping("/CstRecord")
 public class CstRecordController extends BaseController{
     @Autowired
     private CstRecordMapper cstRecordMapper;
@@ -48,8 +50,8 @@ public class CstRecordController extends BaseController{
     }
 
     //根据机会id查询记录表
-    @RequestMapping("/getCstRecord")
-    public  Map getCstRecord(Long id){
+    @RequestMapping("/getCstRecord/{id}")
+    public  Map getCstRecord(@PathVariable("id") Long id){
         Map map=result();
         try {
             List<CstRecord> RecordList = iCstRecordService.getCstRecord(id);
