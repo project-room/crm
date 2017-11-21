@@ -226,9 +226,8 @@
                                     <img th:src="@{/img/addCustomer.png}"/>
                                     新建客户
                                 </a>
-                            <button class="moreOperate">
-                                · · ·
-                            </button>
+                            <img th:src="@{/img/more.png}" class="moreOperate"/>
+
                         </div>
                     </div>
                     <div class="allOperate dnone">
@@ -414,14 +413,13 @@
                                 </ul>
                                 <div class="jump">
                                     <label>调转
-                                        <select>
+                                        <select class="dumppage">
                                             <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}"></a></option>
                                         </select>
                                     </label>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

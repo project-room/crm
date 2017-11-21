@@ -62,6 +62,8 @@ $(function() {
         location.href="/crm/sysUser/loginOut";
         //删除sessionStorage的值
         sessionStorage.removeItem("roleNameSession");
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userpsd');
     });
 
     //加载用户名
@@ -75,6 +77,8 @@ $(function() {
 
         }
     });
+
+
 });
 
 //右边头部email和user
@@ -182,6 +186,9 @@ function forFenye() {
     for (var i = 0; i < $('.page-number').length; i++) {
         if ($('.page-number').eq(i).find('a').text() == yema[yema.length - 2]) {
             $('.page-number').eq(i).addClass('active');
+        }
+        if ($('.dumppage option').eq(i).text() == yema[yema.length - 2]) {
+            $('.dumppage option').eq(i).attr('selected',true);
         }
     }
     $('.page-number.active').siblings('.page-number').addClass('dnone');

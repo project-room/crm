@@ -63,6 +63,12 @@ $(function() {
         });
 	});
 
+    //跳转到页面
+    $('body').on('change', '.dumppage', function() {
+        var val = $(this).val();
+        window.location.pathname = '/crm/sysUser/getSysUserList/' + val + '/10';
+
+    });
 
 	
 	$('.cus').click(function() {

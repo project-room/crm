@@ -54,4 +54,7 @@ public interface SysUserMapper {
 
     //机会查询所有用户
     List<SysUser> getSysUser(Long userId);
+
+    //根据账号来获取用户
+    SysUser selectSysUserByAccounts(String accounts);
 }

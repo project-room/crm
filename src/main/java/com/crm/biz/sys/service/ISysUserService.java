@@ -39,6 +39,9 @@ public interface ISysUserService {
 
     //根据用户id获取用户信息
     SysUser selectSysUserInfoById(Long userId);
+
+    //根据账号来获取用户
+    SysUser selectSysUserByAccounts(String accounts);
 }
 
 

@@ -110,5 +110,10 @@ public class SysUserServiceImpl implements ISysUserService {
         return sysUserMapper.selectSysUserById(userId);
     }
 
+    @Override
+    public SysUser selectSysUserByAccounts(String accounts) {
+       return sysUserMapper.selectSysUserByAccounts(accounts);
+    }
+
 
 }

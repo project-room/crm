@@ -206,4 +206,11 @@ function forTable() {
        var custId= $(this).children("input[type=hidden]").val().toString();
         location.href="/crm/cstCustomer/lookCstCustomerInfo/"+custId;
     });
+
+    //跳转到页面
+    $('body').on('change', '.dumppage', function() {
+        var val = $(this).val();
+        window.location.pathname = '/crm/cstCustomer/getPage/' + val + '/7';
+
+    });
 }
