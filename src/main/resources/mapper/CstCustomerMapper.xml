@@ -102,10 +102,10 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <!--公海客户分页-->
     <select id="getPageCstCustomerInfo" parameterType="map" resultMap="BaseResultMap">
         <if test="roleName=='管理员'||roleName=='销售经理'">
-            SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`  LIMIT #{currentPageLimit},#{pageSize}
+            SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` ORDER BY cc.`cust_date` DESC LIMIT #{currentPageLimit},#{pageSize}
         </if>
         <if test="roleName=='销售员'">
-            SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`user_id`=#{userIdForPage} LIMIT #{currentPageLimit},#{pageSize}
+            SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`user_id`=#{userIdForPage} ORDER BY cc.`cust_date` DESC LIMIT #{currentPageLimit},#{pageSize}
         </if>
     </select>
 

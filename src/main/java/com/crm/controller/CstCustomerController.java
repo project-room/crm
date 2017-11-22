@@ -371,9 +371,28 @@ public class CstCustomerController extends BaseController{
 
             cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(userIdForPage,roleName,currentPage,pageSize);
 //            map.put("cstCustomerPage",cstCustomerPage);
+
+
+
+
             //设置创建时间格式
            List<CstCustomer> cstCustomers= cstCustomerPage.getList();
-            
+//            //排序
+//            Collections.sort(cstCustomers, new Comparator<CstCustomer>(){
+//
+//                @Override
+//                public int compare(CstCustomer c1, CstCustomer c2) {
+//                    //按照学生的年龄进行升序排列
+//                    if(c1.getCustDate().getTime() < c2.getCustDate().getTime()){
+//                        return 1;
+//                    }
+//                    if(c1.getCustDate().getTime() == c2.getCustDate().getTime()){
+//                        return 0;
+//                    }
+//                    return -1;
+//                }
+//            });
+
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
                 Date formation= cstCustomer.getCustDate();

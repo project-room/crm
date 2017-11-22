@@ -33,6 +33,8 @@ $(function() {
         });
     });
 
+    forDealing();
+
     forTable();
     fenye();
     //新建客户
@@ -123,6 +125,46 @@ function allCheck() {
             }
         }
         allOperateShowHide();
+    });
+}
+
+
+function forDealing() {
+    $('body').on('click', '.dealing', function() {
+        $('.dealingPop').addClass('dblock').removeClass('dnone');
+    });
+    $('.dealingPop .shelter').click(function(event) {
+        $('.dealingPop').addClass('dnone').removeClass('dblock');
+    });
+    $('.dealingPop .sure').click(function() {
+        $('.dealingPop').addClass('dnone').removeClass('dblock');
+    });
+    $('.dealingPop .cancel').click(function() {
+        $('.dealingPop').addClass('dnone').removeClass('dblock');
+    });
+    $('tbody').on('click', '.dealing', function() {
+        $('.dealingPop').addClass('dblock').removeClass('dnone');
+    });
+
+    $('.dealingPop .saler').click(function() {
+        $('.salerSearch').slideToggle()
+    });
+
+    $('.salerSearch ul').click(function() {
+        if ($(this).find('span').text() == '+') {
+            $(this).find('span').text('-');
+            openOrnot = false;
+        } else {
+            $(this).find('span').text('+');
+            openOrnot = true;
+        }
+        $(this).find('li').slideToggle();
+    });
+
+    $('.salerSearch li').click(function(event) {
+        event.stopPropagation();
+        var text = $(this).text();
+        $('.saler').val(text);
     });
 }
 

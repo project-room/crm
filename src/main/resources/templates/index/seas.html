@@ -26,6 +26,50 @@
         </meta>
     </head>
     <body>
+    <div class="dealingPop dnone"  style="font-size: 14px;">
+        <div class="shelter"></div>
+        <div class="dealingmain">
+            <h4>
+                分配公海客户
+                <svg class="fright cancel" viewbox="0 0 20 20">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </svg>
+            </h4>
+            <form>
+                <label>
+                    <span>客户类型</span>
+                    <select>
+                        <option>有效客户</option>
+                    </select>
+                </label>
+                <label>
+                    <span>分配销售员</span>
+                    <input type="text" class="saler" />
+                </label>
+                <div class="btngroup">
+                    <input class="sure" type="button" value="确定"/>
+                    <input class="cancel" type="button" value="取消"/>
+                </div>
+            </form>
+            <div class="salerSearch">
+                <label>
+                    <input type="text" placeholder="请输入销售员名字" />
+                </label>
+                <ul>
+                    <span>+</span>A区
+                    <li>小姐A</li>
+                    <li>小姐B</li>
+                </ul>
+                <ul>
+                    <span>+</span>B区
+                    <li>小姐C</li>
+                    <li>小姐D</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
         <div class="filterPop dnone" style="font-size: 14px;">
             <div class="shelter">
             </div>
@@ -234,7 +278,7 @@
                         <label class="forCheckbox">
                             <input type="checkbox"/>
                         </label>
-                        <button>
+                        <button class="dealing">
                             <img th:src="@{/img/allocation.png}"/>
                             分配
                         </button>
@@ -373,7 +417,7 @@
                                         </p>
                                         <ul class="slideEdit">
                                             <li>
-                                                <a href="#" mce_href="#">
+                                                <a href="#" mce_href="#" class="dealing">
                                                     分配
                                                 </a>
                                             </li>
