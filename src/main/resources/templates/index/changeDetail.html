@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="leftSide">
-            <form action="/cstChance/updateCstChance">
+            <form action="/crm/cstChance/updateCstChance">
             <div class="leftSideHeader">
                 <p>销售机会信息</p>
                 <a class="leftSideEdit">操作<img th:src="@{/img/arrowDown.png}" height="8" width="10"/></a>
@@ -122,9 +122,7 @@
                 </tr>
                 <tr>
                     <td>所在省份</td>
-                    <td>
-                        <input type="text" name="custprovinceChar" th:value="${cstChanceList.chCustomer.custprovinceChar}" disabled="disabled"/>
-                    </td>
+                    <td><input type="text" name="custprovinceChar" th:value="${cstChanceList.chCustomer.custprovinceChar}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>地址</td>
@@ -132,7 +130,7 @@
                 </tr>
                 <tr>
                     <td>标签</td>
-                    <td><span class="changeLabel">意愿很强</span><span class="changeLabel">企业文档管理</span></td>
+                    <td><span class="changeLabel" th:text="${cstChanceList.chIntentionality}"></span><span class="changeLabel" th:text="${cstChanceList.requirement}"></span></td>
                 </tr>
             </table>
 
@@ -141,7 +139,7 @@
             </div>
             <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
                 <tr>
-                    <td>姓名<input type="text" name="linkId" th:value="${cstChanceList.linkmanList[0].linkId}"/></td>
+                    <td>姓名<input type="hidden" name="linkId" th:value="${cstChanceList.linkmanList[0].linkId}"/></td>
                     <td><input type="text" name="linkName" th:value="${cstChanceList.linkmanList[0].linkName}" disabled="disabled"/></td>
                 </tr>
                 <tr>
@@ -298,39 +296,9 @@
                 <a class="fabu">发布</a>
                 <div class="clearfix"></div>
                 <p class="recordNum"><span>记录</span>（15）</p>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-                <div class="msg">
-                    <p>沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。</p>
-                    <p>2017/08/26   聂宇豪 添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                <div class="msg" >
+                    <p ></p>
+                    <p ></p> <p>添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
                         <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
                 </div>
             </div>
@@ -486,7 +454,32 @@
                     <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
                 </ul>
             </div>
-            <div class="rightSideTask progressNavDetail progressNavDetail5"></div>
+            <div class="rightSideTask progressNavDetail progressNavDetail5">
+                <button class="rightSideTaskNewBtn">
+                    <span>+</span>
+                    <span>添加任务</span>
+                </button>
+                <p>未完成（3）</p>
+                <ul >
+                    <li th:each="userTasksList:${userTasksList}" th:hidden="${userTasksList.taskStatus eq 1}">
+                        <div class="fl"><input type="checkbox"/></div>
+                        <div class="fl" >
+                            <p th:text="${userTasksList.taskContent}"></p>
+                            <p class="grey" th:text="${userTasksList.taskDate}"></p>执行
+                        </div>
+                    </li>
+                </ul>
+                <p>已完成（3）</p>
+                <ul>
+                    <li th:each="userTasksList:${userTasksList}" th:hidden="${userTasksList.taskStatus eq 0}">
+                        <div class="fl"><img class="checkedPic" th:src="@{/img/checked.png}" height="19" width="18"/></div>
+                        <div class="fl">
+                            <p th:text="${userTasksList.taskContent}"></p>
+                            <p class="grey" th:text="${userTasksList.taskDate}"></p>已执行
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

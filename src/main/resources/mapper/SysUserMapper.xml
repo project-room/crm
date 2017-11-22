@@ -74,6 +74,7 @@
       <result column="ch_status" property="chStatus" jdbcType="VARCHAR"/>
       <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
       <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
+      <result column="ch_indication" property="chIndication" jdbcType="VARCHAR" />
     </collection>
 
 

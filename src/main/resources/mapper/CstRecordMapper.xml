@@ -6,6 +6,47 @@
     <result column="re_content" property="reContent" jdbcType="VARCHAR" />
     <result column="ch_id" property="chId" jdbcType="BIGINT" />
     <result column="re_date" property="reDate" jdbcType="TIMESTAMP" />
+    <!--记录表和机会表的关联-->
+    <association property="chance" column="ch_id" javaType="CstChance">
+      <id  property="chId" column="ch_id"/>
+      <result property="chContent" column="ch_content"/>
+      <result property="custId" column="cust_id"  />
+      <result property="chDate"  column="ch_date"  />
+      <result property="chMoney" column="ch_money"  />
+      <result property="userToId"  column="userTo_id"/>
+      <result property="userId" column="user_id"/>
+      <result  property="chDept"  column="ch_dept" />
+      <result  property="chDoc" column="ch_doc" />
+      <result property="chSupplier"  column="ch_supplier" />
+      <result  property="chUptime" column="ch_uptime" />
+      <result property="chBackground" column="ch_background" />
+      <result  property="chIntentionality" column="ch_Intentionality"  />
+      <result property="chStage" column="ch_stage"  />
+      <result property="chIndication" column="ch_indication" />
+      <result  property="chImportance" column="ch_importance" />
+      <result property="requirement" column="ch_requirement" />
+      <result property="chFollow" column="ch_Follow"/>
+      <result property="chTransaction" column="ch_Transaction"/>
+      <result property="chLostSingleType" column="ch_LostSingleType"/>
+      <result  property="chReasonsForLosingOrders" column="ch_ReasonsForLosingOrders"/>
+      <result property="chStatus" column="ch_status"/>
+      <result  property="TransferTime" column="ch_TransferTime" />
+      <result  property="chExamine" column="ch_examine"/>
+      <association property="sysUser" column="user_id" javaType="SysUser">
+        <id property="userId" column="user_id"/>
+        <result  property="roleId" column="role_id"/>
+        <result  property="userName" column="user_name"/>
+        <result  property="userAccounts" column="user_accounts"/>
+        <result  property="userPassword" column="user_password"/>
+        <result  property="userStatus" column="user_status"/>
+        <result  property="userDepartment" column="user_department"/>
+        <result  property="userPosition" column="user_position"/>
+        <result  property="userEmail" column="user_email"/>
+        <result  property="userPhone" column="user_phone"/>
+        <result  property="userWorkphone" column="user_workphone"/>
+        <result  property="userState"  column="user_state"/>
+      </association>
+    </association>
     <!--记录表和附件表的关联-->
     <collection property="attachmentList" ofType="com.crm.entity.SysAttachment">
       <id column="atta_id" property="attaId" jdbcType="BIGINT" />
@@ -14,7 +55,10 @@
       <result column="atta_name" property="attaName" jdbcType="VARCHAR" />
       <result column="atta_address" property="attaAddress" jdbcType="VARCHAR" />
     </collection>
+
+
   </resultMap>
+
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM cst_record WHERE re_id=#{id}
   </select>
@@ -34,10 +78,12 @@
     INSERT INTO cst_record (re_content,ch_id,user_name,re_date) VALUES (#{reContent},#{chId},#{userName},#{reDate})
   </insert>
 
-    <!--根据机会id查询记录表-->
+  <!--根据机会id查询记录表-->
   <select id="getCstRecord" parameterType="Long"  resultMap="BaseResultMap">
-    select * from cst_record  where ch_id=#{chId} ORDER BY re_date DESC
+    select r.*,c.user_id,y.user_name from cst_record r,cst_chance c,sys_user y where
+    r.ch_id=#{chId} and c.ch_id=r.ch_id and c.user_id=y.user_id ORDER BY re_date DESC
   </select>
+
   <!--添加记录-->
    <insert id="addRecord" parameterType="CstRecord">
      INSERT INTO cst_record (re_content,ch_id,user_name,re_date)

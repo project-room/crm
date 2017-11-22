@@ -40,6 +40,8 @@ public class CstChance {
 
     private String chTransaction;//成交年份
 
+    private String chIndication;//购买意向
+
     private  String chLostSingleType;//丢单类型
 
     private  String chReasonsForLosingOrders;//丢单原因
@@ -100,6 +102,14 @@ public class CstChance {
 
     public void setRecordList(List<CstRecord> recordList) {
         this.recordList = recordList;
+    }
+
+    public String getChIndication() {
+        return chIndication;
+    }
+
+    public void setChIndication(String chIndication) {
+        this.chIndication = chIndication;
     }
 
     public Long getChId() {

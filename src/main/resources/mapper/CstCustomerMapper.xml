@@ -5,7 +5,7 @@
     <id column="cust_id" property="custId" jdbcType="BIGINT" />
     <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
     <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
-      <result column="cust_provinceChar" property="custprovinceChar" jdbcType="VARCHAR"></result>
+    <result column="cust_provinceChar" property="custprovinceChar" jdbcType="VARCHAR"/>
     <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
     <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
     <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />

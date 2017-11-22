@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ICstChanceService {
 
-    public Page<CstChance> getCstChance(Long userId, int currentPage, int pageSize);
+    public Page<CstChance> getCstChance(Long userId,String custCompany,int currentPage, int pageSize);
 
     public boolean addCstChance(CstChance cstChance,CstCustomer cstCustomer,ChLinkman chLinkman,CstLowCustomer cstLowCustomer,Long linkIdTo,String linkDepartmentTo,String linkPositionTo);
 
@@ -41,4 +41,5 @@ public interface ICstChanceService {
 
     public  Page<CstChance> getfilterChance(CstChance chance,String begindate, String finishdate, int currentPage, int pageSize);
 
+    public boolean updateChanceTo(Long chId);
 }

@@ -62,7 +62,6 @@ $(function() {
 
     $('tbody').on('click', 'tr',function() {
         var chId=$(this).children("input[type=hidden]").val();
-        alert(chId);
         location.href ="/crm/cstChance/getCstChanceId/"+chId;
     });
 
