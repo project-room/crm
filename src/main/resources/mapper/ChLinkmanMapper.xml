@@ -46,7 +46,9 @@ UPDATE ch_linkman SET link_name=#{chLinkman.linkName},link_phone=#{chLinkman.lin
 
       <!--删除机会表时将联系人表中chid设置为空-->
        <update id="updateChId" parameterType="Long">
-         update ch_linkman set ch_id=null where ch_id=#{chId}
+         update ch_linkman set ch_id=null where ch_id=#{chId} 
        </update>
-
+        <delete id="deleteLinkStatus" parameterType="Long">
+            delete from ch_linkman where ch_id=#{id} and link_status=1
+        </delete>
 </mapper>

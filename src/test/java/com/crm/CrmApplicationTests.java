@@ -2,13 +2,20 @@ package com.crm;
 
 import com.crm.biz.dynamic.dao.SysDynamicMapper;
 import com.crm.entity.UserTask;
+import com.crm.utils.HttpUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sun.net.www.http.HttpClient;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)

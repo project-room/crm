@@ -71,7 +71,7 @@
                         </path>
                     </svg>
                 </h4>
-                <form action="/cstChance/addChance/1/10">
+                <form action="/crm/cstChance/addChance/1/10">
                     <label>
                         原始负责人
                         <input type="text" name="userId" />
@@ -99,31 +99,31 @@
                             </li>
                             <li>
                                 <label class="forCheckbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" name="chStage" value="需求分析"/>
                                 </label>
                                     需求分析
                             </li>
                             <li>
                                 <label class="forCheckbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" name="chStage" value="方案制定"/>
                                 </label>
                                     方案制定
                             </li>
                             <li>
                                 <label class="forCheckbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" name="chStage" value="竞标中"/>
                                 </label>
                                     竞标中
                             </li>
                             <li>
                                 <label class="forCheckbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox"  name="chStage" value="商务谈判"/>
                                 </label>
                                     商务谈判
                             </li>
                             <li>
                                 <label class="forCheckbox">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox"  name="chStage" value="合同签订"/>
                                 </label>
                                     合同签订
                             </li>
@@ -147,7 +147,7 @@
                         </path>
                     </svg>
                 </h4>
-                <form  action="/cstChance/getfilterChance/1/10">
+                <form  action="/crm/cstChance/getfilterChance/1/10">
                     <label>
                         <span>原始负责人</span>
                         <input type="text" name="userId" value="1"  class="oldSaler" />
@@ -263,7 +263,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a th:href="@{'/cstChance/getCstChance/1/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}">
+                    <a th:href="@{'/cstChance/getCstChance/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}">
                         <img alt="机会" th:src="@{/img/chance.png}" />
                         <span class="navTxt">
                             机会
@@ -294,7 +294,7 @@
         <div class="rightContent">
             <div class="header">
                 <div>
-                    <input placeholder="请输入客户名称" type="text"/>
+                    <input placeholder="请输入客户名称" type="text" />
                     <button>
                         <img alt="" th:src="@{/img/searchIcon.png}"/>
                     </button>
@@ -372,7 +372,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a th:href="@{'/cstChance/getCstChanceUserId/1/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}" style="color: #7460ee;">
+                                        <a th:href="@{'/cstChance/getCstChanceUserId/'+${cstChancesPageList.currentPage}+'/'+${cstChancesPageList.pageSize}}" style="color: #7460ee;">
                                             转交客户
                                         </a>
                                     </li>
@@ -481,10 +481,12 @@
                                         </label>
                                     </td>
                                     <td class="origin" style="">
+                                        <input type="hidden" th:value="${cstChancesPageList.chId}"/>
                                         <p th:text="${cstChancesPageList.sysUser.userName}">
                                         </p>
                                     </td>
                                     <td class="newMan" style="">
+                                        <input type="hidden" th:value="${cstChancesPageList.userToId}"/>
                                         <p th:text="${cstChancesPageList.userToId}">
                                         </p>
                                     </td>
@@ -525,11 +527,11 @@
                         <div class="fixed-table-pagination">
                             <div class="pull-right pagination">
                                 <ul class="pagination">
-                                    <li class="page-first"><a th:href="@{/cstChance/getCstChanceUserId/1/1/10}">首页</a></li>
-                                    <li class="page-pre"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${((cstChancesPageList.currentPage-1) le 0?1:(cstChancesPageList.currentPage-1))}+'/'+${cstChancesPageList.pageSize}}">上一页</a></li>
+                                    <li class="page-first"><a th:href="@{/cstChance/getCstChanceUserId/1/10}">首页</a></li>
+                                    <li class="page-pre"><a th:href="@{'/cstChance/getCstChanceUserId/'+${((cstChancesPageList.currentPage-1) le 0?1:(cstChancesPageList.currentPage-1))}+'/'+${cstChancesPageList.pageSize}}">上一页</a></li>
                                     <li class="page-number" th:each="arr:${arrList}"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${arr}+'/'+${cstChancesPageList.pageSize}}" th:text="${arr}" ></a></li>
-                                    <li class="page-next"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${((cstChancesPageList.currentPage+1) ge (cstChancesPageList.totalPage)?(cstChancesPageList.totalPage):(cstChancesPageList.currentPage+1))}+'/'+${cstChancesPageList.pageSize}}">下一页</a></li>
-                                    <li class="page-last"><a th:href="@{'/cstChance/getCstChanceUserId/1/'+${cstChancesPageList.totalPage}+'/'+${cstChancesPageList.pageSize}}">尾页</a></li>
+                                    <li class="page-next"><a th:href="@{'/cstChance/getCstChanceUserId/'+${((cstChancesPageList.currentPage+1) ge (cstChancesPageList.totalPage)?(cstChancesPageList.totalPage):(cstChancesPageList.currentPage+1))}+'/'+${cstChancesPageList.pageSize}}">下一页</a></li>
+                                    <li class="page-last"><a th:href="@{'/cstChance/getCstChanceUserId/'+${cstChancesPageList.totalPage}+'/'+${cstChancesPageList.pageSize}}">尾页</a></li>
                                 </ul>
                                 <div class="jump">
                                     <label>调转

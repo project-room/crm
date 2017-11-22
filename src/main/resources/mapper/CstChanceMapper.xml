@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crm.biz.chance.dao.CstChanceMapper" >
-  <resultMap id="BaseResultMap" type="com.crm.entity.CstChance" >
+  <resultMap  id="BaseResultMap" type="com.crm.entity.CstChance" >
     <id column="ch_id" property="chId" jdbcType="BIGINT" />
     <result column="ch_content" property="chContent" jdbcType="VARCHAR" />
     <result column="cust_id" property="custId" jdbcType="BIGINT" />
@@ -25,6 +25,22 @@
     <result column="ch_status" property="chStatus" jdbcType="VARCHAR"/>
     <result column="ch_TransferTime" property="TransferTime" jdbcType="VARCHAR"/>
     <result column="ch_examine" property="chExamine" jdbcType="BIGINT"/>
+    <result column="ch_indication" property="chIndication" jdbcType="VARCHAR"/>
+    <!--机会表和用户表的关系-->
+    <association property="sysUser" column="user_id" javaType="SysUser">
+      <id property="userId" column="user_id"/>
+      <result  property="roleId" column="role_id"/>
+      <result  property="userName" column="user_name"/>
+      <result  property="userAccounts" column="user_accounts"/>
+      <result  property="userPassword" column="user_password"/>
+      <result  property="userStatus" column="user_status"/>
+      <result  property="userDepartment" column="user_department"/>
+      <result  property="userPosition" column="user_position"/>
+      <result  property="userEmail" column="user_email"/>
+      <result  property="userPhone" column="user_phone"/>
+      <result  property="userWorkphone" column="user_workphone"/>
+      <result  property="userState"  column="user_state"/>
+    </association>
     <!--机会表和记录表的关联-->
     <collection property="recordList" ofType="com.crm.entity.CstRecord">
       <id column="re_id" property="reId" jdbcType="BIGINT" />
@@ -73,6 +89,7 @@
       <id column="cust_id" property="custId" jdbcType="BIGINT" />
       <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
       <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
+      <result column="cust_provinceChar" property="custprovinceChar" jdbcType="VARCHAR"/>
       <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
       <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
       <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
@@ -87,21 +104,8 @@
       <result column="cust_CustomerNature" property="custCustomerNature" jdbcType="VARCHAR"/>
       <result column="cust_CustomerBudget" property="custCustomerBudget" jdbcType="VARCHAR"/>
   </collection>
-  <!--机会表和用户表的关系-->
-    <collection property="sysUser" ofType="com.crm.entity.SysUser">
-      <id column="user_id" property="userId" jdbcType="BIGINT" />
-      <result column="user_name" property="userName" jdbcType="VARCHAR" />
-      <result column="user_accounts" property="userAccounts" jdbcType="VARCHAR" />
-      <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
-      <result column="user_status" property="userStatus" jdbcType="INTEGER" />
-      <result column="user_department" property="userDepartment" jdbcType="VARCHAR" />
-      <result column="user_position" property="userPosition" jdbcType="VARCHAR" />
-      <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
-      <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-      <result column="user_workphone" property="userWorkphone" jdbcType="VARCHAR" />
-      <result column="user_state" property="userState" jdbcType="INTEGER" />
-    </collection>
   </resultMap>
+
   <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM cst_chance WHERE cust_id=#{id}
   </select>
@@ -118,8 +122,8 @@
 
     <!--添加机会-->
       <insert id="addCstChance" parameterType="cstChance" useGeneratedKeys="true" keyProperty="chId">
-      insert into cst_chance (ch_content,cust_id,ch_date,ch_money,user_id,ch_dept,ch_doc,ch_supplier,ch_uptime,ch_background,ch_Intentionality,ch_stage,ch_importance,ch_requirement,ch_Follow,ch_Transaction,ch_LostSingleType,ch_ReasonsForLosingOrders) values (#{chContent},#{custId},#{chDate},#{chMoney},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chIntentionality},#{chStage},#{chImportance},#{requirement}
-        ,#{chFollow},#{chTransaction},#{chLostSingleType},#{chReasonsForLosingOrders})
+      insert into cst_chance (ch_content,cust_id,ch_date,ch_money,user_id,ch_dept,ch_doc,ch_supplier,ch_uptime,ch_background,ch_Intentionality,ch_stage,ch_importance,ch_requirement,ch_Follow,ch_Transaction,ch_LostSingleType,ch_ReasonsForLosingOrders,ch_indication) values (#{chContent},#{custId},#{chDate},#{chMoney},#{userId},#{chDept},#{chDoc},#{chSupplier},#{chUptime},#{chBackground},#{chIntentionality},#{chStage},#{chImportance},#{requirement}
+        ,#{chFollow},#{chTransaction},#{chLostSingleType},#{chReasonsForLosingOrders},#{chIndication})
       </insert>
 
     <!--   <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
@@ -138,8 +142,16 @@
 
   <!-- 根据用户id查询我的所有机会  -->
    <select id="getCstChance" resultMap="BaseResultMap">
-     select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y WHERE c.user_id=#{userId} AND y.user_id=c.user_id  AND c.cust_id =u.cust_id
-     ORDER BY c.ch_id  limit  #{currentPageLimit},#{pageSize}
+     select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y
+     <where>
+       <if test="userId!=null and userId!=0">
+        and c.user_id=#{userId} AND y.user_id=c.user_id  AND c.cust_id =u.cust_id
+       </if>
+       <if test="custCompany!=null and custCompany!=''">
+         and u.cust_company like '%${custCompany}%'
+       </if>
+       ORDER BY r.re_date DESC  limit  #{currentPageLimit},#{pageSize}
+     </where>
   </select>
 
   <!--删除我的机会 -->
@@ -159,6 +171,10 @@
     update cst_chance set user_id=#{userToId},userTo_id=null,ch_examine=null,ch_status="已审核" where ch_id=#{chId}
   </update>
 
+  <!--不通过时修改机会表-->
+  <update id="updateChanceTo" parameterType="Long">
+    update cst_chance set userTo_id=null,ch_examine=null,ch_status="" where ch_id=#{chId}
+  </update>
 <!--  &lt;!&ndash;根据机会阶段修改机会的负责人&ndash;&gt;
   <update id="updateCst"  parameterType="cstChance">
     UPDATE cst_chance SET  user_name=#{userName},user_id=#{userId} WHERE ch_stage=#{chStage}
@@ -170,7 +186,7 @@
 
   <!--机会转交查询-->
   <select id="getCstChanceUserId"  resultMap="BaseResultMap">
-    SELECT a.*,t.cust_company,u.user_name FROM cst_chance a,cst_customer t,sys_user u where a.user_id=1 and a.user_id=u.user_id AND a.cust_id=t.cust_id  and a.ch_status!=""
+    SELECT a.*,t.cust_company,u.user_name FROM cst_chance a,cst_customer t,sys_user u where a.user_id=#{userId} and a.user_id=u.user_id AND a.cust_id=t.cust_id  and a.ch_status!=""
     <!--select c.*,u.user_id,u.user_name,s.user_id,s.user_name,e.user_id,e.user_name  FROM (SELECT a.*,t.cust_company FROM cst_chance a,cst_customer t where a.cust_id=t.cust_id and a.user_id=#{userId} and a.ch_status!="") c
     LEFT JOIN sys_user u on c.user_id=u.user_id LEFT JOIN sys_user s ON c.userTo_id=s.user_id LEFT JOIN sys_user e on c.ch_examine=e.user_id  limit #{currentPageLimit},#{pageSize}-->
   </select>
@@ -181,7 +197,7 @@
     </update>
 
     <!--机会转交的条件查询-->
-    <select id="getfilterChance"     resultMap="BaseResultMap">
+    <select id="getfilterChance"  resultMap="BaseResultMap">
       select  *  from cst_chance c,sys_user u,cst_customer t
       <where>
         <if test="chance.userId!=null and chance.userId!=0">

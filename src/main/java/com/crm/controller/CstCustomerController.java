@@ -4,9 +4,11 @@ import com.crm.biz.customer.service.ICstCustomerService;
 import com.crm.common.BaseController;
 import com.crm.common.Page;
 import com.crm.converter.CstCustomerConverter;
+import com.crm.dto.DataConditionDto;
 import com.crm.entity.*;
 import com.crm.enums.ChLinkmanStatusEnums;
 import com.crm.enums.CstCustomerTypeEnums;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -140,52 +142,52 @@ public class CstCustomerController extends BaseController{
      * 筛选公海客户
      * @return
      */
-    @RequestMapping("/selectCstCustomersByCondition")
-    public String selectCstCustomersByCondition(String year,String minute,String userName,CstCustomer cstCustomer,ChLinkman chLinkman,Model model){
-        Map map=result();
-        try {
-            //获取角色名
-            String roleName=(String) session.getAttribute("roleName");
-            //获取用户id
-            Long userIdForPage=(Long)session.getAttribute("userId");
-            //年月日
-            String yearStr=year.replace("年","-").replace("月","-").replace("日"," ");
-           //时分秒
-            String[] arrTime=minute.split("-");
-            String startTime=arrTime[0].trim();
-            String endTime=arrTime[1].trim();
-
-            //开始字符串时间
-            String startTimeStr=yearStr+startTime;
-            //结束字符串时间
-            String endTimeStr=yearStr+endTime;
-            //开始时间
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date startTimeDate=sdf.parse(startTimeStr);
-            //结束时间
-            Date endTimeDate=sdf.parse(endTimeStr);
-
-            Integer currentPage=1;
-            Integer pageSize=7;
-            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(userIdForPage,roleName,userName,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPage,pageSize);
-            //设置创建时间格式
-            List<CstCustomer> cstCustomers= returnCstCustomer.getList();
-            for (CstCustomer cstCustomerRevert:cstCustomers
-                    ) {
-                Date formation= cstCustomerRevert.getCustDate();
-                String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
-                cstCustomerRevert.setRevertDate(afterDate);
-            }
-            map.put("returnCstCustomer",returnCstCustomer);
-            model.addAttribute("cstCustomerPage",returnCstCustomer);
-        } catch (Exception e) {
-            e.printStackTrace();
-            map.put("code","-1");
-            map.put("msg","筛选客户失败");
-        }
-
-        return "index/seas";
-    }
+//    @RequestMapping("/selectCstCustomersByCondition")
+//    public String selectCstCustomersByCondition(String year,String minute,String userName,CstCustomer cstCustomer,ChLinkman chLinkman,Model model){
+//        Map map=result();
+//        try {
+//            //获取角色名
+//            String roleName=(String) session.getAttribute("roleName");
+//            //获取用户id
+//            Long userIdForPage=(Long)session.getAttribute("userId");
+//            //年月日
+//            String yearStr=year.replace("年","-").replace("月","-").replace("日"," ");
+//           //时分秒
+//            String[] arrTime=minute.split("-");
+//            String startTime=arrTime[0].trim();
+//            String endTime=arrTime[1].trim();
+//
+//            //开始字符串时间
+//            String startTimeStr=yearStr+startTime;
+//            //结束字符串时间
+//            String endTimeStr=yearStr+endTime;
+//            //开始时间
+//            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date startTimeDate=sdf.parse(startTimeStr);
+//            //结束时间
+//            Date endTimeDate=sdf.parse(endTimeStr);
+//
+//            Integer currentPage=1;
+//            Integer pageSize=7;
+//            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(userIdForPage,roleName,userName,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPage,pageSize);
+//            //设置创建时间格式
+//            List<CstCustomer> cstCustomers= returnCstCustomer.getList();
+//            for (CstCustomer cstCustomerRevert:cstCustomers
+//                    ) {
+//                Date formation= cstCustomerRevert.getCustDate();
+//                String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
+//                cstCustomerRevert.setRevertDate(afterDate);
+//            }
+//            map.put("returnCstCustomer",returnCstCustomer);
+//            model.addAttribute("cstCustomerPage",returnCstCustomer);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            map.put("code","-1");
+//            map.put("msg","筛选客户失败");
+//        }
+//
+//        return "index/seas";
+//    }
 
     /**
      * 查看所有认领的公海客户
@@ -653,6 +655,61 @@ public class CstCustomerController extends BaseController{
             cstCustomerService.deleteCstCustomerById(custId);
         }
         return "redirect:" + "/cstCustomer/getPage/1/7";
+    }
+
+
+    /**
+     *通过分页bean获取认领公海客户信息
+     * @return
+     */
+    @RequestMapping("/getPage")
+    public void getPage(HttpServletRequest request,HttpServletResponse response){
+        try {
+            Map map=result();
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            PrintWriter out= response.getWriter();
+            DataConditionDto dataConditionDto=new DataConditionDto();
+            String pageNumber= request.getParameter("pageNumber");
+            Integer pageNumberInt=Integer.parseInt(pageNumber);
+
+            String customContact= request.getParameter("customContact");
+            dataConditionDto.setCustomContact("%"+customContact+"%");
+
+            String customMobile= request.getParameter("customMobile");
+            dataConditionDto.setCustomMobile("%"+customMobile+"%");
+
+            String customTelephone= request.getParameter("customTelephone");
+            dataConditionDto.setCustomTelephone("%"+customTelephone+"%");
+
+            String customRenlingren= request.getParameter("customRenlingren");
+            dataConditionDto.setCustomRenlingren("%"+customRenlingren+"%");
+
+            String customMail= request.getParameter("customMail");
+            dataConditionDto.setCustomMail("%"+customMail+"%");
+
+//        String customDay= request.getParameter("customDay");
+//        String customHour= request.getParameter("customHour");
+            dataConditionDto.setCustomContact(customContact);
+            dataConditionDto.setCustomMobile(customMobile);
+            dataConditionDto.setCustomTelephone(customTelephone);
+            dataConditionDto.setCustomRenlingren(customRenlingren);
+            dataConditionDto.setCustomMail(customMail);
+//        dataConditionDto.setCustomDay(customDay);
+//        dataConditionDto.setCustomHour(customHour);
+
+            Integer pageSize=7;
+            Integer pageNumberIntStr=(pageNumberInt-1)*pageSize;
+            List<CstCustomer> cstCustomers=cstCustomerService.getCstCustomerOnePageList(dataConditionDto,pageNumberIntStr,pageSize);
+            Map maps=new HashMap();
+            maps.put("cstCustomers",cstCustomers);
+            JSONObject jsonObject= JSONObject.fromObject(maps);
+            out.print(jsonObject);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

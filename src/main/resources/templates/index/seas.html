@@ -14,6 +14,7 @@
             </script>
             <script th:src="@{/js/jquery.nicescroll.js}">
             </script>
+            <script th:src="@{/js/simpleAlert.js}"></script>
             <script th:src="@{/laydate/laydate.js}">
             </script>
             <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
@@ -26,6 +27,10 @@
         </meta>
     </head>
     <body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 573489a8dd1ef470adde5d676799d016ab194199
     <div class="dealingPop dnone"  style="font-size: 14px;">
         <div class="shelter"></div>
         <div class="dealingmain">
@@ -70,7 +75,13 @@
         </div>
     </div>
 
+<<<<<<< HEAD
         <div class="filterPop dnone" style="font-size: 14px;">
+=======
+
+
+    <div class="filterPop dnone" style="font-size: 14px;">
+>>>>>>> 573489a8dd1ef470adde5d676799d016ab194199
             <div class="shelter">
             </div>
             <div class="filtermain">
@@ -417,7 +428,11 @@
                                         </p>
                                         <ul class="slideEdit">
                                             <li>
+<<<<<<< HEAD
                                                 <a href="#" mce_href="#" class="dealing">
+=======
+                                                <a class="dealing" href="#" mce_href="#">
+>>>>>>> 573489a8dd1ef470adde5d676799d016ab194199
                                                     分配
                                                 </a>
                                             </li>
@@ -443,13 +458,13 @@
                                 <ul class="pagination">
                                     <li class="page-first"><a th:href="@{/cstCustomer/getPage/1/7}">首页</a></li>
                                     <li class="page-pre">
-                                        <a th:href="@{'/cstCustomer/getPage/'+${((cstCustomerPage.currentPage-1) le 0?1:(cstCustomerPage.currentPage-1))}+'/7'}">
+                                        <a href="javascript:void(0);">
                                             上一页
                                         </a>
                                     </li>
-                                    <li class="page-number" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}"></a></li>
+                                    <li class="page-number" th:each="arr:${arrInteger}"><a href="javascript:void(0);" th:text="${arr}"></a></li>
                                     <li class="page-next">
-                                        <a th:href="@{'/cstCustomer/getPage/'+${(cstCustomerPage.currentPage+1) ge (cstCustomerPage.totalPage)?(cstCustomerPage.totalPage):(cstCustomerPage.currentPage+1)}+'/7'}">
+                                        <a href="javascript:void(0);">
                                             下一页
                                         </a>
                                     </li>

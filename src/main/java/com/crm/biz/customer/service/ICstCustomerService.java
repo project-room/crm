@@ -2,6 +2,7 @@ package com.crm.biz.customer.service;
 
 
 import com.crm.common.Page;
+import com.crm.dto.DataConditionDto;
 import com.crm.entity.*;
 
 import java.util.Date;
@@ -96,5 +97,12 @@ public interface ICstCustomerService {
      */
     SysUser selectUserById(Long userId);
 
+<<<<<<< HEAD
+=======
+    /**
+     * 根据条件获取每一页客户信息
+     */
+    List<CstCustomer> getCstCustomerOnePageList(DataConditionDto dataConditionDto,Integer pageNumber,Integer pageSize);
+>>>>>>> 573489a8dd1ef470adde5d676799d016ab194199
 
 }

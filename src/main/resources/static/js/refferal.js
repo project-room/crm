@@ -207,7 +207,10 @@ function forZhuanjiao(){
     });
 }
 function forshenpiPop(){
+    var origin, newMan;
     $('tbody').on('click', '.shenpi', function() {
+        origin = $(this).parents('tr').find('.origin').find('input').val();
+        newMan = $(this).parents('tr').find('.newMan').find('input').val();
         $('.shenpiPop').addClass('dblock').removeClass('dnone');
     });
     $('.shenpiPop .shelter').click(function(event) {
@@ -221,6 +224,25 @@ function forshenpiPop(){
     });
     $('.shenpiPop .no').click(function() {
         $('.shenpiPop').addClass('dnone').removeClass('dblock');
+    });
+
+    $('.shenpiPop').find('.yes').click(function() {
+        console.log(origin, newMan)
+        location.href ="/crm/cstChance/updateChance/"+origin+"/"+newMan;
+       /* $.get('/crm/cstChance/updateChance',{chId:origin,userToId:newMan},function() {
+            console.log('success')
+        })
+        origin = undefined;
+        newMan = undefined;*/
+    });
+    $('.shenpiPop').find('.no').click(function() {
+        console.log(origin, newMan)
+        location.href ="/crm/cstChance/updateChanceTo/"+origin;
+       /* $.get('/crm/cstChance/updateChanceTo',{chId:origin},function() {
+            console.log('success')
+        })
+        origin = undefined;
+        newMan = undefined;*/
     });
 }
 function forchehuiPop(){

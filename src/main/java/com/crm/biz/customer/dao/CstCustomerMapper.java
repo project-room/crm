@@ -2,6 +2,7 @@ package com.crm.biz.customer.dao;
 
 import com.crm.common.Page;
 import com.crm.dto.CstCustomerDto;
+import com.crm.dto.DataConditionDto;
 import com.crm.entity.ChLinkman;
 import com.crm.entity.CstChance;
 import com.crm.entity.CstCustomer;
@@ -69,5 +70,8 @@ public interface CstCustomerMapper{
 
     //根据公海客户id修改客户信息
     void updateCstCustomerWithId(@Param("cstcustId") Long cstcustId,@Param("cstCustomer") CstCustomer cstCustomer);
+
+    //获取每一页客户的信息
+    List<CstCustomer> getCstCustomerOnePageList(@Param("dataConditionDto") DataConditionDto dataConditionDto,@Param("pageNumber") Integer pageNumber,@Param("pageSize") Integer pageSize);
 
 }

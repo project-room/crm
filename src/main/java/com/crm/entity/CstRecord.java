@@ -14,6 +14,8 @@ public class CstRecord {
 
     private List<SysAttachment> attachmentList;
 
+    private CstChance chance;
+
     public List<SysAttachment> getAttachmentList() {
         return attachmentList;
     }
@@ -53,5 +55,13 @@ public class CstRecord {
 
     public void setReDate(Date reDate) {
         this.reDate = reDate;
+    }
+
+    public CstChance getChance() {
+        return chance;
+    }
+
+    public void setChance(CstChance chance) {
+        this.chance = chance;
     }
 }

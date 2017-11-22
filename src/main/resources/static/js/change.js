@@ -32,4 +32,22 @@ $(function () {
         _disabledShelter.show();
         $(".leftSideBtn").hide();
     })
+
+   $('.headerNav').find("li").click(function(){
+    var chId=$(tbody).children("input[type=hidden]").val();
+        alert(chId);
+           $.ajax({
+               url:'/crm/CstRecord/getCstRecord/1',
+               dataType:'json',
+               type:'post',
+               data:{},
+               success:function(data){
+                   console.log(123)
+               },
+               error:function(){
+                   console.log(456)
+               }
+           })
+       });
+
 })

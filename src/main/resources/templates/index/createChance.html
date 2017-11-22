@@ -57,7 +57,7 @@
 		</div>
 
 		<div class="main" >
-			<form class="addNew" action="/cstChance/addCstChance">
+			<form class="addNew" action="/crm/cstChance/addCstChance">
 			<div class="baseInfo">
 				<div>
 					<label for="customerLogo">
@@ -88,9 +88,14 @@
 								<select name="chStage">
 									<option value="" selected="selected">阶段</option>
 									<option value="初期沟通">初期沟通</option>
-									<option value="立项评估">立项评估</option>
+									<option value="理想评估">理想评估</option>
 									<option value="需求分析">需求分析</option>
+									<option value="方案制定">方案制定</option>
+									<option value="竞标中">竞标中</option>
+									<option value="商务谈判">商务谈判</option>
 									<option value="合同签订">合同签订</option>
+									<option value="丢单">丢单</option>
+									<option value="失效客户">失效客户</option>
 								</select>
 							   </label>
 							</li>
@@ -98,8 +103,7 @@
 								<label>
 									<select name="custType">
 										<option value="" >分类</option>
-										<option value="客户">客户</option>
-										<option value="代理商">代理商</option>
+										<option value="客户">我的客户</option>
 									</select>
 								</label>
 							</li>
@@ -116,8 +120,42 @@
 							    </label>
 							</li>
 							<li><label><input type="text" placeholder="客户官网" name="custWebsite"/></label></li>
-							<li><label><input type="text" placeholder="所在省份" name="custprovinceChar"/></label></li>
-							<li><label><input type="text" placeholder="地址" name="custAddress"/></label></li>
+							<li><label> <select name="custprovinceChar">
+								<option value="北京">北京</option>
+								<option value="上海">上海</option>
+								<option value="广东">广东</option>
+								<option value="黑龙江">黑龙江</option>
+								<option value="辽宁">辽宁</option>
+								<option value="吉林">吉林</option>
+								<option value="天津">天津</option>
+								<option value="山东">山东</option>
+								<option value="山西">山西</option>
+								<option value="陕西">陕西</option>
+								<option value="河北">河北</option>
+								<option value="河南">河南</option>
+								<option value="安徽">安徽</option>
+								<option value="江西">江西</option>
+								<option value="湖南">湖南</option>
+								<option value="四川">四川</option>
+								<option value="重庆">重庆</option>
+								<option value="湖北">湖北</option>
+								<option value="云南">云南</option>
+								<option value="广西">广西</option>
+								<option value="福建">福建</option>
+								<option value="海南">海南</option>
+								<option value="贵州">贵州</option>
+								<option value="江苏">江苏</option>
+								<option value="浙江">浙江</option>
+								<option value="甘肃">甘肃</option>
+								<option value="新疆">新疆</option>
+								<option value="西藏">西藏</option>
+								<option value="青海">青海</option>
+								<option value="内蒙">内蒙</option>
+								<option value="宁夏">宁夏</option>
+								<option value="港澳台">港澳台</option>
+								<option value="海外">海外</option>
+							</select></label></li>
+							<li><label><input type="text" placeholder="具体地址" name="custAddress"/></label></li>
 
 						</ul>
 						<h5>标签</h5>
@@ -125,74 +163,121 @@
 							<li>
 								<select name="chIntentionality" >
 									<option value="">意向度</option>
-									<option value="80%">80%</option>
-									<option value="50%">50%</option>
-									<option value="20%">20%</option>
+									<option value="意向很强">意向很强</option>
+									<option value="有需求">有需求</option>
+
 								</select>
 							</li>
 							<li>
 								<select name="custClassify">
 									<option value="" >客户类型</option>
-									<option value="0">公海客户</option>
-									<option value="1">我的客户</option>
+									<option value="0">终端</option>
+									<option value="1">中间商</option>
+									<option value="2">代理商</option>
 								</select>
 							</li>
 							<li>
 								<select name="chImportance" >
 									<option value="">重要性</option>
-									<option value="非常重要">非常重要</option>
-									<option value="一般客户">一般客户</option>
+									<option value="大客户">大客户</option>
 								</select>
 							</li>
 							<li>
 								<select name="requirement" >
 									<option value="">产品需求</option>
-									<option value="需要实现功能">需要实现功能</option>
+									<option value="文档管理">	文档管理</option>
+									<option value="档案管理">	档案管理</option>
+									<option value="ISO文控">	ISO文控</option>
+									<option value="产品图文档管理">产品图文档管理</option>
+									<option value="合同管理">	合同管理</option>
+									<option value="无纸化办公">无纸化办公</option>
+									<option value="整个平台">	整个平台</option>
+									<option value="部门文档管理">	部门文档管理</option>
+									<option value="项目文档管理">项目文档管理</option>
 								</select>
 							</li>
 							<li>
-							<select name="" >
-								<option value="">购买意向</option>
-								<option value=""></option>
+							<select name="chIndication" >
+								<option value="">购买意向（单选）</option>
+								<option value="1级">1级</option>
+								<option value="2级">2级</option>
+								<option value="3级">3级</option>
+								<option value="4级">4级</option>
+								<option value="5级">5级</option>
+								<option value="6级">6级</option>
 							</select>
 						</li>
 							<li>
 								<select name="custIndustry">
 									<option value="">所属行业</option>
-									<option value="通讯">通讯</option>
-									<option value="铁路">铁路</option>
-									<option value="能源">能源</option>
+									<option value="生物医疗">生物医疗</option>
+									<option value="政府行业">政府行业</option>
+									<option value="党委组织">党委组织</option>
+									<option value="部队">部队</option>
+									<option value="教育学校">教育学校</option>
+									<option value="能源化工">能源化工</option>
+									<option value="航天航空">航天航空</option>
+									<option value="媒体出版社">媒体出版社</option>
+									<option value="教育行业">教育行业</option>
+									<option value="金融保险">金融保险</option>
+									<option value="制造业">制造业</option>
+									<option value="IT软件">IT软件</option>
+									<option value="互联网/游戏">互联网/游戏</option>
+									<option value="电信通讯">电信通讯</option>
+									<option value="建筑工程">建筑工程</option>
+									<option value="商业服务（代理、咨询">商业服务（代理、咨询）</option>
+									<option value="信息技术">信息技术</option>
+									<option value="电子">电子</option>
+									<option value="机电弱电工控">机电弱电工控</option>
+									<option value="广告设计">广告设计</option>
+									<option value="营销商贸">营销商贸</option>
+									<option value="房地产">房地产</option>
+									<option value="其它">其它</option>
 								</select>
 							</li>
 							<li>
 								<select name="chFollow">
 									<option value="">跟进结果</option>
-									<option value="无">无</option>
-									<option value="有">有</option>
+									<option value="成交">成交</option>
 								</select>
 							</li>
 							<li>
 								<select name="custCustomerNature">
 									<option value="">客户性质</option>
+									<option value="新客户">新客户</option>
 									<option value="老客户">老客户</option>
 								</select>
 							</li>
 							<li>
 								<select name="chTransaction">
 									<option value="">成交年份</option>
+									<option value="2009">2009</option>
+									<option value="2010">2010</option>
+									<option value="2011">2011</option>
+									<option value="2012">2012</option>
+									<option value="2013">2013</option>
+									<option value="2014">2014</option>
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
 									<option value="2017">2017</option>
+									<option value="2018">2018</option>
 								</select>
 							</li>
 							<li>
 								<select name="chLostSingleType">
 									<option value="">丢单类型</option>
-									<option value="难搞">难搞</option>
+									<option value="无效">无效</option>
+									<option value="中单">中单</option>
+									<option value="渠道">渠道</option>
 								</select>
 							</li>
 							<li>
 								<select name="chReasonsForLosingOrders" >
 									<option value="">丢单原因</option>
-									<option value="价格高">价格高</option>
+									<option value="选用他家">选用他家</option>
+									<option value="项目搁置">项目搁置</option>
+									<option value="产品无法满足">产品无法满足</option>
+									<option value="其他">其他</option>
 								</select>
 							</li>
 						</ul>
@@ -220,7 +305,7 @@
 							<li><label><input type="text"  name="linkLandlinePhone"  placeholder="固话" /></label></li>
 							<li><label><input type="text"  name="linkEmail" placeholder="邮箱" /></label></li>
 							<li><label><input type="text"  name="linkQq"  placeholder="QQ" /></label></li>
-							<input type="hidden" name="linkStatus" value="0"/>
+							<input type="hidden" name="linkStatus" value="1"/>
 							<li><label><input type="text" name="linkWechat" placeholder="微信" /></label></li>
 						</ul>
 					</div>
