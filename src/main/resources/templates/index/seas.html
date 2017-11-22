@@ -455,7 +455,7 @@
                             </li>
                             <li class="page-last"><a th:href="@{'/cstCustomer/getPage/'+${cstCustomerPage.totalPage}+'/7'}">尾页</a></li>
                         </ul>
-                        <div class="jump">s
+                        <div class="jump">
                             <label>调转
                                 <select class="dumppage">
                                     <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}"></a></option>
