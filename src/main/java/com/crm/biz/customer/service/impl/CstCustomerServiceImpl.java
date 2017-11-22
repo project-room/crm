@@ -221,20 +221,5 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         return sysUserMapper.selectSysUserById(userId);
     }
 
-<<<<<<< HEAD
-=======
-    /**
-     * 获取每一页客户的信息
-     * @param dataConditionDto
-     * @param pageNumber
-     * @param pageSize
-     * @return
-     */
-    @Override
-    public List<CstCustomer> getCstCustomerOnePageList(DataConditionDto dataConditionDto, Integer pageNumber, Integer pageSize) {
-      return cstCustomerMapper.getCstCustomerOnePageList(dataConditionDto,pageNumber,pageSize);
-    }
-
->>>>>>> 573489a8dd1ef470adde5d676799d016ab194199
 
 }

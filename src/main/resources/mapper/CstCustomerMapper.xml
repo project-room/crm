@@ -189,10 +189,4 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <update id="updateCstCustomerWithId" parameterType="map">
          UPDATE cst_customer SET cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},user_id=#{cstCustomer.userId},cust_type=#{cstCustomer.custType},cust_date=#{cstCustomer.custDate} WHERE cust_id=#{cstcustId}
     </update>
-
-    <!--获取每一页客户的信息-->
-    <select id="getCstCustomerOnePageList" parameterType="map" resultMap="BaseResultMap">
-SELECT * FROM cst_customer cc,ch_linkman cl WHERE cc.`cust_id`=cl.`cust_id` OR (cc.`cust_company` LIKE #{dataConditionDto.customContact} OR cl.`link_name` LIKE #{dataConditionDto.customMobile} OR
-cl.`link_phone` LIKE #{dataConditionDto.customTelephone} OR cl.`link_landline_phone` LIKE #{dataConditionDto.customRenlingren} OR cl.`link_email` LIKE #{dataConditionDto.customMail}) ORDER BY cc.`cust_date` DESC  LIMIT #{pageNumber},#{pageSize}
-    </select>
 </mapper>

@@ -71,7 +71,4 @@ public interface CstCustomerMapper{
     //根据公海客户id修改客户信息
     void updateCstCustomerWithId(@Param("cstcustId") Long cstcustId,@Param("cstCustomer") CstCustomer cstCustomer);
 
-    //获取每一页客户的信息
-    List<CstCustomer> getCstCustomerOnePageList(@Param("dataConditionDto") DataConditionDto dataConditionDto,@Param("pageNumber") Integer pageNumber,@Param("pageSize") Integer pageSize);
-
 }

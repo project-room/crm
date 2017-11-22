@@ -97,12 +97,4 @@ public interface ICstCustomerService {
      */
     SysUser selectUserById(Long userId);
 
-<<<<<<< HEAD
-=======
-    /**
-     * 根据条件获取每一页客户信息
-     */
-    List<CstCustomer> getCstCustomerOnePageList(DataConditionDto dataConditionDto,Integer pageNumber,Integer pageSize);
->>>>>>> 573489a8dd1ef470adde5d676799d016ab194199
-
 }
