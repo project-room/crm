@@ -83,7 +83,7 @@
 						<h4>销售机会信息</h4>
 						<ul>
 							<li><label><input type="text" placeholder="机会简述" name="chContent"/></label></li>
-							<input type="hidden" name="userId" value="1"/>
+							<input type="hidden" name="userId"/>
 							<li><label>
 								<select name="chStage">
 									<option value="" selected="selected">阶段</option>
@@ -121,6 +121,7 @@
 							</li>
 							<li><label><input type="text" placeholder="客户官网" name="custWebsite"/></label></li>
 							<li><label> <select name="custprovinceChar">
+								<option value="" selected="selected">客户所在省份</option>
 								<option value="北京">北京</option>
 								<option value="上海">上海</option>
 								<option value="广东">广东</option>
@@ -288,7 +289,7 @@
 					<div class="contactMsg">
 						<h4>主要联系人信息</h4>
 						<ul >
-							  <input type="text" name="linkIdTo" class="majorId"/>
+							  <input type="hidden" name="linkIdTo" class="majorId"/>
 							<li><label><input type="text" class="majorName" placeholder="姓名" /></label></li>
 							<li><label><input type="text" class="majorPhone" placeholder="手机" /></label></li>
 							<li><label><input type="text" class="majorTel"  placeholder="固话" /></label></li>

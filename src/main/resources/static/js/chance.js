@@ -34,14 +34,37 @@ $(function() {
         $('.laydate-btns-clear').trigger('click');
     });
 
-    $('.allOperate .delete').click(function() {
-        $('tbody tr').each(function(index, el) {
-            if ($(this).find('.forCheckbox input').prop('checked') == true) {
-                $(this).remove();
-                //ajax
-            }
-        });
-    });
+ $('.allOperate .delete').click(function() {
+        var chIdArr = [];
+         var dblChoseAlert = simpleAlert({
+             "content":"确定删除？",
+             "buttons":{
+                 "确定":function () {
+                     $('tbody tr').each(function(index, el) {
+                         if ($(this).find('.forCheckbox input').prop('checked') == true) {
+                             chIdArr.push($(this).find('input[type=hidden]').val());
+                             alert($(this).find('input[type=hidden]').val())
+                             $(this).remove();
+                             //ajax
+                         }
+                     });
+                    for(var i=0;i<chIdArr.length;i++){
+                     $.ajax({
+                        url:'/crm/cstChance/deleteCstChance/1/10',
+                        data: {chId:chIdArr[i]},
+                        success: function() {
+                          location.href = '/crm/cstChance/getCstChance/1/10'
+                        }
+                     })
+                     }
+                     dblChoseAlert.close();
+                 },
+                 "取消":function () {
+                     dblChoseAlert.close();
+                 }
+             }
+         });
+     });
 
     forTable();
     fenye();
@@ -60,10 +83,14 @@ $(function() {
         $('.tag').find('ul').addClass('dnone').removeClass('dblock');
     });
 
-    $('tbody').on('click', 'tr',function() {
+    $('#table').on('click', 'tr',function() {
         var chId=$(this).children("input[type=hidden]").val();
         location.href ="/crm/cstChance/getCstChanceId/"+chId;
     });
+
+
+    referral();
+
 
 });
 
@@ -135,12 +162,25 @@ function allCheck() {
 }
 
 function forTable() {
-    var slideBool = false;
-    $('tbody').on('click', 'tr .delete', function() {
-        $(this).parents('tr').remove();
-        allOperateShowHide();
-    });
-
+   var slideBool = false;
+       $('tbody').on('click', 'tr .delete', function() {
+          var chId = $(this).parents('tr').find('input[type=hidden]').val();
+           var $this = $(this);
+           var dblChoseAlert = simpleAlert({
+               "content":"确定删除？",
+               "buttons":{
+                   "确定":function () {
+                       $this.parents('tr').remove();
+                       location.href='/crm/cstChance/deleteCstChance/'+chId+'/1/10';
+                       dblChoseAlert.close();
+                   },
+                   "取消":function () {
+                       dblChoseAlert.close();
+                   }
+               }
+           });
+           allOperateShowHide();
+       });
     $('tbody').on('click', 'tr input[type=checkbox]', function(event) {
         event.stopPropagation();
         allOperateShowHide();
@@ -160,4 +200,83 @@ function forTable() {
             slideBool = false;
         }
     });
+}
+
+
+function referral() {
+    var chanceId =[],
+         newXXX;
+    //单选复选框
+    $('.referralmain').find('.forCheckbox').click(function() {
+        $(this).parents('tr').siblings().find('.forCheckbox').removeClass('borderPurple');
+        $(this).parents('tr').siblings().find('.forCheckbox').find('input').prop('checked', false);
+    });
+
+    //table中的referral
+
+    $('.slideEdit .referral').click(function() {
+        $('.referralPop').removeClass('dnone');
+        chanceId.push($(this).parents('tr').find('input[type=hidden]').val());
+    })
+
+//    $('#table').on('click','.referral', function(event) {
+//        $('.referralPop').removeClass('dnone');
+//        alert(2);
+//        chanceId.push($(this).parents('tr').find('input[type=hidden]').val());
+//    });
+
+    //allOperate的referral
+    $('.allOperate').find('.referral').click(function() {
+        $('.referralPop').removeClass('dnone');
+        console.log($('#table tbody tr').length)
+        for (var x = 0; x < $('#table tbody tr').length; x++) {
+            if ($('#table tbody tr').eq(x).find('input[type=checkbox]').prop('checked') == true){
+                chanceId.push($('#table tbody tr').eq(x).find('input[type=hidden]').val())
+            }
+        }
+    })
+    $('.referralPop').find('.cancel').click(function() {
+        $('.referralPop').addClass('dnone');
+        chanceId = [];
+    });
+    $('.referralPop').find('.canc').click(function() {
+        $('.referralPop').addClass('dnone');
+        chanceId = [];
+    });
+    $('.referralPop').find('.sure').click(function() {
+        $('.referralPop').addClass('dnone');
+    });
+
+    $('.referralSearch').click(function() {
+        var salerName = $('.referralName').val();
+        console.log(chanceId, salerName)
+//        $.ajax({
+//            url:,
+//            data:{salerName:salerName},
+//            success:function() {
+//
+//            }
+//        })
+    });
+
+    $('.referralList').on('click', '.forCheckbox', function() {
+         userToId= $(this).find('input[type=checkbox]').val();
+    })
+
+    $('.referralmain').find('.sure').click(function() {
+        for(var i=0;i<chanceId.length;i++){
+          /*chanceId=chanceId[i];*/
+        $.ajax({
+            url:'/crm/cstChance/addToChance',
+            data:{
+             chanceId:chanceId[i],
+             userToId:userToId
+            },
+            success: function() {
+                location.href = '/crm/cstChance/getCstChanceUserId/1/10'
+            }
+         })
+        }
+    });
+
 }

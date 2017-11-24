@@ -149,9 +149,8 @@ SELECT * FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id` HAVING use
     SELECT * FROM sys_user su ,sys_role sr WHERE su.`role_id`=sr.`role_id` AND su.`user_id`=#{userId}
   </select>
 
-
   <select id="getSysUser" parameterType="Long" resultMap="BaseResultMap">
-    select user_id,user_name from sys_user where user_id!=#{userId}
+    select * from sys_user where user_id!=#{userId}
   </select>
 
   <select id="selectSysUserByAccounts" parameterType="String" resultMap="BaseResultMap">

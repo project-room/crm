@@ -167,8 +167,10 @@ public class CstChanceServiceImpl implements ICstChanceService {
     }
 
 
+    //查询用户表的其他用户
     @Override
     public List<SysUser> getSysUser(Long userId) {
+        System.out.println(userId+"用户Id");
         return sysUserMapper.getSysUser(userId);
     }
 
@@ -207,9 +209,7 @@ public class CstChanceServiceImpl implements ICstChanceService {
     //机会转交的条件查询
     @Override
     public Page<CstChance> getfilterChance(CstChance chance,String begindate,String finishdate, int currentPage, int pageSize) {
-        System.out.println(chance.getUserId());
         Long count = (long) cstChanceMapper.getCstChanceCountTo(chance.getUserId());
-        System.out.println(begindate+"-----"+finishdate);
         int currentPageLimit = (currentPage - 1) * pageSize;
         List<CstChance> ChanceList=cstChanceMapper.getfilterChance(chance,begindate,finishdate,currentPageLimit,pageSize);
         return new Page<CstChance>(currentPage, pageSize, ChanceList, count);

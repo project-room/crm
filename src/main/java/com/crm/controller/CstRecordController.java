@@ -8,11 +8,16 @@ import com.crm.entity.CstLowCustomer;
 import com.crm.entity.CstRecord;
 import com.crm.utils.ObjectUtil;
 import com.crm.utils.TypeUtil;
+import net.sf.json.JSONObject;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +25,8 @@ import java.util.Map;
 /**
  * Created by Administrator on 2017/9/12.
  */
-@RestController
+@Controller
+/*@RestController*/
 @RequestMapping("/CstRecord")
 public class CstRecordController extends BaseController{
     @Autowired
@@ -51,35 +57,45 @@ public class CstRecordController extends BaseController{
 
     //根据机会id查询记录表
     @RequestMapping("/getCstRecord/{id}")
-    public  Map getCstRecord(@PathVariable("id") Long id){
+    public  void getCstRecord(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") Long id){
         Map map=result();
+        System.out.println(id);
         try {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
             List<CstRecord> RecordList = iCstRecordService.getCstRecord(id);
-            Boolean by = ObjectUtil.isNotNull(RecordList);
-            if (by) {
-                map.put("RecordList", RecordList);
-            } else {
-                map.put("-1", "查询失败");
-            }
+                map.put("RecordList",RecordList);
+                JSONObject object=JSONObject.fromObject(map);
+                PrintWriter out= response.getWriter();
+                out.print(object);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  map;
+      /*  return  map;*/
     }
+
     //添加一条记录
     @RequestMapping("/addCstRecord")
-    public Map addCstRecord(CstRecord cstRecord){
+    public void addCstRecord(HttpServletRequest request, HttpServletResponse response){
         Map map= result();
+        Date date = new Date();
+        date.getTime();
+        CstRecord cstRecord=new CstRecord();
         try {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            String reContent=request.getParameter("recordTextareaVal");
+            String chId=request.getParameter("chId");
+            Long id= Long.parseLong(chId);
+            System.out.println(id+"机会Id");
+            cstRecord.setChId(id);
+            System.out.println(reContent+"记录");
+            cstRecord.setReContent(reContent);
+            cstRecord.setReDate(date);
             boolean mak = iCstRecordService.addCstRecord(cstRecord);
-            if (mak == false) {
-                map.put("code", "-1");
-                map.put("msg", "添加失败");
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return map;
     }
 
      //删除记录

@@ -8,16 +8,24 @@ import com.crm.entity.SysUser;
 import com.crm.entity.UserTask;
 import com.crm.utils.ObjectUtil;
 import com.crm.utils.TypeUtil;
+import net.sf.json.JSONObject;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
  * Created by Administrator on 2017/9/14.
  */
-@RestController
+@Controller
+/*@RestController*/
+@RequestMapping("/UserTask")
 public class UserTaskController extends BaseController {
     @Autowired
     private UserTaskMapper userTaskMapper;
@@ -34,21 +42,28 @@ public class UserTaskController extends BaseController {
     }
 
     //根据机会id查询任务
-    @RequestMapping("/getUserTask")
-    public Map getUserTask(Long chId) {
+    @RequestMapping("/getUserTask/{chId}")
+    public void getUserTask(HttpServletRequest request, HttpServletResponse response,@PathVariable("chId") Long chId) {
         Map map =result();
+        System.out.println(chId);
          try {
+             request.setCharacterEncoding("UTF-8");
+             response.setCharacterEncoding("UTF-8");
              List<UserTask> userTasksList = iUserTaskService.getUserTask(chId);
              Boolean by = ObjectUtil.isNotNull(userTasksList);
              if (by) {
-                 map.put("userTasksList", userTasksList);
+                 /*map.put("userTasksList", userTasksList);*/
+                 map.put("userTasksList",userTasksList);
+                 JSONObject jsonObject=JSONObject.fromObject(map);
+                 PrintWriter out= response.getWriter();
+                 out.print(jsonObject);
              } else {
                  map.put("-1", "查询失败，对象为空");
              }
          }  catch (Exception e) {
              e.printStackTrace();
          }
-        return map;
+       /* return map;*/
     }
 
     //添加一条任务
