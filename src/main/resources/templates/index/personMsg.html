@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>客户关系管理系统</title>
+  <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+  <script th:src="@{/js/jquery.nicescroll.js}"></script>
+  <script th:src="@{/js/default.js}"></script>
+  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+  <link rel="stylesheet" th:href="@{/css/default.css}" />
+  <link rel="stylesheet" th:href="@{/css/addNewCustomer.css}" />
+  <script th:src="@{/js/setting.js}"></script>
+</head>
+
+<body class="personMsg" onload="personMsg()">
+  <div class="leftContent">
+    <div class="logo">
+      <img th:src="@{/img/logo.png}" alt="logo" />
+      <span class="logoTxt">润普CRM</span>
+    </div>
+    <ul>
+      <li>
+        <a href="/crm/cstCustomer/toIndex">
+          <img th:src="@{/img/index.png}" alt="首页" />
+          <span class="navTxt">首页</span>
+        </a>
+      </li>
+      <li class="">
+        <a href="/crm/cstCustomer/getPage/1/7">
+          <img th:src="@{/img/seas.png}" alt="公海" />
+          <span class="navTxt">公海</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/cstChance/getCstChance/1/10}">
+          <img th:src="@{/img/chance.png}" alt="机会" />
+          <span class="navTxt">机会</span>
+        </a>
+      </li>
+      <li>
+        <a >
+          <img th:src="@{/img/contract.png}" alt="合同" />
+          <span class="navTxt">合同</span>
+        </a>
+      </li>
+      <li>
+        <img th:src="@{/img/financial.png}" alt="财务" />
+        <span class="navTxt">财务</span>
+      </li>
+      <li>
+        <img th:src="@{/img/support.png}" alt="支持" />
+        <span class="navTxt">支持</span>
+      </li>
+      <li class="settitemdisplay">
+        <a href="/crm/sysUser/getSysUserList/1/10">
+        <img th:src="@{/img/setting.png}" alt="设置" />
+        <span class="navTxt">设置</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="rightContent">
+    <div class="header">
+      <div>
+        <div class="mail">
+          <span class="msgNum">1</span>
+          <div>
+            <ul>
+              <li>
+                <a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a>
+              </li>
+              <li>
+                <a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a>
+              </li>
+              <li>
+                <a href="">聂宇豪创建了新</a>
+              </li>
+            </ul>
+            <p class="lookMore">
+              <a href="" class="grey">查看更多</a>
+            </p>
+          </div>
+        </div>
+        <div class="user">
+          <span class="userName">聂宇豪</span>
+          <span class="xiala">
+            <img th:src="@{/img/xiala.png}" />
+          </span>
+          <ul class="detail">
+            <li>
+              <a class="personData">个人资料</a>
+            </li>
+            <li>
+              <a href="">系统设置</a>
+            </li>
+            <li>
+              <a class="loginOut">退出</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div style="background: #fff">
+        <h4>个人资料
+          <span>操作
+            <img th:src="@{/img/xialaPurple.png}" />
+            <ul>
+              <li class="editMsg">编辑</li>
+            </ul>
+          </span>
+        </h4>
+        <form class="editMsgForm" action="/crm/sysUser/eiditPersonData">
+          <label for="name">
+            <span>姓名</span>
+            <input type="text" id="name" th:value="${sysUser.userName}" name="userName" disabled="disabled" />
+          </label>
+          <label for="bumen">
+            <span>部门</span>
+            <input type="text" id="bumen" th:value="${sysUser.userDepartment}" name="userDepartment" disabled="disabled" />
+          </label>
+          <label for="gangwei">
+            <span>岗位</span>
+            <input type="text" id="gangwei" th:value="${sysUser.userPosition}" name="userPosition" disabled="disabled" />
+          </label>
+          <label for="mail">
+            <span>邮箱</span>
+            <input type="text" id="mail" th:value="${sysUser.userEmail}" name="userEmail" disabled="disabled" />
+          </label>
+          <label for="mobile">
+            <span>手机号码</span>
+            <input type="text" id="mobile" th:value="${sysUser.userPhone}" name="userPhone" disabled="disabled" />
+          </label>
+          <label for="tel">
+            <span>办公号码</span>            
+            <input type="text" id="tel" th:value="${sysUser.userWorkphone}" name="userWorkphone" disabled="disabled" />
+          </label>
+          <label for="psd">
+            <span>当前密码</span>
+            <input type="password" id="psd" th:value="${sysUser.userPassword}" name="userPassword" disabled="disabled" />
+          </label>
+
+          <div class="btngroup dnone">
+            <input type="submit" class="save" value="保存" id="personDataSave" />
+            <input type="reset" class="cancel" value="取消" />
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
