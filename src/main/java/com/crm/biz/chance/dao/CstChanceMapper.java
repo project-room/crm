@@ -62,7 +62,7 @@ public interface CstChanceMapper {
     List<CstChance> getCstChanceUserId(@Param("userId") Long userId, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
     //新建转交机会
-    int  addChance(CstChance chance);
+    int addChance(@Param("cstChance") CstChance cstChance);
 
     //机会转交的条件查询
     List<CstChance> getfilterChance(@Param("chance") CstChance chance,@Param("begindate") String begindate,@Param("finishdate") String finishdate, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);

@@ -192,8 +192,16 @@
   </select>
 
   <!--新建按阶段转交机会-->
-    <update id="addChance" parameterType="CstChance">
-      update cst_chance set userTo_id=#{userToId},ch_status=#{chStatus},ch_TransferTime=#{TransferTime},ch_examine=#{chExamine} where ch_stage=#{chStage}
+    <update id="addChance">
+      update cst_chance set userTo_id=#{cstChance.userToId},ch_status=#{cstChance.chStatus},ch_TransferTime=#{cstChance.TransferTime},ch_examine=#{cstChance.chExamine}
+      <where>
+        <if test="cstChance.chStage!=null and cstChance.chStage!=''">
+         and ch_stage=#{cstChance.chStage}
+        </if>
+        <if test="cstChance.chId!=null and cstChance.chId!=0">
+          and ch_id=#{cstChance.chId}
+        </if>
+      </where>
     </update>
 
     <!--机会转交的条件查询-->
@@ -245,7 +253,7 @@
       </if>
 
       <if test="cstChance.chContent!=null and cstChance.chContent!=''">
-        and c.ch_content like '%${chContent}%'
+        and c.ch_content like '%${cstChance.chContent}%'
        </if>
 
        <if test="cstChance!=null and cstChance.chCustomer!=null and cstChance.chCustomer.custClassify!=null and cstChance.chCustomer.custClassify!=''">

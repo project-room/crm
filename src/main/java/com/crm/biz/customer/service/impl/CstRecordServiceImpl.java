@@ -19,7 +19,7 @@ public class CstRecordServiceImpl implements ICstRecordService{
 
     @Override
     public List<CstRecord> getCstRecord(Long id) {
-
+        System.out.println("到了没");
         return cstRecordMapper.getCstRecord(id);
     }
 

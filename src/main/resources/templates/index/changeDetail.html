@@ -31,8 +31,12 @@
 <div class="rightContent" th:each="cstChanceList:${cstChanceList}">
     <div class="header">
         <div>
-            <input type="text" placeholder="请输入客户名称"/>
-            <button><img th:src="@{/img/searchIcon.png}" alt=""/></button>
+            <form action="/crm/cstChance/getCstChance/1/10">
+            <input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
+            <button class="but" type="submit">
+                <img alt="" th:src="@{/img/searchIcon.png}"/>
+            </button>
+            </form>
             <div class="mail">
                 <span class="msgNum">1</span>
                 <div>
@@ -72,7 +76,7 @@
             </div>
             <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
                 <tr>
-                    <td>机会简述<input type="hidden" name="chId" th:value="${cstChanceList.chId}"/></td>
+                    <td class="chId">机会简述<input type="hidden" name="chId" th:value="${cstChanceList.chId}"/></td>
                     <td><input type="text" name="chContent" th:value="${cstChanceList.chContent}" disabled="disabled"/></td>
                 </tr>
                 <tr>
@@ -139,30 +143,59 @@
             </div>
             <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
                 <tr>
-                    <td>姓名<input type="hidden" name="linkId" th:value="${cstChanceList.linkmanList[0].linkId}"/></td>
-                    <td><input type="text" name="linkName" th:value="${cstChanceList.linkmanList[0].linkName}" disabled="disabled"/></td>
+                    <td>姓名<input type="hidden" name="linkId" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkId:null}"/></td>
+                    <td><input type="text" name="linkName"   th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkName:null}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>手机</td>
-                    <td><input type="text" name="linkPhone" th:value="${cstChanceList.linkmanList[0].linkPhone}" disabled="disabled"/></td>
+                    <td><input type="text" name="linkPhone" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkPhone:null}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>固话</td>
-                    <td><input type="text" name="linkLandlinePhone" th:value="${cstChanceList.linkmanList[0].linkLandlinePhone}" disabled="disabled"/></td>
+                    <td><input type="text" name="linkLandlinePhone" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkLandlinePhone:null}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>邮箱</td>
-                    <td><input type="text" name="linkEmail" th:value="${cstChanceList.linkmanList[0].linkEmail}" disabled="disabled"/></td>
+                    <td><input type="text" name="linkEmail" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkEmail:null}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>QQ</td>
-                    <td><input type="text" name="linkQq" th:value="${cstChanceList.linkmanList[0].linkQq}" disabled="disabled"/></td>
+                    <td><input type="text" name="linkQq" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkQq:null}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>微信</td>
-                    <td><input type="text" name="linkWechat" th:value="${cstChanceList.linkmanList[0].linkWechat}" disabled="disabled"/></td>
+                    <td><input type="text" name="linkWechat" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkWechat:null}" disabled="disabled"/></td>
                 </tr>
             </table>
+                <div class="leftSideHeader">
+                    <p>次要联系人</p>
+                </div>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
+                    <tr>
+                        <td>姓名</td>
+                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkName:null}"  disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td>手机</td>
+                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkPhone:null}" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td>固话</td>
+                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkLandlinePhone:null}" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td>邮箱</td>
+                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkEmail:null}" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td>QQ</td>
+                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkQq:null}" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td>微信</td>
+                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkWechat:null}" disabled="disabled"/></td>
+                    </tr>
+                </table>
 
             <div class="leftSideHeader">
                 <p>详细信息</p>
@@ -293,12 +326,15 @@
             <div class="rightSideRecord progressNavDetail progressNavDetail1">
                 <textarea class="recordTextarea"></textarea>
                 <div class="upload"><img th:src="@{/img/upload.png}" height="16" width="16"/>上传附件</div>
-                <a class="fabu">发布</a>
+                <a class="fabu" href="javascirpt:void(0);">发布</a>
                 <div class="clearfix"></div>
                 <p class="recordNum"><span>记录</span>（15）</p>
+             <!--   <div>
+                    <img th:src="@{/img/edit.png}" alt=""/>
+                    <img th:src="@{/img/delete.png}" alt=""/>
+                </div>-->
                 <div class="msg" >
-                    <p ></p>
-                    <p ></p> <p>添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
+                    <p>添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
                         <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
                 </div>
             </div>
@@ -455,31 +491,34 @@
                 </ul>
             </div>
             <div class="rightSideTask progressNavDetail progressNavDetail5">
-                <button class="rightSideTaskNewBtn">
+                 <button class="rightSideTaskNewBtn">
                     <span>+</span>
                     <span>添加任务</span>
-                </button>
-                <p>未完成（3）</p>
-                <ul >
-                    <li th:each="userTasksList:${userTasksList}" th:hidden="${userTasksList.taskStatus eq 1}">
-                        <div class="fl"><input type="checkbox"/></div>
-                        <div class="fl" >
-                            <p th:text="${userTasksList.taskContent}"></p>
-                            <p class="grey" th:text="${userTasksList.taskDate}"></p>执行
-                        </div>
-                    </li>
+                 </button>
+                <p>未完成（<span>3</span>）</p>
+                <ul class="undone">
+                     <!--<li>-->
+                         <!--<div class="fl"><div class="forCheckbox"><input type="checkbox"/></div></div>-->
+                         <!--<div class="fl" >-->
+                             <!--<p></p>-->
+                            <!--<span></span>执行-->
+                         <!--</div>-->
+                    <!--</li>-->
                 </ul>
-                <p>已完成（3）</p>
-                <ul>
-                    <li th:each="userTasksList:${userTasksList}" th:hidden="${userTasksList.taskStatus eq 0}">
-                        <div class="fl"><img class="checkedPic" th:src="@{/img/checked.png}" height="19" width="18"/></div>
-                        <div class="fl">
-                            <p th:text="${userTasksList.taskContent}"></p>
-                            <p class="grey" th:text="${userTasksList.taskDate}"></p>已执行
-                        </div>
-                    </li>
+                <p>已完成（<span>3</span>）</p>
+                <ul class="done">
+                    <!--<li>-->
+                        <!--<div class="fl"><img class="checkedPic" th:src="@{/img/checked.png}" height="14" width="14"/></div>-->
+                        <!--<div class="fl" >-->
+                            <!--<p></p>-->
+                            <!--<span></span>执行-->
+                        <!--</div>-->
+                    <!--</li>-->
                 </ul>
             </div>
+
+
+
         </div>
     </div>
 </div>

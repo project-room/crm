@@ -53,9 +53,9 @@ td>span { color: red; }
 .modify+ul li { height: 30px; line-height: 30px; }
 
 .filterPop { min-height: 740px; height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
-.filterPop .shelter { height: 100%; width: 100%; }
+.shelter { height: 100%; width: 100%; }
 .filterPop .filtermain { width: 600px; height: 740px; background: #fff; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -370px; }
-.filterPop h4 { height: 40px; width: 100%; line-height: 40px; background: #eee; color: #000; padding: 0 20px; }
+.filterPop h4,.referralPop h4 { font-size: 16px; height: 40px; width: 100%; line-height: 40px; background: #eee; color: #000; padding: 0 20px; }
 .filterPop h4 svg { width: 14px; float: right; margin-top: 10px; }
 
 .filterPop form label {display: block; width: 560px; margin: 17px auto 0; border-bottom: 1px  solid #eee; color: #999; padding-bottom: 5px; }
@@ -69,12 +69,22 @@ td>span { color: red; }
 .filterPop .btngroup input.sure { margin-left: 140px; }
 
 
+.referralPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }
+.referralPop .referralmain { width: 600px; height: 350px; background: #fff; position: absolute; left: 50%; margin-left: -300px; top: 50%; margin-top: -175px; }
+.referralPop h4 .cancel { position: absolute; right: 20px; top: 15px; }
+.referralPop .referralmain>label { width: 560px; border-bottom: 1px solid #eee; margin: 15px auto; display: block; }
+.referralPop .referralmain>label input { width: 520px; border: none; outline: none; }
+.referralPop .referralmain>label button { background: transparent; border: none; outline: none; }
 
-
-
-
-
-
-
-
+.referralPop table { width: 560px; margin: 0 auto; }
+.referralPop table th { background: transparent; }
+.referralPop .pagination { position: absolute; bottom: 5px; left: 20px; }
+.referralPop .pagination ul { display: inline-block; }
+.referralPop .pagination li { display: inline-block; width: 20px; }
+.referralPop .btns { position: absolute; right: 20px; bottom: 20px; }
+.referralPop .btns button { height: 30px; width: 100px; border: #7460ee 1px solid; border-radius: 4px; }
+.referralPop .btns button.sure { color: #fff; background: #7460ee; }
+.referralPop .btns button.canc { color: #7460ee; background: #fff; }
+.referralPop li.page-number a { background: #fff; color: #999; }
+.referralPop li.page-number.active a { background: #fff; color: #333; }
 
