@@ -60,7 +60,7 @@ public interface CstCustomerMapper{
 
 
     //根据条件筛选客户
-    List<CstCustomer>  selectCstCustomerByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userName") String userName, @Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate, @Param("cstCustomer") CstCustomer cstCustomer, @Param("chLinkman") ChLinkman chLinkman, @Param("currentPage") Integer currentPage, @Param("pageSize") Integer pageSize);
+    List<CstCustomer>  selectCstCustomerByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userName") String userName, @Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate, @Param("cstCustomer") CstCustomer cstCustomer, @Param("chLinkman") ChLinkman chLinkman, @Param("currentPage") int currentPage, @Param("pageSize") int pageSize);
 
     //筛选客户
     Long getCountByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userNameLike") String userNameLike,@Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate,@Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman);
@@ -71,4 +71,6 @@ public interface CstCustomerMapper{
     //根据公海客户id修改客户信息
     void updateCstCustomerWithId(@Param("cstcustId") Long cstcustId,@Param("cstCustomer") CstCustomer cstCustomer);
 
+    //更改客户用户id
+    void updateCstCustomerSysUserProperties(@Param("custIdLong") Long custIdLong,@Param("userIdLong") Long userIdLong,@Param("flagDistri") Integer flagDistri);
 }

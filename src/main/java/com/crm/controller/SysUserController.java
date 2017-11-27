@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -293,9 +294,19 @@ public class SysUserController extends BaseController {
         for(int i=1;i<=totalPage;i++){
             arrInteger.add(new Long(i));
         }
+        //判断查询结果是否为空
+        if(sysUserPage.getRecTotal()==0){
+            //查询无果
+            model.addAttribute("changeEmpty",0);
+        }else{
+            //查询不为空
+            model.addAttribute("changeEmpty",1);
+        }
         model.addAttribute("arrInteger",arrInteger);
-      model.addAttribute("sysUserPage",sysUserPage);
-      return "index/setting";
+        model.addAttribute("sysUserPage",sysUserPage);
+        //固定参数
+        model.addAttribute("userNameOrAccount",userNameOrAccount);
+      return "index/settingSearch";
     }
 
     /**
@@ -415,5 +426,56 @@ public class SysUserController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 加载销售经理列表
+     * @return
+     */
+    @RequestMapping("/loadSalesManager")
+    public String loadSalesManager(Model model){
+        Long roleId=2L;
+        List<SysUser> sysUsers= sysUserService.loadSalesManager(roleId);
+        //加载用户列表
+        Long salesRoleId = 3L;
+        String districtA = "A区";
+        String districtB="B区";
+        String districtC = "C区";
+        String districtD="D区";
+        List<SysUser> sysUsersA = sysUserService .bySysUserList(salesRoleId, districtA);
+        List<SysUser> sysUsersB = sysUserService.bySysUserList(salesRoleId, districtB);
+        List<SysUser> sysUsersC = sysUserService.bySysUserList(salesRoleId, districtC);
+        List<SysUser> sysUsersD = sysUserService.bySysUserList(salesRoleId, districtD);
+        model.addAttribute("sysUsers",sysUsers);
+        model.addAttribute("sysUsersA",sysUsersA);
+        model.addAttribute("sysUsersB",sysUsersB);
+        model.addAttribute("sysUsersC",sysUsersC);
+        model.addAttribute("sysUsersD",sysUsersD);
+        return "index/organize";
+    }
+
+    /**
+     * 查看个人资料信息
+     */
+    @RequestMapping("/lookPersonInfo")
+    public String lookPersonInfo(Model model){
+        Long userId=(Long)session.getAttribute("userId");
+        SysUser sysUser= sysUserService.selectSysUserInfoById(userId);
+        model.addAttribute("sysUser",sysUser);
+        return "index/personMsg";
+    }
+
+    /**
+     * 编辑个人资料信息
+     */
+    @RequestMapping("/eiditPersonData")
+    public String eiditPersonData(SysUser sysUser,Model model){
+        Long userId=(Long)session.getAttribute("userId");
+        sysUser.setUserId(userId);
+        sysUserService.updatePersonDataById(sysUser);
+        SysUser sysUserReturn=sysUserService.selectSysUserInfoById(userId);
+        model.addAttribute("sysUser",sysUserReturn);
+        return "index/personMsg";
+
     }
 }

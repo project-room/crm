@@ -12,6 +12,8 @@
     <result column="cust_sales" property="custSales" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="cust_classify" property="custClassify" jdbcType="INTEGER" />
+      <!--null未分配，0已分配-->
+    <result column="flag_distri" property="flagDistri" jdbcType="INTEGER" />
     <result column="cust_content" property="custContent" jdbcType="VARCHAR" />
     <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
     <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
@@ -188,5 +190,9 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
 
     <update id="updateCstCustomerWithId" parameterType="map">
          UPDATE cst_customer SET cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},user_id=#{cstCustomer.userId},cust_type=#{cstCustomer.custType},cust_date=#{cstCustomer.custDate} WHERE cust_id=#{cstcustId}
+    </update>
+
+    <update id="updateCstCustomerSysUserProperties" parameterType="map" >
+        UPDATE cst_customer SET user_id=#{userIdLong},flag_distri=#{flagDistri} WHERE cust_id=#{custIdLong}
     </update>
 </mapper>

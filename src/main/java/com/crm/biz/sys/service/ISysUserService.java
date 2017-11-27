@@ -42,6 +42,15 @@ public interface ISysUserService {
 
     //根据账号来获取用户
     SysUser selectSysUserByAccounts(String accounts);
+
+    //加载销售经理列表
+   List<SysUser> loadSalesManager(Long roleId);
+
+   //加载销售员列表
+   List<SysUser> bySysUserList(Long roleId,String district);
+
+   //修改个人资料
+   void updatePersonDataById(SysUser sysUser);
 }
 
 

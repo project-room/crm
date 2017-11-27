@@ -40,6 +40,8 @@ $(function() {
                 $(".settitemdisplay").css("display", "none");
                 //用户系统设置
                 $(".systemSetting") .css("display","none");
+                if(data!="销售经理")
+                $('.showHideDeling').css("display","none");
             }
         },fail:function () {
 
@@ -76,6 +78,11 @@ $(function() {
         },fail:function (data) {
 
         }
+    });
+
+    //个人资料
+    $(".personData").click(function () {
+        location.href="/crm/sysUser/lookPersonInfo";
     });
 
 

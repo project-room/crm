@@ -4,6 +4,9 @@ $(function() {
     $('.main').niceScroll({
         cursorcolor: '#ccc'
     });
+    $('.salerSearch').niceScroll({
+        cursorcolor: '#ccc'
+    });
 
 
     checkboxClick();
@@ -42,15 +45,51 @@ $(function() {
         location.href="/crm/cstCustomer/toAddNewCustomer";
     });
 
-    // //根据客户名来模糊搜所客户信息
-    //  $("#search").click(function () {
-    //   var custCompany=$("#searchName").val();
-    //   location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
-    //  });
-
     //筛选客户
     $("#confirm").click(function () {
-        $("#filterForm").submit();
+        var custCompany= $("input[name='custCompany']").val();
+        var linkName= $("input[name='linkName']").val();
+        var linkPhone= $("input[name='linkPhone']").val();
+        var linkLandlinePhone= $("input[name='linkLandlinePhone']").val();
+        var userName= $("input[name='userName']").val();
+        var linkEmail= $("input[name='linkEmail']").val();
+        var year= $("input[name='year']").val();
+        var minute= $("input[name='minute']").val();
+        var currentPageFor= $("input[name='currentPageFor']").val();
+
+        //判断是否为空值
+//           year:2017年11月22日
+//            minute:09:04:04 - 03:03:03
+        if(year==""||year==null){
+            year="1880年01月01日";
+        }
+        if(minute==""||minute==null){
+            minute="00:00:00 - 00:00:00";
+        }
+        if(userName==""||userName==null){
+            userName="1111111111111111";
+        }
+        if(custCompany==null||custCompany==""){
+            custCompany="1111111111111111";
+        }
+        if(linkName==null||linkName==""){
+            linkName="1111111111111111";
+        }
+        if(linkPhone==null||linkPhone==""){
+            linkPhone="1111111111111111";
+        }
+        if(linkLandlinePhone==null||linkLandlinePhone==""){
+            linkLandlinePhone="1111111111111111";
+        }
+        if (userName==null||userName==""){
+            userName="1111111111111111";
+        }
+        if (linkEmail==null||linkEmail==""){
+            linkEmail="1111111111111111";
+        }
+
+        location.href="/crm/cstCustomer/selectCstCustomersByCondition/"+custCompany+"/"+linkName+"/"+linkPhone+"/"+linkLandlinePhone+"/"+userName+"/"+linkEmail+"/"+year+"/"+minute+"/"+currentPageFor+"/7"
+
     });
 
     //如果没有登录调到登录页面
@@ -65,6 +104,12 @@ $(function() {
         },fail:function (data) {
 
         }
+    });
+
+
+    //限制单个分配客户（列表右侧的分配）
+    $(".dealing").click(function () {
+
     });
 });
 
@@ -130,6 +175,7 @@ function allCheck() {
 
 
 function forDealing() {
+    var userId="";
     $('body').on('click', '.dealing', function() {
         $('.dealingPop').addClass('dblock').removeClass('dnone');
     });
@@ -138,7 +184,29 @@ function forDealing() {
     });
     $('.dealingPop .sure').click(function() {
         $('.dealingPop').addClass('dnone').removeClass('dblock');
+        //客户字符串id
+        var custIdStr="";
+        for(var i = 0; i < $('#table tbody tr').length; i++) {
+            if ($('#table tbody tr').eq(i).find('.forCheckbox').find('input[type=checkbox]').prop('checked')) {
+                var custId= $('#table tbody tr').eq(i).find('input[type=hidden]').val();
+                custIdStr=custIdStr+"-"+custId;
+            }
+        }
+        //分配客户
+        $.ajax({
+            url:"/crm/cstCustomer/distributeCstCustomer",
+            type:"POST",
+            data:{"userId":userId,"custIdStr":custIdStr},
+            success:function (data) {
+
+            }
+        });
+
     });
+
+    //测试
+
+
     $('.dealingPop .cancel').click(function() {
         $('.dealingPop').addClass('dnone').removeClass('dblock');
     });
@@ -147,7 +215,8 @@ function forDealing() {
     });
 
     $('.dealingPop .saler').click(function() {
-        $('.salerSearch').slideToggle()
+        $('.salerSearch').slideToggle();
+
     });
 
     $('.salerSearch ul').click(function() {
@@ -165,6 +234,8 @@ function forDealing() {
         event.stopPropagation();
         var text = $(this).text();
         $('.saler').val(text);
+        //获取销售员id
+        userId= $(this).attr('name');
     });
 }
 
@@ -187,10 +258,10 @@ function forTable() {
             var x = 0;
             var mx = $('tbody tr').length;
             for (var i = 0; i < mx; i++) {
-                if ($('tbody tr').eq(i).find('input[type=checkbox]').prop('checked') == true) {
+                if ($('#table tbody tr').eq(i).find('input[type=checkbox]').prop('checked') == true) {
                     x++;
                     //获取批量用户id
-                    var userId= $('tbody tr').eq(i).find('input[type=hidden]').val().toString();
+                    var userId= $('#table tbody tr').eq(i).find('input[type=hidden]').val().toString();
                     userIdStr=userIdStr+"-"+userId;
                 }
             }
@@ -249,10 +320,27 @@ function forTable() {
         location.href="/crm/cstCustomer/lookCstCustomerInfo/"+custId;
     });
 
-    //跳转到页面
+    //公海普通跳转到页面
     $('body').on('change', '.dumppage', function() {
         var val = $(this).val();
         window.location.pathname = '/crm/cstCustomer/getPage/' + val + '/7';
+
+    });
+
+
+
+    // //公海筛选跳转到页面
+    $('body').on('change', '.dumppagescreen', function() {
+        var val = $(this).val();
+        var custCompany=$("input[name='custCompanyscreen']").val();
+        var linkName=$("input[name='linkNamescreen']").val();
+        var linkPhone=$("input[name='linkPhonescreen']").val();
+        var linkLandlinePhone=$("input[name='linkLandlinePhonescreen']").val();
+        var userName=$("input[name='userNamescreen']").val();
+        var linkEmail=$("input[name='linkEmailscreen']").val();
+        var year=$("input[name='yearscreen']").val();
+        var minute=$("input[name='minutescreen']").val();
+        location.href = '/crm/cstCustomer/selectCstCustomersByCondition/'+custCompany+'/'+linkName+'/'+linkPhone+'/'+linkLandlinePhone+'/'+userName+'/'+linkEmail+'/'+year+'/'+minute+'/'+val+'/7';
 
     });
 }

@@ -3,7 +3,7 @@
 label { display: block; margin: 10px; border-bottom: 1px solid #e9ecf2; color: #999; padding-bottom: 5px; font-size: 14px; }
 label:hover { border-color: #999; }
 label input { border: none; display: inline-block; margin-left: 10px; outline: none; width: 50%; background: #fff; }
-input[type=button] { width: 60px; height: 30px; border-radius: 4px; border: 1px solid #7460ee; margin-left: 10px; outline: none; margin-top: 40px; }
+input[type=button], .btngroup input { width: 60px !important; height: 30px; border-radius: 4px; border: 1px solid #7460ee; margin-left: 10px; outline: none; margin-top: 40px; }
 input.save { background: #7460ee; color: #fff; }
 input.cancel { background: #fff; color: #7460ee; border-color: #b9aff6 }
 

@@ -58,13 +58,19 @@
             </label>
             <ul>
                 <span>+</span>A区
-                <li>小姐A</li>
-                <li>小姐B</li>
+                <li th:each="sysUserA:${sysUsersA}" th:text="${sysUserA.userName}" th:name="${sysUserA.userId}"></li>
             </ul>
             <ul>
                 <span>+</span>B区
-                <li>小姐C</li>
-                <li>小姐D</li>
+                <li th:each="sysUserB:${sysUsersB}" th:text="${sysUserB.userName}" th:name="${sysUserB.userId}"></li>
+            </ul>
+            <ul>
+                <span>+</span>C区
+                <li th:each="sysUserC:${sysUsersC}" th:text="${sysUserC.userName}" th:name="${sysUserC.userId}"></li>
+            </ul>
+            <ul>
+                <span>+</span>D区
+                <li th:each="sysUserD:${sysUsersD}" th:text="${sysUserD.userName}" th:name="${sysUserD.userId}"></li>
             </ul>
         </div>
     </div>
@@ -81,6 +87,7 @@
                     </span>
         </h4>
         <form id="filterForm" action="/crm/cstCustomer/selectCstCustomersByCondition">
+            <input id="currentPage" name="currentPageFor" type="hidden" value="1"/>
             <label for="name">
                 客户名称
                 <input id="name" name="custCompany" type="text"/>
@@ -224,7 +231,7 @@
                         </span>
                 <ul class="detail">
                     <li>
-                        <a href="">
+                        <a class="personData">
                             个人资料
                         </a>
                     </li>
@@ -278,7 +285,13 @@
                 <label class="forCheckbox">
                     <input type="checkbox"/>
                 </label>
-                <button class="dealing">
+                <button class="addNew ">
+                    <a href="/crm/cstChance/getCstCustomer" style="color: #7460ee;">
+                    <img th:src="@{/img/add3.png}"/>
+                    新建销售机会
+                    </a>
+                </button>
+                <button class="dealing showHideDeling">
                     <img th:src="@{/img/allocation.png}"/>
                     分配
                 </button>
@@ -438,7 +451,8 @@
                     </tbody>
 
                 </table>
-                <div class="fixed-table-pagination">
+                <!--公海分页-->
+                <div class="fixed-table-pagination" th:hidden="${normal eq 1}">
                     <div class="pull-right pagination">
                         <ul class="pagination">
                             <li class="page-first"><a th:href="@{/cstCustomer/getPage/1/7}">首页</a></li>
@@ -459,6 +473,41 @@
                             <label>调转
                                 <select class="dumppage">
                                     <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}"></a></option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!--筛选分页-->
+                <div class="fixed-table-pagination" th:hidden="${normal eq 0}">
+                    <div class="pull-right pagination">
+                        <ul class="pagination">
+                            <li class="page-first"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/1/7'}">首页</a></li>
+                            <li class="page-pre">
+                                <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${((cstCustomerPage.currentPage-1) le 0?1:(cstCustomerPage.currentPage-1))}+'/7'}">
+                                    上一页
+                                </a>
+                            </li>
+                            <li class="page-number" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${arr}+'/7'}" th:text="${arr}"></a></li>
+                            <li class="page-next">
+                                <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${(cstCustomerPage.currentPage+1) ge (cstCustomerPage.totalPage)?(cstCustomerPage.totalPage):(cstCustomerPage.currentPage+1)}+'/7'}">
+                                    下一页
+                                </a>
+                            </li>
+                            <li class="page-last"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${cstCustomerPage.totalPage}+'/7'}">尾页</a></li>
+                        </ul>
+                        <div class="jump">
+                            <label>调转
+                                <input  name="custCompanyscreen" type="hidden" th:value="${custCompany}"/>
+                                <input  name="linkNamescreen" type="hidden" th:value="${linkName}"/>
+                                <input  name="linkPhonescreen" type="hidden" th:value="${linkPhone}"/>
+                                <input  name="linkLandlinePhonescreen" type="hidden" th:value="${linkLandlinePhone}"/>
+                                <input  name="userNamescreen" type="hidden" th:value="${userName}"/>
+                                <input  name="linkEmailscreen" type="hidden" th:value="${linkEmail}"/>
+                                <input  name="yearscreen" type="hidden" th:value="${year}"/>
+                                <input  name="minutescreen" type="hidden" th:value="${minute}"/>
+                                <select class="dumppagescreen">
+                                    <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${arr}+'/7'}" th:text="${arr}"></a></option>
                                 </select>
                             </label>
                         </div>

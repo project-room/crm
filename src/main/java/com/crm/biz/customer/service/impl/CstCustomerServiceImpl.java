@@ -150,15 +150,15 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      * @return
      */
     @Override
-    public Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, Integer currentPage, Integer pageSize) {
+    public Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, int currentPage, int pageSize) {
         String userNameLike="%"+userName+"%";
-        Integer currentPageLimit=(currentPage-1)*pageSize;
+        int currentPageLimit=(currentPage-1)*pageSize;
         List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
         cstCustomer.setCustCompany("%"+cstCustomer.getCustCompany()+"%");
         chLinkman.setLinkName("%"+chLinkman.getLinkName()+"%");
         chLinkman.setLinkPhone("%"+chLinkman.getLinkPhone()+"%");
         chLinkman.setLinkLandlinePhone("%"+chLinkman.getLinkLandlinePhone()+"%");
-        chLinkman.setLinkQq("%"+chLinkman.getLinkQq()+"%");
+//        chLinkman.setLinkQq("%"+chLinkman.getLinkQq()+"%");
         chLinkman.setLinkEmail("%"+chLinkman.getLinkEmail()+"%");
         cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPageLimit,pageSize);
         //通过用户id获取用户名
@@ -170,7 +170,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
             cstCustomerFor.setRevertUserNameFromId(userNameFor);
         }
         Long count=cstCustomerMapper.getCountByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman);
-       return new Page<CstCustomer>(currentPageLimit,pageSize,cstCustomers,count);
+       return new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
     }
 
     /**
@@ -219,6 +219,16 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     @Override
     public SysUser selectUserById(Long userId) {
         return sysUserMapper.selectSysUserById(userId);
+    }
+
+    @Override
+    public void updateCstCustomerSysUserProperties(Long custIdLong, Long userIdLong,Integer flagDistri) {
+        cstCustomerMapper.updateCstCustomerSysUserProperties(custIdLong,userIdLong,flagDistri);
+    }
+
+    @Override
+    public List<SysUser> bySysUserList(Long roleId,String district) {
+        return sysUserMapper.bySysUserList(roleId,district);
     }
 
 

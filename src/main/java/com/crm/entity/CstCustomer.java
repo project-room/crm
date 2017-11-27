@@ -41,6 +41,8 @@ public class  CstCustomer {
 
     private  String  custCustomerBudget;//客户预算
 
+    private Integer flagDistri;  //是否分配 null-未分配，0已分配
+
     //时期为字符串格式
     private String revertDate;
 
@@ -227,5 +229,13 @@ public class  CstCustomer {
 
     public void setCustprovinceChar(String custprovinceChar) {
         this.custprovinceChar = custprovinceChar;
+    }
+
+    public Integer getFlagDistri() {
+        return flagDistri;
+    }
+
+    public void setFlagDistri(Integer flagDistri) {
+        this.flagDistri = flagDistri;
     }
 }

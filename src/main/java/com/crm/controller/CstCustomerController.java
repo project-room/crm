@@ -1,6 +1,7 @@
 package com.crm.controller;
 
 import com.crm.biz.customer.service.ICstCustomerService;
+import com.crm.biz.sys.service.ISysUserService;
 import com.crm.common.BaseController;
 import com.crm.common.Page;
 import com.crm.converter.CstCustomerConverter;
@@ -107,6 +108,14 @@ public class CstCustomerController extends BaseController{
     public String toSetting(){
         return "index/setting";
     }
+    @RequestMapping("/toPersonMsg")
+    public String toPersonMsg(){
+        return "index/personMsg";
+    }
+    @RequestMapping("/toSettingSearch")
+    public String toSettingSearch(){
+        return "index/settingSearch";
+    }
 
 
 
@@ -142,52 +151,100 @@ public class CstCustomerController extends BaseController{
      * 筛选公海客户
      * @return
      */
-//    @RequestMapping("/selectCstCustomersByCondition")
-//    public String selectCstCustomersByCondition(String year,String minute,String userName,CstCustomer cstCustomer,ChLinkman chLinkman,Model model){
-//        Map map=result();
-//        try {
-//            //获取角色名
-//            String roleName=(String) session.getAttribute("roleName");
-//            //获取用户id
-//            Long userIdForPage=(Long)session.getAttribute("userId");
-//            //年月日
-//            String yearStr=year.replace("年","-").replace("月","-").replace("日"," ");
-//           //时分秒
-//            String[] arrTime=minute.split("-");
-//            String startTime=arrTime[0].trim();
-//            String endTime=arrTime[1].trim();
-//
-//            //开始字符串时间
-//            String startTimeStr=yearStr+startTime;
-//            //结束字符串时间
-//            String endTimeStr=yearStr+endTime;
-//            //开始时间
-//            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            Date startTimeDate=sdf.parse(startTimeStr);
-//            //结束时间
-//            Date endTimeDate=sdf.parse(endTimeStr);
-//
-//            Integer currentPage=1;
-//            Integer pageSize=7;
-//            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(userIdForPage,roleName,userName,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPage,pageSize);
-//            //设置创建时间格式
-//            List<CstCustomer> cstCustomers= returnCstCustomer.getList();
-//            for (CstCustomer cstCustomerRevert:cstCustomers
-//                    ) {
-//                Date formation= cstCustomerRevert.getCustDate();
-//                String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
-//                cstCustomerRevert.setRevertDate(afterDate);
-//            }
+    @RequestMapping("/selectCstCustomersByCondition/{custCompany}/{linkName}/{linkPhone}/{linkLandlinePhone}/{userName}/{linkEmail}/{year}/{minute}/{currentPageFor}/{pageSize}")
+    public String selectCstCustomersByCondition(@PathVariable("custCompany") String custCompany,@PathVariable("linkName") String linkName,@PathVariable("linkPhone") String linkPhone,@PathVariable("linkLandlinePhone") String linkLandlinePhone,@PathVariable("userName") String userName,@PathVariable("linkEmail") String linkEmail,@PathVariable("year") String year,@PathVariable("minute") String minute,@PathVariable("currentPageFor") Integer currentPageFor,@PathVariable("pageSize") Integer pageSize,Model model){
+        Map map=result();
+
+        //用对象封装参数
+        CstCustomer cstCustomer=new CstCustomer();
+        ChLinkman chLinkman=new ChLinkman();
+        cstCustomer.setCustCompany(custCompany);
+        chLinkman.setLinkName(linkName);
+        chLinkman.setLinkPhone(linkPhone);
+        chLinkman.setLinkLandlinePhone(linkLandlinePhone);
+        chLinkman.setLinkEmail(linkEmail);
+
+        try {
+
+            //固定参数
+            model.addAttribute("year");
+            model.addAttribute("minute");
+            model.addAttribute("userName");
+            String custCompanyPage=cstCustomer.getCustCompany();
+            model.addAttribute("custCompany",custCompanyPage);
+            String linkNamePage=chLinkman.getLinkName();
+            model.addAttribute("linkName",linkNamePage);
+            String linkPhonePage=chLinkman.getLinkPhone();
+            model.addAttribute("linkPhone",linkPhonePage);
+            String linkLandlinePhonePage=chLinkman.getLinkLandlinePhone();
+            model.addAttribute("linkLandlinePhone",linkLandlinePhonePage);
+            String linkEmailPage=chLinkman.getLinkEmail();
+            model.addAttribute("linkEmail",linkEmailPage);
+
+            //获取角色名
+            String roleName=(String) session.getAttribute("roleName");
+            //获取用户id
+            Long userIdForPage=(Long)session.getAttribute("userId");
+            //年月日
+            String yearStr=year.replace("年","-").replace("月","-").replace("日"," ");
+           //时分秒
+            String[] arrTime=minute.split("-");
+            String startTime=arrTime[0].trim();
+            String endTime=arrTime[1].trim();
+
+            //开始字符串时间
+            String startTimeStr=yearStr+startTime;
+            //结束字符串时间
+            String endTimeStr=yearStr+endTime;
+            //开始时间
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date startTimeDate=sdf.parse(startTimeStr);
+            //结束时间
+            Date endTimeDate=sdf.parse(endTimeStr);
+
+            pageSize=7;
+            Page<CstCustomer> returnCstCustomer= cstCustomerService.selectCstCustomerByCondition(userIdForPage,roleName,userName,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPageFor,pageSize);
+            //设置创建时间格式
+            List<CstCustomer> cstCustomers= returnCstCustomer.getList();
+            for (CstCustomer cstCustomerRevert:cstCustomers
+                    ) {
+                Date formation= cstCustomerRevert.getCustDate();
+                String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
+                cstCustomerRevert.setRevertDate(afterDate);
+            }
+            //组装分页数组
+            List<Long> arrInteger=new ArrayList<Long>();
+            Long totalPage=returnCstCustomer.getTotalPage();
+            for(int i=1;i<=totalPage;i++){
+                arrInteger.add(new Long(i));
+            }
+            model.addAttribute("arrInteger",arrInteger);
 //            map.put("returnCstCustomer",returnCstCustomer);
-//            model.addAttribute("cstCustomerPage",returnCstCustomer);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            map.put("code","-1");
-//            map.put("msg","筛选客户失败");
-//        }
-//
-//        return "index/seas";
-//    }
+            model.addAttribute("cstCustomerPage",returnCstCustomer);
+            model.addAttribute("normal",1);
+
+            //加载用户列表
+            Long roleId = 3L;
+            String districtA = "A区";
+            String districtB="B区";
+            String districtC = "C区";
+            String districtD="D区";
+            List<SysUser> sysUsersA = cstCustomerService .bySysUserList(roleId, districtA);
+            List<SysUser> sysUsersB = cstCustomerService.bySysUserList(roleId, districtB);
+            List<SysUser> sysUsersC = cstCustomerService.bySysUserList(roleId, districtC);
+            List<SysUser> sysUsersD = cstCustomerService.bySysUserList(roleId, districtD);
+            model.addAttribute("sysUsersA", sysUsersA);
+            model.addAttribute("sysUsersB", sysUsersB);
+            model.addAttribute("sysUsersC", sysUsersC);
+            model.addAttribute("sysUsersD", sysUsersD);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code","-1");
+            map.put("msg","筛选客户失败");
+        }
+
+        return "index/seas";
+    }
 
     /**
      * 查看所有认领的公海客户
@@ -370,30 +427,10 @@ public class CstCustomerController extends BaseController{
             System.out.println(roleName+"角色名");
             //获取用户id
             Long userIdForPage=(Long)session.getAttribute("userId");
-
             cstCustomerPage= cstCustomerService.getCstCustomerOnePageInfo(userIdForPage,roleName,currentPage,pageSize);
-//            map.put("cstCustomerPage",cstCustomerPage);
-
-
-
 
             //设置创建时间格式
            List<CstCustomer> cstCustomers= cstCustomerPage.getList();
-//            //排序
-//            Collections.sort(cstCustomers, new Comparator<CstCustomer>(){
-//
-//                @Override
-//                public int compare(CstCustomer c1, CstCustomer c2) {
-//                    //按照学生的年龄进行升序排列
-//                    if(c1.getCustDate().getTime() < c2.getCustDate().getTime()){
-//                        return 1;
-//                    }
-//                    if(c1.getCustDate().getTime() == c2.getCustDate().getTime()){
-//                        return 0;
-//                    }
-//                    return -1;
-//                }
-//            });
 
             for (CstCustomer cstCustomer:cstCustomers
                  ) {
@@ -409,6 +446,23 @@ public class CstCustomerController extends BaseController{
             }
             model.addAttribute("arrInteger",arrInteger);
             model.addAttribute("cstCustomerPage",cstCustomerPage);
+            //标记为公海普通分页
+            model.addAttribute("normal",0);
+
+            //加载用户列表
+            Long roleId = 3L;
+            String districtA = "A区";
+            String districtB="B区";
+            String districtC = "C区";
+            String districtD="D区";
+            List<SysUser> sysUsersA = cstCustomerService .bySysUserList(roleId, districtA);
+            List<SysUser> sysUsersB = cstCustomerService.bySysUserList(roleId, districtB);
+            List<SysUser> sysUsersC = cstCustomerService.bySysUserList(roleId, districtC);
+            List<SysUser> sysUsersD = cstCustomerService.bySysUserList(roleId, districtD);
+            model.addAttribute("sysUsersA", sysUsersA);
+            model.addAttribute("sysUsersB", sysUsersB);
+            model.addAttribute("sysUsersC", sysUsersC);
+            model.addAttribute("sysUsersD", sysUsersD);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
@@ -637,5 +691,42 @@ public class CstCustomerController extends BaseController{
             e.printStackTrace();
         }
         return "redirect:" + "/cstCustomer/getPage/1/7";
+    }
+
+    /**
+     * 分配公海客户
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/distributeCstCustomer")
+    public void distributeCstCustomer(HttpServletRequest request,HttpServletResponse response){
+
+        try {
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
+            PrintWriter out= response.getWriter();
+            String userId= request.getParameter("userId");
+            Long userIdLong=new Long(userId);
+            String custIdStr=request.getParameter("custIdStr");
+
+            Long cstCustomerId=null;
+            //去掉首字符"-"
+            String revertCustIdArr=custIdStr.substring(1);
+            String[] idArr= revertCustIdArr.split("-");
+
+            for (int i=0;i<idArr.length;i++){
+                Long custIdLong= new Long(idArr[i]);
+                //判断客户是否已经被分配
+              Integer flagDistri=cstCustomerService.lookCstCustomerInfo(custIdLong).getFlagDistri();
+              if(flagDistri==null){
+                  //分配赋值为0
+                  flagDistri=0;
+                  //更张客户的用户id
+                  cstCustomerService.updateCstCustomerSysUserProperties(custIdLong,userIdLong,flagDistri);
+              }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

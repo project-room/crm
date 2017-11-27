@@ -57,4 +57,12 @@ public interface SysUserMapper {
 
     //根据账号来获取用户
     SysUser selectSysUserByAccounts(String accounts);
+
+    //加载销售员的列表
+    List<SysUser> bySysUserList(@Param("roleId") Long roleId,@Param("district") String district);
+
+    //加载销售经理列表
+    List<SysUser> loadSalesManager(Long roleId);
+
+    void updatePersonDataById(@Param("sysUser") SysUser sysUser);
 }

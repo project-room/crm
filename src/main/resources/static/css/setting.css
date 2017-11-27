@@ -28,10 +28,9 @@
 
 
 
-.mainHeader .fright p { height: 30px; width: 280px; border: 1px solid #999; border-radius: 15px; padding-left: 20px; outline: none;
-    display: inline-block; line-height: 30px; margin-right: 10px; }
-.mainHeader .fright p input { border: none; width: 200px; outline: none; height:30px; line-height:30px; background: transparent; }
-.mainHeader .fright p i { height: 20px; width: 20px; cursor: pointer; }
+.mainHeader .fright label { height: 30px; width: 300px;  border: 1px solid #999; border-radius: 15px; padding-left: 20px; outline: none; line-height: 30px; position: relative; }
+.mainHeader .fright label input { height: 30px; width: 300px;border: none; outline: none; line-height: 30px;background: transparent; }
+.mainHeader .fright label i { position: absolute; right: 10px; top: -2px; cursor: pointer; }
 .mainHeader .fright a { border: 1px solid #7460ee; color: #7460ee; font-size: 14px; padding:4px 4px 4px 24px; border-radius: 4px; background: url('../img/add3.png') left 4px center no-repeat;  }
 
 .allOperate a { width: 100px; height: 30px; display: inline-block; border: 1px solid #7460ee; border-radius: 4px; line-height: 30px; text-align: center; font-size: 14px; color: #7460ee; margin-left: 14px; }

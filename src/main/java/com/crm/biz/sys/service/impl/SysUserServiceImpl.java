@@ -98,8 +98,8 @@ public class SysUserServiceImpl implements ISysUserService {
     public Page<SysUser> selectSysUserPageByUserNameAndAccount(String userNameOrAccount, Integer currentPage, Integer pageSize) {
         //根据用户名或账号获取每页的用户集合
         userNameOrAccount="%"+userNameOrAccount+"%";
-        currentPage=(currentPage-1)*pageSize;
-        List<SysUser> sysUsers=sysUserMapper.selectSysUserByUserNameOrAccount(userNameOrAccount,currentPage,pageSize);
+       int  currentPageLimit=(currentPage-1)*pageSize;
+        List<SysUser> sysUsers=sysUserMapper.selectSysUserByUserNameOrAccount(userNameOrAccount,currentPageLimit,pageSize);
         //根据用户名或账号获取用户总记录条数
         Long count= sysUserMapper.selectCountByUserNameOrAccount(userNameOrAccount);
         return new Page<SysUser>(currentPage,pageSize,sysUsers,count);
@@ -113,6 +113,21 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public SysUser selectSysUserByAccounts(String accounts) {
        return sysUserMapper.selectSysUserByAccounts(accounts);
+    }
+
+    @Override
+    public List<SysUser> loadSalesManager(Long roleId) {
+        return sysUserMapper.loadSalesManager(roleId);
+    }
+
+    @Override
+    public List<SysUser> bySysUserList(Long roleId, String district) {
+        return sysUserMapper.bySysUserList(roleId,district);
+    }
+
+    @Override
+    public void updatePersonDataById(SysUser sysUser) {
+        sysUserMapper.updatePersonDataById(sysUser);
     }
 
 

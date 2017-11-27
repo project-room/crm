@@ -45,14 +45,14 @@
                     </a>
                 </li>
                 <li>
-                    <a th:href="@{/cstChance/getCstChance/1/1/10}">
+                    <a th:href="@{/cstChance/getCstChance/1/10}">
                         <img alt="机会" th:src="@{/img/chance.png}"/>
                         <span class="navTxt">
                             机会
                         </span>
                     </a>
                 </li>
-                <li><a href="contract.html"><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
+                <li><a ><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
                 <li>
                     <img alt="财务" th:src="@{/img/financial.png}"/>
                     <span class="navTxt">
@@ -120,7 +120,7 @@
                         </span>
                         <ul class="detail">
                             <li>
-                                <a href="">
+                                <a  class="personData">
                                     个人资料
                                 </a>
                             </li>
@@ -147,55 +147,54 @@
                                 <li class="org"><a href="javascript:void(0);">组织架构管理</a><i></i>
                                     <ul class="bumen dnone">
                                         <li>
-                                            <a href="organize.html">销售部</a>
+                                            <a class="salesDepartment" th:href="@{/sysUser/loadSalesManager}">销售部</a>
                                             <ul class="quyu">
-                                                <li><a th:href="@{'/cstCustomer/toOrganize'}">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a>1A区</a></li>
+                                                <li><a>1A区</a></li>
+                                                <li><a>1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="organize.html">技术支持</a>
+                                            <a>技术支持</a>
                                             <ul class="quyu">
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="organize.html">财务部</a>
+                                            <a >财务部</a>
                                             <ul class="quyu">
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="organize.html">行政部</a>
+                                            <a >行政部</a>
                                             <ul class="quyu">
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
-                                                <li><a href="organize.html">1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="cus"><a href="javascript:void(0);">自定义字段设置</a><i></i>
                                     <ul class="dnone">
-                                        <li><a href="customField.html">机会</a></li>
-                                        <li><a href="customField.html">合同</a></li>
+                                        <li><a >机会</a></li>
+                                        <li><a >合同</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="process.html">业务流程设置</a></li>
-                                <li><a href="argument.html">参数设置</a></li>
+                                <li><a >业务流程设置</a></li>
+                                <li><a >参数设置</a></li>
                             </ul>
                             
                         </div>
                         <div class="fright">
-                            <p>
-                                <input type="text" name="userNameOrAccount" placeholder="请输入员工名字或登陆账号"/>
-                                <i id="searchUserNameOrAccount"><img th:src="@{/img/search.png}" alt="搜索"/></i>
-                            </p>
+
+                            <label><input type="text" name="userNameOrAccount" placeholder="请输入员工名字或登陆账号" /><i class="toSearch" id="searchUserNameOrAccount"><img th:src="@{/img/search.png}" alt="搜索"/></i></label>
+                            &emsp;
                             <a th:href="@{'/cstCustomer/toAddEmployee'}">
                                 添加员工
                             </a>

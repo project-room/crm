@@ -75,7 +75,7 @@ public interface ICstCustomerService {
      * @param chLinkman
      * @return
      */
-    Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, Integer currentPage, Integer pageSize );
+    Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, int currentPage, int pageSize );
 
     /**
      * 根据模糊客户名来获取count
@@ -96,5 +96,13 @@ public interface ICstCustomerService {
      * @return
      */
     SysUser selectUserById(Long userId);
+
+    /**
+     * 更改客户的用户id
+     */
+    void updateCstCustomerSysUserProperties(Long custIdLong,Long userIdLong,Integer flagDistri);
+
+    //加载销售员列表
+    List<SysUser> bySysUserList(Long roleId,String district);
 
 }

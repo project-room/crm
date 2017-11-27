@@ -63,10 +63,18 @@ $(function() {
         });
 	});
 
-    //跳转到页面
+    //员工普通跳转到页面
     $('body').on('change', '.dumppage', function() {
         var val = $(this).val();
         window.location.pathname = '/crm/sysUser/getSysUserList/' + val + '/10';
+
+    });
+
+    //员工筛选跳转到页面
+    $('body').on('change', '.dumppagescreen', function() {
+        var val = $(this).val();
+        var userNameOrAccount= $("input[name='userNameOrAccount']").val();
+        window.location.pathname = '/crm/sysUser/searchUserNameOrAccount/' +userNameOrAccount+'/'+ val + '/10';
 
     });
 
@@ -156,7 +164,9 @@ function org() {
         });
 	});
 	$('.jingli p').click(function() {
-		$(this).siblings('ul').slideToggle();
+        $(this).siblings('ul').slideToggle('100', function() {
+            $(".main").getNiceScroll().resize();
+        });
 		if($(this).find('span').text() == '-') {
 			$(this).find('span').text('+');
 		} else {
@@ -254,6 +264,9 @@ function org() {
 	//搜所用户名
     $("#searchUserNameOrAccount").click(function () {
 	      var  userNameOrAccount=$("input[name='userNameOrAccount']").val();
+	      if(userNameOrAccount==""||userNameOrAccount==null){
+	      	userNameOrAccount=11111111111;
+		  }
 	      location.href="/crm/sysUser/searchUserNameOrAccount/"+userNameOrAccount+"/1/10"
     });
 
@@ -276,9 +289,11 @@ function org() {
         var userId=$("input[name='userId']").val();
         // //1-管理员，2-销售经理，3-销售员
         var roleId= $('.juese').val();
+        //用户区域A ,B ,C, D
+		var userDistrict= $('.district').val();
         $.ajax({
             url:"/crm/sysUser/editSysUserInfo",
-            data:{"userName":userName,"userAccounts":userAccounts,"userPassword":userPassword,"userPhone":userPhone,"userDepartment":userDepartment,"userPosition":userPosition,"roleId":roleId,"userStatus":userStatus,"userId":userId},
+            data:{"userName":userName,"userAccounts":userAccounts,"userPassword":userPassword,"userPhone":userPhone,"userDepartment":userDepartment,"userPosition":userPosition,"roleId":roleId,"userStatus":userStatus,"userId":userId,"userDistrict":userDistrict},
             type:"POST",
             success:function (data) {
                 location.href="/crm/sysUser/getSysUserList/1/10";
@@ -302,4 +317,32 @@ function org() {
         }
     });
 
+    //编辑个人资料
+	 $("#personDataSave").click(function () {
+		$(".editMsgForm").submit();
+	 });
+}
+
+
+function personMsg() {
+	$('.main>div').height($('.main').height()-60)
+	$('.main>div').width($('.main').width()-60)
+
+	$('.editMsg').click(function() {
+		$('form').find('input').attr('disabled', false);
+		// $('form').find('label').addClass()
+		$('.btngroup').removeClass('dnone');
+		$('.main .editMsgForm label').css({
+			'border-bottom': '1px solid #eee'
+		});
+	});
+
+	$('input.cancel[type=reset]').click(function () {
+        $('form').find('input').attr('disabled', true);
+        // $('form').find('label').addClass()
+        $('.btngroup').addClass('dnone');
+        $('.main .editMsgForm label').css({
+            'border-bottom': 'none'
+        });
+    });
 }

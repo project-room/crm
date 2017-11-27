@@ -34,6 +34,9 @@ public class SysUser {
 
     private Integer userState;
 
+    //区域
+    private String userDistrict;
+
     private List<CstCustomer> customerList;
 
     private List<UserTask> taskList;
@@ -170,4 +173,13 @@ public class SysUser {
     public void setSysRole(SysRole sysRole) {
         this.sysRole = sysRole;
     }
+
+    public String getUserDistrict() {
+        return userDistrict;
+    }
+
+    public void setUserDistrict(String userDistrict) {
+        this.userDistrict = userDistrict;
+    }
+
 }
