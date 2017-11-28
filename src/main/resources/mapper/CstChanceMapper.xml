@@ -131,8 +131,9 @@
        </select>-->
        <!--根据机会id查询机会的详细信息-->
        <select id="getCstChanceId" parameterType="Long" resultMap="BaseResultMap">
-         SELECT * from cst_chance c LEFT JOIN ch_linkman l ON l.ch_id=c.ch_id,cst_customer u LEFT JOIN cst_low_customer w ON  u.cust_id=w.high_id,cst_label a,cst_ref_label b ,sys_user s WHERE c.ch_id=#{chId} and c.cust_id=u.cust_id  AND
-         u.cust_id=b.cust_id AND a.label_id=b.label_id and c.user_id=s.user_id
+           SELECT * FROM cst_chance c LEFT JOIN ch_linkman l ON l.ch_id=c.ch_id,cst_customer u LEFT JOIN cst_low_customer w ON
+             u.cust_id=w.high_id,sys_user s WHERE c.ch_id=#{chId} AND c.cust_id=u.cust_id  AND
+          c.user_id=s.user_id
        </select>
 
      <!--查询机会条数 -->

@@ -154,14 +154,66 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <!--根据条件筛选公海客户-->
     <select id="selectCstCustomerByCondition" parameterType="map" resultMap="BaseResultMap">
         <if test="roleName=='管理员'||roleName=='销售经理'">
-            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` HAVING cc.`cust_company` LIKE #{cstCustomer.custCompany}
-            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userName} OR
-            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate} LIMIT #{currentPage},#{pageSize}
+            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl
+            <where>
+                <if test="cstCustomer.custCompany!='%11111%'">
+                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
+                </if>
+                <if test="chLinkman.linkName!='%11111%'">
+                    AND cl.`link_name` LIKE #{chLinkman.linkName}
+                </if>
+                <if test="chLinkman.linkPhone!='%11111%'">
+                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
+                </if>
+                <if test="chLinkman.linkLandlinePhone!='%11111%'">
+                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
+                </if>
+                <if test="userName!='%11111%'">
+                    AND su.`user_name` LIKE #{userName}
+                </if>
+                <if test="chLinkman.linkEmail!='%11111%'">
+                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
+                </if>
+                <if test="startTimeStr!='1880-01-01 00:00:00'">
+                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+                <if test="startTimeStr=='1880-01-01 00:00:00'">
+                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+                having su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id`
+                LIMIT #{currentPage},#{pageSize}
+            </where>
         </if>
         <if test="roleName=='销售员'">
-            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage} HAVING cc.`cust_company` LIKE #{cstCustomer.custCompany}
-            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userName} OR
-            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate} LIMIT #{currentPage},#{pageSize}
+            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl
+            <where>
+                <if test="cstCustomer.custCompany!='%11111%'">
+                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
+                </if>
+                <if test="chLinkman.linkName!='%11111%'">
+                    AND cl.`link_name` LIKE #{chLinkman.linkName}
+                </if>
+                <if test="chLinkman.linkPhone!='%11111%'">
+                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
+                </if>
+                <if test="chLinkman.linkLandlinePhone!='%11111%'">
+                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
+                </if>
+                <if test="userName!='%11111%'">
+                    AND su.`user_name` LIKE #{userName}
+                </if>
+                <if test="chLinkman.linkEmail!='%11111%'">
+                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
+                </if>
+                <if test="startTimeStr!='1880-01-01 00:00:00'">
+                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+                <if test="startTimeStr=='1880-01-01 00:00:00'">
+                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+                having su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage}
+                LIMIT #{currentPage},#{pageSize}
+            </where>
         </if>
 
     </select>
@@ -169,14 +221,66 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <!--获取筛选count-->
     <select id="getCountByCondition" parameterType="map" resultType="Long" >
         <if test="roleName=='管理员'||roleName=='销售经理'">
-            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND  (cc.`cust_company` LIKE #{cstCustomer.custCompany}
-            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userNameLike} OR
-            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl
+            <where>
+                AND su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id`
+                <if test="cstCustomer.custCompany!='%11111%'">
+                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
+                </if>
+                <if test="chLinkman.linkName!='%11111%'">
+                    AND cl.`link_name` LIKE #{chLinkman.linkName}
+                </if>
+                <if test="chLinkman.linkPhone!='%11111%'">
+                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
+                </if>
+                <if test="chLinkman.linkLandlinePhone!='%11111%'">
+                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
+                </if>
+                <if test="userNameLike!='%11111%'">
+                    AND su.`user_name` LIKE #{userNameLike}
+                </if>
+                <if test="chLinkman.linkEmail!='%11111%'">
+                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
+                </if>
+                <if test="startTimeStr!='1880-01-01 00:00:00'">
+                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+                <if test="startTimeStr=='1880-01-01 00:00:00'">
+                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+
+            </where>
         </if>
         <if test="roleName=='销售员'">
-            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage} AND  (cc.`cust_company` LIKE #{cstCustomer.custCompany}
-            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userNameLike} OR
-            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl
+            <where>
+                AND su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage}
+                <if test="cstCustomer.custCompany!='%11111%'">
+                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
+                </if>
+                <if test="chLinkman.linkName!='%11111%'">
+                    AND cl.`link_name` LIKE #{chLinkman.linkName}
+                </if>
+                <if test="chLinkman.linkPhone!='%11111%'">
+                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
+                </if>
+                <if test="chLinkman.linkLandlinePhone!='%11111%'">
+                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
+                </if>
+                <if test="userNameLike!='%11111%'">
+                    AND su.`user_name` LIKE #{userNameLike}
+                </if>
+                <if test="chLinkman.linkEmail!='%11111%'">
+                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
+                </if>
+                <if test="startTimeStr!='1880-01-01 00:00:00'">
+                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+                <if test="startTimeStr=='1880-01-01 00:00:00'">
+                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
+                </if>
+
+            </where>
         </if>
 
     </select>
