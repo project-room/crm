@@ -70,6 +70,10 @@
             update cst_customer set user_id=#{userId} where cust_id=#{custId}
         </update>-->
 
+        <select id="getCstLowCust" parameterType="Long" resultMap="BaseResultMap">
+            SELECT cust_company  FROM  cst_customer WHERE cust_id=(select cust_low_id from cst_low_customer  where high_id=(select cust_id from cst_chance where ch_id=#{chId}))
+        </select>
+
        <!--添加机会时完善客户资料-->
         <update id="updateCustomer" parameterType="CstCustomer">
             update cst_customer set cust_email=#{custEmail},cust_provinceChar=#{custprovinceChar},cust_address=#{custAddress},cust_industry=#{custIndustry},cust_pic=#{custPic},cust_sales=#{custSales},cust_classify=#{custClassify},cust_content=#{custContent},cust_lifecycle=#{custLifecycle},cust_website=#{custWebsite},cust_type=#{custType},cust_CustomerNature=#{custCustomerNature},cust_CustomerBudget=#{custCustomerBudget} WHERE

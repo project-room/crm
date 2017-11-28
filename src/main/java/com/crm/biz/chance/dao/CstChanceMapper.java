@@ -66,4 +66,5 @@ public interface CstChanceMapper {
 
     //机会转交的条件查询
     List<CstChance> getfilterChance(@Param("chance") CstChance chance,@Param("begindate") String begindate,@Param("finishdate") String finishdate, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
+
 }

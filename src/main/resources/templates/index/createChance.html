@@ -108,7 +108,13 @@
 								</label>
 							</li>
 
-							<li><label><input type="text" name="highId" placeholder="上级客户" /><img src="" /></label></li>
+							<li><label>
+								<!--<input type="text" name="highId" placeholder="上级客户" />-->
+								<select name="highId">
+									<option value="" selected="selected">上级客户</option>
+									<option th:each="cstCustomer:${cstCustomerList}" th:value="${cstCustomer.custId}"><p th:text="${cstCustomer.custCompany}"></p></option>
+								</select>
+							</label></li>
 							<li>
 								<label>
 								 <select name="custLifecycle">

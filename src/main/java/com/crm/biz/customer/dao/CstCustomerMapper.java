@@ -73,4 +73,7 @@ public interface CstCustomerMapper{
 
     //更改客户用户id
     void updateCstCustomerSysUserProperties(@Param("custIdLong") Long custIdLong,@Param("userIdLong") Long userIdLong,@Param("flagDistri") Integer flagDistri);
+
+    //机会ID查询客户的下级客户
+    CstCustomer getCstLowCust(Long chId);
 }

@@ -84,6 +84,10 @@
     r.ch_id=#{chId} and c.ch_id=r.ch_id and c.user_id=y.user_id ORDER BY re_date DESC
   </select>
 
+  <select id="getRecordCount" parameterType="Long" resultType="int">
+    select count(*) from cst_record where ch_id=#{chId}
+  </select>
+
   <!--添加记录-->
    <insert id="addRecord" parameterType="CstRecord">
      INSERT INTO cst_record (re_content,ch_id,re_date)

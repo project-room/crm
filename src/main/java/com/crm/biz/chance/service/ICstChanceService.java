@@ -42,4 +42,6 @@ public interface ICstChanceService {
     public  Page<CstChance> getfilterChance(CstChance chance,String begindate, String finishdate, int currentPage, int pageSize);
 
     public boolean updateChanceTo(Long chId);
+
+    public CstCustomer getCstLowCust(Long chId);
 }
