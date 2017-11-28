@@ -67,7 +67,7 @@ public interface ICstCustomerService {
      * 新建公海客户
      * @param cstCustomer
      */
-    void createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman);
+    Long createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman);
 
     /**
      * 筛选公海客户
@@ -75,7 +75,7 @@ public interface ICstCustomerService {
      * @param chLinkman
      * @return
      */
-    Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, int currentPage, int pageSize );
+    Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, int currentPage, int pageSize,String startTimeStr );
 
     /**
      * 根据模糊客户名来获取count
@@ -103,6 +103,9 @@ public interface ICstCustomerService {
     void updateCstCustomerSysUserProperties(Long custIdLong,Long userIdLong,Integer flagDistri);
 
     //加载销售员列表
-    List<SysUser> bySysUserList(Long roleId,String district);
+    List<SysUser> bySysUserList(Long roleId,String district,int userStatus);
+
+    //首页动态添加客户
+    void addCstCustomerSysDynamic(String userName,Long roleId,int dyClassify,String dyContent,Date date,Long custId,String custCompany);
 
 }

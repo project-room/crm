@@ -19,4 +19,7 @@ public interface ISysDynamicService {
     //修改任务中的状态，当状态为未完成时修改为已完成，状态为已完成时修改成未完成
     void updateTask(Long taskId,Integer taskStatus);
 
+    //查询所有动态信息
+    List<SysDynamic> selectDynamicAll(Long roleId);
+
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 public class SysDynamic {
     private Long dyId;       //动态id
 
+    private Long roleId;      //角色id
+
     private Long userId;       //用户id
 
     private String userName;     //用户名称
@@ -17,6 +19,13 @@ public class SysDynamic {
     private Integer dyClassify;       //分类
 
     private Long dyClassifyId;          //分类详细id
+
+    private Long custId;   //客户id
+
+    private String custCompany; //客户名称
+
+    //时期为字符串格式
+    private String revertDate;
 
 
     public Long getDyId() {
@@ -73,5 +82,37 @@ public class SysDynamic {
 
     public void setDyClassifyId(Long dyClassifyId) {
         this.dyClassifyId = dyClassifyId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public Long getCustId() {
+        return custId;
+    }
+
+    public void setCustId(Long custId) {
+        this.custId = custId;
+    }
+
+    public String getCustCompany() {
+        return custCompany;
+    }
+
+    public void setCustCompany(String custCompany) {
+        this.custCompany = custCompany;
+    }
+
+    public String getRevertDate() {
+        return revertDate;
+    }
+
+    public void setRevertDate(String revertDate) {
+        this.revertDate = revertDate;
     }
 }

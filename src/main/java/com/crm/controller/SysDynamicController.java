@@ -4,6 +4,7 @@ import com.crm.biz.customer.dao.CstScheduleMapper;
 import com.crm.biz.dynamic.dao.SysDynamicMapper;
 import com.crm.biz.dynamic.service.ISysDynamicService;
 import com.crm.common.BaseController;
+import com.crm.entity.CstCustomer;
 import com.crm.entity.CstSchedule;
 import com.crm.entity.SysDynamic;
 import com.crm.entity.UserTask;
@@ -37,6 +38,7 @@ public class SysDynamicController extends BaseController {
         Map map= TypeUtil.successMap();
         try {
             List<SysDynamic> sysDynamicList = iSysDynamicService.selectDynamicListByUserId((long)userId,lastId,classify);
+
             map.put("sysDynamic",sysDynamicList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +48,7 @@ public class SysDynamicController extends BaseController {
         return map;
 }
 
-    //根据用户Id查询当前日期任务表也要根据状态将不是当前日期的给查出来
+    //根据用户Id查询当前日期任务表也要根据状态将不是当前日期的给查出来，添加客户动态
     @RequestMapping("/getTaskListByUserId")
     public String selectTaskByUserId(Model model){
         Map map= TypeUtil.successMap();
@@ -66,6 +68,30 @@ public class SysDynamicController extends BaseController {
 //        String s = formatter.format(sysDynamicList.get(0).getTaskDate());
 //        System.out.println("日期:" + s);
          /*  map.put("sysDynamic",sysDynamicList);*/
+
+         //查询添加客户动态
+            String roleName=(String)session.getAttribute("roleName");
+            Long roleId=null;
+            if(roleName.equals("管理员")){
+                roleId=1L;
+            }
+            if(roleName.equals("销售经理")){
+                roleId=2L;
+            }
+            if(roleName.equals("销售员")){
+                roleId=3L;
+            }
+          List<SysDynamic> sysDynamicAll= iSysDynamicService.selectDynamicAll(roleId);
+            //设置创建时间格式
+            for (SysDynamic sysDynamic:sysDynamicAll
+                    ) {
+                Date formation= sysDynamic.getDyDate();
+                String afterDate= new  SimpleDateFormat("yyyy-MM-dd hh：mm").format(formation).toString();
+                sysDynamic.setRevertDate(afterDate);
+            }
+             model.addAttribute("sysDynamicAll",sysDynamicAll);
+            model.addAttribute("roleName",roleName);
+
          } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");

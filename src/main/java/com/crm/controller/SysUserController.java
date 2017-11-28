@@ -61,7 +61,7 @@ public class SysUserController extends BaseController {
 
     //用户登录
     @RequestMapping("/userLogin")
-    public String login(String username,String password ,HttpServletResponse response,Model model){
+    public String login(String username,String password ,HttpServletResponse response){
          Map map= result();
          SysUser sysUser=sysUserService.login(username,password);
          //如果用户为停用状态不能登录
@@ -72,9 +72,8 @@ public class SysUserController extends BaseController {
              SysRole sysRole=sysUserService.selectRoleById(roleId);
              session.setAttribute("roleName",sysRole.getRoleName());
              session.setAttribute("userId",sysUser.getUserId());
-             model.addAttribute("roleName",sysRole.getRoleName());
              //用户状态如何为停用状态不能登录成功
-             return "index/index";
+             return "redirect:"+"/getTaskListByUserId";
          }
         return "index/login";
     }
@@ -438,14 +437,15 @@ public class SysUserController extends BaseController {
         List<SysUser> sysUsers= sysUserService.loadSalesManager(roleId);
         //加载用户列表
         Long salesRoleId = 3L;
+        int userStatus=1;
         String districtA = "A区";
         String districtB="B区";
         String districtC = "C区";
         String districtD="D区";
-        List<SysUser> sysUsersA = sysUserService .bySysUserList(salesRoleId, districtA);
-        List<SysUser> sysUsersB = sysUserService.bySysUserList(salesRoleId, districtB);
-        List<SysUser> sysUsersC = sysUserService.bySysUserList(salesRoleId, districtC);
-        List<SysUser> sysUsersD = sysUserService.bySysUserList(salesRoleId, districtD);
+        List<SysUser> sysUsersA = sysUserService .bySysUserList(salesRoleId, districtA,userStatus);
+        List<SysUser> sysUsersB = sysUserService.bySysUserList(salesRoleId, districtB,userStatus);
+        List<SysUser> sysUsersC = sysUserService.bySysUserList(salesRoleId, districtC,userStatus);
+        List<SysUser> sysUsersD = sysUserService.bySysUserList(salesRoleId, districtD,userStatus);
         model.addAttribute("sysUsers",sysUsers);
         model.addAttribute("sysUsersA",sysUsersA);
         model.addAttribute("sysUsersB",sysUsersB);

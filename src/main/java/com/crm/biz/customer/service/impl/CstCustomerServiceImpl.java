@@ -5,6 +5,7 @@ import com.crm.biz.customer.dao.CstCustomerMapper;
 import com.crm.biz.customer.dao.CstLabelMapper;
 import com.crm.biz.customer.dao.CstLowCustomerMapper;
 import com.crm.biz.customer.service.ICstCustomerService;
+import com.crm.biz.dynamic.dao.SysDynamicMapper;
 import com.crm.biz.sys.dao.SysUserMapper;
 import com.crm.common.Page;
 import com.crm.dto.DataConditionDto;
@@ -31,6 +32,8 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     private CstLowCustomerMapper cstLowCustomerMapper;
     @Autowired
     private CstLabelMapper cstLabelMapper;
+    @Autowired
+    private SysDynamicMapper sysDynamicMapper;
     @Override
     public void cliamCstCustomer(CstCustomer cstCustomer, ChLinkman chLinkman) {
 
@@ -48,13 +51,13 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         Long  count=cstCustomerMapper.getCstCustomerCount(userIdForPage,roleName);
 
 
-       int currentPageLimit=(currentPage-1)*pageSize;
-       List<CstCustomer> cstCustomers= cstCustomerMapper.getPageCstCustomerInfo(userIdForPage,roleName,currentPageLimit,pageSize);
-     //通过用户id获取用户名
+        int currentPageLimit=(currentPage-1)*pageSize;
+        List<CstCustomer> cstCustomers= cstCustomerMapper.getPageCstCustomerInfo(userIdForPage,roleName,currentPageLimit,pageSize);
+        //通过用户id获取用户名
         for (CstCustomer cstCustomer:cstCustomers
-             ) {
+                ) {
             Long userId=cstCustomer.getUserId();
-           SysUser sysUser= sysUserMapper.findById(userId);
+            SysUser sysUser= sysUserMapper.findById(userId);
             String userName=sysUser.getUserName();
             cstCustomer.setRevertUserNameFromId(userName);
         }
@@ -63,7 +66,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
 
     @Override
     public CstCustomer lookCstCustomerInfo(Long cstCustomerId) {
-     CstCustomer reCstCustomer=  cstCustomerMapper.selectCstCustomerInfo(cstCustomerId);
+        CstCustomer reCstCustomer=  cstCustomerMapper.selectCstCustomerInfo(cstCustomerId);
         return reCstCustomer;
     }
 
@@ -107,14 +110,14 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         //添加下级客户
 //        cstLowCustomer.setHighCustId(cstCustId);
         for (CstLowCustomer cstLowCustomer:cstLowCustomers
-             ) {
+                ) {
             cstLowCustomerMapper.saveCstLowCustomerInfo(cstLowCustomer);
         }
 
 
         //添加标签
         for (CstLabel cstLabel:cstLabels
-             ) {
+                ) {
             cstLabelMapper.saveCstLabel(cstLabel,userId);
             //获取标签id
             int labelId=cstLabel.getLabelId();
@@ -133,12 +136,12 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      * @param chLinkman
      */
     @Override
-    public void createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman) {
+    public Long createCstCustomer(CstCustomer cstCustomer,ChLinkman chLinkman) {
         cstCustomerMapper.saveCstCustomer(cstCustomer);
         Long custId=cstCustomer.getCustId();
         chLinkman.setCustId(custId);
         chLinkmanMapper.saveChLinkman(chLinkman);
-
+        return custId;
     }
 
     /**
@@ -150,7 +153,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      * @return
      */
     @Override
-    public Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, int currentPage, int pageSize) {
+    public Page<CstCustomer> selectCstCustomerByCondition(Long userIdForPage,String roleName,String userName,Date startTimeDate, Date endTimeDate, CstCustomer cstCustomer, ChLinkman chLinkman, int currentPage, int pageSize,String startTimeStr) {
         String userNameLike="%"+userName+"%";
         int currentPageLimit=(currentPage-1)*pageSize;
         List<CstCustomer> cstCustomers=new ArrayList<CstCustomer>();
@@ -160,7 +163,7 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
         chLinkman.setLinkLandlinePhone("%"+chLinkman.getLinkLandlinePhone()+"%");
 //        chLinkman.setLinkQq("%"+chLinkman.getLinkQq()+"%");
         chLinkman.setLinkEmail("%"+chLinkman.getLinkEmail()+"%");
-        cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPageLimit,pageSize);
+        cstCustomers= cstCustomerMapper.selectCstCustomerByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman,currentPageLimit,pageSize,startTimeStr);
         //通过用户id获取用户名
         for (CstCustomer cstCustomerFor:cstCustomers
                 ) {
@@ -169,8 +172,8 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
             String userNameFor=sysUser.getUserName();
             cstCustomerFor.setRevertUserNameFromId(userNameFor);
         }
-        Long count=cstCustomerMapper.getCountByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman);
-       return new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
+        Long count=cstCustomerMapper.getCountByCondition(userIdForPage,roleName,userNameLike,startTimeDate,endTimeDate,cstCustomer,chLinkman,startTimeStr);
+        return new Page<CstCustomer>(currentPage,pageSize,cstCustomers,count);
     }
 
     /**
@@ -180,8 +183,8 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
      */
     @Override
     public Long selectCountByCstCustomerName(Long userIdForPage,String roleName,String custCompany) {
-       String  custCompanyStr="%"+custCompany+"%";
-       Long count= cstCustomerMapper.selectCountByCstCustomerName(userIdForPage, roleName,custCompanyStr);
+        String  custCompanyStr="%"+custCompany+"%";
+        Long count= cstCustomerMapper.selectCountByCstCustomerName(userIdForPage, roleName,custCompanyStr);
         return count;
     }
 
@@ -227,8 +230,13 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     }
 
     @Override
-    public List<SysUser> bySysUserList(Long roleId,String district) {
-        return sysUserMapper.bySysUserList(roleId,district);
+    public List<SysUser> bySysUserList(Long roleId,String district,int userStatus) {
+        return sysUserMapper.bySysUserList(roleId,district,userStatus);
+    }
+
+    @Override
+    public void addCstCustomerSysDynamic(String userName, Long roleId, int dyClassify, String dyContent,Date date,Long custId,String custCompany) {
+        sysDynamicMapper.addSysDynamic(userName,roleId,dyClassify,dyContent,date,custId,custCompany);
     }
 
 

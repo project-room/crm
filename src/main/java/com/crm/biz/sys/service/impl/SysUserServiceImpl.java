@@ -121,8 +121,8 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public List<SysUser> bySysUserList(Long roleId, String district) {
-        return sysUserMapper.bySysUserList(roleId,district);
+    public List<SysUser> bySysUserList(Long roleId, String district,int userStatus) {
+        return sysUserMapper.bySysUserList(roleId,district,userStatus);
     }
 
     @Override

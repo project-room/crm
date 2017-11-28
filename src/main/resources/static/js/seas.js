@@ -66,26 +66,26 @@ $(function() {
         if(minute==""||minute==null){
             minute="00:00:00 - 00:00:00";
         }
-        if(userName==""||userName==null){
-            userName="1111111111111111";
-        }
+        // if(userName==""||userName==null){
+        //     userName="11111";
+        // }
         if(custCompany==null||custCompany==""){
-            custCompany="1111111111111111";
+            custCompany="11111";
         }
         if(linkName==null||linkName==""){
-            linkName="1111111111111111";
+            linkName="11111";
         }
         if(linkPhone==null||linkPhone==""){
-            linkPhone="1111111111111111";
+            linkPhone="11111";
         }
         if(linkLandlinePhone==null||linkLandlinePhone==""){
-            linkLandlinePhone="1111111111111111";
+            linkLandlinePhone="11111";
         }
         if (userName==null||userName==""){
-            userName="1111111111111111";
+            userName="11111";
         }
         if (linkEmail==null||linkEmail==""){
-            linkEmail="1111111111111111";
+            linkEmail="11111";
         }
 
         location.href="/crm/cstCustomer/selectCstCustomersByCondition/"+custCompany+"/"+linkName+"/"+linkPhone+"/"+linkLandlinePhone+"/"+userName+"/"+linkEmail+"/"+year+"/"+minute+"/"+currentPageFor+"/7"
@@ -198,7 +198,7 @@ function forDealing() {
             type:"POST",
             data:{"userId":userId,"custIdStr":custIdStr},
             success:function (data) {
-
+                location.href="/crm/cstCustomer/getPage/1/7"
             }
         });
 

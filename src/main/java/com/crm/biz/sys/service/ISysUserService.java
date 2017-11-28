@@ -47,7 +47,7 @@ public interface ISysUserService {
    List<SysUser> loadSalesManager(Long roleId);
 
    //加载销售员列表
-   List<SysUser> bySysUserList(Long roleId,String district);
+   List<SysUser> bySysUserList(Long roleId,String district,int userStatus);
 
    //修改个人资料
    void updatePersonDataById(SysUser sysUser);

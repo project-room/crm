@@ -20,10 +20,10 @@ import java.util.List;
 public interface CstCustomerMapper{
 
     //此方法是机会新建查询客户
-     List<CstCustomer>  getCstCustomer(Long id);
+    List<CstCustomer>  getCstCustomer(Long id);
 
-     //添加机会时完善客户资料
-     int updateCustomer(CstCustomer cstCustomer);
+    //添加机会时完善客户资料
+    int updateCustomer(CstCustomer cstCustomer);
 
     //根据机会对象里的客户id修改客户表里的用户id
     /*int updateCstCustomer(CstChance cstChance);*/
@@ -60,10 +60,10 @@ public interface CstCustomerMapper{
 
 
     //根据条件筛选客户
-    List<CstCustomer>  selectCstCustomerByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userName") String userName, @Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate, @Param("cstCustomer") CstCustomer cstCustomer, @Param("chLinkman") ChLinkman chLinkman, @Param("currentPage") int currentPage, @Param("pageSize") int pageSize);
+    List<CstCustomer>  selectCstCustomerByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userName") String userName, @Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate, @Param("cstCustomer") CstCustomer cstCustomer, @Param("chLinkman") ChLinkman chLinkman, @Param("currentPage") int currentPage, @Param("pageSize") int pageSize,@Param("startTimeStr") String startTimeStr);
 
     //筛选客户
-    Long getCountByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userNameLike") String userNameLike,@Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate,@Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman);
+    Long getCountByCondition(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("userNameLike") String userNameLike,@Param("startTimeDate") Date startTimeDate,@Param("endTimeDate") Date endTimeDate,@Param("cstCustomer") CstCustomer cstCustomer,@Param("chLinkman") ChLinkman chLinkman,@Param("startTimeStr") String startTimeStr);
 
     //根据模糊客户名来获取count
     Long selectCountByCstCustomerName(@Param("userIdForPage") Long userIdForPage,@Param("roleName") String roleName,@Param("custCompany") String custCompany);

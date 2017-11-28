@@ -3,12 +3,15 @@
 <mapper namespace="com.crm.biz.dynamic.dao.SysDynamicMapper" >
   <resultMap id="BaseDynamicResultMap" type="com.crm.entity.SysDynamic" >
     <id column="dy_id" property="dyId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="dy_content" property="dyContent" jdbcType="VARCHAR" />
     <result column="dy_date" property="dyDate" jdbcType="TIMESTAMP" />
     <result column="dy_classify" property="dyClassify" jdbcType="INTEGER" />
     <result column="dy_classify_id" property="dyClassifyId" jdbcType="BIGINT" />
+    <result column="cust_id" property="custId" jdbcType="BIGINT" />
+    <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="BaseUserTaskResultMap" type="com.crm.entity.UserTask" >
     <id column="task_id" property="taskId" jdbcType="BIGINT" />
@@ -48,9 +51,9 @@
   <select id="findById" parameterType="Long" resultMap="BaseDynamicResultMap">
     SELECT * FROM sys_dynamic WHERE dy_id=#{id}
   </select>
-  <insert id="addSysDynamic" parameterType="SysDynamic">
-    INSERT INTO sys_dynamic (user_id,user_name,dy_content,dy_date,dy_classify,dy_classify_id)
-    VALUES (#{userId},#{userName},#{dyContent},#{dyDate},#{dyClassify},#{dyClassifyId})
+  <insert id="addSysDynamic" parameterType="map">
+    INSERT INTO sys_dynamic (role_id,user_name,dy_content,dy_date,dy_classify,cust_id,cust_company)
+    VALUES (#{roleId},#{userName},#{dyContent},#{dyDate},#{dyClassify},#{custId},#{custCompany})
   </insert>
   <delete id="deleteById" parameterType="Long">
     DELETE FROM sys_dynamic WHERE dy_id=#{id}
@@ -120,4 +123,13 @@ WHERE
     VALUES (#{taskStatus},#{taskContent},#{taskDate},#{userId})
   </insert>
 
+  <!--查询所有的动态信息-->
+  <select id="selectDynamicAll" parameterType="Long" resultMap="BaseDynamicResultMap">
+      <if test="roleId==1||roleId==2">
+         SELECT * FROM sys_dynamic  ORDER BY dy_date DESC
+      </if>
+      <if test="roleId==3">
+        SELECT * FROM sys_dynamic WHERE role_id=#{roleId} ORDER BY dy_date DESC
+      </if>
+  </select>
 </mapper>

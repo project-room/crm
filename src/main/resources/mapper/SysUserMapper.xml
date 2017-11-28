@@ -160,7 +160,7 @@ SELECT * FROM sys_user su,sys_role sr WHERE su.`role_id`=sr.`role_id` HAVING use
 
   <!--加载销售员列表-->
   <select id="bySysUserList" parameterType="map" resultMap="BaseResultMap">
-    SELECT * FROM sys_user WHERE user_district=#{district} AND role_id=#{roleId}
+    SELECT * FROM sys_user WHERE user_district=#{district} AND user_status=#{userStatus} AND role_id=#{roleId}
   </select>
 
   <!--加载销售经理列表-->

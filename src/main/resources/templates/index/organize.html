@@ -108,7 +108,7 @@
             </div>
             <ul>
                 <li>
-                    <a href="/crm/cstCustomer/toIndex">
+                    <a th:href="@{/getTaskListByUserId}">
                         <img alt="首页" th:src="@{/img/index.png}"/>
                         <span class="navTxt">
                             首页
@@ -324,9 +324,9 @@
                                         <p><span>+</span><img th:src="@{/img/Oquyu.png}" alt=""/>A区</p>
                                         <ul class="quyujingli">
                                             <li>
-                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>区域经理&nbsp;李四<a href="#">编辑</a></p>
+                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>销售员</p>
                                                 <ul class="zhuli">
-                                                    <li th:each="sysUserA:${sysUsersA}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="@{'销售助理&nbsp;'+${sysUserA.userName}}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserA.userId}}">编辑</a></li>
+                                                    <li th:each="sysUserA:${sysUsersA}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="${sysUserA.userName}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserA.userId}}">编辑</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -335,9 +335,9 @@
                                         <p><span>+</span><img th:src="@{/img/Oquyu.png}" alt=""/>B区</p>
                                         <ul class="quyujingli">
                                             <li>
-                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>区域经理&nbsp;李四<a >编辑</a></p>
+                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>销售员</p>
                                                 <ul class="zhuli">
-                                                    <li th:each="sysUserB:${sysUsersB}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="@{'销售助理&nbsp;'+${sysUserB.userName}}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserB.userId}}">编辑</a></li>
+                                                    <li th:each="sysUserB:${sysUsersB}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="${sysUserB.userName}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserB.userId}}">编辑</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -346,9 +346,9 @@
                                         <p><span>+</span><img th:src="@{/img/Oquyu.png}" alt=""/>C区</p>
                                         <ul class="quyujingli">
                                             <li>
-                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>区域经理&nbsp;李四<a >编辑</a></p>
+                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>销售员</p>
                                                 <ul class="zhuli">
-                                                    <li th:each="sysUserC:${sysUsersC}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="@{'销售助理&nbsp;'+${sysUserC.userName}}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserC.userId}}">编辑</a></li>
+                                                    <li th:each="sysUserC:${sysUsersC}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="{sysUserC.userName}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserC.userId}}">编辑</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -357,9 +357,9 @@
                                         <p><span>+</span><img th:src="@{/img/Oquyu.png}" alt=""/>D区</p>
                                         <ul class="quyujingli">
                                             <li>
-                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>区域经理&nbsp;李四<a >编辑</a></p>
+                                                <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>销售员</p>
                                                 <ul class="zhuli">
-                                                    <li th:each="sysUserD:${sysUsersD}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="@{'销售助理&nbsp;'+${sysUserD.userName}}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserD.userId}}">编辑</a></li>
+                                                    <li th:each="sysUserD:${sysUsersD}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="${sysUserD.userName}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserD.userId}}">编辑</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

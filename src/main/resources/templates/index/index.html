@@ -65,44 +65,14 @@
 				</div>
 				<div class="dynamicContent">
 					<ul>
-						<li>
+						<li th:each="sysDynamic:${sysDynamicAll}">
 							<div>
 								<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
 								<div class="msg">
-									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-									<p class="addWhat grey">添加了机会：<a href="" class="description">广州润普网络科技有限公司：文档管理</a></p>
+									<p class="employee"><i  th:text="${sysDynamic.userName}"></i><span class="career" th:text="${sysDynamic.roleId eq 1? '（管理员）':(sysDynamic.roleId eq 2 ? '（销售经理）':'（销售人员）')}"></span></p>
+									<p class="addWhat grey"><i th:text="${sysDynamic.dyClassify eq 7?'添加了客户：':'添加了机会：'}"></i><a href="" class="description" th:text="${sysDynamic.custCompany}"></a></p>
 								</div>
-								<span class="addTime">08/23 16:30</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
-								<div class="msg">
-									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-									<p class="addWhat grey">添加了合同：<a href="" class="description">201708220001</a></p>
-								</div>
-								<span class="addTime">08/23 16:30</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="icon"><img th:src="@{/img/financialIcon.png}" alt="" /></span>
-								<div class="msg">
-									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-									<p class="addWhat grey">添加了合同：<a href="" class="description">201708220001</a></p>
-								</div>
-								<span class="addTime">08/23 16:30</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="icon"><img th:src="@{/img/contractIcon.png}" alt="" /></span>
-								<div class="msg">
-									<p class="employee">聂宇豪<span class="career">（销售人员）</span></p>
-									<p class="addWhat grey">添加了合同：<a href="" class="description">201708220001</a></p>
-								</div>
-								<span class="addTime">08/23 16:30</span>
+								<span class="addTime" th:text="${sysDynamic.revertDate}"></span>
 							</div>
 						</li>
 					</ul>
