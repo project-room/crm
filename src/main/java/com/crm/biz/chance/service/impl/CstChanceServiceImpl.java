@@ -166,6 +166,13 @@ public class CstChanceServiceImpl implements ICstChanceService {
         return false;
     }
 
+    //根据机会Id查询客户对应的下级客户
+    @Override
+    public CstCustomer getCstLowCust(Long chId) {
+
+        return cstCustomerMapper.getCstLowCust(chId);
+    }
+
 
     //查询用户表的其他用户
     @Override

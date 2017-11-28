@@ -55,6 +55,13 @@ public class CstRecordServiceImpl implements ICstRecordService{
         return false;
     }
 
+    //查询一天机会的总记录条数
+    @Override
+    public int getRecordCount(Long chId) {
+
+        return cstRecordMapper.getRecordCount(chId);
+    }
+
     //修改一条记录方法
     @Override
     public boolean updateCstRecord(CstRecord Record) {

@@ -84,7 +84,7 @@ public class CstChanceController extends BaseController {
                 model.addAttribute("arrList", arrList);
                 model.addAttribute("cstChancePage", cstChancePage);
                 model.addAttribute("SysUserlist",SysUserlist);
-            } else {
+            }   else {
                 map.put("-1", "查询失败");
             }
         } catch (Exception e) {
@@ -96,9 +96,11 @@ public class CstChanceController extends BaseController {
 
     //机会添加方法
     @RequestMapping("/addCstChance")
-    public String addCstChance(CstChance cstChance, CstCustomer cstCustomer, ChLinkman chLinkman, CstLowCustomer cstLowCustomer, Long linkIdTo, String linkDepartmentTo, String linkPositionTo) {
+    public String addCstChance(CstChance cstChance, CstCustomer cstCustomer, ChLinkman chLinkman,CstLowCustomer cstLowCustomer, Long linkIdTo, String linkDepartmentTo, String linkPositionTo) {
         Map map = result();
         Long userIdLong=(Long) session.getAttribute("userId");
+        cstLowCustomer.setCustLowId(cstCustomer.getCustId());
+        System.out.println(cstLowCustomer.getCustLowCompany()+"下级客户");
         cstChance.setUserId(userIdLong);
         Date date = new Date();
         date.getTime();
@@ -124,9 +126,11 @@ public class CstChanceController extends BaseController {
         //测试数据
         try {
              List<CstChance> cstChanceList = iCstChance.getCstChanceId(chId);
+             CstCustomer cstCustomer=iCstChance.getCstLowCust(chId);
             if (cstChanceList != null ) {
                 /* map.put("RecordList",RecordList);*/
                 model.addAttribute("cstChanceList", cstChanceList);
+                model.addAttribute("cstCustomer",cstCustomer);
             } else {
                 map.put("-1", "查询失败，对象为空");
             }

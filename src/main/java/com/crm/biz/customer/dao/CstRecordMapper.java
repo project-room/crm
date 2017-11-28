@@ -36,4 +36,6 @@ public interface CstRecordMapper {
     //修改一条记录
     int updateCstRecord(CstRecord Record);
 
+    int getRecordCount(Long chId);
+
 }

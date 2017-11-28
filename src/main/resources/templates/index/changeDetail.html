@@ -106,7 +106,7 @@
                 </tr>
                 <tr>
                     <td>下级客户</td>
-                    <td><input type="text" th:value="广州润普网络科技" disabled="disabled"/></td>
+                    <td><input type="text" th:value="${cstCustomer ne null ? cstCustomer.custCompany:null}" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td>生命周期</td>
@@ -177,11 +177,11 @@
                     </tr>
                     <tr>
                         <td>手机</td>
-                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkPhone:null}" disabled="disabled"/></td>
+                        <td><input type="text" th:value="${ cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkPhone:null}" disabled="disabled"/></td>
                     </tr>
                     <tr>
                         <td>固话</td>
-                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkLandlinePhone:null}" disabled="disabled"/></td>
+                        <td><input type="text" th:value="${ cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkLandlinePhone:null}" disabled="disabled"/></td>
                     </tr>
                     <tr>
                         <td>邮箱</td>

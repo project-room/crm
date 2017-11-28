@@ -114,10 +114,4 @@ public class SysDynamicController extends BaseController {
         }
         return map;
     }
-
-
-
-
-
-
 }

@@ -20,4 +20,6 @@ public interface ICstRecordService {
 
     public boolean deleteCstRecordChId(Long chId);
 
+    public int getRecordCount(Long chId);
+
 }

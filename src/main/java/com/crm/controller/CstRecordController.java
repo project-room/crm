@@ -64,6 +64,8 @@ public class CstRecordController extends BaseController{
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
             List<CstRecord> RecordList = iCstRecordService.getCstRecord(id);
+            int count=iCstRecordService.getRecordCount(id);
+            System.out.println(count+"记录总条数");
                 map.put("RecordList",RecordList);
                 JSONObject object=JSONObject.fromObject(map);
                 PrintWriter out= response.getWriter();

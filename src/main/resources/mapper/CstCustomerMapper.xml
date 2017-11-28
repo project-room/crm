@@ -1,77 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crm.biz.customer.dao.CstCustomerMapper" >
-    <resultMap id="BaseResultMap" type="com.crm.entity.CstCustomer" >
-        <id column="cust_id" property="custId" jdbcType="BIGINT" />
-        <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
-        <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
-        <result column="cust_provinceChar" property="custprovinceChar" jdbcType="VARCHAR"/>
-        <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
-        <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
-        <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
-        <result column="cust_sales" property="custSales" jdbcType="VARCHAR" />
-        <result column="user_id" property="userId" jdbcType="BIGINT" />
-        <result column="cust_classify" property="custClassify" jdbcType="INTEGER" />
-        <!--null未分配，0已分配-->
-        <result column="flag_distri" property="flagDistri" jdbcType="INTEGER" />
-        <result column="cust_content" property="custContent" jdbcType="VARCHAR" />
-        <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
-        <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
-        <result column="cust_type" property="custType" jdbcType="VARCHAR" />
-        <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
-        <result column="cust_CustomerNature" property="custCustomerNature" jdbcType="VARCHAR"/>
-        <result column="cust_CustomerBudget" property="custCustomerBudget" jdbcType="VARCHAR"/>
-        <!--客户表和标签表之间的关联-->
-        <collection property="labelList" ofType="com.crm.entity.CstLabel">
-            <id column="label_id" property="labelId" jdbcType="INTEGER" />
-            <result column="label_name" property="labelName" jdbcType="VARCHAR" />
-            <result column="user_id" property="userId" jdbcType="BIGINT" />
-        </collection>
-        <!--客户表与下级客户表之间的关联-->
-        <collection property="lowCustomerList" ofType="com.crm.entity.CstLowCustomer">
-            <id column="low_id" property="lowId" jdbcType="BIGINT" />
-            <result column="high_id" property="highId" jdbcType="BIGINT" />
-            <result column="cust_low_company" property="custLowCompany" jdbcType="VARCHAR" />
-            <result column="cust_low_id" property="custLowId" jdbcType="BIGINT" />
-        </collection>
-        <!--客户表和联系人表的关联-->
-        <collection property="linkmanList" ofType="com.crm.entity.ChLinkman">
-            <id column="link_id" property="linkId" jdbcType="BIGINT" />
-            <result column="link_name" property="linkName" jdbcType="VARCHAR" />
-            <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
-            <result column="link_landline_phone" property="linkLandlinePhone" jdbcType="VARCHAR" />
-            <result column="link_email" property="linkEmail" jdbcType="VARCHAR" />
-            <result column="link_qq" property="linkQq" jdbcType="VARCHAR" />
-            <result column="link_wechat" property="linkWechat" jdbcType="VARCHAR" />
-            <result column="link_status" property="linkStatus" jdbcType="INTEGER" />
-            <result column="ch_id" property="chId" jdbcType="BIGINT" />
-            <result column="link_department" property="linkDepartment" jdbcType="VARCHAR" />
-            <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
-            <result column="cust_id" property="custId" jdbcType="BIGINT" />
-        </collection>
-    </resultMap>
-    <!--基础查询、增添、修改、删除SQL-->
-    <select id="findById" parameterType="Long" resultMap="BaseResultMap">
+  <resultMap id="BaseResultMap" type="com.crm.entity.CstCustomer" >
+    <id column="cust_id" property="custId" jdbcType="BIGINT" />
+    <result column="cust_email" property="custEmail" jdbcType="VARCHAR" />
+    <result column="cust_company" property="custCompany" jdbcType="VARCHAR" />
+    <result column="cust_provinceChar" property="custprovinceChar" jdbcType="VARCHAR"/>
+    <result column="cust_address" property="custAddress" jdbcType="VARCHAR" />
+    <result column="cust_industry" property="custIndustry" jdbcType="VARCHAR" />
+    <result column="cust_pic" property="custPic" jdbcType="VARCHAR" />
+    <result column="cust_sales" property="custSales" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="cust_classify" property="custClassify" jdbcType="INTEGER" />
+      <!--null未分配，0已分配-->
+    <result column="flag_distri" property="flagDistri" jdbcType="INTEGER" />
+    <result column="cust_content" property="custContent" jdbcType="VARCHAR" />
+    <result column="cust_lifecycle" property="custLifecycle" jdbcType="VARCHAR" />
+    <result column="cust_website" property="custWebsite" jdbcType="VARCHAR" />
+    <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+    <result column="cust_date" property="custDate" jdbcType="TIMESTAMP" />
+    <result column="cust_CustomerNature" property="custCustomerNature" jdbcType="VARCHAR"/>
+    <result column="cust_CustomerBudget" property="custCustomerBudget" jdbcType="VARCHAR"/>
+      <!--客户表和标签表之间的关联-->
+      <collection property="labelList" ofType="com.crm.entity.CstLabel">
+          <id column="label_id" property="labelId" jdbcType="INTEGER" />
+          <result column="label_name" property="labelName" jdbcType="VARCHAR" />
+          <result column="user_id" property="userId" jdbcType="BIGINT" />
+      </collection>
+      <!--客户表与下级客户表之间的关联-->
+      <collection property="lowCustomerList" ofType="com.crm.entity.CstLowCustomer">
+          <id column="low_id" property="lowId" jdbcType="BIGINT" />
+          <result column="high_id" property="highId" jdbcType="BIGINT" />
+          <result column="cust_low_company" property="custLowCompany" jdbcType="VARCHAR" />
+          <result column="cust_low_id" property="custLowId" jdbcType="BIGINT" />
+      </collection>
+      <!--客户表和联系人表的关联-->
+      <collection property="linkmanList" ofType="com.crm.entity.ChLinkman">
+          <id column="link_id" property="linkId" jdbcType="BIGINT" />
+          <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+          <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+          <result column="link_landline_phone" property="linkLandlinePhone" jdbcType="VARCHAR" />
+          <result column="link_email" property="linkEmail" jdbcType="VARCHAR" />
+          <result column="link_qq" property="linkQq" jdbcType="VARCHAR" />
+          <result column="link_wechat" property="linkWechat" jdbcType="VARCHAR" />
+          <result column="link_status" property="linkStatus" jdbcType="INTEGER" />
+          <result column="ch_id" property="chId" jdbcType="BIGINT" />
+          <result column="link_department" property="linkDepartment" jdbcType="VARCHAR" />
+          <result column="link_position" property="linkPosition" jdbcType="VARCHAR" />
+          <result column="cust_id" property="custId" jdbcType="BIGINT" />
+      </collection>
+  </resultMap>
+<!--基础查询、增添、修改、删除SQL-->
+  <select id="findById" parameterType="Long" resultMap="BaseResultMap">
     SELECT * FROM cst_customer WHERE cust_id=#{id}
   </select>
-    <insert id="addCstCustomer" parameterType="CstCustomer">
+  <insert id="addCstCustomer" parameterType="CstCustomer">
     INSERT INTO cst_customer (cust_name,cust_phone,cust_email,cust_company,cust_address,cust_industry,cust_pic,cust_sales,user_id,`type`)
  VALUES (#{custName},#{custPhone},#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{custSales},#{userId},#{type})
   </insert>
-    <delete id="deleteById" parameterType="Long">
+  <delete id="deleteById" parameterType="Long">
      DELETE FROM cst_customer WHERE cust_id=#{id}
   </delete>
-    <update id="updateCstCustomerById" parameterType="map">
+  <update id="updateCstCustomerById" parameterType="map">
     UPDATE cst_customer SET cust_email=#{cstCustomer.custEmail},cust_company=#{cstCustomer.custCompany},cust_address=#{cstCustomer.custAddress},cust_industry=#{cstCustomer.custIndustry},cust_pic=#{cstCustomer.custPic},cust_sales=#{cstCustomer.custSales},user_id=#{cstCustomer.userId},cust_classify=#{cstCustomer.custClassify},cust_content=#{cstCustomer.custContent},cust_lifecycle=#{cstCustomer.custLifecycle},cust_website=#{cstCustomer.custWebsite},cust_type=#{cstCustomer.custType} WHERE cust_id=#{cstcustId}
   </update>
 
-    <!--  &lt;!&ndash;根据机会对象里的客户id修改客户表的用户id&ndash;&gt;
-       <update id="updateCstCustomer" parameterType="CstChance">
-           update cst_customer set user_id=#{userId} where cust_id=#{custId}
-       </update>-->
+     <!--  &lt;!&ndash;根据机会对象里的客户id修改客户表的用户id&ndash;&gt;
+        <update id="updateCstCustomer" parameterType="CstChance">
+            update cst_customer set user_id=#{userId} where cust_id=#{custId}
+        </update>-->
 
-    <!--添加机会时完善客户资料-->
-    <update id="updateCustomer" parameterType="CstCustomer">
+        <select id="getCstLowCust" parameterType="Long" resultMap="BaseResultMap">
+            SELECT cust_company  FROM  cst_customer WHERE cust_id=(select cust_low_id from cst_low_customer  where high_id=(select cust_id from cst_chance where ch_id=#{chId}))
+        </select>
+
+       <!--添加机会时完善客户资料-->
+        <update id="updateCustomer" parameterType="CstCustomer">
             update cst_customer set cust_email=#{custEmail},cust_provinceChar=#{custprovinceChar},cust_address=#{custAddress},cust_industry=#{custIndustry},cust_pic=#{custPic},cust_sales=#{custSales},cust_classify=#{custClassify},cust_content=#{custContent},cust_lifecycle=#{custLifecycle},cust_website=#{custWebsite},cust_type=#{custType},cust_CustomerNature=#{custCustomerNature},cust_CustomerBudget=#{custCustomerBudget} WHERE
             cust_Id=#{custId}
         </update>
@@ -81,17 +85,17 @@
         cust_Id=#{custId}
     </update>
 
-    <!-- 机会新建前的查询客户-->
-    <select id="getCstCustomer" parameterType="Long" resultMap="BaseResultMap">
+     <!-- 机会新建前的查询客户-->
+     <select id="getCstCustomer" parameterType="Long" resultMap="BaseResultMap">
            SELECT * FROM cst_customer t,ch_linkman l WHERE t.user_id=#{userId} and t.cust_id=l.cust_id
       </select>
-    <!--根据客户id查询客户的关联信息-->
-    <select id="getCstCustomerCustId" parameterType="Long" resultMap="BaseResultMap">
+      <!--根据客户id查询客户的关联信息-->
+       <select id="getCstCustomerCustId" parameterType="Long" resultMap="BaseResultMap">
            select * from cst_customer t,ch_linkman l where t.cust_id=#{custId} and t.cust_id=l.cust_id and l.link_status=0
        </select>
 
-    <!--查询所有公海客户-->
-    <select id="selectAllCstCutomer" resultMap="BaseResultMap">
+  <!--查询所有公海客户-->
+  <select id="selectAllCstCutomer" resultMap="BaseResultMap">
     SELECT * FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.cust_id`
   </select>
 
@@ -113,12 +117,12 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
 
     <!--获取公海客户总记录数-->
     <select id="getCstCustomerCount" parameterType="map" resultType="Long">
-        <if test="roleName=='管理员'||roleName=='销售经理'">
-            SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`
-        </if>
-        <if test="roleName=='销售员'">
-            SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`user_id`=#{userIdForPage}
-        </if>
+            <if test="roleName=='管理员'||roleName=='销售经理'">
+                SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id`
+            </if>
+            <if test="roleName=='销售员'">
+                SELECT COUNT(1) FROM cst_customer cc,ch_linkman ch WHERE cc.`cust_id`=ch.`cust_id` AND cc.`user_id`=#{userIdForPage}
+            </if>
     </select>
 
     <!--根据id查看公海客户信息-->
@@ -150,66 +154,14 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <!--根据条件筛选公海客户-->
     <select id="selectCstCustomerByCondition" parameterType="map" resultMap="BaseResultMap">
         <if test="roleName=='管理员'||roleName=='销售经理'">
-            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl
-            <where>
-                <if test="cstCustomer.custCompany!='%11111%'">
-                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
-                </if>
-                <if test="chLinkman.linkName!='%11111%'">
-                    AND cl.`link_name` LIKE #{chLinkman.linkName}
-                </if>
-                <if test="chLinkman.linkPhone!='%11111%'">
-                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
-                </if>
-                <if test="chLinkman.linkLandlinePhone!='%11111%'">
-                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
-                </if>
-                <if test="userName!='%11111%'">
-                    AND su.`user_name` LIKE #{userName}
-                </if>
-                <if test="chLinkman.linkEmail!='%11111%'">
-                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
-                </if>
-                <if test="startTimeStr!='1880-01-01 00:00:00'">
-                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-                <if test="startTimeStr=='1880-01-01 00:00:00'">
-                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-                having su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id`
-                LIMIT #{currentPage},#{pageSize}
-            </where>
+            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` HAVING cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userName} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate} LIMIT #{currentPage},#{pageSize}
         </if>
         <if test="roleName=='销售员'">
-            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl
-            <where>
-                <if test="cstCustomer.custCompany!='%11111%'">
-                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
-                </if>
-                <if test="chLinkman.linkName!='%11111%'">
-                    AND cl.`link_name` LIKE #{chLinkman.linkName}
-                </if>
-                <if test="chLinkman.linkPhone!='%11111%'">
-                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
-                </if>
-                <if test="chLinkman.linkLandlinePhone!='%11111%'">
-                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
-                </if>
-                <if test="userName!='%11111%'">
-                    AND su.`user_name` LIKE #{userName}
-                </if>
-                <if test="chLinkman.linkEmail!='%11111%'">
-                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
-                </if>
-                <if test="startTimeStr!='1880-01-01 00:00:00'">
-                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-                <if test="startTimeStr=='1880-01-01 00:00:00'">
-                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-                having su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage}
-                LIMIT #{currentPage},#{pageSize}
-            </where>
+            SELECT * FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage} HAVING cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userName} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate} LIMIT #{currentPage},#{pageSize}
         </if>
 
     </select>
@@ -217,66 +169,14 @@ VALUES (#{custEmail},#{custCompany},#{custAddress},#{custIndustry},#{custPic},#{
     <!--获取筛选count-->
     <select id="getCountByCondition" parameterType="map" resultType="Long" >
         <if test="roleName=='管理员'||roleName=='销售经理'">
-            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl
-            <where>
-                AND su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id`
-                <if test="cstCustomer.custCompany!='%11111%'">
-                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
-                </if>
-                <if test="chLinkman.linkName!='%11111%'">
-                    AND cl.`link_name` LIKE #{chLinkman.linkName}
-                </if>
-                <if test="chLinkman.linkPhone!='%11111%'">
-                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
-                </if>
-                <if test="chLinkman.linkLandlinePhone!='%11111%'">
-                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
-                </if>
-                <if test="userNameLike!='%11111%'">
-                    AND su.`user_name` LIKE #{userNameLike}
-                </if>
-                <if test="chLinkman.linkEmail!='%11111%'">
-                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
-                </if>
-                <if test="startTimeStr!='1880-01-01 00:00:00'">
-                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-                <if test="startTimeStr=='1880-01-01 00:00:00'">
-                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-
-            </where>
+            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND  (cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userNameLike} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
         </if>
         <if test="roleName=='销售员'">
-            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl
-            <where>
-                AND su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage}
-                <if test="cstCustomer.custCompany!='%11111%'">
-                    AND cc.`cust_company` LIKE #{cstCustomer.custCompany}
-                </if>
-                <if test="chLinkman.linkName!='%11111%'">
-                    AND cl.`link_name` LIKE #{chLinkman.linkName}
-                </if>
-                <if test="chLinkman.linkPhone!='%11111%'">
-                    AND cl.`link_phone` LIKE #{chLinkman.linkPhone}
-                </if>
-                <if test="chLinkman.linkLandlinePhone!='%11111%'">
-                    AND cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone}
-                </if>
-                <if test="userNameLike!='%11111%'">
-                    AND su.`user_name` LIKE #{userNameLike}
-                </if>
-                <if test="chLinkman.linkEmail!='%11111%'">
-                    AND cl.`link_email` LIKE #{chLinkman.linkEmail}
-                </if>
-                <if test="startTimeStr!='1880-01-01 00:00:00'">
-                    AND  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-                <if test="startTimeStr=='1880-01-01 00:00:00'">
-                    OR  (cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
-                </if>
-
-            </where>
+            SELECT COUNT(1) FROM sys_user su,cst_customer cc,ch_linkman cl WHERE su.`user_id`=cc.`user_id` AND cc.`cust_id`=cl.`cust_id` AND cc.`user_id`=#{userIdForPage} AND  (cc.`cust_company` LIKE #{cstCustomer.custCompany}
+            OR cl.`link_name` LIKE #{chLinkman.linkName} OR cl.`link_phone` LIKE #{chLinkman.linkPhone} OR cl.`link_landline_phone` LIKE #{chLinkman.linkLandlinePhone} OR su.`user_name` LIKE #{userNameLike} OR
+            cl.`link_email` LIKE #{chLinkman.linkEmail} OR  cc.`cust_date` BETWEEN #{startTimeDate} AND #{endTimeDate})
         </if>
 
     </select>
