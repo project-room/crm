@@ -31,8 +31,12 @@
 	<div class="rightContent">
 		<div class="header">
 			<div>
-				<!-- <input type="text" placeholder="请输入客户名称" />
-				<button><img src="img/searchIcon.png" alt="" /></button> -->
+				<form action="/crm/cstChance/getCstChance/1/10">
+					<input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
+					<button class="but" type="submit">
+						<img alt="" th:src="@{/img/searchIcon.png}"/>
+					</button>
+				</form>
 				<div class="mail">
 					<span class="msgNum">1</span>
 					<div>
