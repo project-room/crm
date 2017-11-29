@@ -41,20 +41,38 @@ public class CstChanceServiceImpl implements ICstChanceService {
     //根据用户id查询机会
     @Override
     public Page<CstChance> getCstChance(Long userId,String custCompany,int currentPage, int pageSize) {
-        Long count = (long) cstChanceMapper.getCstChanceCount(userId);
-        int currentPageLimit = (currentPage - 1) * pageSize;
-        List<CstChance> cstChances = cstChanceMapper.getCstChance(userId,custCompany,currentPageLimit, pageSize);
-        return new Page<CstChance>(currentPage, pageSize, cstChances, count);
+
+        SysUser sysUser=sysUserMapper.selectSysUserAndRoleInfoBySysUserId(userId);
+        System.out.println(sysUser.getSysRole().getRoleName()+"角色名称：");
+        if(sysUser.getSysRole().getRoleName().equals("销售员")){
+            Long count = (long) cstChanceMapper.getCstChanceCount(userId);
+            int currentPageLimit = (currentPage - 1) * pageSize;
+            List<CstChance> cstChances = cstChanceMapper.getCstChance(userId, custCompany, currentPageLimit, pageSize);
+            return new Page<CstChance>(currentPage, pageSize, cstChances, count);
+        }else {
+            Long count = (long) cstChanceMapper.getCstChanceToCount();
+            int currentPageLimit = (currentPage - 1) * pageSize;
+            List<CstChance> cstChances = cstChanceMapper.getCstChanceNo(custCompany, currentPageLimit, pageSize);
+            return new Page<CstChance>(currentPage, pageSize,cstChances, count);
+        }
     }
 
     //转交的客户查询
     @Override
     public Page<CstChance> getCstChanceUserId(Long userId, int currentPage, int pageSize) {
         System.out.println(userId);
-        Long count = (long) cstChanceMapper.getCstChanceCountTo(userId);
-        int currentPageLimit = (currentPage - 1) * pageSize;
-        List<CstChance>  cstChancesList=cstChanceMapper.getCstChanceUserId(userId, currentPageLimit, pageSize);
-        return new Page<CstChance>(currentPage, pageSize, cstChancesList, count);
+        SysUser sysUser=sysUserMapper.selectSysUserAndRoleInfoBySysUserId(userId);
+        if(sysUser.getSysRole().getRoleName().equals("销售员")) {
+            Long count = (long) cstChanceMapper.getCstChanceCountTo(userId);
+            int currentPageLimit = (currentPage - 1) * pageSize;
+            List<CstChance> cstChancesList = cstChanceMapper.getCstChanceUserId(userId, currentPageLimit, pageSize);
+            return new Page<CstChance>(currentPage, pageSize, cstChancesList, count);
+        }else {
+            Long count = (long) cstChanceMapper.getCstChanceZhuanCount();
+            int currentPageLimit = (currentPage - 1) * pageSize;
+            List<CstChance> cstChancesList = cstChanceMapper.getCstChanceNoUserId(currentPageLimit, pageSize);
+            return new Page<CstChance>(currentPage, pageSize, cstChancesList, count);
+        }
     }
 
     //新建按阶段转交机会
@@ -81,9 +99,7 @@ public class CstChanceServiceImpl implements ICstChanceService {
         chLinkman.setChId(chId);
         chLinkmanMapper.updateLinkman(chLinkmanTo);
         System.out.println(chLinkman.getLinkName()+"这个值");
-        if(chLinkman.getLinkName()!=""){
-            chLinkmanMapper.addChLinkman(chLinkman);
-        }
+        chLinkmanMapper.addChLinkman(chLinkman);
         cstLowCustomerMapper.addCstLowCust(cstLowCustomer);
         if (count > 0) {
             return true;

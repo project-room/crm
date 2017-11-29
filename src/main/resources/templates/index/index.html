@@ -19,24 +19,51 @@
 			<span class="logoTxt">润普CRM</span>
 		</div>
 		<ul>
-			<li class="active"><a th:href="@{/getTaskListByUserId}"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
-			<li><a th:href="@{/cstCustomer/getPage/1/7}"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt" id="gongHai">公海</span></a></li>
-			<li><a th:href="@{/cstChance/getCstChance/1/10}"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
-			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
-			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
-			<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
-			<li class="settitemdisplay"><a href="/crm/sysUser/getSysUserList/1/10"><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></a></li>
+			<li class="active">
+				<a th:href="@{/getTaskListByUserId}">
+					<img th:src="@{/img/index.png}" alt="首页" />
+					<span class="navTxt">首页</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/cstCustomer/getPage/1/7}">
+					<img th:src="@{/img/seas.png}" alt="公海" />
+					<span class="navTxt" id="gongHai">公海</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/cstChance/getCstChance/1/10}">
+					<img th:src="@{/img/chance.png}" alt="机会" />
+					<span class="navTxt">机会</span>
+				</a>
+			</li>
+			<li>
+				<img th:src="@{/img/contract.png}" alt="合同" />
+				<span class="navTxt">合同</span>
+			</li>
+			<li>
+				<img th:src="@{/img/financial.png}" alt="财务" />
+				<span class="navTxt">财务</span>
+			</li>
+			<li>
+				<img th:src="@{/img/support.png}" alt="支持" />
+				<span class="navTxt">支持</span>
+			</li>
+			<li class="settitemdisplay">
+				<a href="/crm/sysUser/getSysUserList/1/10">
+					<img th:src="@{/img/setting.png}" alt="设置" />
+					<span class="navTxt">设置</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 	<div class="rightContent">
 		<div class="header">
 			<div>
-				<form action="/crm/cstChance/getCstChance/1/10">
-					<input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
-					<button class="but" type="submit">
-						<img alt="" th:src="@{/img/searchIcon.png}"/>
-					</button>
-				</form>
+				<input placeholder="请输入客户名称" type="text" class="searchName"/>
+				<button class="search">
+					<img alt="" th:src="@{/imgarchIcon.png}"/>
+				</button>
 				<div class="mail">
 					<span class="msgNum">1</span>
 					<div>
