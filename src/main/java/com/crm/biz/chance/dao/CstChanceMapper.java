@@ -23,6 +23,8 @@ public interface CstChanceMapper {
 
     void updateCstChanceById(CstChance cstChance);
 
+    //登录管理员或经理，查询所有机会
+    List<CstChance> getCstChanceNo(@Param("custCompany") String custCompany,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
     //根据用户id查询机会
     List<CstChance> getCstChance(@Param("userId") Long userId,@Param("custCompany") String custCompany,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
@@ -47,8 +49,11 @@ public interface CstChanceMapper {
 
     //根据机会的状态来修改负责人
     int updateCst(CstChance cstChance);
-    
-    //查询总共有多少条机会
+
+    //登录角色是经理或管理员，查询所有机会总条数
+      int getCstChanceToCount();
+
+    //根据用户ID查询总共有多少条机会
     int  getCstChanceCount(Long userId);
 
     //机会的条件查询
@@ -57,6 +62,12 @@ public interface CstChanceMapper {
 
     //转交机会的总条数
     int getCstChanceCountTo(Long userId);
+
+    //转交机会按角色查询
+    int getCstChanceZhuanCount();
+
+    //登录角色是经理或管理员时，查询所有转交机会
+    List<CstChance>  getCstChanceNoUserId(@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
     //转交机会的查询
     List<CstChance> getCstChanceUserId(@Param("userId") Long userId, @Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);

@@ -49,7 +49,7 @@ $(function() {
     });
 
     if(roleNameSession!="销售员"){
-        $(".tag").text("公海池");
+        $(".weater").text("公海池");
     }
 
 
