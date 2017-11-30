@@ -33,8 +33,8 @@ public interface SysDynamicMapper {
     void updateTask(@Param("taskId")Long taskId,@Param("taskStatus")Integer taskStatus);
 
     //添加动态信息
-    void addSysDynamic(@Param("userName") String userName,@Param("roleId") Long roleId,@Param("dyClassify") int dyClassify,@Param("dyContent") String dyContent,@Param("dyDate") Date dyDate,@Param("custId") Long custId,@Param("custCompany") String custCompany);
+    void addSysDynamic(@Param("userId") Long userId,@Param("userName") String userName,@Param("roleId") Long roleId,@Param("dyClassify") int dyClassify,@Param("dyContent") String dyContent,@Param("dyDate") Date dyDate,@Param("custId") Long custId,@Param("custCompany") String custCompany);
 
     //查询所有的动态信息
-    List<SysDynamic> selectDynamicAll(@Param("roleId") Long roleId);
+    List<SysDynamic> selectDynamicAll(@Param("userId") Long userId,@Param("roleId") Long roleId);
 }

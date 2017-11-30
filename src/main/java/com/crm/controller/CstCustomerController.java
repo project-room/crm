@@ -159,7 +159,7 @@ public class CstCustomerController extends BaseController{
             CstCustomer cstCustomerForCompany= cstCustomerService.lookCstCustomerInfo(custId);
             String custCompany= cstCustomerForCompany.getCustCompany();
 
-            cstCustomerService.addCstCustomerSysDynamic(userName,roleId,dyClassify,dyContent,date,custId,custCompany);
+            cstCustomerService.addCstCustomerSysDynamic(userId,userName,roleId,dyClassify,dyContent,date,custId,custCompany);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");
@@ -503,29 +503,28 @@ public class CstCustomerController extends BaseController{
      */
     @RequestMapping("/lookCstCustomerInfo/{custId}")
     public String lookCstCustomerInfo(@PathVariable("custId") String custId,Model model){
-        Map map=result();
-        Long cstCustomerId=null;
-        if(custId.contains("-")){
-            //去掉首字符"-"
-            String revertCustIdArr=custId.substring(1);
-            String[] idArr= revertCustIdArr.split("-");
-            cstCustomerId=new Long(idArr[0]);
-
-        }else{
-            cstCustomerId=new Long(custId);
-        }
         try {
+            Long cstCustomerId=null;
+            if(custId.contains("-")){
+                //去掉首字符"-"
+                String revertCustIdArr=custId.substring(1);
+                String[] idArr= revertCustIdArr.split("-");
+                cstCustomerId=new Long(idArr[0]);
+
+            }else{
+                cstCustomerId=new Long(custId);
+            }
             CstCustomer cstCustomer=  cstCustomerService.lookCstCustomerInfo(cstCustomerId);
-            //转换创建日期格式
-            CstCustomerConverter.dateConvertor(cstCustomer);
-            model.addAttribute("cstCustomer",cstCustomer);
-            map.put("cstCustomer",cstCustomer);
+            if(cstCustomer!=null){
+                //转换创建日期格式
+                CstCustomerConverter.dateConvertor(cstCustomer);
+                model.addAttribute("cstCustomer",cstCustomer);
+                return "index/editCustomer";
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("code","-1");
-            map.put("msg","查看公海客户信息失败");
         }
-        return "index/editCustomer";
+        return "redirect:"+"/getTaskListByUserId";
     }
 
     /**

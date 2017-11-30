@@ -20,6 +20,6 @@ public interface ISysDynamicService {
     void updateTask(Long taskId,Integer taskStatus);
 
     //查询所有动态信息
-    List<SysDynamic> selectDynamicAll(Long roleId);
+    List<SysDynamic> selectDynamicAll(Long userId,Long roleId);
 
 }

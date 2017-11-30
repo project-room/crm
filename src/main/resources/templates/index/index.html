@@ -31,12 +31,10 @@
 	<div class="rightContent">
 		<div class="header">
 			<div>
-				<form action="/crm/cstChance/getCstChance/1/10">
-					<input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
-					<button class="but" type="submit">
-						<img alt="" th:src="@{/img/searchIcon.png}"/>
-					</button>
-				</form>
+				<input placeholder="请输入客户名称" type="text" class="searchName"/>
+				<button class="search">
+					<img alt="" th:src="@{/img/searchIcon.png}"/>
+				</button>
 				<div class="mail">
 					<span class="msgNum">1</span>
 					<div>
@@ -74,7 +72,7 @@
 								<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
 								<div class="msg">
 									<p class="employee"><i  th:text="${sysDynamic.userName}"></i><span class="career" th:text="${sysDynamic.roleId eq 1? '（管理员）':(sysDynamic.roleId eq 2 ? '（销售经理）':'（销售人员）')}"></span></p>
-									<p class="addWhat grey"><i th:text="${sysDynamic.dyClassify eq 7?'添加了客户：':'添加了机会：'}"></i><a href="" class="description" th:text="${sysDynamic.custCompany}"></a></p>
+									<p class="addWhat grey"><i th:text="${sysDynamic.dyClassify eq 7?'添加了客户：':'添加了机会：'}"></i><a th:href="@{'/cstCustomer/lookCstCustomerInfo/'+${sysDynamic.custId}}" class="description" th:text="${sysDynamic.custCompany}"></a></p>
 								</div>
 								<span class="addTime" th:text="${sysDynamic.revertDate}"></span>
 							</div>

@@ -189,12 +189,10 @@
 <div class="rightContent">
     <div class="header">
         <div>
-            <form action="/crm/cstChance/getCstChance/1/10">
-                <input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
-                <button class="but" type="submit">
-                    <img alt="" th:src="@{/img/searchIcon.png}"/>
-                </button>
-            </form>
+            <input placeholder="请输入客户名称" type="text" class="searchName"/>
+            <button class="search">
+                <img alt="" th:src="@{/img/searchIcon.png}"/>
+            </button>
             <div class="mail">
                         <span class="msgNum">
                             1
@@ -288,7 +286,7 @@
                     <input type="checkbox"/>
                 </label>
                 <button class="addNew ">
-                    <a href="/crm/cstChance/getCstCustomer" style="color: #7460ee;">
+                    <a  style="color: #7460ee;">
                     <img th:src="@{/img/add3.png}"/>
                     新建销售机会
                     </a>
@@ -427,12 +425,11 @@
                         </td>
                         <td style="">
                             <p class="modify">
-                                <!--· · ·-->
                                 <img th:src="@{/img/more3.png}"/>
                             </p>
                             <ul class="slideEdit">
                                 <li>
-                                    <a href="#" mce_href="#" class="dealing">
+                                    <a href="#" mce_href="#" class="dealing" th:name="${cstCustoemr.custId}">
                                         分配
                                     </a>
                                 </li>

@@ -9,10 +9,10 @@ $(function() {
 
 
     //根据客户名来模糊搜所客户信息
-    $(".search").click(function () {
-        var custCompany=$(".searchName").val();
-        location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
-    });
+    // $(".search").click(function () {
+    //     var custCompany=$(".searchName").val();
+    //     location.href="/crm/cstCustomer/selectCstCustomerByName/"+custCompany+"/1/7"
+    // });
 
 
 	//session

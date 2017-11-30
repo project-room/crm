@@ -106,6 +106,6 @@ public interface ICstCustomerService {
     List<SysUser> bySysUserList(Long roleId,String district,int userStatus);
 
     //首页动态添加客户
-    void addCstCustomerSysDynamic(String userName,Long roleId,int dyClassify,String dyContent,Date date,Long custId,String custCompany);
+    void addCstCustomerSysDynamic(Long userId,String userName,Long roleId,int dyClassify,String dyContent,Date date,Long custId,String custCompany);
 
 }

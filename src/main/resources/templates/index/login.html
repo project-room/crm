@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}"/>
 	<script th:src="@{/js/default.js}"></script>
 	<link rel="stylesheet" th:href="@{/css/login.css}"/>
-	<script th:src="@{/js/login.js}"></script>
+	<script th:src="@{/js/login.js}" th:inline="javascript"></script>
 </head>
 <body>
 	<div class="content">
@@ -16,12 +16,13 @@
 		</span>
 		<div class="logMsg">
 			<h4>润普CRM</h4>
-			<form action="/crm/sysUser/userLogin" method="post" id="loginForm">
+			<form action="" method="post" id="loginForm">
 				<label>
-					<input type="text" placeholder="请输入账号" name="username"/>
+					<input type="text" placeholder="请输入账号" name="username" id="username"/>
 				</label>
+
 				<label>
-					<input type="text" placeholder="请输入密码" name="password"/>
+					<input type="text" placeholder="请输入密码" name="password" id="password"/>
 				</label>
 				<p>
 					<label class="forCheckbox borderPurple">
@@ -29,7 +30,7 @@
 					</label>
 					下次自动登录
 				</p>
-				<a class="login" id="loginButton">登录</a>
+				<button type="submit" class="login"  id="loginButton">登录</button>
 				<a href="/crm/cstCustomer/toFindPsd" class="findPsd">找回密码</a>
 			</form>
 		</div>
