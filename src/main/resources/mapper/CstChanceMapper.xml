@@ -148,18 +148,20 @@
 
      <!--登录是管理员或销售经理，查询所有机会-->
       <select id="getCstChanceNo" resultMap="BaseResultMap">
-        select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y
+        select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y <!--where y.user_id=c.user_id  and c.cust_id =u.cust_id-->  <!--and u.cust_company like '%${custCompany}%'-->
         <where>
-          <if test="1==1">
-            AND y.user_id=c.user_id  AND c.cust_id =u.cust_id
+          <if test="userId!=0">
+           and y.user_id=c.user_id  and c.cust_id =u.cust_id
           </if>
           <if test="custCompany!=null and custCompany!=''">
             and u.cust_company like '%${custCompany}%'
           </if>
-          ORDER BY r.re_date DESC  limit  #{currentPageLimit},#{pageSize}
+          GROUP BY c.ch_id  ORDER BY r.re_date DESC  limit #{currentPageLimit},#{pageSize}
         </where>
-
       </select>
+
+
+
   <!-- 根据用户id查询我的所有机会  -->
    <select id="getCstChance" resultMap="BaseResultMap">
      select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y

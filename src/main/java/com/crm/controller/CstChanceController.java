@@ -69,6 +69,7 @@ public class CstChanceController extends BaseController {
         Map map = result();
         // 测试数据
         try {
+        /*    Long userIdLong=(long)1;*/
             Long userIdLong=(Long) session.getAttribute("userId");
             Page<CstChance> cstChancePage = iCstChance.getCstChance(userIdLong,custCompany,currentPage, pageSize);
             List<SysUser> SysUserlist=iCstChance.getSysUser(userIdLong);
@@ -80,7 +81,8 @@ public class CstChanceController extends BaseController {
                     System.out.println(i);
                     arrList.add(new Long(i));
                 }
-                /* map.put("SysUserlist",SysUserlist);*/
+                /*map.put("cstChancePage",cstChancePage);*/
+               /*map.put("SysUserlist",SysUserlist);*/
                 model.addAttribute("arrList", arrList);
                 model.addAttribute("cstChancePage", cstChancePage);
                 model.addAttribute("SysUserlist",SysUserlist);
@@ -319,6 +321,7 @@ public class CstChanceController extends BaseController {
         try {
             Long userIdLong=(Long) session.getAttribute("userId");
             List<CstCustomer> cstCustomerList = iCstChance.getCstCustomer(userIdLong);
+         /*   CstCustomer Customer = iCstChance.getCstCustomerCustId(custId);*/
             if (cstCustomerList != null) {
                 model.addAttribute("cstCustomerList", cstCustomerList);
             } else {
