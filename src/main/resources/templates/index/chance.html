@@ -501,7 +501,7 @@
                                     <ul class="pagination">
                                         <li class="page-first"><a th:href="@{/cstChance/getCstChance/1/10}">首页</a></li>
                                         <li class="page-pre"><a th:href="@{'/cstChance/getCstChance/'+${((cstChancePage.currentPage-1) le 0?1:(cstChancePage.currentPage-1))}+'/'+${cstChancePage.pageSize}}">上一页</a></li>
-                                        <li class="page-number" th:each="arr:${arrList}"><a th:href="@{'/cstChance/getCstChance/1/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}" ></a></li>
+                                        <li class="page-number" th:each="arr:${arrList}"><a th:href="@{'/cstChance/getCstChance/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}" ></a></li>
                                         <li class="page-next"><a th:href="@{'/cstChance/getCstChance/'+${((cstChancePage.currentPage+1) ge (cstChancePage.totalPage)?(cstChancePage.totalPage):(cstChancePage.currentPage+1))}+'/'+${cstChancePage.pageSize}}">下一页</a></li>
                                         <li class="page-last"><a th:href="@{'/cstChance/getCstChance/'+${cstChancePage.totalPage}+'/'+${cstChancePage.pageSize}}">尾页</a></li>
                                     </ul>

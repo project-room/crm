@@ -50,9 +50,11 @@ public class CstChanceServiceImpl implements ICstChanceService {
             List<CstChance> cstChances = cstChanceMapper.getCstChance(userId, custCompany, currentPageLimit, pageSize);
             return new Page<CstChance>(currentPage, pageSize, cstChances, count);
         }else {
+            System.out.println("走的这个方法！！");
+            System.out.println(userId+"多少");
             Long count = (long) cstChanceMapper.getCstChanceToCount();
             int currentPageLimit = (currentPage - 1) * pageSize;
-            List<CstChance> cstChances = cstChanceMapper.getCstChanceNo(custCompany, currentPageLimit, pageSize);
+            List<CstChance> cstChances = cstChanceMapper.getCstChanceNo(userId,custCompany,currentPageLimit, pageSize);
             return new Page<CstChance>(currentPage, pageSize,cstChances, count);
         }
     }

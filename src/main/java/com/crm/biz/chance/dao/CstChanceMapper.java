@@ -24,7 +24,7 @@ public interface CstChanceMapper {
     void updateCstChanceById(CstChance cstChance);
 
     //登录管理员或经理，查询所有机会
-    List<CstChance> getCstChanceNo(@Param("custCompany") String custCompany,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
+    List<CstChance> getCstChanceNo(@Param("userId") Long userId,@Param("custCompany") String custCompany,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
 
     //根据用户id查询机会
     List<CstChance> getCstChance(@Param("userId") Long userId,@Param("custCompany") String custCompany,@Param("currentPageLimit") int currentPageLimit, @Param("pageSize") int pageSize);
