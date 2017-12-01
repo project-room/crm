@@ -30,46 +30,62 @@ $(function() {
 	});
 	
 	//登录
-	$("#loginButton").click(function () {
+	$("#loginButton").click(function (e) {
+		e.preventDefault()
         var userName = $('#loginForm').find('input[name=username]').val();
         var userpsd = $('#loginForm').find('input[name=password]').val();
         $.ajax({
-			url:"/crm/sysUser/getSysUserByUserName",
+			// url:"/crm/sysUser/getSysUserByUserName",
+			url: "/crm/sysUser/userLogin",
 			type:"POST",
-			data:{"userName":userName},
+			data:{"username":userName,"password":userpsd},
 			success:function (data) {
-
-				var data = JSON.parse(data);
-				console.log(data.userPassword)
-				if (data.userPassword == userpsd) {
+				if (data == 1) {
                     if ($('.forCheckbox').find('input').prop('checked') == true) {
-                        localStorage.setItem('userName', userName);
-                        localStorage.setItem('userpsd', userpsd);
-                    }
-
+					    localStorage.setItem('userName', userName);
+					    localStorage.setItem('userpsd', userpsd);
+				    }
+				    location.href = '/crm/getTaskListByUserId'
+				}else{
+					$(".s_first").css('display','block')
 				}
+				// var data = JSON.parse(data);
+				// console.log(data.userPassword)
+				// if (data.userPassword == userpsd) {
+                 //    if ($('.forCheckbox').find('input').prop('checked') == true) {
+                 //        localStorage.setItem('userName', userName);
+                 //        localStorage.setItem('userpsd', userpsd);
+                 //    }
+                //
+				// }
             },fail:function (e) {
                 console.log(e)
-				alert(e)
 			}
 		});
-        $("#loginButton").click(function () {
-		var username=$("input[name='username']").val();
-		var password=$("input[name='password']").val();
-		$.ajax({
-			url:'/sysUser/userLogin',
-			data:{"username":username,"password":password},
-			type:'POST',
-			success:function (data) {
-                if(data=='1'){
-                    location.href="/crm/getTaskListByUserId";
-                }else{
-                    location.href="/crm/cstCustomer/toLogin";
-                }
-            }
-		});
-        });
     });
+    $('#username').focus(function () {
+        $(".s_first").css('display','none')
+    })
+    // $(".login_form").click(function () {
+    //     var username=$("input[name='username']").val();
+    //     var password=$("input[name='password']").val();
+    //     $.ajax({
+    //         url:'/sysUser/userLogin',
+    //         data:{"username":username,"password":password},
+    //         type:'POST',
+    //         success:function (data) {
+    //             if(data=='1'){
+    //                 location.href="/crm/getTaskListByUserId";
+    //             }else{
+    //                 console.log(123)
+    //                 $('.logMsg form .s_first').css('display','block')
+    //             }
+    //         }
+    //     });
+    //     return false;
+    // });
+
+
 
 	//获取短信验证码
 	$("#sendCaptcha").click(function () {

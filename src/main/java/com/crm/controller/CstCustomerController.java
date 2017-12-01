@@ -137,6 +137,7 @@ public class CstCustomerController extends BaseController{
             cstCustomer.setCustDate(date);
             cstCustomer.setCustType("2");
             cstCustomer.setCustClassify(2);
+            chLinkman.setLinkStatus(0);
             Long custId=cstCustomerService.createCstCustomer(cstCustomer,chLinkman);
 
             //首页添加客户动态

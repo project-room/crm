@@ -16,13 +16,15 @@
 		</span>
 		<div class="logMsg">
 			<h4>润普CRM</h4>
-			<form action="" method="post" id="loginForm">
+			<form method="post" id="loginForm" >
 				<label>
 					<input type="text" placeholder="请输入账号" name="username" id="username"/>
-				</label>
 
+				</label>
+				<span class="s_first">用户名错误或密码</span>
 				<label>
 					<input type="text" placeholder="请输入密码" name="password" id="password"/>
+
 				</label>
 				<p>
 					<label class="forCheckbox borderPurple">
@@ -30,7 +32,7 @@
 					</label>
 					下次自动登录
 				</p>
-				<button type="submit" class="login"  id="loginButton">登录</button>
+				<button type="submit" class="login login_form"  id="loginButton" >登录</button>
 				<a href="/crm/cstCustomer/toFindPsd" class="findPsd">找回密码</a>
 			</form>
 		</div>
