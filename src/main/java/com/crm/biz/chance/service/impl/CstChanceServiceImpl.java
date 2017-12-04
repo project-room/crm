@@ -62,7 +62,6 @@ public class CstChanceServiceImpl implements ICstChanceService {
     //转交的客户查询
     @Override
     public Page<CstChance> getCstChanceUserId(Long userId, int currentPage, int pageSize) {
-        System.out.println(userId);
         SysUser sysUser=sysUserMapper.selectSysUserAndRoleInfoBySysUserId(userId);
         if(sysUser.getSysRole().getRoleName().equals("销售员")) {
             Long count = (long) cstChanceMapper.getCstChanceCountTo(userId);

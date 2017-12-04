@@ -349,7 +349,7 @@
                                             <li>
                                                 <p><span>+</span><img th:src="@{/img/Operson.png}" alt=""/>销售员</p>
                                                 <ul class="zhuli">
-                                                    <li th:each="sysUserC:${sysUsersC}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="{sysUserC.userName}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserC.userId}}">编辑</a></li>
+                                                    <li th:each="sysUserC:${sysUsersC}"><img th:src="@{/img/Operson.png}" alt=""/><i th:text="${sysUserC.userName}"></i><a th:href="@{'/sysUser/getSysUserInfoById/'+${sysUserC.userId}}">编辑</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

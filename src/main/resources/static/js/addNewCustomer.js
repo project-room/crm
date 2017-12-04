@@ -41,11 +41,6 @@ $(function() {
         }
     });
 
-    
-    //保存客户
-    // $("#save").click(function () {
-		// $("#saveForm").submit();
-    // });
 	//取消保存客户
 	$("#cancel").click(function () {
 		location.href="/crm/cstCustomer/getPage/1/7";
@@ -85,7 +80,6 @@ $(function() {
                            $(this).val('').css('color','black')
                        })
                    }
-                   // location.href='/crm/cstCustomer/getPage/1/7';
                };
 		   }
      })

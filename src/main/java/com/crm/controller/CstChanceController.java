@@ -65,11 +65,10 @@ public class CstChanceController extends BaseController {
     //查询我的机会方法
 //    Long userId ,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize
     @RequestMapping("/getCstChance/{currentPage}/{pageSize}")
-    public String /*Map*/ getCstChance(Model model,String custCompany,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
+    public String  getCstChance(Model model,String custCompany,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize) {
         Map map = result();
         // 测试数据
         try {
-        /*    Long userIdLong=(long)1;*/
             Long userIdLong=(Long) session.getAttribute("userId");
             Page<CstChance> cstChancePage = iCstChance.getCstChance(userIdLong,custCompany,currentPage, pageSize);
             List<SysUser> SysUserlist=iCstChance.getSysUser(userIdLong);
@@ -81,8 +80,6 @@ public class CstChanceController extends BaseController {
                     System.out.println(i);
                     arrList.add(new Long(i));
                 }
-                /*map.put("cstChancePage",cstChancePage);*/
-               /*map.put("SysUserlist",SysUserlist);*/
                 model.addAttribute("arrList", arrList);
                 model.addAttribute("cstChancePage", cstChancePage);
                 model.addAttribute("SysUserlist",SysUserlist);
@@ -92,7 +89,6 @@ public class CstChanceController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /*return map;*/
         return "index/chance";
 }
 
@@ -352,7 +348,7 @@ public class CstChanceController extends BaseController {
 
     //按用户id查询已建立转交的机会
     @RequestMapping("/getCstChanceUserId/{currentPage}/{pageSize}")
-    public String /*Map*/  getCstChanceUserId(Model model,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
+    public String  getCstChanceUserId(Model model,@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
         Map map=result();
         try{
             Long userIdLong=(Long) session.getAttribute("userId");
@@ -365,19 +361,15 @@ public class CstChanceController extends BaseController {
                 for (int i = 1; i <= totalPage; i++) {
                     arrList.add(new Long(i));
                 }
-               /* map.put("cstChancePage",cstChancePage);*/
                 model.addAttribute("arrList", arrList);
-               /* map.put("cstChancesPageList",cstChancesPageList);*/
                 model.addAttribute("cstChancesPageList", cstChancesPageList);
                 model.addAttribute("SysUserList",SysUserList);
-                /*map.put("SysUserList",SysUserList);*/
             } else {
                 map.put("-1", "查询失败，对象为空");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /*return map;*/
         return "index/refferal";
     }
 
