@@ -13,12 +13,13 @@
             </script>
             <script th:src="@{/js/jquery.nicescroll.js}">
             </script>
-             <script th:src="@{/js/simpleAlert.js}"></script>
+            <script th:src="@{/js/simpleAlert.js}">
+            </script>
             <script th:src="@{/laydate/laydate.js}">
             </script>
-            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-            <link th:href="@{/css/default.css}" rel="stylesheet"/>
-            <link th:href="@{/css/chance.css}" rel="stylesheet"/>
+            <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+            <link rel="stylesheet" th:href="@{/css/default.css}"/>
+            <link rel="stylesheet" th:href="@{/css/chance.css}"/>
             <script th:src="@{/js/default.js}">
             </script>
             <script th:src="@{/js/chance.js}">
@@ -26,60 +27,132 @@
         </meta>
     </head>
     <body>
-    <div class="referralPop dnone" style="font-size: 14px;">
-        <div class="shelter cancel"></div>
-        <div class="referralmain">
-            <h4>转交机会<img th:src="@{/img/close.png}" alt="close" class="fr cancel" /></h4>
-            <label><input type="input" class="referralName" name="" placeholder="请输入销售员名字"/><button type="button" class="referralSearch"><img th:src="@{/img/search.png}" alt="搜索" /></button></label>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>销售员</th>
-                    <th>职位</th>
-                    <th>手机</th>
-                </tr>
-                </thead>
-                <tbody class="referralList">
-                <tr th:each="SysUserlist:${SysUserlist}">
-                    <td>
-                        <label class="forCheckbox">
-                            <input type="checkbox" name="userId" th:value="${SysUserlist.userId}"/>
-                        </label>
-                        <i th:text="${SysUserlist.userName}"></i>
-                    </td>
-                    <td>
-                        <i th:text="${SysUserlist.userPosition}"></i>
-                    </td>
-                    <td><i th:text="${SysUserlist.userPhone}"></i></td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="pagination">
-                <ul>
-                    <li class="page-number2"><a href="javascript:void(0);">1</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">2</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">3</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">4</a></li>
-                    <li class="page-number2 active"><a href="javascript:void(0);">5</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">6</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">7</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">8</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">9</a></li>
-                    <li class="page-number2"><a href="javascript:void(0);">10</a></li>
-                </ul>
-                <span>跳转</span>
-                <select>
-                    <option>1</option>
-                    <option>1</option>
-                    <option>1</option>
-                </select>
+        <div class="referralPop dnone" style="font-size: 14px;">
+            <div class="shelter cancel">
             </div>
-            <div class="btns">
-                <button class="sure">确定</button>
-                <button class="canc">取消</button>
+            <div class="referralmain">
+                <h4>
+                    转交机会
+                    <img alt="close" class="fr cancel" th:src="@{/img/close.png}"/>
+                </h4>
+                <label>
+                    <input class="referralName" name="" placeholder="请输入销售员名字" type="input"/>
+                    <button class="referralSearch" type="button">
+                        <img alt="搜索" th:src="@{/img/search.png}"/>
+                    </button>
+                </label>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                销售员
+                            </th>
+                            <th>
+                                职位
+                            </th>
+                            <th>
+                                手机
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="referralList">
+                        <tr th:each="SysUserlist:${SysUserlist}">
+                            <td>
+                                <label class="forCheckbox">
+                                    <input name="userId" th:value="${SysUserlist.userId}" type="checkbox"/>
+                                </label>
+                                <i th:text="${SysUserlist.userName}">
+                                </i>
+                            </td>
+                            <td>
+                                <i th:text="${SysUserlist.userPosition}">
+                                </i>
+                            </td>
+                            <td>
+                                <i th:text="${SysUserlist.userPhone}">
+                                </i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <ul>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                1
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                2
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                3
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                4
+                            </a>
+                        </li>
+                        <li class="page-number2 active">
+                            <a href="javascript:void(0);">
+                                5
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                6
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                7
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                8
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                9
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                10
+                            </a>
+                        </li>
+                    </ul>
+                    <span>
+                        跳转
+                    </span>
+                    <select>
+                        <option>
+                            1
+                        </option>
+                        <option>
+                            1
+                        </option>
+                        <option>
+                            1
+                        </option>
+                    </select>
+                </div>
+                <div class="btns">
+                    <button class="sure">
+                        确定
+                    </button>
+                    <button class="canc">
+                        取消
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
         <div class="filterPop dnone" style="font-size: 14px;">
             <div class="shelter">
             </div>
@@ -90,83 +163,292 @@
                         X
                     </span>
                 </h4>
-                <form class="addNew" action="/crm/cstChance/getCstChanceTo/1/10">
+                <form action="/crm/cstChance/getCstChanceTo/1/10" class="addNew">
                     <label for="name">
-                        <input type="hidden" name="userId" value="1"/>
-                        <span>客户名称</span>
+                        <input name="userId" type="hidden" value="1"/>
+                        <span>
+                            客户名称
+                        </span>
                         <input id="name" name="custCompany" type="text"/>
                     </label>
                     <label>
-                        <span>阶段</span>
-                        <select name="chStage" >
-                            <option value="" selected="selected">请选择阶段</option>
-                            <option value="初期沟通">初期沟通</option>
-                            <option value="理想评估">理想评估</option>
-                            <option value="需求分析">需求分析</option>
-                            <option value="方案制定">方案制定</option>
-                            <option value="竞标中">竞标中</option>
-                            <option value="商务谈判">商务谈判</option>
-                            <option value="合同签订">合同签订</option>
-                            <option value="丢单">丢单</option>
-                            <option value="失效客户">失效客户</option>
+                        <span>
+                            阶段
+                        </span>
+                        <select name="chStage">
+                            <option selected="selected" value="">
+                                请选择阶段
+                            </option>
+                            <option value="初期沟通">
+                                初期沟通
+                            </option>
+                            <option value="理想评估">
+                                理想评估
+                            </option>
+                            <option value="需求分析">
+                                需求分析
+                            </option>
+                            <option value="方案制定">
+                                方案制定
+                            </option>
+                            <option value="竞标中">
+                                竞标中
+                            </option>
+                            <option value="商务谈判">
+                                商务谈判
+                            </option>
+                            <option value="合同签订">
+                                合同签订
+                            </option>
+                            <option value="丢单">
+                                丢单
+                            </option>
+                            <option value="失效客户">
+                                失效客户
+                            </option>
                             <!--<option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chStage}"><p th:text="${cstChance.chStage}"></p></option>-->
                         </select>
                     </label>
                     <label>
-                        <span>机会简述</span>
-                        <input type="text" name="chContent"/>
+                        <span>
+                            机会简述
+                        </span>
+                        <input name="chContent" type="text"/>
                     </label>
                     <label>
-                        <span>客户类型</span>
+                        <span>
+                            客户类型
+                        </span>
                         <select name="custType">
-                            <option value="" selected="selected">请选择客户类型</option>
-                            <option value="客户">我的客户</option>
-                           <!-- <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chCustomer.custClassify}"><p th:text="${cstChance.chCustomer.custClassify}"></p></option>-->
+                            <option selected="selected" value="">
+                                请选择客户类型
+                            </option>
+                            <option value="客户">
+                                我的客户
+                            </option>
+                            <!-- <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chCustomer.custClassify}"><p th:text="${cstChance.chCustomer.custClassify}"></p></option>-->
                         </select>
                     </label>
                     <label>
-                        <span>生命周期</span>
+                        <span>
+                            生命周期
+                        </span>
                         <select name="custLifecycle">
-                            <option value="" selected="selected">请选择客户生命周期</option>
-                            <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chCustomer.custLifecycle}"><p th:text="${cstChance.chCustomer.custLifecycle}"></p></option>
+                            <option selected="selected" value="">
+                                请选择客户生命周期
+                            </option>
+                            <option th:each="cstChance:${cstChancePage.List}" th:value="${cstChance.chCustomer.custLifecycle}">
+                                <p th:text="${cstChance.chCustomer.custLifecycle}">
+                                </p>
+                            </option>
                         </select>
                     </label>
                     <label>
-                        <span>客户地址</span>
+                        <span>
+                            客户地址
+                        </span>
                         <input name="custAddress" type="text"/>
                     </label>
                     <label>
-                        <span>标签</span><img th:src="@{/img/add_grey.png}" class="fr" alt="" />
-                    </label>
-                   <label>
-                        <span>联系人名字</span>
-                        <input type="text" name="linkName"/>
-                    </label>
-                    <label>
-                        <span>联系人手机</span>
-                        <input type="text" name="linkPhone"/>
+                        <span>
+                            标签
+                        </span>
+                        <img alt="" class="fr img_list" th:src="@{/img/add_grey.png}"/>
                     </label>
                     <label>
-                        <span>联系人固话</span>
-                        <input type="text" name="linkLandlinePhone"/>
+                        <span>
+                            联系人名字
+                        </span>
+                        <input name="linkName" type="text"/>
                     </label>
                     <label>
-                        <span>联系人邮箱</span>
-                        <input type="text" name="linkEmail" />
+                        <span>
+                            联系人手机
+                        </span>
+                        <input name="linkPhone" type="text"/>
                     </label>
                     <label>
-                        <span>联系人QQ</span>
-                        <input type="text" name="linkQq"/>
+                        <span>
+                            联系人固话
+                        </span>
+                        <input name="linkLandlinePhone" type="text"/>
                     </label>
                     <label>
-                        <span>客户行业</span>
-                        <input type="text" name="custIndustry"/>
+                        <span>
+                            联系人邮箱
+                        </span>
+                        <input name="linkEmail" type="text"/>
+                    </label>
+                    <label>
+                        <span>
+                            联系人QQ
+                        </span>
+                        <input name="linkQq" type="text"/>
+                    </label>
+                    <label>
+                        <span>
+                            客户行业
+                        </span>
+                        <input name="custIndustry" type="text"/>
                     </label>
                     <div class="btngroup">
                         <input class="sure" type="submit" value="确定"/>
                         <input class="cancel" type="button" value="取消"/>
                     </div>
                 </form>
+                <!--点击加号显示列表start-->
+                <ul class="add_list_a" style="display:none;top:75px">
+                    <li>
+                        <span>
+                            所属区域
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                    A区
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            意向度
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                    很强
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            客户类型
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                    终端
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            重要性
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                    大客户
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            产品需求
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                    项目文档管理
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            购买意向
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            所在省市
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                    江苏
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            所属行业
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            跟进效果
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            客户性质
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            成交年份
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            丢单类型
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            丢单原因
+                        </span>
+                        <span>
+                            <select id="" name="">
+                                <option value="">
+                                </option>
+                            </select>
+                        </span>
+                    </li>
+                </ul>
+                <!--点击加号显示列表end-->
             </div>
         </div>
         <div class="leftContent">
@@ -186,7 +468,7 @@
                     </a>
                 </li>
                 <li>
-                    <a  th:href="@{/cstCustomer/getPage/1/7}">
+                    <a th:href="@{/cstCustomer/getPage/1/7}">
                         <img alt="公海" th:src="@{/img/seas.png}"/>
                         <span class="navTxt">
                             公海
@@ -195,12 +477,12 @@
                 </li>
                 <li class="active">
                     <!--<a href="@{'/cstChance/getCstChance/'+${userId}+'/'+${currentPage}+'/'+${pageSize}}"></a>-->
-                   <a th:href="@{/cstChance/getCstChance/1/10}">
+                    <a th:href="@{/cstChance/getCstChance/1/10}">
                         <img alt="机会" th:src="@{/img/chance.png}"/>
                         <span class="navTxt">
                             机会
                         </span>
-                   </a>
+                    </a>
                 </li>
                 <li>
                     <img alt="合同" th:src="@{/img/contract.png}"/>
@@ -222,10 +504,10 @@
                 </li>
                 <li class="settitemdisplay">
                     <a href="/crm/sysUser/getSysUserList/1/10">
-                    <img alt="设置" th:src="@{/img/setting.png}"/>
-                    <span class="navTxt">
-                        设置
-                    </span>
+                        <img alt="设置" th:src="@{/img/setting.png}"/>
+                        <span class="navTxt">
+                            设置
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -234,7 +516,7 @@
             <div class="header">
                 <div>
                     <form action="/crm/cstChance/getCstChance/1/10">
-                        <input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
+                        <input class="custCompany" name="custCompany" placeholder="请输入客户名称" type="text"/>
                         <button class="but" type="submit">
                             <img alt="" th:src="@{/img/searchIcon.png}"/>
                         </button>
@@ -281,13 +563,13 @@
                                     个人资料
                                 </a>
                             </li>
-                            <li  class="systemSetting">
+                            <li class="systemSetting">
                                 <a href="/crm/sysUser/getSysUserList/1/10">
                                     系统设置
                                 </a>
                             </li>
                             <li>
-                                <a class="loginOut" >
+                                <a class="loginOut">
                                     退出
                                 </a>
                             </li>
@@ -303,7 +585,7 @@
                                 我的机会
                                 <ul class="dnone">
                                     <li>
-                                        <a th:href="@{/cstChance/getCstChance/1/10}" style="color: #7460ee;">
+                                        <a style="color: #7460ee;" th:href="@{/cstChance/getCstChance/1/10}">
                                             我的机会
                                         </a>
                                     </li>
@@ -321,23 +603,22 @@
                             </div>
                             <p class="customerNum">
                                 <span th:text="${cstChancePage.recTotal}">
-
                                 </span>
                                 条客户信息
                             </p>
                         </div>
-                        <div class="fright">
-                            <button class="filter">
+                        <div class="fright" style="margin-top: 10px;">
+                            <button class="filter" type="button">
                                 <img th:src="@{/img/filter.png}"/>
                                 筛选
                             </button>
-                                <a th:href="@{/cstChance/getCstCustomer}">
-                                    <img th:src="@{/img/addCustomer.png}"/>
-                                    新建机会
-                                </a>
-                            <button class="moreOperate">
-                                · · ·
-                            </button>
+                            <a th:href="@{/cstChance/getCstCustomer}">
+                                <img th:src="@{/img/addCustomer.png}"/>
+                                新建机会
+                            </a>
+                            <!-- <button class="moreOperate"> -->
+                            <img alt="" class="moreOperate" th:src="@{/img/more.png}"/>
+                            <!-- </button> -->
                         </div>
                     </div>
                     <div class="allOperate dnone">
@@ -404,8 +685,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="cstChance:${cstChancePage.List}" th:data-index="${cstChance.chId}">
-                                    <input type="hidden" th:value="${cstChance.chId}"/>
+                                <tr th:data-index="${cstChance.chId}" th:each="cstChance:${cstChancePage.List}">
+                                    <input th:value="${cstChance.chId}" type="hidden"/>
                                     <td style="">
                                         <label class="forCheckbox">
                                             <input type="checkbox"/>
@@ -422,22 +703,20 @@
                                     <td class="stage" style="">
                                         <p th:text="${cstChance.chStage}">
                                         </p>
-
                                     </td>
                                     <td class="follow" style="width: 601px;">
                                         <p th:text="${cstChance.recordList[0].reContent}">
-
                                         </p>
                                         <p class="createTime" th:text="${cstChance.recordList[0].reDate}">
                                         </p>
                                     </td>
                                     <td style="">
                                         <p class="modify">
-                                            <img th:src="@{/img/more3.png}" alt="" />
+                                            <img alt="" th:src="@{/img/more3.png}"/>
                                         </p>
                                         <ul class="slideEdit">
                                             <li>
-                                                <a class="update" th:href="@{'/cstChance/getCstChanceId/'+${cstChance.chId}}" mce_href="#">
+                                                <a class="update" mce_href="#" th:href="@{'/cstChance/getCstChanceId/'+${cstChance.chId}}">
                                                     编辑
                                                 </a>
                                             </li>
@@ -456,68 +735,52 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div style="height: 100px;">
+                        </div>
                         <div class="fixed-table-pagination">
-                            <div class="pull-left pagination-detail">
-                                <span class="pagination-info">
-                                    Showing 1 to 10 of 78 rows
-                                </span>
-                                <span class="page-list">
-                                    <span class="btn-group dropup">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-                                            <span class="page-size">
-                                                10
-                                            </span>
-                                            <span class="caret">
-                                            </span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li class="active" role="menuitem">
-                                                <a href="#">
-                                                    10
+                            <div class="pull-right pagination">
+                                <ul class="pagination">
+                                    <li class="page-first">
+                                        <a th:href="@{/cstChance/getCstChance/1/10}">
+                                            首页
+                                        </a>
+                                    </li>
+                                    <li class="page-pre">
+                                        <a th:href="@{'/cstChance/getCstChance/'+${((cstChancePage.currentPage-1) le 0?1:(cstChancePage.currentPage-1))}+'/'+${cstChancePage.pageSize}}">
+                                            上一页
+                                        </a>
+                                    </li>
+                                    <li class="page-number" th:each="arr:${arrList}">
+                                        <a th:href="@{'/cstChance/getCstChance/1/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}">
+                                        </a>
+                                    </li>
+                                    <li class="page-next">
+                                        <a th:href="@{'/cstChance/getCstChance/'+${((cstChancePage.currentPage+1) ge (cstChancePage.totalPage)?(cstChancePage.totalPage):(cstChancePage.currentPage+1))}+'/'+${cstChancePage.pageSize}}">
+                                            下一页
+                                        </a>
+                                    </li>
+                                    <li class="page-last">
+                                        <a th:href="@{'/cstChance/getCstChance/'+${cstChancePage.totalPage}+'/'+${cstChancePage.pageSize}}">
+                                            尾页
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="jump">
+                                    <label>
+                                        跳转
+                                        <select>
+                                            <option th:each="arr:${arrList}" th:value="${arr}">
+                                                <a th:href="@{'/cstChance/getCstChance/1/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}">
                                                 </a>
-                                            </li>
-                                            <li role="menuitem">
-                                                <a href="#">
-                                                    25
-                                                </a>
-                                            </li>
-                                            <li role="menuitem">
-                                                <a href="#">
-                                                    50
-                                                </a>
-                                            </li>
-                                            <li role="menuitem">
-                                                <a href="#">
-                                                    100
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </span>
-                                    rows per page
-                                </span>
-                            </div>
-                            <div class="fixed-table-pagination">
-                                <div class="pull-right pagination">
-                                    <ul class="pagination">
-                                        <li class="page-first"><a th:href="@{/cstChance/getCstChance/1/10}">首页</a></li>
-                                        <li class="page-pre"><a th:href="@{'/cstChance/getCstChance/'+${((cstChancePage.currentPage-1) le 0?1:(cstChancePage.currentPage-1))}+'/'+${cstChancePage.pageSize}}">上一页</a></li>
-                                        <li class="page-number" th:each="arr:${arrList}"><a th:href="@{'/cstChance/getCstChance/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}" ></a></li>
-                                        <li class="page-next"><a th:href="@{'/cstChance/getCstChance/'+${((cstChancePage.currentPage+1) ge (cstChancePage.totalPage)?(cstChancePage.totalPage):(cstChancePage.currentPage+1))}+'/'+${cstChancePage.pageSize}}">下一页</a></li>
-                                        <li class="page-last"><a th:href="@{'/cstChance/getCstChance/'+${cstChancePage.totalPage}+'/'+${cstChancePage.pageSize}}">尾页</a></li>
-                                    </ul>
-                                    <div class="jump">
-                                        <label>调转
-                                            <select>
-                                                <option th:each="arr:${arrList}" th:value="${arr}"><a th:href="@{'/cstChance/getCstChance/1/'+${arr}+'/'+${cstChancePage.pageSize}}" th:text="${arr}"></a></option>
-                                            </select>
-                                        </label>
-                                    </div>
+                                            </option>
+                                        </select>
+                                    </label>
                                 </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-     </div>
         </div>
     </body>
 </html>

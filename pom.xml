@@ -119,7 +119,6 @@
 					<exclude>bootstrap.properties</exclude>
 				</excludes>
 			</resource>
-
 		</resources>
 		<plugins>
 			<plugin>
@@ -132,4 +131,6 @@
 		</plugins>
 
 	</build>
+
+
 </project>

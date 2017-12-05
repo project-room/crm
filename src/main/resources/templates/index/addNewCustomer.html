@@ -1,102 +1,189 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8"/>
-	<title>客户关系管理系统</title>
-	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
-	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-	<script th:src="@{/js/jquery.nicescroll.js}"></script>
-	<script th:src="@{/js/default.js}" th:inline="javascript"></script>
-	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
-	<link rel="stylesheet" th:href="@{/css/default.css}" />
-	<link rel="stylesheet" th:href="@{/css/addNewCustomer.css}" />
-	<script th:src="@{/js/addNewCustomer.js}"></script>
-</head>
-<body>
-	<div class="leftContent">
-		<div class="logo">
-			<img th:src="@{/img/logo.png}" alt="logo" />
-			<span class="logoTxt">润普CRM</span>
-		</div>
-		<ul>
-			<li>
-				<a th:href="@{/getTaskListByUserId}">
-					<img th:src="@{/img/index.png}" alt="首页" />
-					<span class="navTxt">首页</span>
-				</a>
-			</li>
-			<li class="active"><a href="/crm/cstCustomer/getPage/1/7">
-				<img th:src="@{/img/seas.png}" alt="公海" />
-				<span class="navTxt">公海</span>
-			</a>
-			</li>
-			<li>
-				<a href="chance.html">
-					<img th:src="@{/img/chance.png}" alt="机会" />
-					<span class="navTxt">机会</span>
-				</a>
-			</li>
-			<li>
-				<img th:src="@{/img/contract.png}" alt="合同" />
-				<span class="navTxt">合同</span>
-			</li>
-			<li>
-				<img th:src="@{/img/financial.png}" alt="财务" />
-				<span class="navTxt">财务</span>
-			</li>
-			<li>
-				<img th:src="@{/img/support.png}" alt="支持" />
-				<span class="navTxt">支持</span>
-			</li>
-			<li class="settitemdisplay">
-				<img th:src="@{/img/setting.png}" alt="设置" />
-				<span class="navTxt">设置</span>
-			</li>
-		</ul>
-	</div>
-	<div class="rightContent">
-		<div class="header">
-			<div>
-				<div class="mail">
-					<span class="msgNum">1</span>
-					<div>
-						<ul>
-							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-							<li><a href="">聂宇豪创建了新</a></li>
-						</ul>
-						<p class="lookMore"><a href="" class="grey">查看更多</a></p>
-					</div>
-				</div>
-				<div class="user">
-					<span class="userName" id="userNameRevertUserId" ></span>
-					<span class="xiala"><img th:src="@{/img/xiala.png}" /></span>
-					<ul class="detail">
-						<li><a class="personData">个人资料</a></li>
-						<li><a class="systemSetting">系统设置</a></li>
-						<li><a class="loginOut">退出</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="main">
-			<div style="background: #fff" >
-				<h4>基本信息</h4>
-				<form class="addNew" id="saveForm" action="/crm/cstCustomer/createCstCustomer">
-					<label for="companyName">公司名称&emsp;<input type="text" id="companyName" name="custCompany"/></label>
-					<label for="contactName">联系人名称<input type="text" id="contactName" name="linkName" /></label>
-					<label for="mobilephone">移动电话&emsp;<input type="text" id="mobilephone" class="mobile" name="linkPhone"/></label>
-					<label for="telephone">固定电话&emsp;<input type="text" id="telephone" class="telphone" name="linkLandlinePhone"/></label>
-					<label for="mail">QQ/邮箱&emsp;<input type="text" id="mail" class="email" name="LinkEmail"/></label>
-					<label for="province">所在省份&emsp;<input type="text" id="province" name="custAddress"/></label>
-					<input type="text" id="forUserId" name="userId" hidden="hidden"  value=""/>
-
-					<input type="button" class="save" value="保存" id="save"/>
-					<input type="button" class="cancel" value="取消" id="cancel" />
-				</form>
-
-			</div>
-		</div>
-	</div>
-</body>
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            客户关系管理系统
+        </title>
+        <script th:src="@{/js/jquery-1.8.3.min.js}">
+        </script>
+        <script th:src="@{/bootstrap/js/bootstrap.js}">
+        </script>
+        <script th:src="@{/js/jquery.nicescroll.js}">
+        </script>
+        <script th:inline="javascript" th:src="@{/js/default.js}">
+        </script>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+        <link rel="stylesheet" th:href="@{/css/default.css}"/>
+        <link rel="stylesheet" th:href="@{/css/addNewCustomer.css}"/>
+        <script th:src="@{/js/addNewCustomer.js}">
+        </script>
+    </head>
+    <body>
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" th:src="@{/img/logo.png}"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
+            </div>
+            <ul>
+                <li>
+                    <a th:href="@{/getTaskListByUserId}">
+                        <img alt="首页" th:src="@{/img/index.png}"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/crm/cstCustomer/getPage/1/7">
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
+                        <span class="navTxt">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chance.html">
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <img alt="合同" th:src="@{/img/contract.png}"/>
+                    <span class="navTxt">
+                        合同
+                    </span>
+                </li>
+                <li>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li class="settitemdisplay">
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent">
+            <div class="header">
+                <div>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName" id="userNameRevertUserId">
+                        </span>
+                        <span class="xiala">
+                            <img th:src="@{/img/xiala.png}"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a class="personData">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a class="systemSetting">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a class="loginOut">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div style="background: #fff">
+                    <h4>
+                        基本信息
+                    </h4>
+                    <form action="/crm/cstCustomer/createCstCustomer" class="addNew" id="saveForm">
+                        <label for="companyName">
+                            <span>
+                                公司名称
+                            </span>
+                            <input id="companyName" name="custCompany" type="text"/>
+                        </label>
+                        <label for="contactName">
+                            <span>
+                                联系人名称
+                            </span>
+                            <input id="contactName" name="linkName" type="text"/>
+                        </label>
+                        <label for="mobilephone">
+                            <span>
+                                移动电话
+                            </span>
+                            <input id="mobilephone" name="linkPhone" type="text"/>
+                        </label>
+                        <label for="telephone">
+                            <span>
+                                固定电话
+                            </span>
+                            <input id="telephone" name="linkLandlinePhone" type="text"/>
+                        </label>
+                        <label for="mail">
+                            <span>
+                                QQ/邮箱
+                            </span>
+                            <input id="mail" name="LinkEmail" type="text"/>
+                        </label>
+                        <label for="province">
+                            <span>
+                                所在省份
+                            </span>
+                            <input id="province" name="custAddress" type="text"/>
+                        </label>
+                        <input hidden="hidden" id="forUserId" name="userId" type="text" value=""/>
+                        <input class="save" id="save" type="button" value="保存"/>
+                        <input class="cancel" id="cancel" type="button" value="取消"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

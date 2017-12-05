@@ -136,31 +136,10 @@
           c.user_id=s.user_id
        </select>
 
-     <!--登录角色经理或管理员，查询机会总条数-->
-     <select id="getCstChanceToCount" resultType="int">
-       select count(ch_id) from cst_chance
-     </select>
-
-     <!--根据用户id查询机会条数 -->
+     <!--查询机会条数 -->
      <select id="getCstChanceCount" parameterType="Long" resultType="int">
        select count(ch_id) from cst_chance where user_id=#{userId}
      </select>
-
-     <!--登录是管理员或销售经理，查询所有机会-->
-      <select id="getCstChanceNo" resultMap="BaseResultMap">
-        select * from cst_chance c LEFT JOIN cst_record  r ON c.ch_id=r.ch_id, cst_customer u ,sys_user y <!--where y.user_id=c.user_id  and c.cust_id =u.cust_id-->  <!--and u.cust_company like '%${custCompany}%'-->
-        <where>
-          <if test="userId!=0">
-           and y.user_id=c.user_id  and c.cust_id =u.cust_id
-          </if>
-          <if test="custCompany!=null and custCompany!=''">
-            and u.cust_company like '%${custCompany}%'
-          </if>
-          GROUP BY c.ch_id  ORDER BY r.re_date DESC  limit #{currentPageLimit},#{pageSize}
-        </where>
-      </select>
-
-
 
   <!-- 根据用户id查询我的所有机会  -->
    <select id="getCstChance" resultMap="BaseResultMap">
@@ -201,18 +180,10 @@
   <update id="updateCst"  parameterType="cstChance">
     UPDATE cst_chance SET  user_name=#{userName},user_id=#{userId} WHERE ch_stage=#{chStage}
   </update>-->
-  <select id="getCstChanceZhuanCount" resultType="int">
-    select count(ch_id) from cst_chance where ch_status!=""
-  </select>
 
   <select id="getCstChanceCountTo" parameterType="Long" resultType="int">
     select count(ch_id) from cst_chance where user_id=#{userId} and ch_status!=""
   </select>
-
-  <select id="getCstChanceNoUserId" resultMap="BaseResultMap">
-    SELECT a.*,t.cust_company,u.user_name FROM cst_chance a,cst_customer t,sys_user u where a.user_id=u.user_id AND a.cust_id=t.cust_id  and a.ch_status!=""
-  </select>
-
 
   <!--机会转交查询-->
   <select id="getCstChanceUserId"  resultMap="BaseResultMap">

@@ -52,8 +52,8 @@
     SELECT * FROM sys_dynamic WHERE dy_id=#{id}
   </select>
   <insert id="addSysDynamic" parameterType="map">
-  INSERT INTO sys_dynamic (user_id,role_id,user_name,dy_content,dy_date,dy_classify,cust_id,cust_company)
-    VALUES (#{userId},#{roleId},#{userName},#{dyContent},#{dyDate},#{dyClassify},#{custId},#{custCompany})
+    INSERT INTO sys_dynamic (role_id,user_name,dy_content,dy_date,dy_classify,cust_id,cust_company)
+    VALUES (#{roleId},#{userName},#{dyContent},#{dyDate},#{dyClassify},#{custId},#{custCompany})
   </insert>
   <delete id="deleteById" parameterType="Long">
     DELETE FROM sys_dynamic WHERE dy_id=#{id}
@@ -129,7 +129,7 @@ WHERE
          SELECT * FROM sys_dynamic  ORDER BY dy_date DESC
       </if>
       <if test="roleId==3">
-        SELECT * FROM sys_dynamic WHERE role_id=#{roleId} AND user_id=#{userId} ORDER BY dy_date DESC
+        SELECT * FROM sys_dynamic WHERE role_id=#{roleId} ORDER BY dy_date DESC
       </if>
   </select>
 </mapper>

@@ -22,8 +22,6 @@ public interface SysUserMapper {
 
     SysUser findByAccount(String account);
 
-    //查询
-
     //通过用户名获取用户Id
     Long selectUserIdByUserName(@Param("userName") String userName);
 

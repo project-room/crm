@@ -81,7 +81,7 @@ public class SysDynamicController extends BaseController {
             if(roleName.equals("销售员")){
                 roleId=3L;
             }
-          List<SysDynamic> sysDynamicAll= iSysDynamicService.selectDynamicAll(userId,roleId);
+          List<SysDynamic> sysDynamicAll= iSysDynamicService.selectDynamicAll(roleId);
             //设置创建时间格式
             for (SysDynamic sysDynamic:sysDynamicAll
                     ) {

@@ -29,7 +29,7 @@ public interface ICstChanceService {
 
     public  List<SysUser>  getSysUser(Long userId);
 
-    public  boolean updateCst(CstChance cstChance);
+   public  boolean updateCst(CstChance cstChance);
 
     public List<CstCustomer>  getCstCustomer(Long id);
 

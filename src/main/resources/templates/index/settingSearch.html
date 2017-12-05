@@ -5,21 +5,28 @@
             <title>
                 客户关系管理系统
             </title>
-            <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
-            <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-            <script th:src="@{/bootstrap/js/bootstrap-table.js}"></script>
-            <script th:src="@{/js/jquery.nicescroll.js}"></script>
-            <script th:src="@{/laydate/laydate.js}"></script>
-            <script th:src="@{/js/simpleAlert.js}"></script>
-            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-            <link th:href="@{/css/default.css}" rel="stylesheet"/>
-            <link th:href="@{/css/setting.css}" rel="stylesheet"/>
-            <script th:src="@{/js/default.js}"></script>
-            <script th:src="@{/js/setting.js}"></script>
+            <script th:src="@{/js/jquery-1.8.3.min.js}">
+            </script>
+            <script th:src="@{/bootstrap/js/bootstrap.js}">
+            </script>
+            <script th:src="@{/bootstrap/js/bootstrap-table.js}">
+            </script>
+            <script th:src="@{/js/jquery.nicescroll.js}">
+            </script>
+            <script th:src="@{/laydate/laydate.js}">
+            </script>
+            <script th:src="@{/js/simpleAlert.js}">
+            </script>
+            <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+            <link rel="stylesheet" th:href="@{/css/default.css}"/>
+            <link rel="stylesheet" th:href="@{/css/setting.css}"/>
+            <script th:src="@{/js/default.js}">
+            </script>
+            <script th:src="@{/js/setting.js}">
+            </script>
         </meta>
     </head>
     <body>
-        
         <div class="leftContent">
             <div class="logo">
                 <img alt="logo" th:src="@{/img/logo.png}"/>
@@ -52,7 +59,14 @@
                         </span>
                     </a>
                 </li>
-                <li><a ><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
+                <li>
+                    <a>
+                        <img alt="合同" th:src="@{/img/contract.png}"/>
+                        <span class="navTxt">
+                            合同
+                        </span>
+                    </a>
+                </li>
                 <li>
                     <img alt="财务" th:src="@{/img/financial.png}"/>
                     <span class="navTxt">
@@ -70,7 +84,7 @@
                         <img alt="设置" th:src="@{/img/setting.png}"/>
                         <span class="navTxt">
                             设置
-                        </span>                        
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -78,7 +92,7 @@
         <div class="rightContent">
             <div class="header">
                 <div>
-                    <input placeholder="请输入客户名称" type="text" class="searchName"/>
+                    <input class="searchName" placeholder="请输入客户名称" type="text"/>
                     <button class="search">
                         <img alt="" th:src="@{/img/searchIcon.png}"/>
                     </button>
@@ -143,56 +157,146 @@
                     <div class="mainHeader">
                         <div class="fleft">
                             <ul>
-                                <li class="active"><a href="/crm/sysUser/getSysUserList/1/10">用户管理</a></li>
-                                <li class="org"><a href="javascript:void(0);">组织架构管理</a><i></i>
+                                <li class="active">
+                                    <a href="/crm/sysUser/getSysUserList/1/10">
+                                        用户管理
+                                    </a>
+                                </li>
+                                <li class="org">
+                                    <a href="javascript:void(0);">
+                                        组织架构管理
+                                    </a>
+                                    <i>
+                                    </i>
                                     <ul class="bumen dnone">
                                         <li>
-                                            <a th:href="@{/sysUser/loadSalesManager}">销售部</a>
+                                            <a th:href="@{/sysUser/loadSalesManager}">
+                                                销售部
+                                            </a>
                                             <ul class="quyu">
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a >技术支持</a>
+                                            <a>
+                                                技术支持
+                                            </a>
                                             <ul class="quyu">
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a >财务部</a>
+                                            <a>
+                                                财务部
+                                            </a>
                                             <ul class="quyu">
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a >行政部</a>
+                                            <a>
+                                                行政部
+                                            </a>
                                             <ul class="quyu">
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
-                                                <li><a >1A区</a></li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        1A区
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="cus"><a href="javascript:void(0);">自定义字段设置</a><i></i>
+                                <li class="cus">
+                                    <a href="javascript:void(0);">
+                                        自定义字段设置
+                                    </a>
+                                    <i>
+                                    </i>
                                     <ul class="dnone">
-                                        <li><a >机会</a></li>
-                                        <li><a >合同</a></li>
+                                        <li>
+                                            <a>
+                                                机会
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                合同
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a>业务流程设置</a></li>
-                                <li><a>参数设置</a></li>
+                                <li>
+                                    <a>
+                                        业务流程设置
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        参数设置
+                                    </a>
+                                </li>
                             </ul>
-                            
                         </div>
                         <div class="fright">
-                            <label><input type="text" name="userNameOrAccount" placeholder="请输入员工名字或登陆账号" /><i class="toSearch" id="searchUserNameOrAccount"><img th:src="@{/img/search.png}" alt="搜索"/></i></label>
+                            <label>
+                                <input name="userNameOrAccount" placeholder="请输入员工名字或登陆账号" type="text"/>
+                                <i class="toSearch" id="searchUserNameOrAccount">
+                                    <img alt="搜索" th:src="@{/img/search.png}"/>
+                                </i>
+                            </label>
                             <a th:href="@{'/cstCustomer/toAddEmployee'}">
                                 添加员工
                             </a>
@@ -200,12 +304,18 @@
                     </div>
                     <div class="allOperate dnone">
                         <label class="forCheckbox">
-                            <input type="checkbox" name="" />
+                            <input name="" type="checkbox"/>
                         </label>
-                        <a class="editSysUserInfo"><img th:src="@{/img/edit.png}" />修改信息</a>
-                        <a href="javascript:void(0);" class="stopAccount"><img th:src="@{/img/stopAcc.png}" />停用账号</a>
+                        <a class="editSysUserInfo">
+                            <img th:src="@{/img/edit.png}"/>
+                            修改信息
+                        </a>
+                        <a class="stopAccount" href="javascript:void(0);">
+                            <img th:src="@{/img/stopAcc.png}"/>
+                            停用账号
+                        </a>
                     </div>
-                    <div class="content" th:hidden="${changeEmpty eq 0}" >
+                    <div class="content" th:hidden="${changeEmpty eq 0}">
                         <table class="table table-hover" id="table">
                             <thead>
                                 <tr>
@@ -260,58 +370,83 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="sysUser:${sysUserPage.list}">
-                                <input type="hidden" th:value="${sysUser.userId}"  name="" />
-                                <td style="">
-                                    <label class="forCheckbox">
-                                        <input type="checkbox"/>
-                                    </label>
-                                </td>
-                                <td style="">
-                                    <p th:text="${sysUser.userName}"></p>
-                                </td>
-
-                                <td style="">
-                                    <p th:text="${sysUser.userAccounts}"></p>
-                                </td>
-                                <td style="">
-                                    <p th:text="${sysUser.userStatus eq 1?'正常':'停用'} "></p>
-                                </td>
-                                <td style="">
-                                    <p th:text="${sysUser.userPhone}"></p>
-                                </td>
-                                <td style="">
-                                    <p th:text="${sysUser.userDepartment}"></p>
-                                </td>
-                                <td>
-                                    <p th:text="${sysUser.userPosition}"></p>
-                                </td>
-                            </tr>
+                                <tr th:each="sysUser:${sysUserPage.list}">
+                                    <input name="" th:value="${sysUser.userId}" type="hidden"/>
+                                    <td style="">
+                                        <label class="forCheckbox">
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userName}">
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userAccounts}">
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userStatus eq 1?'正常':'停用'} ">
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userPhone}">
+                                        </p>
+                                    </td>
+                                    <td style="">
+                                        <p th:text="${sysUser.userDepartment}">
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${sysUser.userPosition}">
+                                        </p>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="fixed-table-pagination">
-                            <span class="employeeNum">共<span th:text="${sysUserPage.recTotal}"></span>条员工记录</span>
+                            <span class="employeeNum">
+                                共
+                                <span th:text="${sysUserPage.recTotal}">
+                                </span>
+                                条员工记录
+                            </span>
                             <div class="pull-right pagination">
                                 <ul class="pagination">
-                                    <li class="page-first"><a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/1/10'}">首页</a></li>
+                                    <li class="page-first">
+                                        <a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/1/10'}">
+                                            首页
+                                        </a>
+                                    </li>
                                     <li class="page-pre">
                                         <a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${((sysUserPage.currentPage-1) le 0?1:(sysUserPage.currentPage-1))}+'/10'}">
                                             上一页
                                         </a>
                                     </li>
-                                    <li class="page-number"  th:each="arr:${arrInteger}"><a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${arr}+'/10'}" th:text="${arr}"></a></li>
+                                    <li class="page-number" th:each="arr:${arrInteger}">
+                                        <a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${arr}+'/10'}" th:text="${arr}">
+                                        </a>
+                                    </li>
                                     <li class="page-next">
                                         <a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${(sysUserPage.currentPage+1) ge (sysUserPage.totalPage)?(sysUserPage.totalPage):(sysUserPage.currentPage+1)}+'/10'}">
                                             下一页
                                         </a>
                                     </li>
-                                    <li class="page-last"><a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${sysUserPage.totalPage}+'/10'}">尾页</a></li>
+                                    <li class="page-last">
+                                        <a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${sysUserPage.totalPage}+'/10'}">
+                                            尾页
+                                        </a>
+                                    </li>
                                 </ul>
                                 <div class="jump">
-                                    <label>调转
-                                        <input type="hidden" th:value="${userNameOrAccount}" name="userNameOrAccount"/>
+                                    <label>
+                                        调转
+                                        <input name="userNameOrAccount" th:value="${userNameOrAccount}" type="hidden"/>
                                         <select class="dumppagescreen">
-                                            <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${arr}+'/10'}" th:text="${arr}"></a></option>
+                                            <option th:each="arr:${arrInteger}" th:value="${arr}">
+                                                <a th:href="@{'/sysUser/searchUserNameOrAccount/'+${userNameOrAccount}+'/'+${arr}+'/10'}" th:text="${arr}">
+                                                </a>
+                                            </option>
                                         </select>
                                     </label>
                                 </div>
@@ -320,10 +455,12 @@
                     </div>
                     <div class="content" th:hidden="${changeEmpty eq 1}">
                         <div class="wait">
-                            <img th:src="@{/img/wait3.png}" alt="" />
-                            <p>搜索结果为空，请确认后重新输入</p>
+                            <img alt="" th:src="@{/img/wait3.png}"/>
+                            <p>
+                                搜索结果为空，请确认后重新输入
+                            </p>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>

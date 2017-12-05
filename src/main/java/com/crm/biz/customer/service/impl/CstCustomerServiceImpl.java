@@ -235,8 +235,8 @@ public class CstCustomerServiceImpl implements ICstCustomerService{
     }
 
     @Override
-    public void addCstCustomerSysDynamic(Long userId,String userName, Long roleId, int dyClassify, String dyContent,Date date,Long custId,String custCompany) {
-        sysDynamicMapper.addSysDynamic(userId,userName,roleId,dyClassify,dyContent,date,custId,custCompany);
+    public void addCstCustomerSysDynamic(String userName, Long roleId, int dyClassify, String dyContent,Date date,Long custId,String custCompany) {
+        sysDynamicMapper.addSysDynamic(userName,roleId,dyClassify,dyContent,date,custId,custCompany);
     }
 
 

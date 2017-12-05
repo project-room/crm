@@ -137,7 +137,6 @@ public class CstCustomerController extends BaseController{
             cstCustomer.setCustDate(date);
             cstCustomer.setCustType("2");
             cstCustomer.setCustClassify(2);
-            chLinkman.setLinkStatus(0);
             Long custId=cstCustomerService.createCstCustomer(cstCustomer,chLinkman);
 
             //首页添加客户动态
@@ -160,7 +159,7 @@ public class CstCustomerController extends BaseController{
             CstCustomer cstCustomerForCompany= cstCustomerService.lookCstCustomerInfo(custId);
             String custCompany= cstCustomerForCompany.getCustCompany();
 
-            cstCustomerService.addCstCustomerSysDynamic(userId,userName,roleId,dyClassify,dyContent,date,custId,custCompany);
+            cstCustomerService.addCstCustomerSysDynamic(userName,roleId,dyClassify,dyContent,date,custId,custCompany);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code","-1");

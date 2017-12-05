@@ -1,553 +1,2828 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <title>客户关系管理系统</title>
-    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/default.css}"/>
-    <link rel="stylesheet" th:href="@{/css/change.css}"/>
-    <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
-    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-    <script th:src="@{/js/jquery.nicescroll.js}"></script>
-    <script th:src="@{/js/default.js}"></script>
-    <script th:src="@{/js/change.js}"></script>
-</head>
-<body>
-<div class="leftContent">
-    <div class="logo">
-        <img th:src="@{/img/logo.png}" alt="logo"/>
-        <span class="logoTxt">润普CRM</span>
-    </div>
-    <ul>
-        <li>
-            <a th:href="@{/getTaskListByUserId}">
-                <img th:src="@{/img/index.png}" alt="首页"/>
-                <span class="navTxt">首页</span>
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/cstCustomer/getPage/1/7}">
-                <img th:src="@{/img/seas.png}" alt="公海"/>
-                <span class="navTxt">公海</span>
-            </a>
-        </li>
-        <li  class="active">
-            <a th:href="@{/cstChance/getCstChance/1/10}">
-                <img th:src="@{/img/chance.png}" alt="机会"/>
-                <span class="navTxt">机会</span>
-            </a>
-        </li>
-        <li>
-            <img th:src="@{/img/contract.png}" alt="合同"/>
-            <span class="navTxt">合同</span>
-        </li>
-        <li>
-            <img th:src="@{/img/financial.png}" alt="财务"/>
-            <span class="navTxt">财务</span>
-        </li>
-        <li>
-            <img th:src="@{/img/support.png}" alt="支持"/>
-            <span class="navTxt">支持</span>
-        </li>
-        <li>
-            <img th:src="@{/img/setting.png}" alt="设置"/>
-            <span class="navTxt">设置</span>
-        </li>
-    </ul>
-</div>
-<div class="rightContent" th:each="cstChanceList:${cstChanceList}">
-    <div class="header">
-        <div>
-            <form action="/crm/cstChance/getCstChance/1/10">
-                <input placeholder="请输入客户名称" type="text" class="custCompany" name="custCompany" />
-                <button class="but" type="submit">
-                    <img alt="" th:src="@{/img/searchIcon.png}"/>
-                </button>
-            </form>
-            <div class="mail">
-                <span class="msgNum">1</span>
-                <div>
-                    <ul>
-                        <li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-                        <li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-                        <li><a href="">聂宇豪创建了新</a></li>
-                    </ul>
-                    <p class="lookMore"><a href="" class="grey">查看更多</a></p>
-                </div>
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            客户关系管理系统
+        </title>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+        <link rel="stylesheet" th:href="@{/css/default.css}"/>
+        <link rel="stylesheet" th:href="@{/css/change.css}"/>
+        <link rel="stylesheet" th:href="@{/css/list.css}"/>
+        <link rel="stylesheet" th:href="@{/css/dropzone.css}"/>
+        <script th:src="@{/js/jquery-1.8.3.min.js}">
+        </script>
+        <script th:src="@{/bootstrap/js/bootstrap.js}">
+        </script>
+        <script th:src="@{/js/jquery.nicescroll.js}">
+        </script>
+        <script th:src="@{/js/default.js}">
+        </script>
+        <script th:src="@{/js/change.js}">
+        </script>
+        <script th:src="@{/js/dropzone.js}">
+        </script>
+        <!--<script th:src="@{/js/seas.js}"></script>-->
+    </head>
+    <body class="changeDetail">
+        <div class="referralPop dnone" style="font-size: 14px;">
+            <div class="shelter cancel">
             </div>
-            <div class="user">
-                <span class="userName">聂宇豪</span>
-                <span class="xiala"><img th:src="@{/img/xiala.png}"/></span>
-                <ul class="detail">
-                    <li><a class="personData">个人资料</a></li>
-                    <li><a href="">系统设置</a></li>
-                    <li><a class="loginOut">退出</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="main" >
-        <div class="customerMsg clearAfter">
-            <div class="customerLogo"><img th:src="@{/img/chinaUnicom.png}" height="86" width="154"/></div>
-            <div class="customerDetailMsg" >
-                <h3><p th:text="${cstChanceList.chCustomer.custCompany}"></p></h3>
-                <p th:text="${cstChanceList.chCustomer.custContent}"></p>
-                <a class="dropDown"><img th:src="@{/img/dropDown2.png}" height="8" width="15"/></a>
-            </div>
-        </div>
-        <div class="leftSide">
-            <form action="/crm/cstChance/updateCstChance">
-            <div class="leftSideHeader">
-                <p>销售机会信息</p>
-                <a class="leftSideEdit">操作<img th:src="@{/img/arrowDown.png}" height="8" width="10"/></a>
-            </div>
-            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
-                <tr>
-                    <td class="chId">机会简述<input type="hidden" name="chId" th:value="${cstChanceList.chId}"/></td>
-                    <td><input type="text" name="chContent" th:value="${cstChanceList.chContent}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>阶段</td>
-                    <td>
-                     <div class="disabledShelter"></div>
-                    <select name="chStage" disabled="disabled">
-                        <option th:value="${cstChanceList.chStage}"><p th:text="${cstChanceList.chStage}"></p></option>
-                        <option value="初期沟通">初期沟通</option>
-                        <option value="立项评估">立项评估</option>
-                        <option value="需求分析">需求分析</option>
-                        <option value="合同签订">合同签订</option>
-                    </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>分类</td>
-                    <td>
-                        <div class="disabledShelter"></div>
-                        <input type="hidden" name="custId" th:value="${cstChanceList.chCustomer.custId}"/>
-                        <select name="custType" disabled="disabled">
-                            <option th:value="${cstChanceList.chCustomer.custType}"><p th:text="${cstChanceList.chCustomer.custType}"></p></option>
-                            <option value="代理商">代理商</option>
-                            <option value="客户">客户</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>下级客户</td>
-                    <td><input type="text" th:value="${cstCustomer ne null ? cstCustomer.custCompany:null}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>生命周期</td>
-                    <td>
-                        <div class="disabledShelter"></div>
-                        <select name="custLifecycle" disabled="disabled">
-                            <option><p th:text="${cstChanceList.chCustomer.custLifecycle}" disabled="disabled"></p></option>
-                            <option value="成交客户" >成交客户</option>
-                            <option value="潜在客户" >潜在客户</option>
-                            <option value="失效客户" >失效客户</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>客户官网</td>
-                    <td><input type="text" name="custWebsite" th:value="${cstChanceList.chCustomer.custWebsite}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>所在省份</td>
-                    <td><input type="text" name="custprovinceChar" th:value="${cstChanceList.chCustomer.custprovinceChar}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>地址</td>
-                    <td><input type="text" name="custAddress" th:value="${cstChanceList.chCustomer.custAddress}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>标签</td>
-                    <td><span class="changeLabel" th:text="${cstChanceList.chIntentionality}"></span><span class="changeLabel" th:text="${cstChanceList.requirement}"></span></td>
-                </tr>
-            </table>
-
-            <div class="leftSideHeader">
-                <p>主要联系人</p>
-            </div>
-            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
-                <tr>
-                    <td>姓名<input type="hidden" name="linkId" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkId:null}"/></td>
-                    <td><input type="text" name="linkName"   th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkName:null}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>手机</td>
-                    <td><input type="text" name="linkPhone" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkPhone:null}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>固话</td>
-                    <td><input type="text" name="linkLandlinePhone" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkLandlinePhone:null}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>邮箱</td>
-                    <td><input type="text" name="linkEmail" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkEmail:null}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>QQ</td>
-                    <td><input type="text" name="linkQq" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkQq:null}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>微信</td>
-                    <td><input type="text" name="linkWechat" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkWechat:null}" disabled="disabled"/></td>
-                </tr>
-            </table>
-                <div class="leftSideHeader">
-                    <p>次要联系人</p>
-                </div>
-                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
-                    <tr>
-                        <td>姓名</td>
-                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkName:null}"  disabled="disabled"/></td>
-                    </tr>
-                    <tr>
-                        <td>手机</td>
-                        <td><input type="text" th:value="${ cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkPhone:null}" disabled="disabled"/></td>
-                    </tr>
-                    <tr>
-                        <td>固话</td>
-                        <td><input type="text" th:value="${ cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkLandlinePhone:null}" disabled="disabled"/></td>
-                    </tr>
-                    <tr>
-                        <td>邮箱</td>
-                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkEmail:null}" disabled="disabled"/></td>
-                    </tr>
-                    <tr>
-                        <td>QQ</td>
-                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkQq:null}" disabled="disabled"/></td>
-                    </tr>
-                    <tr>
-                        <td>微信</td>
-                        <td><input type="text" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkWechat:null}" disabled="disabled"/></td>
-                    </tr>
+            <div class="referralmain">
+                <h4>
+                    转交机会
+                    <img alt="close" class="fr cancel" src="img/close.png"/>
+                </h4>
+                <label>
+                    <input name="" placeholder="请输入销售员名字" type="input"/>
+                    <button>
+                        <img alt="搜索" src="img/search.png"/>
+                    </button>
+                </label>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                销售员
+                            </th>
+                            <th>
+                                职位
+                            </th>
+                            <th>
+                                手机
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="forCheckbox">
+                                    <input id="" name="" type="checkbox"/>
+                                </label>
+                                张三
+                            </td>
+                            <td>
+                                销售专员
+                            </td>
+                            <td>
+                                123456787654
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="forCheckbox">
+                                    <input id="" name="" type="checkbox"/>
+                                </label>
+                                张三
+                            </td>
+                            <td>
+                                销售专员
+                            </td>
+                            <td>
+                                123456787654
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-
-            <div class="leftSideHeader">
-                <p>详细信息</p>
+                <div class="pagination">
+                    <ul>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                1
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                2
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                3
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                4
+                            </a>
+                        </li>
+                        <li class="page-number2 active">
+                            <a href="javascript:void(0);">
+                                5
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                6
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                7
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                8
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                9
+                            </a>
+                        </li>
+                        <li class="page-number2">
+                            <a href="javascript:void(0);">
+                                10
+                            </a>
+                        </li>
+                    </ul>
+                    <span>
+                        跳转
+                    </span>
+                    <select>
+                        <option>
+                            1
+                        </option>
+                        <option>
+                            1
+                        </option>
+                        <option>
+                            1
+                        </option>
+                    </select>
+                </div>
+                <div class="btns">
+                    <button class="sure" type="button">
+                        确定
+                    </button>
+                    <button class="canc" type="reset">
+                        取消
+                    </button>
+                </div>
             </div>
-            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="leftSideTable">
-                <tr>
-                    <td>立项背景</td>
-                    <td><input type="text" name="chBackground" th:value="${cstChanceList.chBackground}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>主要联系人所在部门、职位</td>
-                    <td><input type="text" name="linkDepartment"  th:value="${cstChanceList.linkmanList[0].linkDepartment}" disabled="disabled"/>
-                        <input type="text" name="linkPosition"  th:value="${cstChanceList.linkmanList[0].linkPosition}" disabled="disabled"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>主要使用部门</td>
-                    <td><input type="text" name="chDept" th:value="${cstChanceList.chDept}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>客户预算</td>
-                    <td><input type="text" name="custCustomerBudget" th:value="${cstChanceList.chCustomer.custCustomerBudget}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>是否存在详细需求文档</td>
-                    <td><div class="disabledShelter"></div>
-                        <select name="chDoc" disabled="disabled">
-                            <option><p th:text="${cstChanceList.chDoc}"></p></option>
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>是否了解其他供应商</td>
-                    <td>
-                        <div class="disabledShelter"></div>
-                        <select name="chSupplier" disabled="disabled">
-                            <option><p th:text="${cstChanceList.chSupplier}"></p></option>
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>期望何时上线</td>
-                    <td><input type="text" name="chUptime" th:value="${cstChanceList.chUptime}" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>我们有哪些客户属于这个行业</td>
-                    <td><input type="text" value="移动中国服务有限公司 移动中国服务有限公司 移动中国服务有限公司 移动中国服务有限公司" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td>机会负责人</td>
-                    <td><input type="text" th:value="${cstChanceList.sysUser.userName}" disabled="disabled"/></td>
-                </tr>
-            </table>
-            <div class="leftSideBtn">
-                <input class="sure" type="submit" value="修改"/>
-               <button>取消</button>
-            </div>
-                </form>
         </div>
-        <div class="rightSide">
-            <ul class="headerNav">
-                <li class="active">进度</li>
-                <li>记录</li>
-                <li>合同</li>
-                <li>关联</li>
-                <li>文件</li>
-                <li>任务</li>
-            </ul>
-            <div class="rightSideProgress progressNavDetail progressNavDetail0">
-                <p class="progressTitle">8月，2017</p>
-                <ul>
-                    <li>
-                        <div class="progressList"></div>
-                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
-                        <div>
-                            <span>22日 16:00</span>
-                            <img class="detailPic" th:src="@{/img/payment.png}" height="16" width="18"/>
-                            <span>跟进回款</span>
-                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="progressList"></div>
-                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
-                        <div>
-                            <span>22日 16:00</span>
-                            <img class="detailPic" th:src="@{/img/followUp.png}" height="18" width="19"/>
-                            <span>跟进回款</span>
-                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="progressList"></div>
-                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
-                        <div>
-                            <span>22日 16:00</span>
-                            <img class="detailPic" th:src="@{/img/clock.png}" height="18" width="18"/>
-                            <span>跟进回款</span>
-                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="progressList"></div>
-                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
-                        <div>
-                            <span>22日 16:00</span>
-                            <img class="detailPic" th:src="@{/img/payment.png}" height="16" width="18"/>
-                            <span>跟进回款</span>
-                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img class="boll" th:src="@{/img/boll.png}" height="14" width="14"/>
-                        <div>
-                            <span>22日 16:00</span>
-                            <img class="detailPic" th:src="@{/img/addMsg.png}" height="18" width="16"/>
-                            <span>跟进回款</span>
-                            <p class="progressState">×××合同收到回款:10000元/未收款:50000元  </p>
-                        </div>
-                    </li>
-                </ul>
-                <p class="progressTitle">7月，2017</p>
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" th:src="@{/img/logo.png}"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
             </div>
-            <div class="rightSideRecord progressNavDetail progressNavDetail1">
-                <textarea class="recordTextarea"></textarea>
-                <div class="upload"><img th:src="@{/img/upload.png}" height="16" width="16"/>上传附件</div>
-                <a class="fabu" href="javascirpt:void(0);">发布</a>
-                <div class="clearfix"></div>
-                <p class="recordNum"><span>记录</span>（15）</p>
-             <!--   <div>
+            <ul>
+                <li>
+                    <a th:href="@{/getTaskListByUserId}">
+                        <img alt="首页" th:src="@{/img/index.png}"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/cstCustomer/getPage/1/7}">
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
+                        <span class="navTxt">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a th:href="@{/cstChance/getCstChance/1/10}">
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <img alt="合同" th:src="@{/img/contract.png}"/>
+                    <span class="navTxt">
+                        合同
+                    </span>
+                </li>
+                <li>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li>
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent" th:each="cstChanceList:${cstChanceList}">
+            <div class="header">
+                <div>
+                    <form action="/crm/cstChance/getCstChance/1/10">
+                        <input class="custCompany" name="custCompany" placeholder="请输入客户名称" type="text"/>
+                        <button class="but" type="submit">
+                            <img alt="" th:src="@{/img/searchIcon.png}"/>
+                        </button>
+                    </form>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName">
+                            聂宇豪
+                        </span>
+                        <span class="xiala">
+                            <img th:src="@{/img/xiala.png}"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a class="personData">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a class="loginOut">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div class="customerMsg clearAfter" style="height:237px;overflow:hidden">
+                    <div class="customerLogo">
+                        <img height="86" th:src="@{/img/chinaUnicom.png}" width="154"/>
+                    </div>
+                    <div class="customerDetailMsg">
+                        <h3>
+                            <p th:text="${cstChanceList.chCustomer.custCompany}">
+                            </p>
+                        </h3>
+                        <p th:text="${cstChanceList.chCustomer.custContent}">
+                        </p>
+                        <a class="dropDown">
+                            <img height="8" th:src="@{/img/dropDown2.png}" width="15"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="leftSide">
+                    <form action="/crm/cstChance/updateCstChance">
+                        <div class="leftSideHeader">
+                            <p>
+                                销售机会信息
+                            </p>
+                            <a class="leftSideEdit">
+                                操作
+                                <img height="8" th:src="@{/img/arrowDown.png}" width="10"/>
+                            </a>
+                        </div>
+                        <div class="span">
+                            <span class="edit">
+                                编辑
+                            </span>
+                            <span class="client referral">
+                                转交客户
+                            </span>
+                            <span class="del">
+                                删除
+                            </span>
+                        </div>
+                        <table border="0" cellpadding="0" cellspacing="0" class="leftSideTable" width="100%">
+                            <tr>
+                                <td class="chId">
+                                    机会简述
+                                    <input name="chId" th:value="${cstChanceList.chId}" type="hidden"/>
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="chContent" th:value="${cstChanceList.chContent}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    阶段
+                                </td>
+                                <td>
+                                    <div class="disabledShelter">
+                                    </div>
+                                    <select disabled="disabled" name="chStage">
+                                        <option th:value="${cstChanceList.chStage}">
+                                            <p th:text="${cstChanceList.chStage}">
+                                            </p>
+                                        </option>
+                                        <option value="初期沟通">
+                                            初期沟通
+                                        </option>
+                                        <option value="立项评估">
+                                            立项评估
+                                        </option>
+                                        <option value="需求分析">
+                                            需求分析
+                                        </option>
+                                        <option value="合同签订">
+                                            合同签订
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    分类
+                                </td>
+                                <td>
+                                    <div class="disabledShelter">
+                                    </div>
+                                    <input name="custId" th:value="${cstChanceList.chCustomer.custId}" type="hidden"/>
+                                    <select disabled="disabled" name="custType">
+                                        <option th:value="${cstChanceList.chCustomer.custType}">
+                                            <p th:text="${cstChanceList.chCustomer.custType}">
+                                            </p>
+                                        </option>
+                                        <option value="代理商">
+                                            代理商
+                                        </option>
+                                        <option value="客户">
+                                            客户
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    下级客户
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${cstCustomer ne null ? cstCustomer.custCompany:null}" type="text"/>
+                                    <img class="searchPic" height="16" src="img/search.png" width="16"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    生命周期
+                                </td>
+                                <td>
+                                    <div class="disabledShelter">
+                                    </div>
+                                    <select disabled="disabled" name="custLifecycle">
+                                        <option>
+                                            <p disabled="disabled" th:text="${cstChanceList.chCustomer.custLifecycle}">
+                                            </p>
+                                        </option>
+                                        <option value="成交客户">
+                                            成交客户
+                                        </option>
+                                        <option value="潜在客户">
+                                            潜在客户
+                                        </option>
+                                        <option value="失效客户">
+                                            失效客户
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    客户官网
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="custWebsite" th:value="${cstChanceList.chCustomer.custWebsite}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    所在省份
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="custprovinceChar" th:value="${cstChanceList.chCustomer.custprovinceChar}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    地址
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="custAddress" th:value="${cstChanceList.chCustomer.custAddress}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    标签
+                                </td>
+                                <td>
+                                    <span class="changeLabel" th:text="${cstChanceList.chIntentionality}">
+                                    </span>
+                                    <span class="changeLabel" th:text="${cstChanceList.requirement}">
+                                    </span>
+                                    <img alt="" class="fr img_list" style="margin-left:205px;" th:src="@{/img/add_grey.png}"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--点击加号显示列表start-->
+                        <ul class="add_list_a" style="display:none">
+                            <li>
+                                <span>
+                                    所属区域
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            A区
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    意向度
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            很强
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    客户类型
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            终端
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    重要性
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            大客户
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    产品需求
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            项目文档管理
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    购买意向
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    所在省市
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            江苏
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    所属行业
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    跟进效果
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    客户性质
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    成交年份
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    丢单类型
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    丢单原因
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                        </option>
+                                    </select>
+                                </span>
+                            </li>
+                        </ul>
+                        <!--点击加号显示列表end-->
+                        <div class="leftSideHeader">
+                            <p>
+                                主要联系人
+                            </p>
+                        </div>
+                        <table border="0" cellpadding="0" cellspacing="0" class="leftSideTable" width="100%">
+                            <tr>
+                                <td>
+                                    姓名
+                                    <input name="linkId" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkId:null}" type="hidden"/>
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkName" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkName:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    手机
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkPhone" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkPhone:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    固话
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkLandlinePhone" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkLandlinePhone:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    邮箱
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkEmail" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkEmail:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    QQ
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkQq" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkQq:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    微信
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkWechat" th:value="${cstChanceList.linkmanList[0].linkStatus eq 0 ? cstChanceList.linkmanList[0].linkWechat:null}" type="text"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="leftSideHeader">
+                            <p>
+                                次要联系人
+                            </p>
+                        </div>
+                        <table border="0" cellpadding="0" cellspacing="0" class="leftSideTable" width="100%">
+                            <tr>
+                                <td>
+                                    姓名
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkName:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    手机
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${ cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkPhone:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    固话
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${ cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkLandlinePhone:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    邮箱
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkEmail:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    QQ
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkQq:null}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    微信
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${cstChanceList.linkmanList[1].linkStatus eq 1 ? cstChanceList.linkmanList[1].linkWechat:null}" type="text"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="leftSideHeader">
+                            <p>
+                                详细信息
+                            </p>
+                        </div>
+                        <table border="0" cellpadding="0" cellspacing="0" class="leftSideTable" width="100%">
+                            <tr>
+                                <td>
+                                    立项背景
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="chBackground" th:value="${cstChanceList.chBackground}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    主要联系人所在部门、职位
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="linkDepartment" th:value="${cstChanceList.linkmanList[0].linkDepartment}" type="text"/>
+                                    <input disabled="disabled" name="linkPosition" th:value="${cstChanceList.linkmanList[0].linkPosition}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    主要使用部门
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="chDept" th:value="${cstChanceList.chDept}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    客户预算
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="custCustomerBudget" th:value="${cstChanceList.chCustomer.custCustomerBudget}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    是否存在详细需求文档
+                                </td>
+                                <td>
+                                    <div class="disabledShelter">
+                                    </div>
+                                    <select disabled="disabled" name="chDoc">
+                                        <option>
+                                            <p th:text="${cstChanceList.chDoc}">
+                                            </p>
+                                        </option>
+                                        <option value="1">
+                                            是
+                                        </option>
+                                        <option value="0">
+                                            否
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    是否了解其他供应商
+                                </td>
+                                <td>
+                                    <div class="disabledShelter">
+                                    </div>
+                                    <select disabled="disabled" name="chSupplier">
+                                        <option>
+                                            <p th:text="${cstChanceList.chSupplier}">
+                                            </p>
+                                        </option>
+                                        <option value="1">
+                                            是
+                                        </option>
+                                        <option value="0">
+                                            否
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    期望何时上线
+                                </td>
+                                <td>
+                                    <input disabled="disabled" name="chUptime" th:value="${cstChanceList.chUptime}" type="text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    我们有哪些客户属于这个行业
+                                </td>
+                                <td>
+                                    <input disabled="disabled" type="text" value="移动中国服务有限公司 移动中国服务有限公司 移动中国服务有限公司 移动中国服务有限公司"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    机会负责人
+                                </td>
+                                <td>
+                                    <input disabled="disabled" th:value="${cstChanceList.sysUser.userName}" type="text"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="leftSideBtn">
+                            <button class="sure" type="submit">
+                                修改
+                            </button>
+                            <button type="reset">
+                                取消
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="rightSide">
+                    <ul class="headerNav">
+                        <li class="active">
+                            进度
+                        </li>
+                        <li>
+                            记录
+                        </li>
+                        <li>
+                            合同
+                        </li>
+                        <li>
+                            关联
+                        </li>
+                        <li>
+                            文件
+                        </li>
+                        <li>
+                            任务
+                        </li>
+                    </ul>
+                    <div class="rightSideProgress progressNavDetail progressNavDetail0">
+                        <p class="progressTitle">
+                            8月，2017
+                        </p>
+                        <ul>
+                            <li>
+                                <div class="progressList">
+                                </div>
+                                <img class="boll" height="14" th:src="@{/img/boll.png}" width="14"/>
+                                <div>
+                                    <span>
+                                        22日 16:00
+                                    </span>
+                                    <img class="detailPic" height="16" th:src="@{/img/payment.png}" width="18"/>
+                                    <span>
+                                        跟进回款
+                                    </span>
+                                    <p class="progressState">
+                                        ×××合同收到回款:10000元/未收款:50000元
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressList">
+                                </div>
+                                <img class="boll" height="14" th:src="@{/img/boll.png}" width="14"/>
+                                <div>
+                                    <span>
+                                        22日 16:00
+                                    </span>
+                                    <img class="detailPic" height="18" th:src="@{/img/followUp.png}" width="19"/>
+                                    <span>
+                                        跟进回款
+                                    </span>
+                                    <p class="progressState">
+                                        ×××合同收到回款:10000元/未收款:50000元
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressList">
+                                </div>
+                                <img class="boll" height="14" th:src="@{/img/boll.png}" width="14"/>
+                                <div>
+                                    <span>
+                                        22日 16:00
+                                    </span>
+                                    <img class="detailPic" height="18" th:src="@{/img/clock.png}" width="18"/>
+                                    <span>
+                                        跟进回款
+                                    </span>
+                                    <p class="progressState">
+                                        ×××合同收到回款:10000元/未收款:50000元
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressList">
+                                </div>
+                                <img class="boll" height="14" th:src="@{/img/boll.png}" width="14"/>
+                                <div>
+                                    <span>
+                                        22日 16:00
+                                    </span>
+                                    <img class="detailPic" height="16" th:src="@{/img/payment.png}" width="18"/>
+                                    <span>
+                                        跟进回款
+                                    </span>
+                                    <p class="progressState">
+                                        ×××合同收到回款:10000元/未收款:50000元
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <img class="boll" height="14" th:src="@{/img/boll.png}" width="14"/>
+                                <div>
+                                    <span>
+                                        22日 16:00
+                                    </span>
+                                    <img class="detailPic" height="18" th:src="@{/img/addMsg.png}" width="16"/>
+                                    <span>
+                                        跟进回款
+                                    </span>
+                                    <p class="progressState">
+                                        ×××合同收到回款:10000元/未收款:50000元
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="progressTitle">
+                            7月，2017
+                        </p>
+                    </div>
+                    <div class="rightSideRecord progressNavDetail progressNavDetail1">
+                        <textarea class="recordTextarea">
+                        </textarea>
+                        <div class="upload_file">
+                            <img height="16" th:src="@{/img/upload.png}" width="16"/>
+                            上传附件
+                        </div>
+                        <a class="fabu" href="javascirpt:void(0);">
+                            发布
+                        </a>
+                        <div class="clearfix">
+                        </div>
+                        <p class="recordNum">
+                            <span>
+                                记录
+                            </span>
+                            （15）
+                        </p>
+                        <!--   <div>
                     <img th:src="@{/img/edit.png}" alt=""/>
                     <img th:src="@{/img/delete.png}" alt=""/>
                 </div>-->
-                <div class="msg" >
-                    <p>添加附件<img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一
-                        <img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档二</p>
-                </div>
-            </div>
-            <div class="rightSideContract progressNavDetail progressNavDetail2">
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                        <td>合同类型</td>
-                        <td>购买合同</td>
-                    </tr>
-                    <tr>
-                        <td>合同名称</td>
-                        <td>易度文档管理系统购买服务合同</td>
-                    </tr>
-                    <tr>
-                        <td>合同金额</td>
-                        <td>￥140000</td>
-                    </tr>
-                </table>
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                        <td>合同类型</td>
-                        <td>购买合同</td>
-                    </tr>
-                    <tr>
-                        <td>合同名称</td>
-                        <td>易度文档管理系统购买服务合同</td>
-                    </tr>
-                    <tr>
-                        <td>合同金额</td>
-                        <td>￥140000</td>
-                    </tr>
-                </table>
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                        <td>合同类型</td>
-                        <td>购买合同</td>
-                    </tr>
-                    <tr>
-                        <td>合同名称</td>
-                        <td>易度文档管理系统购买服务合同</td>
-                    </tr>
-                    <tr>
-                        <td>合同金额</td>
-                        <td>￥140000</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="rightSideRelation progressNavDetail progressNavDetail3">
-                <p>关联流程</p>
-                <ul class="clearAfter">
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                    <li>销售合同审批</li>
-                </ul>
-                <p>已建流程</p>
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                    <tr>
-                        <td>流程</td>
-                        <td>标题</td>
-                        <td>创建人</td>
-                        <td>提交时间</td>
-                        <td>当前步骤</td>
-                    </tr>
-                    <tr>
-                        <td>技术支持</td>
-                        <td>客户需要把步骤及审核人导出来</td>
-                        <td>张三三</td>
-                        <td>2017-09-12</td>
-                        <td>处理中</td>
-                    </tr>
-                    <tr>
-                        <td>技术支持</td>
-                        <td>客户需要把步骤及审核人导出来</td>
-                        <td>张三三</td>
-                        <td>2017-09-12</td>
-                        <td>处理中</td>
-                    </tr>
-                    <tr>
-                        <td>技术支持</td>
-                        <td>客户需要把步骤及审核人导出来</td>
-                        <td>张三三</td>
-                        <td>2017-09-12</td>
-                        <td>处理中</td>
-                    </tr>
-                    <tr>
-                        <td>技术支持</td>
-                        <td>客户需要把步骤及审核人导出来</td>
-                        <td>张三三</td>
-                        <td>2017-09-12</td>
-                        <td>处理中</td>
-                    </tr>
-                    <tr>
-                        <td>技术支持</td>
-                        <td>客户需要把步骤及审核人导出来</td>
-                        <td>张三三</td>
-                        <td>2017-09-12</td>
-                        <td>处理中</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="rightSideEnclosure progressNavDetail progressNavDetail4">
-                <p class="title">记录附件(10)</p>
-                <ul class="clearAfter">
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/ppt3.png}"  height="18" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                </ul>
-                <p class="title">记录附件(10)</p>
-                <ul class="clearAfter">
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                </ul>
-                <p class="title">记录附件(10)</p>
-                <ul class="clearAfter">
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/ppt3.png}" height="18" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                    <li><img th:src="@{/img/word3.png}" height="17" width="18"/>需求分析文档一</li>
-                </ul>
-            </div>
-            <div class="rightSideTask progressNavDetail progressNavDetail5">
-                 <button class="rightSideTaskNewBtn">
-                    <span>+</span>
-                    <span>添加任务</span>
-                 </button>
-                <p>未完成（<span>3</span>）</p>
-                <ul class="undone">
-                     <!--<li>-->
-                         <!--<div class="fl"><div class="forCheckbox"><input type="checkbox"/></div></div>-->
-                         <!--<div class="fl" >-->
-                             <!--<p></p>-->
-                            <!--<span></span>执行-->
-                         <!--</div>-->
-                    <!--</li>-->
-                </ul>
-                <p>已完成（<span>3</span>）</p>
-                <ul class="done">
-                    <!--<li>-->
-                        <!--<div class="fl"><img class="checkedPic" th:src="@{/img/checked.png}" height="14" width="14"/></div>-->
-                        <!--<div class="fl" >-->
+                        <div class="msg">
+                            <div>
+                                <img alt="" class="edit_img" src="img/edit.png"/>
+                                <img alt="" class="del_img" src="img/delete.png"/>
+                            </div>
+                            <p>
+                                沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了。
+                            </p>
+                            <p>
+                                2017/08/26   聂宇豪 添加附件
+                                <img height="17" src="img/word3.png" width="18"/>
+                                需求分析文档一
+                                <img height="18" src="img/ppt3.png" width="18"/>
+                                需求分析文档二
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rightSideContract progressNavDetail progressNavDetail2">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    合同类型
+                                </td>
+                                <td>
+                                    购买合同
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    合同名称
+                                </td>
+                                <td>
+                                    易度文档管理系统购买服务合同
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    合同金额
+                                </td>
+                                <td>
+                                    ￥140000
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    合同类型
+                                </td>
+                                <td>
+                                    购买合同
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    合同名称
+                                </td>
+                                <td>
+                                    易度文档管理系统购买服务合同
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    合同金额
+                                </td>
+                                <td>
+                                    ￥140000
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    合同类型
+                                </td>
+                                <td>
+                                    购买合同
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    合同名称
+                                </td>
+                                <td>
+                                    易度文档管理系统购买服务合同
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    合同金额
+                                </td>
+                                <td>
+                                    ￥140000
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rightSideRelation progressNavDetail progressNavDetail3">
+                        <div class="relation">
+                            <p>
+                                关联流程
+                            </p>
+                            <ul class="clearAfter">
+                                <li>
+                                    销售合同审批
+                                </li>
+                                <li>
+                                    收款
+                                </li>
+                                <li>
+                                    开票
+                                </li>
+                                <li>
+                                    报销
+                                </li>
+                                <li>
+                                    定制报价
+                                </li>
+                                <li>
+                                    需求答复
+                                </li>
+                                <li>
+                                    技术支持
+                                </li>
+                                <li>
+                                    方案报价
+                                </li>
+                                <li>
+                                    客户拜访
+                                </li>
+                            </ul>
+                            <p>
+                                流程列表
+                            </p>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td>
+                                        流程
+                                    </td>
+                                    <td>
+                                        标题
+                                    </td>
+                                    <td>
+                                        创建人
+                                    </td>
+                                    <td>
+                                        提交时间
+                                    </td>
+                                    <td>
+                                        当前步骤
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text_click" style="cursor:pointer">
+                                        技术支持
+                                    </td>
+                                    <td>
+                                        客户需要把步骤及审核人导出来
+                                    </td>
+                                    <td>
+                                        张三三
+                                    </td>
+                                    <td>
+                                        2017-09-12
+                                    </td>
+                                    <td>
+                                        处理中
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text_click" style="cursor:pointer">
+                                        销售合同审批
+                                    </td>
+                                    <td>
+                                        客户需要把步骤及审核人导出来
+                                    </td>
+                                    <td>
+                                        张三三
+                                    </td>
+                                    <td>
+                                        2017-09-12
+                                    </td>
+                                    <td>
+                                        处理中
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text_click" style="cursor:pointer">
+                                        收款
+                                    </td>
+                                    <td>
+                                        客户需要把步骤及审核人导出来
+                                    </td>
+                                    <td>
+                                        张三三
+                                    </td>
+                                    <td>
+                                        2017-09-12
+                                    </td>
+                                    <td>
+                                        处理中
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text_click" style="cursor:pointer">
+                                        方案报价
+                                    </td>
+                                    <td>
+                                        客户需要把步骤及审核人导出来
+                                    </td>
+                                    <td>
+                                        张三三
+                                    </td>
+                                    <td>
+                                        2017-09-12
+                                    </td>
+                                    <td>
+                                        处理中
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text_click" style="cursor:pointer">
+                                        需求答复
+                                    </td>
+                                    <td>
+                                        客户需要把步骤及审核人导出来
+                                    </td>
+                                    <td>
+                                        张三三
+                                    </td>
+                                    <td>
+                                        2017-09-12
+                                    </td>
+                                    <td>
+                                        处理中
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--关联区域开始- -点击进入详情-->
+                        <div class="relevance" style="display:none">
+                            <div class="examin">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png"/>
+                                销售合同审批
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    待审文件
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        文档管理系统购买合同
+                                        <img alt="" class="img_del" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="introduce">
+                                说明
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gathering" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                收款
+                            </div>
+                            <div>
+                                <span>
+                                    收款日期
+                                </span>
+                                <label class="day" for="day">
+                                    <input id="day" name="" placeholder="年/月/日" type="text"/>
+                                </label>
+                                <span>
+                                    <img alt="" src="img/xiala.png"/>
+                                </span>
+                            </div>
+                            <div class="select">
+                                <span>
+                                    关联合同
+                                    <select id="s_select" name="" style="color:black">
+                                        <option value="">
+                                            易度文档管理系统购买合同
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    收款金额
+                                </span>
+                                <input placeholder="￥" type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    收款方式
+                                </span>
+                                <select id="" name="" style="color:black">
+                                    <option value="">
+                                        银行转账
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <span>
+                                    收款人
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    说明
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="invoice" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                开票
+                            </div>
+                            <div>
+                                <span>
+                                    关联合同
+                                </span>
+                                <select id="" name="" style="color:black">
+                                    <option value="">
+                                        易度文档管理系统购买合同
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="invoice_heade">
+                                <span>
+                                    发票抬头
+                                </span>
+                                <span style="color:black">
+                                    广州润普网络科技有限公司
+                                </span>
+                                <span>
+                                    票据内容
+                                    <input type="text"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    开票金额
+                                </span>
+                                <span>
+                                    ￥
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    票据类型
+                                </span>
+                                <select id="" name="" style="color:black">
+                                    <option value="">
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <span>
+                                    发票号码
+                                    <input type="text"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    经手人
+                                </span>
+                                <select id="" name="" style="color:black;margin-left:101px">
+                                    <option value="">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="introduce">
+                                说明
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="refund" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                报销
+                            </div>
+                            <div>
+                                <span>
+                                    报销人
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    报销标题
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    报销描述
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="invoice_heade">
+                                <span>
+                                    报销明细
+                                </span>
+                                <select id="" name="">
+                                    <option value="">
+                                        报销类型
+                                    </option>
+                                </select>
+                                <span class="last">
+                                    说明
+                                </span>
+                                <input type="text"/>
+                                <span class="last">
+                                    金额
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="add">
+                                <img alt="" src="img/add3.png"/>
+                                <span class="new_add">
+                                    新增一行报销明细
+                                </span>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    电子发票
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx餐饮集团电子发票
+                                        <img alt="" class="img_del" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="introduce">
+                                <input placeholder="说明" style="width:100%" type="text"/>
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <p>
+                                总计:1000元
+                            </p>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="customization" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                定制报价
+                            </div>
+                            <div>
+                                <span>
+                                    需求标题
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求描述
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    设计文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制需求文档
+                                        <img alt="" class="img_del" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>
+                                    人天
+                                </span>
+                                <input class="moneyday" placeholder="￥" type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    天数
+                                </span>
+                                <input class="moneyday" type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    成本
+                                </span>
+                                <input class="moneyday" placeholder="￥" type="text"/>
+                            </div>
+                            <div class="introduce">
+                                <input placeholder="报价说明" style="border:none;outline:none" type="text"/>
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="response" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                需求答复
+                            </div>
+                            <div>
+                                <span>
+                                    需求标题
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求描述
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    说明文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制说明文档
+                                        <img alt="" class="img_del" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="introduce">
+                                <input placeholder="使用场景" style="border:none;outline:none" type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="technical" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                技术支持
+                            </div>
+                            <div>
+                                <span>
+                                    标题
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    详细描述
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    服务请求类型
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            售前
+                                        </option>
+                                        <option value="">
+                                            售后
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    紧急度
+                                </span>
+                                <span>
+                                    <select id="urgency" name="">
+                                        <option value="">
+                                            紧急
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    故障文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制说明文档
+                                        <img alt="" class="img_del" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                方案报价
+                            </div>
+                            <div>
+                                <span>
+                                    需求标题
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求描述
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    需求文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制需求文档
+                                        <img alt="" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    方案文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制方案文档
+                                        <img alt="" class="img_del" src="img/closeRed.png"/>
+                                    </span>
+                                    <span class="upload_file">
+                                        <img alt="" src="img/upload.png"/>
+                                        上传附件
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>
+                                    人天
+                                </span>
+                                <input class="moneyday" placeholder="￥" type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    天数
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    成本
+                                </span>
+                                <input class="moneyday" placeholder="￥" type="text"/>
+                            </div>
+                            <div class="introduce">
+                                <input placeholder="报价说明" style="border:none;outline:none" type="text"/>
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="customer" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                客户
+                            </div>
+                            <div>
+                                <span>
+                                    客户名称
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    拜访时间
+                                </span>
+                                <label class="day" for="day">
+                                    <input class="time" id="day" name="" placeholder="年/月/日" type="text"/>
+                                </label>
+                                <img alt="" src="img/xiala.png"/>
+                                <label class="hour" for="day">
+                                    <input class="time_minute" id="hour" name="" placeholder="00:00" type="text"/>
+                                </label>
+                                <img alt="" src="img/xiala.png"/>
+                            </div>
+                            <div>
+                                <span>
+                                    客户地址
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    联系人电话
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    联系人部门岗位
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求说明
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <span>
+                                    拜访目的
+                                </span>
+                                <select class="produce">
+                                    <option value="">
+                                        产品介绍
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <span>
+                                    是否用车
+                                </span>
+                                <span>
+                                    <select class="IS">
+                                        <option value="">
+                                            是
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="introduce">
+                                说明
+                            </div>
+                            <div class="remove" style="display:none">
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--关联区域结束- -点击进入详情-->
+                    <!--流程列表开始-->
+                    <div class="list_div" style="display:none">
+                        <div class="relevance" style="display:none">
+                            <div class="examin" style="margin-top:10px">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png"/>
+                                销售合同审批
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    待审文件
+                                </span>
+                                <span class="_img" style="margin-left:60px">
+                                    <img alt="" src="img/word3.png"/>
+                                    xx集团定制说明文档
+                                </span>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    说明
+                                </span>
+                                <input style="margin-left:85px" type="text" value="这是xxx集团的购买合同,请审批通过一下."/>
+                            </div>
+                            <div>
+                                <span>
+                                    审批意见
+                                </span>
+                            </div>
+                            <div style="padding-right:10px;">
+                                <textarea cols="30" id="" name="" rows="10" style="resize:none;width:100%;outline:none;">
+                                </textarea>
+                            </div>
+                            <div class="introduce_botton">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gathering" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                收款
+                            </div>
+                            <div>
+                                <span>
+                                    收款日期
+                                </span>
+                                <input type="text" value="2017/10/10"/>
+                            </div>
+                            <div>
+                                <span>
+                                    关联合同
+                                </span>
+                                <input type="text" value="易度文档管理系统购买合同"/>
+                            </div>
+                            <div>
+                                <span>
+                                    收款金额
+                                </span>
+                                <input type="text" value="￥30000元"/>
+                            </div>
+                            <div>
+                                <span>
+                                    收款方式
+                                </span>
+                                <input type="text" value="银行转账"/>
+                            </div>
+                            <div>
+                                <span>
+                                    收款人
+                                </span>
+                                <input style="margin-left:107px" type="text" value="陈小姐"/>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    说明
+                                </span>
+                                <input style="margin-left:118px" type="text" value="这是二期收款30000元,请审批"/>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    提交
+                                </button>
+                                <button class="draf">
+                                    保存草稿
+                                </button>
+                            </div>
+                        </div>
+                        <div class="invoice" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                开票
+                            </div>
+                            <div>
+                                <span>
+                                    关联合同
+                                </span>
+                                <select id="" name="" style="color:black">
+                                    <option value="">
+                                        易度文档管理系统购买合同
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="invoice_heade">
+                                <span>
+                                    发票抬头
+                                </span>
+                                <span style="color:black">
+                                    广州润普网络科技有限公司
+                                </span>
+                                <span>
+                                    票据内容
+                                    <input type="text" value="购买合同发票"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    开票金额
+                                </span>
+                                <input type="text" value="￥30000"/>
+                            </div>
+                            <div>
+                                <span>
+                                    票据类型
+                                </span>
+                                <input type="text" value="增值税普通票"/>
+                            </div>
+                            <div>
+                                <span>
+                                    发票号码
+                                    <input type="text" value="789456123"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    经手人
+                                </span>
+                                <input style="margin-left:105px" type="text" value="朱小姐"/>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    说明
+                                </span>
+                                <span style="margin-left:120px">
+                                    xx公司需要合同发票,请审批
+                                </span>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="refund" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                报销
+                            </div>
+                            <div>
+                                <span>
+                                    报销人
+                                </span>
+                                <input style="margin-left:110px;" type="text" value="张三"/>
+                            </div>
+                            <div>
+                                <span>
+                                    报销标题
+                                </span>
+                                <input type="text" value="出差报销"/>
+                            </div>
+                            <div>
+                                <span>
+                                    报销描述
+                                </span>
+                                <input type="text" value="武汉出差报销"/>
+                            </div>
+                            <ul>
+                                <li>
+                                    报销明细
+                                    <span>
+                                        交通费
+                                    </span>
+                                    <span>
+                                        招待费
+                                    </span>
+                                </li>
+                                <li style="margin-left:100px">
+                                    报销类型
+                                    <span>
+                                        交通费
+                                    </span>
+                                    <span>
+                                        招待费
+                                    </span>
+                                </li>
+                                <li>
+                                    说明
+                                    <span>
+                                        从武汉至南京
+                                    </span>
+                                    <span>
+                                        请黄总吃饭
+                                    </span>
+                                </li>
+                                <li>
+                                    金额
+                                    <span>
+                                        500元
+                                    </span>
+                                    <span>
+                                        500元
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    电子发票
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx餐饮集团电子发票
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <p>
+                                总计:1000元
+                            </p>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="customization" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                定制报价
+                            </div>
+                            <div>
+                                <span>
+                                    需求标题
+                                </span>
+                                <input type="text" value="定制审批流程"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求描述
+                                </span>
+                                <input type="text" value="定制11个审批流程,流程需求请留意附件"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    设计文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img" style="color:#000">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制需求文档
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>
+                                    人天
+                                </span>
+                                <input class="moneyday" style="margin-left:130px" type="text" value="￥1000"/>
+                            </div>
+                            <div>
+                                <span>
+                                    天数
+                                </span>
+                                <input class="moneyday" style="margin-left:130px" type="text" value="30天"/>
+                            </div>
+                            <div>
+                                <span>
+                                    成本
+                                </span>
+                                <input class="moneyday" style="margin-left:130px" type="text" value="￥30000"/>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    报价说明
+                                </span>
+                                <input style="border:none;outline:none" type="text" value="xxxxxx"/>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="response" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                需求答复
+                            </div>
+                            <div>
+                                <span>
+                                    需求标题
+                                </span>
+                                <input type="text" value="xxxx集团需要一个电子签章"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求描述
+                                </span>
+                                <input type="text" value="xxx集团需要一个签章,详情请留意附件"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    说明文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制说明文档
+                                        <img alt="" src="img/closeRed.png"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    使用场景
+                                </span>
+                                <input style="border:none;outline:none" type="text" value="方便签章"/>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="technical" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                技术支持
+                            </div>
+                            <div>
+                                <span style="margin-right:105px;">
+                                    标题
+                                </span>
+                                <input type="text" value="文件无法预览"/>
+                            </div>
+                            <div>
+                                <span style="margin-right:83px;">
+                                    详细描述
+                                </span>
+                                <input type="text" value="文件无法预览,并报出500错误"/>
+                            </div>
+                            <div>
+                                <span class="after">
+                                    服务请求类型
+                                </span>
+                                <span>
+                                    <select id="" name="">
+                                        <option value="">
+                                            售后
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="urgency" style="margin-right:100px;">
+                                    紧急度
+                                </span>
+                                <span>
+                                    <select name="">
+                                        <option value="">
+                                            紧急
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    故障文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制说明文档
+                                        <img alt="" src="img/closeRed.png"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                方案报价
+                            </div>
+                            <div>
+                                <span>
+                                    需求标题
+                                </span>
+                                <input type="text" value="xxxxxxxxxxxxxxxxxxx"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求描述
+                                </span>
+                                <input type="text" value="定制11个审批流程,详情请看附件"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    需求文档
+                                </span>
+                                <div class="_file">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制需求文档
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>
+                                    使用场景
+                                </span>
+                                <input type="text" value="xxxxxxxxxxxxxxxxxxxxxxxx"/>
+                            </div>
+                            <div class="s_next">
+                                <span class="wait_file" style="font-size:12px">
+                                    方案文档
+                                </span>
+                                <div class="_file" style="margin-top:0">
+                                    <span class="_img">
+                                        <img alt="" src="img/word3.png"/>
+                                        xx集团定制方案文档
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>
+                                    人天
+                                </span>
+                                <input class="moneyday" style="margin-left:125px;" type="text" value="￥1000"/>
+                            </div>
+                            <div>
+                                <span>
+                                    天数
+                                </span>
+                                <input style="margin-left:125px;" type="text" value="3天"/>
+                            </div>
+                            <div>
+                                <span>
+                                    成本
+                                </span>
+                                <input class="moneyday" style="margin-left:125px;" type="text" value="￥3000"/>
+                            </div>
+                            <div class="introduce">
+                                <span>
+                                    报价说明
+                                </span>
+                                <input style="border:none;outline:none" type="text" value="需求方案已出,请审批一下"/>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                        <div class="customer" style="display:none">
+                            <div class="examin" style="border-bottom:none">
+                                <img alt="" class="img_return" src="img/dropDown2.1.png" style="float:left"/>
+                                客户拜访
+                            </div>
+                            <div>
+                                <span>
+                                    客户名称
+                                </span>
+                                <input type="text" value="中国移动"/>
+                            </div>
+                            <div>
+                                <span>
+                                    拜访时间
+                                </span>
+                                <input type="text" value="2017/10/28 09.00"/>
+                            </div>
+                            <div>
+                                <span>
+                                    客户地址
+                                </span>
+                                <input type="text" value="广州市天河区xx路"/>
+                            </div>
+                            <div>
+                                <span>
+                                    联系人名称
+                                </span>
+                                <input style="margin-left:90px;" type="text" value="董小姐"/>
+                            </div>
+                            <div>
+                                <span>
+                                    联系人电话
+                                </span>
+                                <input style="margin-left:90px;" type="text" value="18816780798"/>
+                            </div>
+                            <div>
+                                <span>
+                                    联系人部门岗位
+                                </span>
+                                <input style="margin-left:63px;" type="text" value="质检部经理"/>
+                            </div>
+                            <div>
+                                <span>
+                                    需求说明
+                                </span>
+                                <input type="text" value="定制质检审批流程"/>
+                            </div>
+                            <div>
+                                <span>
+                                    拜访目的
+                                </span>
+                                <input type="text" value="商务谈判"/>
+                            </div>
+                            <div>
+                                <span>
+                                    是否用车
+                                </span>
+                                <input type="text" value="是"/>
+                            </div>
+                            <div class="remove">
+                                <span>
+                                    审批意见
+                                </span>
+                                <input type="text"/>
+                            </div>
+                            <div class="introduce_botton" style="border:none">
+                                <button class="submit">
+                                    通过
+                                </button>
+                                <button class="draf">
+                                    不通过
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightSideEnclosure progressNavDetail progressNavDetail4">
+                        <p class="title">
+                            记录附件(10)
+                        </p>
+                        <ul class="clearAfter">
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="18" th:src="@{/img/ppt3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                        </ul>
+                        <p class="title">
+                            记录附件(10)
+                        </p>
+                        <ul class="clearAfter">
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="18" th:src="@{/img/ppt3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                        </ul>
+                        <p class="title">
+                            记录附件(10)
+                        </p>
+                        <ul class="clearAfter">
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="18" th:src="@{/img/ppt3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                            <li>
+                                <img height="17" th:src="@{/img/word3.png}" width="18"/>
+                                需求分析文档一
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rightSideTask progressNavDetail progressNavDetail5">
+                        <button class="rightSideTaskNewBtn">
+                            <span>
+                                +
+                            </span>
+                            <span>
+                                添加任务
+                            </span>
+                        </button>
+                        <p>
+                            未完成（
+                            <span>
+                                3
+                            </span>
+                            ）
+                        </p>
+                        <ul class="undone">
+                            <!--<li>-->
+                            <!--<div class="fl"><div class="forCheckbox"><input type="checkbox"/></div></div>-->
+                            <!--<div class="fl" >-->
                             <!--<p></p>-->
                             <!--<span></span>执行-->
-                        <!--</div>-->
-                    <!--</li>-->
-                </ul>
+                            <!--</div>-->
+                            <!--</li>-->
+                        </ul>
+                        <ul>
+                            <li>
+                                <div class="fl">
+                                    <label class="forCheckbox">
+                                        <input type="checkbox"/>
+                                    </label>
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        22号早上9点打电话给客户联通科技有限公司
+                                    </p>
+                                    <p class="grey">
+                                        2017/08/18  执行
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fl">
+                                    <label class="forCheckbox">
+                                        <input type="checkbox"/>
+                                    </label>
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        22号早上9点打电话给客户联通科技有限公司
+                                    </p>
+                                    <p class="grey">
+                                        2017/08/18  执行
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fl">
+                                    <label class="forCheckbox">
+                                        <input type="checkbox"/>
+                                    </label>
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        22号早上9点打电话给客户联通科技有限公司
+                                    </p>
+                                    <p class="grey">
+                                        2017/08/18  执行
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>
+                            已完成（
+                            <span>
+                                3
+                            </span>
+                            ）
+                        </p>
+                        <ul class="dnone">
+                            <li>
+                                <div class="fl">
+                                    <label class="forCheckbox">
+                                        <input type="checkbox"/>
+                                    </label>
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        22号早上9点打电话给客户联通科技有限公司
+                                    </p>
+                                    <p class="grey">
+                                        2017/08/18  执行
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fl">
+                                    <label class="forCheckbox">
+                                        <input type="checkbox"/>
+                                    </label>
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        22号早上9点打电话给客户联通科技有限公司
+                                    </p>
+                                    <p class="grey">
+                                        2017/08/18  执行
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fl">
+                                    <label class="forCheckbox">
+                                        <input type="checkbox"/>
+                                    </label>
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        22号早上9点打电话给客户联通科技有限公司
+                                    </p>
+                                    <p class="grey">
+                                        2017/08/18  执行
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--流程列表结束-->
             </div>
-
-
-
         </div>
-    </div>
-</div>
-</body>
+        <div class="filterPop dnone" style="font-size: 14px;">
+            <div class="shelter">
+            </div>
+            <div class="filtermain">
+                <h4>
+                    高级筛选
+                </h4>
+                <div class="text_area">
+                </div>
+                <div class="btngroup">
+                    <input class="add" type="button" value=""/>
+                    <input class="_upload" type="button" value=""/>
+                </div>
+            </div>
+        </div>
+        <div class="filter_upload dnone" style="font-size: 14px;">
+            <div class="shelter">
+            </div>
+            <div class="filtermain">
+                <h4>
+                    上传文件
+                    <svg class="fright cancel" viewbox="0 0 20 20">
+                    </svg>
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </h4>
+                <h5>
+                    上传至CRM客户管理系统
+                </h5>
+                <div class="text_area dropzone" id="dropz">
+                    <span>
+                        请
+                        <a href="javascript:void(0);">
+                            添加文件
+                        </a>
+                        或将文件拖拽至此区域
+                    </span>
+                </div>
+                <div class="btngroup">
+                    <input class="play" type="button" value="+ 添加"/>
+                    <input class="upload_cancel" type="button" value="上传"/>
+                </div>
+            </div>
+        </div>
+        <!--点击记录的编辑框-->
+        <div class="filter_upload filte_mission dnone add_task" style="font-size: 14px;">
+            <div class="shelter">
+            </div>
+            <div class="filtermain mission">
+                <h4 style="background:none">
+                    上传文件
+                    <svg class="fright cancel" viewbox="0 0 20 20">
+                    </svg>
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </h4>
+                <div class="text_area dropzone" id="dropz">
+                    <textarea style="resize:none;width:100%;height:100%;border:none;outline:none;text-align:left;">
+                        沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了沈工说他们王经理出差了，要到下周三才回来，到时候再让绿盾那边的李经理联系他们。环境已经在绿盾那边弄好了
+                    </textarea>
+                </div>
+                <div style="position: absolute;left: 25px;bottom:90px;font-size:12px;width:90%">
+                    <span>
+                        附件:
+                    </span>
+                    <img alt="" src="img/word2.png"/>
+                    <span>
+                        需求文档分析一
+                    </span>
+                    <img alt="" src="img/closeRed.png"/>
+                    <img alt="" src="img/ppt3.png"/>
+                    <span>
+                        需求分析文档二
+                    </span>
+                    <img alt="" src="img/closeRed.png"/>
+                    <span class="info_upload upload_file" style="float:right;color:#7460ee">
+                        <img alt="" src="img/upload.png"/>
+                        上传附件
+                    </span>
+                </div>
+                <div class="btngroup">
+                    <input class="play" type="button" value="确定"/>
+                    <input class="upload_cancel" type="button" value="取消"/>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

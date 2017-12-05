@@ -42,8 +42,8 @@ public class SysDynamicServiceImpl implements ISysDynamicService {
     }
 
     @Override
-    public List<SysDynamic> selectDynamicAll(Long userId,Long roleId) {
-        return sysDynamicMapper.selectDynamicAll(userId,roleId);
+    public List<SysDynamic> selectDynamicAll(Long roleId) {
+        return sysDynamicMapper.selectDynamicAll(roleId);
     }
 
 }

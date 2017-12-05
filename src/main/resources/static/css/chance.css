@@ -1,5 +1,5 @@
 .chanceHeader { height: 50px; padding: 0 30px; }
-.allOperate { clear: both; margin: 0 30px 20px;}
+.allOperate { clear: both; margin: 0 30px 15px;}
 .chanceContent { position: relative; clear: both; margin: 0 30px 30px; background: #fff}
 
 /* .chanceContent  */
@@ -8,7 +8,7 @@
 .chanceHeader .tag { font-size: 18px; color: #7460ee; display: inline-block; position: relative; z-index: 4; background: url('../img/dropDown.png') right center no-repeat; padding-right: 15px; margin-right: 5px; }
 .chanceHeader .tag ul { position: absolute; font-size: 14px; padding: 4px; right: 0; background: #fff; color: #666; line-height: 1.8;}
 .chanceHeader .customerNum { color: #999; }
-.chanceHeader .fright button,.allOperate button { height: 32px; border: 1px solid #7460ee; background: none; border-radius: 4px; color: #7460ee; margin-top: 10px; }
+.chanceHeader .fright button,.allOperate button { height: 32px; border: 1px solid #7460ee; background: none; border-radius: 4px; color: #7460ee; padding: 0 10px; }
 .chanceHeader .fright button.moreOperate { background: #7460ee; color: #fff; font-weight: 900; padding: 0; }
 .chanceHeader .fright a { color: #7460ee; height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; vertical-align: middle; display: inline-block; line-height: 28px; padding: 0 3px; }
 
@@ -19,7 +19,7 @@ nav { text-align: center; }
 .pagination > li:first-child > a, .pagination > li:first-child > span {border-radius: 0;}
 .pagination > li:last-child > a, .pagination > li:last-child > span {border-radius: 0;}
 
-div.fixed-table-pagination { text-align: center; margin-bottom: 30px; position: absolute; bottom: 0; width: 100%; }
+div.fixed-table-pagination { text-align: center; margin-bottom: 15px; position: absolute; bottom: 0; width: 100%; }
 div.pull-left.pagination-detail { display: none; }
 div.pull-right.pagination { float: none !important; text-align: center; margin: 0 auto; display: inline-block !important; }
 
@@ -67,6 +67,15 @@ td>span { color: red; }
 .filterPop .btngroup input { width: 100px; height: 30px; margin-top: 70px; border: 1px solid #7460ee; border-radius: 4px; background: #7460ee; color: #fff; margin-bottom: 20px; }
 .filterPop .btngroup input.cancel { color: #7460ee; background: #fff; margin-right: 140px; float: right; }
 .filterPop .btngroup input.sure { margin-left: 140px; }
+
+.img_list{width: 16px;height:16px}
+.add_list_a{background: #fff url(../img/backgroundImg.png) -2px 0 no-repeat;padding-bottom:20px;position: absolute;right: -390px;top: 115px;z-index: 1;width: 405px;box-shadow: 3px 2px 2px #ccc}
+.add_list_a li{margin-left:30px;}
+.add_list_a li select{border:none;width: 70%;}
+.add_list_a li span:nth-of-type(1){color:#ccc; width: 22%; display: inline-block}
+.add_list_a li:nth-of-type(1){padding-top:10px;padding-top: 10px;border-bottom: 1px solid #ccc;padding-bottom: 5px;}
+.add_list_a li+li{margin-top: 10px;border-bottom: 1px solid #ccc;padding-bottom: 5px;}
+
 
 
 .referralPop { height: 100%; width: 100%; position: absolute; background: rgba(0, 0, 0, .5); z-index: 5; }

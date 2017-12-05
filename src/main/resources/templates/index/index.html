@@ -1,117 +1,262 @@
 <!DOCTYPE html>
-<html lang="en"
-	  xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8"/>
-	<title>客户关系管理系统</title>
-	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
-	<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-	<script th:src="@{/js/jquery.nicescroll.js}"></script>
-	<script th:src="@{/js/default.js}"></script>
-	<script th:src="@{/js/index.js}"></script>
-	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
-	<link rel="stylesheet" th:href="@{/css/default.css}" />
-	<link rel="stylesheet" th:href="@{/css/index.css}" />
-</head>
-<body>
-	<div class="leftContent">
-		<div class="logo">
-			<img th:src="@{/img/logo.png}" alt="logo" />
-			<span class="logoTxt">润普CRM</span>
-		</div>
-		<ul>
-			<li class="active"><a th:href="@{/getTaskListByUserId}"><img th:src="@{/img/index.png}" alt="首页" /><span class="navTxt">首页</span></a></li>
-			<li><a th:href="@{/cstCustomer/getPage/1/7}"><img th:src="@{/img/seas.png}" alt="公海" /><span class="navTxt" id="gongHai">公海</span></a></li>
-			<li><a th:href="@{/cstChance/getCstChance/1/10}"><img th:src="@{/img/chance.png}" alt="机会" /><span class="navTxt">机会</span></a></li>
-			<li><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></li>
-			<li><img th:src="@{/img/financial.png}" alt="财务" /><span class="navTxt">财务</span></li>
-			<li><img th:src="@{/img/support.png}" alt="支持" /><span class="navTxt">支持</span></li>
-			<li class="settitemdisplay"><a href="/crm/sysUser/getSysUserList/1/10"><img th:src="@{/img/setting.png}" alt="设置" /><span class="navTxt">设置</span></a></li>
-		</ul>
-	</div>
-	<div class="rightContent">
-		<div class="header">
-			<div>
-				<input placeholder="请输入客户名称" type="text" class="searchName"/>
-				<button class="search">
-					<img alt="" th:src="@{/img/searchIcon.png}"/>
-				</button>
-				<div class="mail">
-					<span class="msgNum">1</span>
-					<div>
-						<ul>
-							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-							<li><a href="">聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊</a></li>
-							<li><a href="">聂宇豪创建了新</a></li>
-						</ul>
-						<p class="lookMore"><a href="" class="grey">查看更多</a></p>
-					</div>
-				</div>
-				<div class="user">
-					<span class="userName">聂宇豪</span>
-					<span class="xiala"><img th:src="@{/img/xiala.png}" /></span>
-					<ul class="detail">
-						<li><a class="personData">个人资料</a></li>
-						<li  class="systemSetting"><a href="/crm/sysUser/getSysUserList/1/10">系统设置</a></li>
-						<li><a class="loginOut">退出</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="main">
-			<div class="dynamic">
-				<div class="dynamicHeader">
-					<ul>
-						<li class="allDynamic active">全部动态</li>
-						<li class="aboutChance">机会相关</li>
-					</ul>
-				</div>
-				<div class="dynamicContent">
-					<ul>
-						<li th:each="sysDynamic:${sysDynamicAll}">
-							<div>
-								<span class="icon"><img th:src="@{/img/chanceIcon.png}" alt="" /></span>
-								<div class="msg">
-									<p class="employee"><i  th:text="${sysDynamic.userName}"></i><span class="career" th:text="${sysDynamic.roleId eq 1? '（管理员）':(sysDynamic.roleId eq 2 ? '（销售经理）':'（销售人员）')}"></span></p>
-									<p class="addWhat grey"><i th:text="${sysDynamic.dyClassify eq 7?'添加了客户：':'添加了机会：'}"></i><a th:href="@{'/cstCustomer/lookCstCustomerInfo/'+${sysDynamic.custId}}" class="description" th:text="${sysDynamic.custCompany}"></a></p>
-								</div>
-								<span class="addTime" th:text="${sysDynamic.revertDate}"></span>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="daily">
-				<div class="dailyHeader">今天<span>( 5/6 )</span></div>
-				<div class="dailyContent">
-					<ul>
-						<li th:each="sysDynamicList:${sysDynamicList}">
-							<label class="forCheckbox">
-								<input type="checkbox" name="complete" />
-							</label>
-							<div>
-								<form>
-									<input type="text" disabled="disabled" th:value="${sysDynamicList.taskContent}" name="" />
-									<button class="sure"><img th:src="@{/img/gou.png}"/></button>
-									<button class="cancel">
-										<svg class="fright" viewbox="0 0 20 20">
-											<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-											</path>
-										</svg>
-									</button>
-								</form>
-								<span class="aboutChance grey">关联机会：<p th:text="${sysDynamicList.chance.chContent}"></p></span>
-								<span class="createTime red dblock">1天前</span>
-							</div>
-							<p class="operate">
-								<span class="edit"><img th:src="@{/img/edit.png}" alt="" /></span>
-								<span class="del"><img th:src="@{/img/delete.png}" alt="" /></span>
-							</p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            客户关系管理系统
+        </title>
+        <script th:src="@{/js/jquery-1.8.3.min.js}">
+        </script>
+        <script th:src="@{/bootstrap/js/bootstrap.js}">
+        </script>
+        <script th:src="@{/js/jquery.nicescroll.js}">
+        </script>
+        <script th:src="@{/js/default.js}">
+        </script>
+        <script th:src="@{/js/index.js}">
+        </script>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+        <link rel="stylesheet" th:href="@{/css/default.css}"/>
+        <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    </head>
+    <body style="overflow-y: hidden;">
+        <div class="leftContent">
+            <div class="logo">
+                <img alt="logo" th:src="@{/img/logo.png}"/>
+                <span class="logoTxt">
+                    润普CRM
+                </span>
+            </div>
+            <ul>
+                <li class="active">
+                    <a th:href="@{/getTaskListByUserId}">
+                        <img alt="首页" th:src="@{/img/index.png}"/>
+                        <span class="navTxt">
+                            首页
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/cstCustomer/getPage/1/7}">
+                        <img alt="公海" th:src="@{/img/seas.png}"/>
+                        <span class="navTxt" id="gongHai">
+                            公海
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/cstChance/getCstChance/1/10}">
+                        <img alt="机会" th:src="@{/img/chance.png}"/>
+                        <span class="navTxt">
+                            机会
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <img alt="合同" th:src="@{/img/contract.png}"/>
+                    <span class="navTxt">
+                        合同
+                    </span>
+                </li>
+                <li>
+                    <img alt="财务" th:src="@{/img/financial.png}"/>
+                    <span class="navTxt">
+                        财务
+                    </span>
+                </li>
+                <li>
+                    <img alt="支持" th:src="@{/img/support.png}"/>
+                    <span class="navTxt">
+                        支持
+                    </span>
+                </li>
+                <li class="settitemdisplay">
+                    <a href="/crm/sysUser/getSysUserList/1/10">
+                        <img alt="设置" th:src="@{/img/setting.png}"/>
+                        <span class="navTxt">
+                            设置
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="rightContent">
+            <div class="header">
+                <div>
+                    <input class="searchName" placeholder="请输入客户名称" type="text"/>
+                    <button class="search">
+                        <img alt="" th:src="@{/img/searchIcon.png}"/>
+                    </button>
+                    <div class="mail">
+                        <span class="msgNum">
+                            1
+                        </span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        聂宇豪创建了新
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="lookMore">
+                                <a class="grey" href="">
+                                    查看更多
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <span class="userName">
+                            聂宇豪
+                        </span>
+                        <span class="xiala">
+                            <img th:src="@{/img/xiala.png}"/>
+                        </span>
+                        <ul class="detail">
+                            <li>
+                                <a class="personData">
+                                    个人资料
+                                </a>
+                            </li>
+                            <li class="systemSetting">
+                                <a href="/crm/sysUser/getSysUserList/1/10">
+                                    系统设置
+                                </a>
+                            </li>
+                            <li>
+                                <a class="loginOut">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main">
+                <div class="dynamic">
+                    <div class="dynamicHeader">
+                        <ul>
+                            <li class="allDynamic active">
+                                全部动态
+                            </li>
+                            <li class="aboutChance">
+                                机会相关
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dynamicContent">
+                        <ul>
+                            <li th:each="sysDynamic:${sysDynamicAll}">
+                                <div>
+                                    <span class="icon">
+                                        <img alt="" th:src="@{/img/chanceIcon.png}"/>
+                                    </span>
+                                    <div class="msg">
+                                        <p class="employee">
+                                            <i th:text="${sysDynamic.userName}">
+                                            </i>
+                                            <span class="career" th:text="${sysDynamic.roleId eq 1? '（管理员）':(sysDynamic.roleId eq 2 ? '（销售经理）':'（销售人员）')}">
+                                            </span>
+                                        </p>
+                                        <p class="addWhat grey">
+                                            <i th:text="${sysDynamic.dyClassify eq 7?'添加了客户：':'添加了机会：'}">
+                                            </i>
+                                            <a class="description" th:href="@{'/cstCustomer/lookCstCustomerInfo/'+${sysDynamic.custId}}" th:text="${sysDynamic.custCompany}">
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <span class="addTime" th:text="${sysDynamic.revertDate}">
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="dnone">
+                            1
+                            <li th:each="sysDynamic:${sysDynamicAll}">
+                                <div>
+                                    <span class="icon">
+                                        <img alt="" th:src="@{/img/chanceIcon.png}"/>
+                                    </span>
+                                    <div class="msg">
+                                        <p class="employee">
+                                            <i th:text="${sysDynamic.userName}">
+                                            </i>
+                                            <span class="career" th:text="${sysDynamic.roleId eq 1? '（管理员）':(sysDynamic.roleId eq 2 ? '（销售经理）':'（销售人员）')}">
+                                            </span>
+                                        </p>
+                                        <p class="addWhat grey">
+                                            <i th:text="${sysDynamic.dyClassify eq 7?'添加了客户：':'添加了机会：'}">
+                                            </i>
+                                            <a class="description" th:href="@{'/cstCustomer/lookCstCustomerInfo/'+${sysDynamic.custId}}" th:text="${sysDynamic.custCompany}">
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <span class="addTime" th:text="${sysDynamic.revertDate}">
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="daily">
+                    <div class="dailyHeader">
+                        今天
+                        <span>
+                            ( 5/6 )
+                        </span>
+                    </div>
+                    <div class="dailyContent">
+                        <ul>
+                            <li th:each="sysDynamicList:${sysDynamicList}">
+                                <label class="forCheckbox">
+                                    <input name="complete" type="checkbox"/>
+                                </label>
+                                <div>
+                                    <form>
+                                        <input disabled="disabled" name="" th:value="${sysDynamicList.taskContent}" type="text"/>
+                                        <button class="sure">
+                                            <img th:src="@{/img/gou.png}"/>
+                                        </button>
+                                        <button class="cancel">
+                                            <svg class="fright" viewbox="0 0 20 20">
+                                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                    <span class="aboutChance grey">
+                                        关联机会：
+                                        <span th:text="${sysDynamicList.chance.chContent}">
+                                        </span>
+                                    </span>
+                                    <span class="createTime red dblock">
+                                        1天前
+                                    </span>
+                                </div>
+                                <p class="operate">
+                                    <span class="edit">
+                                        <img alt="" th:src="@{/img/edit.png}"/>
+                                    </span>
+                                    <span class="del">
+                                        <img alt="" th:src="@{/img/delete.png}"/>
+                                    </span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

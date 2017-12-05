@@ -6,16 +6,16 @@ $(function() {
 	});
 	$('.rightContent .main > div').width($('.rightContent .main').width() - 60);
 
-	// $('.save').click(function() {
-	// 	var companyName = $('#companyName').val();
-	// 	var contactName = $('#contactName').val();
-	// 	var mobilephone = $('#mobilephone').val();
-	// 	var telephone = $('#telephone').val();
-	// 	var mail = $('#mail').val();
-	// 	var province = $('#province').val();
-	// 	console.log(companyName, contactName, mobilephone, telephone, mail, province);
-	// 	//location.href = 'seas.html';
-	// });
+	$('.save').click(function() {
+		var companyName = $('#companyName').val();
+		var contactName = $('#contactName').val();
+		var mobilephone = $('#mobilephone').val();
+		var telephone = $('#telephone').val();
+		var mail = $('#mail').val();
+		var province = $('#province').val();
+		console.log(companyName, contactName, mobilephone, telephone, mail, province);
+		//location.href = 'seas.html';
+	});
 	$('.addNew .cancel').click(function(){
 		location.href = 'seas.html';
 	})
@@ -41,6 +41,11 @@ $(function() {
         }
     });
 
+    
+    //保存客户
+	$("#save").click(function () {
+		$("#saveForm").submit();
+    });
 	//取消保存客户
 	$("#cancel").click(function () {
 		location.href="/crm/cstCustomer/getPage/1/7";
@@ -59,31 +64,6 @@ $(function() {
 
         }
     });
-
-    //保存公海客户的限制
-     $(" #saveForm #save").click(function (e) {
-     	e.preventDefault()
-		  var mx=$(".addNew input").length;
-
-		   if ($('#companyName').val() !== "" && $('#companyName').val() !== "*必填" &&
-               $('#contactName').val() !== "" && $('#contactName').val() !== "*必填" &&
-               $('#mobilephone').val() !== "" && $('#mobilephone').val() !== "*必填" &&
-               $('#telephone').val() !== "" && $('#telephone').val() !== "*必填" &&
-               $('#mail').val() !== "" && $('#mail').val() !== "*必填" &&
-               $('#province').val() !== "" && $('#province').val() !== "*必填") {
-               		$('#saveForm').submit();
-		   } else {
-               for(var i=0;i<mx;i++){
-                   if($(".addNew input").eq(i).val()=='' ){
-                       $(".addNew input").eq(i).val('*必填').css('color','red');
-                       $(".addNew input").eq(i).focus(function () {
-                           $(this).val('').css('color','black')
-                       })
-                   }
-               };
-		   }
-     })
-
 });
 
 
@@ -98,6 +78,7 @@ $(function() {
 		$('.main .editMsgForm label').css({
 			'border-bottom': '1px solid #eee'
 		});
+		$('#createTime').attr('disabled',true)
 	});
 	$('.editMsgForm').find('.save').click(function() {
 		$('.editMsgForm').find('input').attr('disabled',true);

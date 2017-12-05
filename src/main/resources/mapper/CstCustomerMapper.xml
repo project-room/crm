@@ -71,7 +71,7 @@
         </update>-->
 
         <select id="getCstLowCust" parameterType="Long" resultMap="BaseResultMap">
-            SELECT cust_company  FROM  cst_customer WHERE cust_id in (select cust_low_id from cst_low_customer  where high_id=(select cust_id from cst_chance where ch_id=#{chId}))
+            SELECT cust_company  FROM  cst_customer WHERE cust_id=(select cust_low_id from cst_low_customer  where high_id=(select cust_id from cst_chance where ch_id=#{chId}))
         </select>
 
        <!--添加机会时完善客户资料-->

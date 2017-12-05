@@ -61,32 +61,21 @@ public class SysUserController extends BaseController {
 
     //用户登录
     @RequestMapping("/userLogin")
-    public void login(HttpServletRequest request ,HttpServletResponse response){
-        try {
-            String username=request.getParameter("username");
-            String password=request.getParameter("password");
-            request.setCharacterEncoding("utf-8");
-            response.setCharacterEncoding("utf-8");
-            PrintWriter out=response.getWriter();
-            SysUser sysUser=sysUserService.login(username,password);
-            //如果用户为停用状态不能登录
-            if(sysUser!=null&&sysUser.getUserStatus()!=0){
-               /* redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);*/
-               //获取用户的角色
-                Long roleId=sysUser.getRoleId();
-                SysRole sysRole=sysUserService.selectRoleById(roleId);
-                session.setAttribute("roleName",sysRole.getRoleName());
-                session.setAttribute("userId",sysUser.getUserId());
-                //用户状态如何为停用状态不能登录成功
-                out.print("1");
-
-            }else{
-                out.print("0");
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String login(String username,String password ,HttpServletResponse response){
+         Map map= result();
+         SysUser sysUser=sysUserService.login(username,password);
+         //如果用户为停用状态不能登录
+         if(sysUser!=null&&sysUser.getUserStatus()!=0){
+            /* redisTemplate.opsForValue().set("userName",username,7200, TimeUnit.SECONDS);*/
+            //获取用户的角色
+             Long roleId=sysUser.getRoleId();
+             SysRole sysRole=sysUserService.selectRoleById(roleId);
+             session.setAttribute("roleName",sysRole.getRoleName());
+             session.setAttribute("userId",sysUser.getUserId());
+             //用户状态如何为停用状态不能登录成功
+             return "redirect:"+"/getTaskListByUserId";
+         }
+        return "index/login";
     }
     //记住登录
     @RequestMapping("/remenberLogin")
@@ -430,8 +419,7 @@ public class SysUserController extends BaseController {
                 JSONObject sysUserJson=JSONObject.fromObject(sysUser);
                 out.print(sysUserJson);
             }else{
-                //用户不存在
-                out.print("0");
+                out.print("用户不存在");
             }
 
         } catch (IOException e) {

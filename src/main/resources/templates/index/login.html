@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8"/>
-	<title>客户关系管理系统</title>
-	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}"/>
-	<script th:src="@{/js/default.js}"></script>
-	<link rel="stylesheet" th:href="@{/css/login.css}"/>
-	<script th:src="@{/js/login.js}" th:inline="javascript"></script>
-</head>
-<body>
-	<div class="content">
-		<span class="pic">
-			<img th:src="@{/img/login.png}" alt="" />
-		</span>
-		<div class="logMsg">
-			<h4>润普CRM</h4>
-			<form method="post" id="loginForm" >
-				<label>
-					<input type="text" placeholder="请输入账号" name="username" id="username"/>
-
-				</label>
-				<span class="s_first">用户名错误或密码</span>
-				<label>
-					<input type="text" placeholder="请输入密码" name="password" id="password"/>
-
-				</label>
-				<p>
-					<label class="forCheckbox borderPurple">
-						<input type="checkbox" checked="checked" value="true"/>
-					</label>
-					下次自动登录
-				</p>
-				<button type="submit" class="login login_form"  id="loginButton" >登录</button>
-				<a href="/crm/cstCustomer/toFindPsd" class="findPsd">找回密码</a>
-			</form>
-		</div>
-	</div>
-</body>
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            客户关系管理系统
+        </title>
+        <script th:src="@{/js/jquery-1.8.3.min.js}">
+        </script>
+        <link rel="stylesheet" th:href="@{/css/default.css}" type="text/css"/>
+        <script th:src="@{/js/default.js}">
+        </script>
+        <link rel="stylesheet" th:href="@{/css/login.css}"/>
+        <script th:src="@{/js/login.js}">
+        </script>
+    </head>
+    <body>
+        <div class="content">
+            <span class="pic">
+                <img alt="" th:src="@{/img/login.png}"/>
+            </span>
+            <div class="logMsg">
+                <h4>
+                    润普CRM
+                </h4>
+                <form action="/crm/sysUser/userLogin" id="loginForm" method="post">
+                    <label>
+                        <input id="userName" name="username" placeholder="请输入账号" type="text"/>
+                    </label>
+                    <label>
+                        <input id="userPwd" name="password" placeholder="请输入密码" type="password"/>
+                    </label>
+                    <p>
+                        <label class="forCheckbox borderPurple">
+                            <input checked="checked" type="checkbox" value="true"/>
+                        </label>
+                        下次自动登录
+                    </p>
+                    <button class="login" id="loginButton" type="submit">
+                        登录
+                    </button>
+                    <a class="findPsd" href="/crm/cstCustomer/toFindPsd">
+                        找回密码
+                    </a>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>

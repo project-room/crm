@@ -1,8 +1,13 @@
 $(function() {
-    allCheck();
+    $('.main').height($(window).height() - 60);
+    $('.chanceContent').css({
+        'min-height': $(window).height() - 135 + 'px',
+        'margin-bottom': '25px'
+    });
     $('.main').niceScroll({
         cursorcolor: '#ccc'
     });
+    allCheck();
     checkboxClick();
     $('.customerNum span').text($('#table tbody tr').length);
     // $('.pull-right.pagination').append('<ul>1234</ul>')
@@ -65,7 +70,7 @@ window.onload = function() {
     });
     laydate.render({
         elem: '#day',
-        format: 'yyyy-MM-dd ',
+        format: 'yyyy-MM-dd',
         theme: '#7460ee',
     });
 };
@@ -117,15 +122,44 @@ function allCheck() {
         }
         allOperateShowHide();
     });
+
+
+    $('.selectPass').click(function() {
+        var selectPass = simpleAlert({
+            "content": "确定通过？",
+            "buttons": {
+                "是": function () {
+                    selectPass.close();
+                },
+                "否": function () {
+                    selectPass.close();
+                }
+            }
+        });
+    });
+
+    $('.selectUnPass').click(function () {
+        var selectUnPass = simpleAlert({
+            "content": "确定不通过？",
+            "buttons": {
+                "是": function () {
+                    selectUnPass.close();
+                },
+                "否": function () {
+                    selectUnPass.close();
+                }
+            }
+        });
+    });
 }
 
 function forTable() {
     var slideBool = false;
-    $('tbody').on('click', 'tr .shenpi', function() {
-        // alert($(this).parents('tr').attr('data-id'))
-        // $(this).parents('tr').remove();
-        allOperateShowHide();
-    });
+    // $('tbody').on('click', 'tr .shenpi', function() {
+    //     // alert($(this).parents('tr').attr('data-id'))
+    //     // $(this).parents('tr').remove();
+    //     allOperateShowHide();
+    // });
     $('tbody').on('click', 'tr input[type=checkbox]', function(event) {
         event.stopPropagation();
         allOperateShowHide();
