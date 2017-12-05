@@ -6,15 +6,6 @@ $(function() {
 	$('.main').niceScroll({
 		cursorcolor: '#ccc'
 	});
-
-
-	$('.main>form>ul').find('input').each(function(index, el) {
-		$(this).width($(this).parent().width()- 125)
-		console.log($(this).parent().width())
-	});
-	$('.main>form>ul').find('select').each(function(index, el) {
-		$(this).width($(this).parent().width() - 125)
-	});
 })
 
 window.onload = function() {

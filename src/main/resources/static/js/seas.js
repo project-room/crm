@@ -1,17 +1,12 @@
 $(function() {
     allCheck();
-    $('.seasContent').css({
-        'min-height': $(window).height() - 135 + 'px',
-        'margin-bottom': '25px'
-    });
-    $('.main').height($(window).height() - 60);
+
     $('.main').niceScroll({
         cursorcolor: '#ccc'
     });
     $('.salerSearch').niceScroll({
         cursorcolor: '#ccc'
     });
-
 
 
     checkboxClick();
@@ -23,19 +18,13 @@ $(function() {
 
     $('.shelter').click(function(event) {
         $('.filterPop').addClass('dnone').removeClass('dblock');
-        $('#layui-laydate2').remove();
-        $('#layui-laydate1').remove();
     });
 
     $('.filterPop .sure').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
-        $('#layui-laydate2').remove();
-        $('#layui-laydate1').remove();
     });
     $('.filterPop .cancel').click(function() {
         $('.filterPop').addClass('dnone').removeClass('dblock');
-        $('#layui-laydate2').remove();
-        $('#layui-laydate1').remove();
     });
 
     $('.allOperate .delete').click(function() {
@@ -118,7 +107,24 @@ $(function() {
     });
 
 
-    //限制单个分配客户（列表右侧的分配），待开发
+    //新建销售机会
+    $(".addNew").click(function () {
+        var custId="";
+        for (var i = 0; i < $('tbody tr').length; i++) {
+            if ($('tbody tr').eq(i).find('input[type=checkbox]').prop('checked') === true) {
+              custId= $('tbody tr').eq(i).find('input[type=hidden]').val();
+            }
+        }
+
+        $.ajax({
+            url:"/crm/cstChance/getCstCustomerCustId",
+            type:"POST",
+            data:{"custId":custId},
+            success:function (data) {
+                location.href="/crm/cstChance/getCstCustomer";
+            }
+        });
+    });
 });
 
 
@@ -126,13 +132,11 @@ window.onload = function() {
     laydate.render({
         elem: '#hour',
         type: 'time',
-        range: true,
-        theme: '#7460ee'
+        range: true
     });
     laydate.render({
         elem: '#day',
-        format: 'yyyy年MM月dd日',
-        theme: '#7460ee'
+        format: 'yyyy年MM月dd日'
     });
 };
 
@@ -186,6 +190,7 @@ function allCheck() {
 
 function forDealing() {
     var userId="";
+    var custIdOne="";
     $('body').on('click', '.dealing', function() {
         $('.dealingPop').addClass('dblock').removeClass('dnone');
     });
@@ -200,19 +205,38 @@ function forDealing() {
             if ($('#table tbody tr').eq(i).find('.forCheckbox').find('input[type=checkbox]').prop('checked')) {
                 var custId= $('#table tbody tr').eq(i).find('input[type=hidden]').val();
                 custIdStr=custIdStr+"-"+custId;
+                alert("custIdStr:"+custIdStr);
             }
         }
-        //分配客户
-        $.ajax({
-            url:"/crm/cstCustomer/distributeCstCustomer",
-            type:"POST",
-            data:{"userId":userId,"custIdStr":custIdStr},
-            success:function (data) {
-                location.href="/crm/cstCustomer/getPage/1/7"
-            }
-        });
-
+        if(custIdOne!=""){
+            custIdStr=custIdStr+"-"+custIdOne;
+            //分配客户
+            $.ajax({
+                url:"/crm/cstCustomer/distributeCstCustomer",
+                type:"POST",
+                data:{"userId":userId,"custIdStr":custIdStr},
+                success:function (data) {
+                    location.href="/crm/cstCustomer/getPage/1/7"
+                }
+            });
+        }else{
+            //分配客户
+            $.ajax({
+                url:"/crm/cstCustomer/distributeCstCustomer",
+                type:"POST",
+                data:{"userId":userId,"custIdStr":custIdStr},
+                success:function (data) {
+                    location.href="/crm/cstCustomer/getPage/1/7"
+                }
+            });
+        }
     });
+
+    //限制单个分配客户（列表右侧的分配），待开发
+     $('tbody tr .dealing').click(function () {
+      custIdOne=$(this).attr('name');
+     });
+
 
     //测试
 

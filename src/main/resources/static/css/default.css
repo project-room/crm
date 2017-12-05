@@ -17,7 +17,6 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family:'微软雅黑';
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -111,7 +110,7 @@ p { margin-bottom: 0; }
 .rightContent .main { background: #dde1eb; }
 
 
-label.forCheckbox { height: 14px !important; width: 14px !important; display: inline-block;
+label.forCheckbox { height: 14px; width: 14px; display: inline-block;
 	border: 1px solid #ccc; border-radius: 2px; box-shadow: inset 0 0 4px #ccc;
 	vertical-align: middle; }
 /* label.forCheckbox input:before {display: block; content: ''; height: 14px; width: 14px; display: inline-block; border: 1px solid #ccc; border-radius: 2px; box-shadow: inset 0 0 4px #ccc; vertical-align: middle; visibility: visible;  }
@@ -138,7 +137,3 @@ select::-ms-expand { display: none; }
 
 
 .page-number.active a { background: #7460ee; }
-
-.bordernone { border: none !important; }
-
-.jump select { padding-left: 25px;}

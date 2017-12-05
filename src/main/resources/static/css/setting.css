@@ -33,7 +33,7 @@
 .mainHeader .fright label i { position: absolute; right: 10px; top: -2px; cursor: pointer; }
 .mainHeader .fright a { border: 1px solid #7460ee; color: #7460ee; font-size: 14px; padding:4px 4px 4px 24px; border-radius: 4px; background: url('../img/add3.png') left 4px center no-repeat;  }
 
-.allOperate a { height: 30px; display: inline-block; border: 1px solid #7460ee; border-radius: 4px; line-height: 25px; text-align: center; font-size: 14px; color: #7460ee; margin-left: 14px; padding: 0 10px; }
+.allOperate a { width: 100px; height: 30px; display: inline-block; border: 1px solid #7460ee; border-radius: 4px; line-height: 30px; text-align: center; font-size: 14px; color: #7460ee; margin-left: 14px; }
 .allOperate { margin-bottom: 14px; }
 .content { background: #fff; position: relative; }
 

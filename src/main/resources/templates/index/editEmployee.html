@@ -5,26 +5,20 @@
             <title>
                 客户关系管理系统
             </title>
-            <script th:src="@{/js/jquery-1.8.3.min.js}">
-            </script>
-            <script th:src="@{/bootstrap/js/bootstrap.js}">
-            </script>
-            <script th:src="@{/bootstrap/js/bootstrap-table.js}">
-            </script>
-            <script th:src="@{/js/jquery.nicescroll.js}">
-            </script>
-            <script th:src="@{/laydate/laydate.js}">
-            </script>
-            <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
-            <link rel="stylesheet" th:href="@{/css/default.css}"/>
-            <link rel="stylesheet" th:href="@{/css/setting.css}"/>
-            <script th:src="@{/js/default.js}">
-            </script>
-            <script th:inline="javascript" th:src="@{/js/setting.js}">
-            </script>
+            <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap-table.js}"></script>
+            <script th:src="@{/js/jquery.nicescroll.js}"></script>
+            <script th:src="@{/laydate/laydate.js}"></script>
+            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+            <link th:href="@{/css/default.css}" rel="stylesheet"/>
+            <link th:href="@{/css/setting.css}" rel="stylesheet"/>
+            <script th:src="@{/js/default.js}"></script>
+            <script th:src="@{/js/setting.js}" th:inline="javascript"></script>
         </meta>
     </head>
     <body class="EmployeeMsg">
+        
         <div class="leftContent">
             <div class="logo">
                 <img alt="logo" th:src="@{/img/logo.png}"/>
@@ -57,14 +51,7 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <img alt="合同" th:src="@{/img/contract.png}"/>
-                        <span class="navTxt">
-                            合同
-                        </span>
-                    </a>
-                </li>
+                <li><a><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
                 <li>
                     <img alt="财务" th:src="@{/img/financial.png}"/>
                     <span class="navTxt">
@@ -79,10 +66,10 @@
                 </li>
                 <li class="active">
                     <a href="/crm/sysUser/getSysUserList/1/10">
-                        <img alt="设置" th:src="@{/img/setting.png}"/>
-                        <span class="navTxt">
-                            设置
-                        </span>
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
                     </a>
                 </li>
             </ul>
@@ -90,7 +77,7 @@
         <div class="rightContent">
             <div class="header">
                 <div>
-                    <input class="searchName" placeholder="请输入客户名称" type="text"/>
+                    <input placeholder="请输入客户名称" type="text" class="searchName"/>
                     <button class="search">
                         <img alt="" th:src="@{/img/searchIcon.png}"/>
                     </button>
@@ -125,6 +112,7 @@
                     </div>
                     <div class="user">
                         <span class="userName">
+
                         </span>
                         <span class="xiala">
                             <img th:src="@{/img/xiala.png}"/>
@@ -154,138 +142,53 @@
                     <div class="mainHeader">
                         <div class="fleft">
                             <ul>
-                                <li class="active">
-                                    <a href="/crm/sysUser/getSysUserList/1/10">
-                                        用户管理
-                                    </a>
-                                </li>
-                                <li class="org">
-                                    <a href="javascript:void(0);">
-                                        组织架构管理
-                                    </a>
-                                    <i>
-                                    </i>
+                                <li class="active"><a href="/crm/sysUser/getSysUserList/1/10">用户管理</a></li>
+                                <li class="org"><a href="javascript:void(0);">组织架构管理</a><i></i>
                                     <ul class="bumen dnone">
                                         <li>
-                                            <a th:href="@{/sysUser/loadSalesManager}">
-                                                销售部
-                                            </a>
+                                            <a th:href="@{/sysUser/loadSalesManager}">销售部</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a>
-                                                技术支持
-                                            </a>
+                                            <a >技术支持</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a>
-                                                财务部
-                                            </a>
+                                            <a >财务部</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a>
-                                                行政部
-                                            </a>
+                                            <a >行政部</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="cus">
-                                    <a href="javascript:void(0);">
-                                        自定义字段设置
-                                    </a>
-                                    <i>
-                                    </i>
+                                <li class="cus"><a href="javascript:void(0);">自定义字段设置</a><i></i>
                                     <ul class="dnone">
-                                        <li>
-                                            <a>
-                                                机会
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                合同
-                                            </a>
-                                        </li>
+                                        <li><a >机会</a></li>
+                                        <li><a >合同</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a>
-                                        业务流程设置
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        参数设置
-                                    </a>
-                                </li>
+                                <li><a >业务流程设置</a></li>
+                                <li><a >参数设置</a></li>
                             </ul>
+                            
                         </div>
                         <div class="fright">
                             <a href="#">
@@ -293,110 +196,67 @@
                             </a>
                         </div>
                     </div>
+                    
                     <div class="content">
-                        <h4 style="font-size: 16px;">
-                            修改员工
-                        </h4>
-                        <form style="font-size: 14px;">
-                            <input name="userId" th:value="${sysUser.userId}" type="hidden"/>
+                        <h4>修改员工</h4>
+                        <form>
+                            <input type="hidden" th:value="${sysUser.userId}"  name="userId" />
                             <label>
-                                <span>
-                                    员工名字
-                                </span>
-                                <input name="userName" th:value="${sysUser.userName}" type="text"/>
+                                <span>员工名字</span>
+                                <input type="text" name="userName" th:value="${sysUser.userName}" />
                             </label>
                             <label>
-                                <span>
-                                    登录账号
-                                </span>
-                                <input name="userAccounts" th:value="${sysUser.userAccounts}" type="text"/>
+                                <span>登录账号</span>
+                                <input type="text" name="userAccounts" th:value="${sysUser.userAccounts}" />
                             </label>
                             <label>
-                                <span>
-                                    输入密码
-                                </span>
-                                <input name="userPassword" th:value="${sysUser.userPassword}" type="password"/>
+                                <span>输入密码</span>
+                                <input type="password" name="userPassword" th:value="${sysUser.userPassword}"/>
                             </label>
                             <label>
-                                <span>
-                                    确认密码
-                                </span>
-                                <input name="" type="password"/>
+                                <span>确认密码</span>
+                                <input type="password" name="" />
                             </label>
                             <label>
-                                <span>
-                                    状态
-                                </span>
+                                <span>状态</span>
                                 <select class="opcontroller">
-                                    <option th:selected="${sysUser.userStatus eq 1}" value="1">
-                                        正常
-                                    </option>
-                                    <option th:selected="${sysUser.userStatus eq 0}" value="0">
-                                        停用
-                                    </option>
+                                    <option value="1" th:selected="${sysUser.userStatus eq 1}" >正常</option>
+                                    <option value="0" th:selected="${sysUser.userStatus eq 0}" >停用</option>
                                 </select>
                             </label>
                             <label>
-                                <span>
-                                    手机号码
-                                </span>
-                                <input name="userPhone" th:value="${sysUser.userPhone}" type="text"/>
+                                <span>手机号码</span>
+                                <input type="text" name="userPhone" th:value="${sysUser.userPhone}" />
                             </label>
                             <label>
-                                <span>
-                                    部门
-                                </span>
-                                <input name="userDepartment" th:value="${sysUser.userDepartment}" type="text"/>
+                                <span>部门</span>
+                                <input type="text" name="userDepartment" th:value="${sysUser.userDepartment}" />
                             </label>
                             <label>
-                                <span>
-                                    职位
-                                </span>
-                                <input name="userPosition" th:value="${sysUser.userPosition}" type="text"/>
+                                <span>职位</span>
+                                <input type="text" name="userPosition" th:value="${sysUser.userPosition}" />
                             </label>
                             <label>
-                                <span>
-                                    负责区域
-                                </span>
+                                <span>负责区域</span>
                                 <select class="district">
-                                    <option th:selected="${sysUser.userDistrict eq 'A区'}">
-                                        A区
-                                    </option>
-                                    <option th:selected="${sysUser.userDistrict eq 'B区'}">
-                                        B区
-                                    </option>
-                                    <option th:selected="${sysUser.userDistrict eq 'C区'}">
-                                        C区
-                                    </option>
-                                    <option th:selected="${sysUser.userDistrict eq 'D区'}">
-                                        D区
-                                    </option>
+                                    <option th:selected="${sysUser.userDistrict eq 'A区'}">A区</option>
+                                    <option th:selected="${sysUser.userDistrict eq 'B区'}">B区</option>
+                                    <option th:selected="${sysUser.userDistrict eq 'C区'}">C区</option>
+                                    <option th:selected="${sysUser.userDistrict eq 'D区'}">D区</option>
                                 </select>
                             </label>
                             <label>
-                                <span>
-                                    角色
-                                </span>
+                                <span>角色</span>
                                 <select class="juese">
-                                    <option th:selected="${sysUser.roleId eq 1}" value="1">
-                                        管理员
-                                    </option>
-                                    <option th:selected="${sysUser.roleId eq 2}" value="2">
-                                        销售经理
-                                    </option>
-                                    <option th:selected="${sysUser.roleId eq 3}" value="3">
-                                        销售员
-                                    </option>
+                                    <option value="1" th:selected="${sysUser.roleId eq 1}">管理员</option>
+                                    <option value="2" th:selected="${sysUser.roleId eq 2}">销售经理</option>
+                                    <option value="3" th:selected="${sysUser.roleId eq 3}">销售员</option>
                                 </select>
                             </label>
                         </form>
                         <div class="btngroup">
-                            <button class="save" id="editEmployee" type="button">
-                                保存
-                            </button>
-                            <button class="cancel" type="reset">
-                                取消
-                            </button>
+                            <button class="save" id="editEmployee">保存</button>
+                            <button class="cancel">取消</button>
                         </div>
                     </div>
                 </div>

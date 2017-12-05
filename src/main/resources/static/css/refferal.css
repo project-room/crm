@@ -1,12 +1,12 @@
 .refferalHeader { height: 50px; padding: 0 30px; }
 .allOperate { clear: both; margin: 0 30px 20px;}
-.chanceContent { clear: both; margin: 0 30px 30px; background: #fff;position: relative;}
+.chanceContent { clear: both; margin: 0 30px 30px; background: #fff}
 
 .refferalHeader .fleft p { display: inline-block; line-height: 50px;  }
 .refferalHeader .tag { font-size: 18px; color: #7460ee; display: inline-block; position: relative; z-index: 4; background: url('../img/dropDown.png') right center no-repeat; padding-right: 15px; margin-right: 5px; }
 .refferalHeader .tag ul { position: absolute; font-size: 14px; padding: 4px; right: 0; background: #fff; color: #666; line-height: 1.8;}
 .refferalHeader .customerNum { color: #999; }
-.refferalHeader .fright button,.allOperate button { height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; color: #7460ee; padding: 0 10px; }
+.refferalHeader .fright button,.allOperate button { height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; color: #7460ee; margin-top: 10px; }
 .refferalHeader .fright button.moreOperate { background: #7460ee; color: #fff; font-weight: 900; padding: 0; }
 .refferalHeader .fright a { color: #7460ee; height: 30px; border: 1px solid #7460ee; background: none; border-radius: 4px; vertical-align: middle; display: inline-block; line-height: 28px; padding: 0 3px; }
 
@@ -18,7 +18,7 @@ nav { text-align: center; }
 .pagination > li:first-child > a, .pagination > li:first-child > span {border-radius: 0;}
 .pagination > li:last-child > a, .pagination > li:last-child > span {border-radius: 0;}
 
-div.fixed-table-pagination { text-align: center; margin-bottom: 15px; position: absolute; bottom: 0; width: 100%; }
+div.fixed-table-pagination { text-align: center; margin-bottom: 40px; }
 div.pull-left.pagination-detail { display: none; }
 div.pull-right.pagination { float: none !important; text-align: center; margin: 0 auto; display: inline-block !important; }
 
@@ -101,8 +101,7 @@ td.contactWay, td.mail { color: #999; }
 
 .zhuanjiao form { padding: 20px; }
 .zhuanjiao form>label { border-bottom: 1px solid #eef1f7; width: 100%; margin-bottom: 20px; padding-bottom: 10px; color: #999; }
-.zhuanjiao form>label span { width: 135px; display: inline-block; }
-.zhuanjiao form>label input { border: none; background: #fff; outline: none; width: 420px; }
+.zhuanjiao form>label input { border: none; background: #fff; outline: none; margin-left: 20px; }
 
 .zhuanjiao .stageSelect p { color: #999; }
 .zhuanjiao .stageSelect ul li { display: inline-block; width: 120px; margin-top: 20px; }

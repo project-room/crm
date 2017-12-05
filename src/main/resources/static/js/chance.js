@@ -1,14 +1,8 @@
 $(function() {
-        //点击加号
-    $('.img_list').click(function(e){
-        console.log(123)
-        $('.add_list_a').css('display','block')
-    }) ;
     allCheck();
 
-    $('.main').height($(window).height() - 60);
     $('.chanceContent').css({
-        'min-height': $(window).height() - 135 + 'px',
+        'min-height': $(window).height() - 130 + 'px',
         'margin-bottom': '25px'
     });
 
@@ -74,7 +68,6 @@ $(function() {
 
     forTable();
     fenye();
-    fenye2();
     $('#table').find('.follow').width($('#table').width() / 2);
 
     $('.tag').click(function() {

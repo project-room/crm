@@ -3,7 +3,18 @@ $(function() {
 	var accountPsd = localStorage.getItem('userpsd');
 	//
 	if(account!=null&&accountPsd!=null){
-		location.href="/crm/sysUser/userLogin?username="+account+"&&password="+accountPsd;
+		$.ajax({
+			url:'/crm/sysUser/userLogin',
+			data:{"username":account,"password":accountPsd},
+			type:'POST',
+			success:function (data) {
+				if(data=='1'){
+                    location.href="/crm/getTaskListByUserId";
+				}else{
+                    location.href="/crm/cstCustomer/toLogin";
+				}
+            }
+		});
 	}
 	// $.post('/crm/sysUser/userLogin',{username:account,password:accountPsd},function() {
 	// 	console.log(1)
@@ -19,31 +30,62 @@ $(function() {
 	});
 	
 	//登录
-	$("#loginButton").click(function () {
+	$("#loginButton").click(function (e) {
+		e.preventDefault()
         var userName = $('#loginForm').find('input[name=username]').val();
         var userpsd = $('#loginForm').find('input[name=password]').val();
         $.ajax({
-			url:"/crm/sysUser/getSysUserByUserName",
+			// url:"/crm/sysUser/getSysUserByUserName",
+			url: "/crm/sysUser/userLogin",
 			type:"POST",
-			data:{"userName":userName},
+			data:{"username":userName,"password":userpsd},
 			success:function (data) {
-
-				var data = JSON.parse(data);
-				console.log(data.userPassword)
-				if (data.userPassword == userpsd) {
+				if (data == 1) {
                     if ($('.forCheckbox').find('input').prop('checked') == true) {
-                        localStorage.setItem('userName', userName);
-                        localStorage.setItem('userpsd', userpsd);
-                    }
-
+					    localStorage.setItem('userName', userName);
+					    localStorage.setItem('userpsd', userpsd);
+				    }
+				    location.href = '/crm/getTaskListByUserId'
+				}else{
+					$(".s_first").css('display','block')
 				}
+				// var data = JSON.parse(data);
+				// console.log(data.userPassword)
+				// if (data.userPassword == userpsd) {
+                 //    if ($('.forCheckbox').find('input').prop('checked') == true) {
+                 //        localStorage.setItem('userName', userName);
+                 //        localStorage.setItem('userpsd', userpsd);
+                 //    }
+                //
+				// }
             },fail:function (e) {
                 console.log(e)
-				alert(e)
 			}
 		});
-        $("#loginForm").submit();
     });
+    $('#username').focus(function () {
+        $(".s_first").css('display','none')
+    })
+    // $(".login_form").click(function () {
+    //     var username=$("input[name='username']").val();
+    //     var password=$("input[name='password']").val();
+    //     $.ajax({
+    //         url:'/sysUser/userLogin',
+    //         data:{"username":username,"password":password},
+    //         type:'POST',
+    //         success:function (data) {
+    //             if(data=='1'){
+    //                 location.href="/crm/getTaskListByUserId";
+    //             }else{
+    //                 console.log(123)
+    //                 $('.logMsg form .s_first').css('display','block')
+    //             }
+    //         }
+    //     });
+    //     return false;
+    // });
+
+
 
 	//获取短信验证码
 	$("#sendCaptcha").click(function () {
@@ -77,26 +119,24 @@ $(function() {
 
     });
 
-
-	// //下次自动登录
-	// var userName=$("type[name='userName']").val();
-	// if(userName==null){
-	// 	// location.href="/crm/cstCustomer/toLogin";
-	// }else{
-     //    $.ajax({
-     //        url:"/crm/sysUser/remenberLogin",
-     //        data:{"userName":userName},
-     //        type: "POST",
-     //        success: function (data) {
-     //            if(data==true){
-     //                alert("data.result:"+data.result);
-     //                location.href="/crm/cstCustomer/toIndex"
-     //            }else{
-     //                location.href="/crm/cstCustomer/toLogin"
-     //            }
+    // //判断用户名是不存在
+    // $("input[name='username']").focus();
+    // $("input[name='username']").blur(function () {
+	 // var userName=$("input[name='username']").val();
+	 // $.ajax({
+		//  url:"/crm/sysUser/getSysUserByUserName",
+		//  data:{"userName":userName},
+		//  type:"POST",
+		//  success:function (data) {
+		// 	if(data=='0'){
+		// 		$("input[name='username']").val('用户名不存在');
+		// 	}
+    //      }
+	 // });
+    // });
     //
-     //        }, fail: function (data) {
-     //        }
-     //    });
-	// }
+    // $("input[name='username']").focus(function () {
+    //     $("input[name='username']").val('');
+    // });
+
 });

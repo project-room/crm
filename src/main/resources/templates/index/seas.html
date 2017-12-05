@@ -1,576 +1,520 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta content="webkit|ie-comp|ie-stand" name="renderer"/>
-        <meta charset="utf-8">
-            <title>
-                客户关系管理系统
-            </title>
-            <script th:src="@{/js/jquery-1.8.3.min.js}">
-            </script>
-            <script th:src="@{/bootstrap/js/bootstrap.js}">
-            </script>
-            <script th:src="@{/bootstrap/js/bootstrap-table.js}">
-            </script>
-            <script th:src="@{/js/jquery.nicescroll.js}">
-            </script>
-            <script th:src="@{/laydate/laydate.js}">
-            </script>
-            <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
-            <link rel="stylesheet" th:href="@{/css/default.css}"/>
-            <link rel="stylesheet" th:href="@{/css/seas.css}"/>
-            <script th:inline="javascript" th:src="@{/js/default.js}">
-            </script>
-            <script th:src="@{/js/seas.js}">
-            </script>
-        </meta>
-    </head>
-    <body class="seas" style="overflow-y: hidden;">
-        <div class="dealingPop dnone" style="font-size: 14px;">
-            <div class="shelter">
+<head>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta charset="utf-8">
+    <title>
+        客户关系管理系统
+    </title>
+    <script th:src="@{/js/jquery-1.8.3.min.js}">
+    </script>
+    <script th:src="@{/bootstrap/js/bootstrap.js}">
+    </script>
+    <script th:src="@{/bootstrap/js/bootstrap-table.js}">
+    </script>
+    <script th:src="@{/js/jquery.nicescroll.js}">
+    </script>
+    <script th:src="@{/laydate/laydate.js}">
+    </script>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link th:href="@{/css/seas.css}" rel="stylesheet"/>
+    <script th:src="@{/js/default.js}" th:inline="javascript">
+    </script>
+    <script th:src="@{/js/seas.js}">
+    </script>
+    </meta>
+</head>
+<body>
+<div class="dealingPop dnone"  style="font-size: 14px;">
+    <div class="shelter"></div>
+    <div class="dealingmain">
+        <h4>
+            分配公海客户
+            <svg class="fright cancel" viewbox="0 0 20 20">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                </path>
+            </svg>
+        </h4>
+        <form>
+            <label>
+                <span>客户类型</span>
+                <select>
+                    <option>有效客户</option>
+                </select>
+            </label>
+            <label>
+                <span>分配销售员</span>
+                <input type="text" class="saler" />
+            </label>
+            <div class="btngroup">
+                <input class="sure" type="button" value="确定"/>
+                <input class="cancel" type="button" value="取消"/>
             </div>
-            <div class="dealingmain">
-                <h4>
-                    分配公海客户
-                    <svg class="fright cancel" viewbox="0 0 20 20">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-                        </path>
-                    </svg>
-                </h4>
-                <form>
-                    <label>
-                        <span>
-                            客户类型
-                        </span>
-                        <select>
-                            <option>
-                                有效客户
-                            </option>
-                        </select>
-                    </label>
-                    <label>
-                        <span>
-                            分配销售员
-                        </span>
-                        <input class="saler" type="text"/>
-                    </label>
-                    <div class="btngroup">
-                        <input class="sure" type="button" value="确定"/>
-                        <input class="cancel" type="button" value="取消"/>
-                    </div>
-                </form>
-                <div class="salerSearch">
-                    <label>
-                        <input placeholder="请输入销售员名字" type="text"/>
-                    </label>
-                    <ul>
-                        <span>
-                            +
-                        </span>
-                        A区
-                        <li th:each="sysUserA:${sysUsersA}" th:name="${sysUserA.userId}" th:text="${sysUserA.userName}">
-                        </li>
-                    </ul>
-                    <ul>
-                        <span>
-                            +
-                        </span>
-                        B区
-                        <li th:each="sysUserB:${sysUsersB}" th:name="${sysUserB.userId}" th:text="${sysUserB.userName}">
-                        </li>
-                    </ul>
-                    <ul>
-                        <span>
-                            +
-                        </span>
-                        C区
-                        <li th:each="sysUserC:${sysUsersC}" th:name="${sysUserC.userId}" th:text="${sysUserC.userName}">
-                        </li>
-                    </ul>
-                    <ul>
-                        <span>
-                            +
-                        </span>
-                        D区
-                        <li th:each="sysUserD:${sysUsersD}" th:name="${sysUserD.userId}" th:text="${sysUserD.userName}">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="filterPop dnone" style="font-size: 14px;">
-            <div class="shelter">
-            </div>
-            <div class="filtermain">
-                <h4>
-                    高级筛选
-                    <span class="fright cancel">
-                        X
-                    </span>
-                </h4>
-                <form action="/crm/cstCustomer/selectCstCustomersByCondition" id="filterForm">
-                    <input id="currentPage" name="currentPageFor" type="hidden" value="1"/>
-                    <label for="name">
-                        <span>
-                            客户名称
-                        </span>
-                        <input id="name" name="custCompany" type="text"/>
-                    </label>
-                    <label for="contact">
-                        <span>
-                            联系人
-                        </span>
-                        <input id="contact" name="linkName" type="text"/>
-                    </label>
-                    <label for="mobile">
-                        <span>
-                            移动电话
-                        </span>
-                        <input id="mobile" name="linkPhone" type="text"/>
-                    </label>
-                    <label for="telphone">
-                        <span>
-                            固定电话
-                        </span>
-                        <input id="telphone" name="linkLandlinePhone" type="text"/>
-                    </label>
-                    <label for="renlingren">
-                        <span>
-                            客户认领人
-                        </span>
-                        <input id="renlingren" name="userName" type="text"/>
-                    </label>
-                    <label for="mail">
-                        <span>
-                            QQ/邮箱
-                        </span>
-                        <input id="mail" name="linkEmail" type="text"/>
-                    </label>
-                    <label class="day" for="day">
-                        <span>
-                            创建日期
-                        </span>
-                        <input id="day" name="year" placeholder="年/月/日" style="width: 130px; text-align: left;" type="text"/>
-                    </label>
-                    <label class="hour" for="hour">
-                        <input id="hour" name="minute" placeholder="00:00-00:00" style="width: 100%;text-align: center;" type="text"/>
-                    </label>
-                    <div class="btngroup">
-                        <input class="sure" id="confirm" type="button" value="确定"/>
-                        <input class="cancel" type="reset" value="取消"/>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="leftContent">
-            <div class="logo">
-                <img alt="logo" th:src="@{/img/logo.png}"/>
-                <span class="logoTxt">
-                    润普CRM
-                </span>
-            </div>
+        </form>
+        <div class="salerSearch">
+            <label>
+                <input type="text" placeholder="请输入销售员名字" />
+            </label>
             <ul>
-                <li>
-                    <a th:href="@{/getTaskListByUserId}">
-                        <img alt="首页" th:src="@{/img/index.png}"/>
-                        <span class="navTxt">
-                            首页
-                        </span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="/crm/cstCustomer/getPage/1/7">
-                        <img alt="公海" th:src="@{/img/seas.png}"/>
-                        <span class="navTxt">
-                            公海
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/cstChance/getCstChance/1/10}">
-                        <img alt="机会" th:src="@{/img/chance.png}"/>
-                        <span class="navTxt">
-                            机会
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <img alt="合同" th:src="@{/img/contract.png}"/>
-                    <span class="navTxt">
-                        合同
-                    </span>
-                </li>
-                <li>
-                    <img alt="财务" th:src="@{/img/financial.png}"/>
-                    <span class="navTxt">
-                        财务
-                    </span>
-                </li>
-                <li>
-                    <img alt="支持" th:src="@{/img/support.png}"/>
-                    <span class="navTxt">
-                        支持
-                    </span>
-                </li>
-                <li class="settitemdisplay">
-                    <a href="/crm/sysUser/getSysUserList/1/10">
-                        <img alt="设置" th:src="@{/img/setting.png}"/>
-                        <span class="navTxt">
-                            设置
-                        </span>
-                    </a>
-                </li>
+                <span>+</span>A区
+                <li th:each="sysUserA:${sysUsersA}" th:text="${sysUserA.userName}" th:name="${sysUserA.userId}"></li>
+            </ul>
+            <ul>
+                <span>+</span>B区
+                <li th:each="sysUserB:${sysUsersB}" th:text="${sysUserB.userName}" th:name="${sysUserB.userId}"></li>
+            </ul>
+            <ul>
+                <span>+</span>C区
+                <li th:each="sysUserC:${sysUsersC}" th:text="${sysUserC.userName}" th:name="${sysUserC.userId}"></li>
+            </ul>
+            <ul>
+                <span>+</span>D区
+                <li th:each="sysUserD:${sysUsersD}" th:text="${sysUserD.userName}" th:name="${sysUserD.userId}"></li>
             </ul>
         </div>
-        <div class="rightContent">
-            <div class="header">
-                <div>
-                    <input class="searchName" placeholder="请输入客户名称" type="text"/>
-                    <button class="search">
-                        <img alt="" th:src="@{/img/searchIcon.png}"/>
-                    </button>
-                    <div class="mail">
+    </div>
+</div>
+
+<div class="filterPop dnone" style="font-size: 14px;">
+    <div class="shelter">
+    </div>
+    <div class="filtermain">
+        <h4>
+            高级筛选
+            <span class="fright cancel">
+                        X
+                    </span>
+        </h4>
+        <form id="filterForm" action="/crm/cstCustomer/selectCstCustomersByCondition">
+            <input id="currentPage" name="currentPageFor" type="hidden" value="1"/>
+            <label for="name">
+                客户名称
+                <input id="name" name="custCompany" type="text"/>
+            </label>
+            <label for="contact">
+                联系人
+                <input id="contact" name="linkName" type="text"/>
+            </label>
+            <label for="mobile">
+                移动电话
+                <input id="mobile" name="linkPhone" type="text"/>
+            </label>
+            <label for="telphone">
+                固定电话
+                <input id="telphone" name="linkLandlinePhone" type="text"/>
+            </label>
+            <label for="renlingren">
+                客户认领人
+                <input id="renlingren" name="userName" type="text"/>
+            </label>
+            <label for="mail">
+                QQ/邮箱
+                <input id="mail" name="linkEmail" type="text"/>
+            </label>
+            <label class="day" for="day">
+                创建日期
+                <input id="day" name="year" placeholder="年/月/日" type="text"/>
+            </label>
+            <label class="hour" for="hour">
+                <input id="hour" name="minute" placeholder="00:00-00:00" type="text"/>
+            </label>
+            <div class="btngroup">
+                <input class="sure" type="button" value="确定" id="confirm"/>
+                <input class="cancel" type="button" value="取消"/>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="leftContent">
+    <div class="logo">
+        <img alt="logo" th:src="@{/img/logo.png}"/>
+        <span class="logoTxt">
+                    润普CRM
+                </span>
+    </div>
+    <ul>
+        <li>
+            <a th:href="@{/getTaskListByUserId}">
+                <img alt="首页" th:src="@{/img/index.png}"/>
+                <span class="navTxt">
+                            首页
+                        </span>
+            </a>
+        </li>
+        <li class="active">
+            <a href="/crm/cstCustomer/getPage/1/7">
+                <img alt="公海" th:src="@{/img/seas.png}"/>
+                <span class="navTxt">
+                            公海
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/cstChance/getCstChance/1/10}">
+                <img alt="机会" th:src="@{/img/chance.png}"/>
+                <span class="navTxt">
+                            机会
+                        </span>
+            </a>
+        </li>
+        <li>
+            <img alt="合同" th:src="@{/img/contract.png}" />
+            <span class="navTxt">
+                        合同
+                    </span>
+        </li>
+        <li>
+            <img alt="财务" th:src="@{/img/financial.png}"/>
+            <span class="navTxt">
+                        财务
+                    </span>
+        </li>
+        <li>
+            <img alt="支持" th:src="@{/img/support.png}"/>
+            <span class="navTxt">
+                        支持
+                    </span>
+        </li>
+        <li class="settitemdisplay">
+            <a href="/crm/sysUser/getSysUserList/1/10">
+                <img alt="设置" th:src="@{/img/setting.png}"/>
+                <span class="navTxt">
+                        设置
+                    </span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="rightContent">
+    <div class="header">
+        <div>
+            <input placeholder="请输入客户名称" type="text" class="searchName"/>
+            <button class="search">
+                <img alt="" th:src="@{/img/searchIcon.png}"/>
+            </button>
+            <div class="mail">
                         <span class="msgNum">
                             1
                         </span>
-                        <div>
-                            <ul>
-                                <li>
-                                    <a href="">
-                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        聂宇豪创建了新
-                                    </a>
-                                </li>
-                            </ul>
-                            <p class="lookMore">
-                                <a class="grey" href="">
-                                    查看更多
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="user">
-                        <span class="userName">
-                        </span>
-                        <span class="xiala">
-                            <img alt="" th:src="@{/img/xiala.png}"/>
-                        </span>
-                        <ul class="detail">
-                            <li>
-                                <a class="personData">
-                                    个人资料
-                                </a>
-                            </li>
-                            <li>
-                                <a class="systemSetting">
-                                    系统设置
-                                </a>
-                            </li>
-                            <li>
-                                <a class="loginOut">
-                                    退出
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a href="">
+                                聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                聂宇豪创建了新的合同需要审核通过啊啊啊啊啊啊啊啊啊
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                聂宇豪创建了新
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="lookMore">
+                        <a class="grey" href="">
+                            查看更多
+                        </a>
+                    </p>
                 </div>
             </div>
-            <div class="main">
-                <div>
-                    <div class="seasHeader">
-                        <div class="fleft">
-                            <p class="tag">
-                                公海
-                            </p>
-                            <!-- <ul class="dnone">
+            <div class="user">
+                        <span class="userName">
+
+                        </span>
+                <span class="xiala">
+                            <img alt="" th:src="@{/img/xiala.png}"/>
+                        </span>
+                <ul class="detail">
+                    <li>
+                        <a class="personData">
+                            个人资料
+                        </a>
+                    </li>
+                    <li>
+                        <a class="systemSetting">
+                            系统设置
+                        </a>
+                    </li>
+                    <li>
+                        <a class="loginOut">
+                            退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div>
+            <div class="seasHeader">
+                <div class="fleft">
+                    <p class="tag weater" >
+                        公海
+                    </p>
+                    <!-- <ul class="dnone">
       <li></li>
       <li></li>
       <li></li>
     </ul> -->
-                            <p class="customerNum">
+                    <p class="customerNum">
                                 <span th:text="${cstCustomerPage.recTotal}">
+
                                 </span>
-                                条客户信息
+                        条客户信息
+                    </p>
+                </div>
+                <div class="fright">
+                    <button class="filter">
+                        <img th:src="@{/img/filter.png}"/>
+                        筛选
+                    </button>
+                    <a href="#" id="addCstCustomer">
+                        <img th:src="@{/img/addCustomer.png}"/>
+                        新建客户
+                    </a>
+                    <img th:src="@{/img/more.png}" class="moreOperate"/>
+
+                </div>
+            </div>
+            <div class="allOperate dnone">
+                <label class="forCheckbox">
+                    <input type="checkbox"/>
+                </label>
+                <button class="addNew ">
+                    <a  style="color: #7460ee;">
+                    <img th:src="@{/img/add3.png}"/>
+                    新建销售机会
+                    </a>
+                </button>
+                <button class="dealing showHideDeling">
+                    <img th:src="@{/img/allocation.png}"/>
+                    分配
+                </button>
+                <button class="delete">
+                    <img th:src="@{/img/delete.png}"/>
+                    删除
+                </button>
+                <button class="edit">
+                    <img th:src="@{/img/edit.png}"/>
+                    编辑
+                </button>
+            </div>
+            <div class="seasContent">
+                <table class="table table-hover" id="table">
+                    <thead>
+                    <tr >
+                        <th data-field="select" style="">
+                            <div class="th-inner ">
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="contact" data-field="contact" style="">
+                            <div class="th-inner ">
+                                联系人
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="contactWay" data-field="contactWay" style="">
+                            <div class="th-inner ">
+                                移动/固定电话
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="companyName" data-field="companyName" style="">
+                            <div class="th-inner ">
+                                公司名称
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="customerClaim" data-field="customerClaim" style="">
+                            <div class="th-inner ">
+                                客户认领
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="mail" data-field="mail" style="">
+                            <div class="th-inner ">
+                                QQ/邮箱
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="province" data-field="province" style="">
+                            <div class="th-inner ">
+                                所在省份
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th class="createTime" data-field="createTime" style="">
+                            <div class="th-inner ">
+                                创建时间
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                        <th data-field="operate" style="">
+                            <div class="th-inner ">
+                            </div>
+                            <div class="fht-cell">
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  th:each="cstCustoemr:${cstCustomerPage.list}" th:data-index="${cstCustoemr.custId}" >
+                        <input type="hidden" th:value="${cstCustoemr.custId}"  name="" />
+                        <td style="">
+                            <label class="forCheckbox">
+                                <input type="checkbox"/>
+                            </label>
+                        </td>
+                        <td class="contact" style="">
+                            <p th:text="${cstCustoemr.linkmanList[0].linkName}" class="pp">
+
                             </p>
-                        </div>
-                        <div class="fright" style="margin-top: 10px;">
-                            <button class="filter">
-                                <img th:src="@{/img/filter.png}"/>
-                                筛选
-                            </button>
-                            <a href="#" id="addCstCustomer">
-                                <img th:src="@{/img/addCustomer.png}"/>
-                                新建客户
-                            </a>
-                            <img class="moreOperate" th:src="@{/img/more.png}"/>
+                        </td>
+                        <td class="contactWay" style="">
+                            <p th:text="${cstCustoemr.linkmanList[0].linkLandlinePhone}">
+
+                            </p>
+                            <p th:text="${cstCustoemr.linkmanList[0].linkPhone}">
+
+                            </p>
+                        </td>
+                        <td class="companyName" style="">
+                            <p class="" th:text="${cstCustoemr.custCompany}" id="">
+
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                        <td class="customerClaim" style="">
+                            <p class="" th:text="${cstCustoemr.revertUserNameFromId}">
+
+                            </p>
+                        </td>
+                        <td class="mail" style="">
+                            <p class="" th:text="${cstCustoemr.linkmanList[0].linkQq}">
+
+                            </p>
+                            <p class="" th:text="${cstCustoemr.linkmanList[0].linkEmail}">
+
+                            </p>
+                        </td>
+                        <td class="province" style="">
+                            <p class="" th:text="${cstCustoemr.custAddress}">
+
+                            </p>
+                        </td>
+                        <td class="createTime" style="">
+                            <p class="createTime" th:text="${cstCustoemr.revertDate}">
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                        <td style="">
+                            <p class="modify">
+                                <img th:src="@{/img/more3.png}"/>
+                            </p>
+                            <ul class="slideEdit">
+                                <li>
+                                    <a href="#" mce_href="#" class="dealing" th:name="${cstCustoemr.custId}">
+                                        分配
+                                    </a>
+                                </li>
+                                <li class="edit">
+                                    <!--th:href="@{'字符串'+${model中的nam值}}"。-->
+                                    <a th:href="@{'/cstCustomer/lookCstCustomerInfo/'+${cstCustoemr.custId}}" mce_href="#"  >
+                                        编辑
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="delete" th:href="@{'/cstCustomer/deleteCstCustomerById/'+${cstCustoemr.custId}}" mce_href="#">
+                                        删除
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+                <!--公海分页-->
+                <div class="fixed-table-pagination" th:hidden="${normal eq 1}">
+                    <div class="pull-right pagination">
+                        <ul class="pagination">
+                            <li class="page-first"><a th:href="@{/cstCustomer/getPage/1/7}">首页</a></li>
+                            <li class="page-pre">
+                                <a th:href="@{'/cstCustomer/getPage/'+${((cstCustomerPage.currentPage-1) le 0?1:(cstCustomerPage.currentPage-1))}+'/7'}">
+                                    上一页
+                                </a>
+                            </li>
+                            <li class="page-number" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}"></a></li>
+                            <li class="page-next">
+                                <a th:href="@{'/cstCustomer/getPage/'+${(cstCustomerPage.currentPage+1) ge (cstCustomerPage.totalPage)?(cstCustomerPage.totalPage):(cstCustomerPage.currentPage+1)}+'/7'}">
+                                    下一页
+                                </a>
+                            </li>
+                            <li class="page-last"><a th:href="@{'/cstCustomer/getPage/'+${cstCustomerPage.totalPage}+'/7'}">尾页</a></li>
+                        </ul>
+                        <div class="jump">
+                            <label>调转
+                                <select class="dumppage">
+                                    <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}"></a></option>
+                                </select>
+                            </label>
                         </div>
                     </div>
-                    <div class="allOperate dnone">
-                        <label class="forCheckbox">
-                            <input type="checkbox"/>
-                        </label>
-                        <button class="addNew ">
-                            <a href="/crm/cstChance/getCstCustomer" style="color: #7460ee;">
-                                <img th:src="@{/img/add3.png}"/>
-                                新建销售机会
-                            </a>
-                        </button>
-                        <button class="dealing showHideDeling">
-                            <img th:src="@{/img/allocation.png}"/>
-                            分配
-                        </button>
-                        <button class="delete">
-                            <img th:src="@{/img/delete.png}"/>
-                            删除
-                        </button>
-                        <button class="edit">
-                            <img th:src="@{/img/edit.png}"/>
-                            编辑
-                        </button>
-                    </div>
-                    <div class="seasContent">
-                        <table class="table table-hover" id="table">
-                            <thead>
-                                <tr>
-                                    <th data-field="select" style="">
-                                        <div class="th-inner ">
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="contact" data-field="contact" style="">
-                                        <div class="th-inner ">
-                                            联系人
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="contactWay" data-field="contactWay" style="">
-                                        <div class="th-inner ">
-                                            移动/固定电话
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="companyName" data-field="companyName" style="">
-                                        <div class="th-inner ">
-                                            公司名称
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="customerClaim" data-field="customerClaim" style="">
-                                        <div class="th-inner ">
-                                            客户认领
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="mail" data-field="mail" style="">
-                                        <div class="th-inner ">
-                                            QQ/邮箱
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="province" data-field="province" style="">
-                                        <div class="th-inner ">
-                                            所在省份
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th class="createTime" data-field="createTime" style="">
-                                        <div class="th-inner ">
-                                            创建时间
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                    <th data-field="operate" style="">
-                                        <div class="th-inner ">
-                                        </div>
-                                        <div class="fht-cell">
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:data-index="${cstCustoemr.custId}" th:each="cstCustoemr:${cstCustomerPage.list}">
-                                    <input name="" th:value="${cstCustoemr.custId}" type="hidden"/>
-                                    <td style="">
-                                        <label class="forCheckbox">
-                                            <input type="checkbox"/>
-                                        </label>
-                                    </td>
-                                    <td class="contact" style="">
-                                        <p class="pp" th:text="${cstCustoemr.linkmanList[0].linkName}">
-                                        </p>
-                                    </td>
-                                    <td class="contactWay" style="">
-                                        <p th:text="${cstCustoemr.linkmanList[0].linkLandlinePhone}">
-                                        </p>
-                                        <p th:text="${cstCustoemr.linkmanList[0].linkPhone}">
-                                        </p>
-                                    </td>
-                                    <td class="companyName" style="">
-                                        <p class="" id="" th:text="${cstCustoemr.custCompany}">
-                                        </p>
-                                        <p>
-                                        </p>
-                                    </td>
-                                    <td class="customerClaim" style="">
-                                        <p class="" th:text="${cstCustoemr.revertUserNameFromId}">
-                                        </p>
-                                    </td>
-                                    <td class="mail" style="">
-                                        <p class="" th:text="${cstCustoemr.linkmanList[0].linkQq}">
-                                        </p>
-                                        <p class="" th:text="${cstCustoemr.linkmanList[0].linkEmail}">
-                                        </p>
-                                    </td>
-                                    <td class="province" style="">
-                                        <p class="" th:text="${cstCustoemr.custAddress}">
-                                        </p>
-                                    </td>
-                                    <td class="createTime" style="">
-                                        <p class="createTime" th:text="${cstCustoemr.revertDate}">
-                                        </p>
-                                        <p>
-                                        </p>
-                                    </td>
-                                    <td style="">
-                                        <p class="modify">
-                                            <img th:src="@{/img/more3.png}"/>
-                                        </p>
-                                        <ul class="slideEdit">
-                                            <li>
-                                                <a class="dealing" href="#" mce_href="#" th:value="${cstCustoemr.custId}">
-                                                    分配
-                                                </a>
-                                            </li>
-                                            <li class="edit">
-                                                <!--th:href="@{'字符串'+${model中的nam值}}"。-->
-                                                <a mce_href="#" th:href="@{'/cstCustomer/lookCstCustomerInfo/'+${cstCustoemr.custId}}">
-                                                    编辑
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="delete" mce_href="#" th:href="@{'/cstCustomer/deleteCstCustomerById/'+${cstCustoemr.custId}}">
-                                                    删除
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!--公海分页-->
-                        <div class="fixed-table-pagination" th:hidden="${normal eq 1}">
-                            <div class="pull-right pagination">
-                                <ul class="pagination">
-                                    <li class="page-first">
-                                        <a th:href="@{/cstCustomer/getPage/1/7}">
-                                            首页
-                                        </a>
-                                    </li>
-                                    <li class="page-pre">
-                                        <a th:href="@{'/cstCustomer/getPage/'+${((cstCustomerPage.currentPage-1) le 0?1:(cstCustomerPage.currentPage-1))}+'/7'}">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="page-number" th:each="arr:${arrInteger}">
-                                        <a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}">
-                                        </a>
-                                    </li>
-                                    <li class="page-next">
-                                        <a th:href="@{'/cstCustomer/getPage/'+${(cstCustomerPage.currentPage+1) ge (cstCustomerPage.totalPage)?(cstCustomerPage.totalPage):(cstCustomerPage.currentPage+1)}+'/7'}">
-                                            下一页
-                                        </a>
-                                    </li>
-                                    <li class="page-last">
-                                        <a th:href="@{'/cstCustomer/getPage/'+${cstCustomerPage.totalPage}+'/7'}">
-                                            尾页
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="jump">
-                                    <label>
-                                        跳转
-                                        <select class="dumppage">
-                                            <option th:each="arr:${arrInteger}" th:value="${arr}">
-                                                <a th:href="@{'/cstCustomer/getPage/'+${arr}+'/7'}" th:text="${arr}">
-                                                </a>
-                                            </option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!--筛选分页-->
-                        <div style="height: 100px;">
-                        </div>
-                        <div class="fixed-table-pagination" th:hidden="${normal eq 0}">
-                            <div class="pull-right pagination">
-                                <ul class="pagination">
-                                    <li class="page-first">
-                                        <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/1/7'}">
-                                            首页
-                                        </a>
-                                    </li>
-                                    <li class="page-pre">
-                                        <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${((cstCustomerPage.currentPage-1) le 0?1:(cstCustomerPage.currentPage-1))}+'/7'}">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="page-number2" th:each="arr:${arrInteger}">
-                                        <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${arr}+'/7'}" th:text="${arr}">
-                                        </a>
-                                    </li>
-                                    <li class="page-next">
-                                        <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${(cstCustomerPage.currentPage+1) ge (cstCustomerPage.totalPage)?(cstCustomerPage.totalPage):(cstCustomerPage.currentPage+1)}+'/7'}">
-                                            下一页
-                                        </a>
-                                    </li>
-                                    <li class="page-last">
-                                        <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${cstCustomerPage.totalPage}+'/7'}">
-                                            尾页
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="jump">
-                                    <label>
-                                        跳转
-                                        <input name="custCompanyscreen" th:value="${custCompany}" type="hidden"/>
-                                        <input name="linkNamescreen" th:value="${linkName}" type="hidden"/>
-                                        <input name="linkPhonescreen" th:value="${linkPhone}" type="hidden"/>
-                                        <input name="linkLandlinePhonescreen" th:value="${linkLandlinePhone}" type="hidden"/>
-                                        <input name="userNamescreen" th:value="${userName}" type="hidden"/>
-                                        <input name="linkEmailscreen" th:value="${linkEmail}" type="hidden"/>
-                                        <input name="yearscreen" th:value="${year}" type="hidden"/>
-                                        <input name="minutescreen" th:value="${minute}" type="hidden"/>
-                                        <select class="dumppagescreen">
-                                            <option th:each="arr:${arrInteger}" th:value="${arr}">
-                                                <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${arr}+'/7'}" th:text="${arr}">
-                                                </a>
-                                            </option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
+                </div>
+                <!--筛选分页-->
+                <div class="fixed-table-pagination" th:hidden="${normal eq 0}">
+                    <div class="pull-right pagination">
+                        <ul class="pagination">
+                            <li class="page-first"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/1/7'}">首页</a></li>
+                            <li class="page-pre">
+                                <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${((cstCustomerPage.currentPage-1) le 0?1:(cstCustomerPage.currentPage-1))}+'/7'}">
+                                    上一页
+                                </a>
+                            </li>
+                            <li class="page-number" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${arr}+'/7'}" th:text="${arr}"></a></li>
+                            <li class="page-next">
+                                <a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${(cstCustomerPage.currentPage+1) ge (cstCustomerPage.totalPage)?(cstCustomerPage.totalPage):(cstCustomerPage.currentPage+1)}+'/7'}">
+                                    下一页
+                                </a>
+                            </li>
+                            <li class="page-last"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${cstCustomerPage.totalPage}+'/7'}">尾页</a></li>
+                        </ul>
+                        <div class="jump">
+                            <label>调转
+                                <input  name="custCompanyscreen" type="hidden" th:value="${custCompany}"/>
+                                <input  name="linkNamescreen" type="hidden" th:value="${linkName}"/>
+                                <input  name="linkPhonescreen" type="hidden" th:value="${linkPhone}"/>
+                                <input  name="linkLandlinePhonescreen" type="hidden" th:value="${linkLandlinePhone}"/>
+                                <input  name="userNamescreen" type="hidden" th:value="${userName}"/>
+                                <input  name="linkEmailscreen" type="hidden" th:value="${linkEmail}"/>
+                                <input  name="yearscreen" type="hidden" th:value="${year}"/>
+                                <input  name="minutescreen" type="hidden" th:value="${minute}"/>
+                                <select class="dumppagescreen">
+                                    <option th:value="${arr}" th:each="arr:${arrInteger}"><a th:href="@{'/cstCustomer/selectCstCustomersByCondition/'+${custCompany}+'/'+${linkName}+'/'+${linkPhone}+'/'+${linkLandlinePhone}+'/'+${userName}+'/'+${linkEmail}+'/'+${year}+'/'+${minute}+'/'+${arr}+'/7'}" th:text="${arr}"></a></option>
+                                </select>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

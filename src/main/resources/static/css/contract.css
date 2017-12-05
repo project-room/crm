@@ -8,13 +8,11 @@
 .mainHeaderDropDown img{margin: 0 10px;}
 .mainHeaderState{color: #999;line-height: 60px;}
 .mainHeaderMore{width: 32px;height: 32px;margin-top: 14px;}
-.mainHeaderBtn{outline:none;background: transparent;display:block;line-height:30px;height: 32px;margin-top: 14px;border: 1px solid #7460ee;padding:0 10px;margin-right:10px;border-radius: 5px;color:#7460ee;}
+.mainHeaderBtn{display:block;height: 32px;margin-top: 14px;border: 1px solid #7460ee;padding:0 10px;margin-right:10px;border-radius: 5px;color:#7460ee;}
 .mainHeaderBtn img{margin-right: 5px;}
 .mainHeaderBtn:active{opacity: 0.8;filter:alpha(opacity=80);}
-.mainHeaderBtn:hover { color: #7460ee; }
-.allOperate { margin-bottom: 10px; clear: both; }
-.editAndDeleteBtn{position:relative;display:none;clear:both;padding: 0 0 10px 8px;margin-bottom: 20px;}
-.editAndDeleteBtn img{cursor: pointer;}
+.allOperate{position:relative;clear:both;padding: 0 0 10px 8px;margin-bottom: 10px;}
+.allOperate img{cursor: pointer;}
 .cantDeleteTip{display:none;position: absolute;top:0;left:0;margin: 40px 0 0 172px;border: 1px solid #333;border-radius: 3px;padding: 3px;background-color: #eef1f7;}
 .bgceef1f7{background-color: #eef1f7;}
 .textRight{text-align: right;}
@@ -29,22 +27,17 @@ input[type="checkbox"]{width:18px;height: 18px;vertical-align: -4px;margin-right
 .mainLeftSideTableTitle{padding: 10px;font-weight: 600;border-bottom: 1px solid #ccc;}
 .mainLeftSideTableTitle .operation{color: #7460ee;cursor: pointer;}
 .mainLeftSideTableTitle .operation img{margin-left: 6px;}
-.mainLeftSideTable td{padding: 10px;color: #999; font-size: 14px;}
-.mainLeftSideTable th{font-weight: normal; font-size: 14px;}
-.mainLeftSideTable .cancel{display:none;float:right;padding: 5px 10px;border-radius: 2px;border: 1px solid #7460ee;background-color: #fff;color: #7460ee;}
-.mainLeftSideTable .save{display:none;float:right;margin-right: 30px;padding: 5px 10px;border-radius: 2px;border: 1px solid #7460ee;background-color: #7460ee;color: #fff;}
+.mainLeftSideTable td{padding: 10px;color: #999;}
+.mainLeftSideTable th{font-weight: 600;}
+.mainLeftSideTable .cancel{float:right;padding: 5px 10px;border-radius: 2px;border: 1px solid #7460ee;background-color: #fff;color: #7460ee;}
+.mainLeftSideTable .save{float:right;margin-right: 30px;padding: 5px 10px;border-radius: 2px;border: 1px solid #7460ee;background-color: #7460ee;color: #fff;}
 .colorBlue{color:#7460ee;}
-.relationBubble{position: absolute;width: 614px;height: 504px;z-index: 9;top:-200px;left: 100%;margin-left: -30px;background: url("../img/bubble.png") no-repeat;}
-.relationBubble .btns{position: absolute;bottom: 20px;right: 20px;}
-.relationBubble .btns button{float:left;width: 100px !important;height: 30px;border: 1px solid #b9aff6;background-color: #fff;color: #7460ee;border-radius: 5px;}
-.relationBubble .btns .sure{border: 1px solid #7460ee;margin-right:10px;background-color: #7460ee;color: #fff;}
-/*.relationBubble .bubble{position: absolute;width: 100%;height: 100%;}*/
-.relationBubble .bubbleMsg{padding: 10px 20px 10px 30px;}
-.relationBubble .title{line-height: 36px;font-weight: 400;color: #999;border-bottom: 1px solid #e9ecf2;}
-.relationBubble h4 input { border: none; width: 100%; outline: none; font-weight: normal; color: #999; height: 30px; line-height: 30px; }
-.relationBubble .search2{position: absolute;right: 20px;top:20px;cursor: pointer;}
 
-.mainRightSideNav{background-color: #eef1f7;overflow: hidden;font-size: 16px;}
+/* sheeep */
+.mainLeftSide input { width: 100%; background: #fff; border: none; outline: none; }
+/* sheeep */
+
+.mainRightSideNav{background-color: #eef1f7;overflow: hidden;}
 .mainRightSideNav li{float:left;margin-right: 60px;height: 40px;line-height: 40px;cursor: pointer;}
 .mainRightSideNav li:first-child{margin-left: 10px;}
 .mainRightSideNav li.active{border-bottom: 2px solid #7460ee;color: #7460ee;}
@@ -60,15 +53,6 @@ input[type="checkbox"]{width:18px;height: 18px;vertical-align: -4px;margin-right
 .mainRightSideChart li .text{vertical-align: -1px;}
 .mainRightSideChart li .clock{margin-left: 10px;}
 .mainRightSideChart li:last-child{height: 18px;}
-.mainRightSideChart .hoverBox{display:none;position: absolute;top: 0;right: 5px;}
-.mainRightSideChart .hoverBox img{float: left;margin-right: 20px;}
-.mainRightSideChart li:hover .hoverBox{display: block;}
-.navDetail .editMain{display: none;}
-.navDetail .editMain table{width: 100%;margin-top: 20px;}
-.navDetail .editMain table td{width: 70%;height: 40px;padding: 0 5px;}
-.navDetail .editMain table td:first-child{width: 25%;padding-left: 20px;}
-.navDetail .editMain .btns button{padding: 5px 10px;background-color: #fff;border-radius: 5px;border:1px solid #b9aff6;color: #7460ee;}
-.navDetail .editMain .btns button:first-child{color: #fff;background-color: #7460ee;margin: 0 20px;}
 
 .navDetail{display: none;}
 .navDetail0{display: block;}
@@ -80,10 +64,10 @@ input[type="checkbox"]{width:18px;height: 18px;vertical-align: -4px;margin-right
 .mainRightSideChart3{margin: 20px 0 0 20px;}
 .mainRightSideChart3 li{float: left;width: 70px;margin-right: 20px;text-align: center;}
 .mainRightSideChart3 li p{margin-top: 10px;}
-.contractApprovalDetail{clear: both;margin-top: 10px;}
+.contractApprovalDetail{clear: both;margin-top: -20px;}
 .contractApprovalDetail:after{content: "";display: block;width: 0;clear: both;}
 .contractApprovalDetail li{position:relative;float:left;width: 380px;height:150px;padding:20px;background-color: #fff;margin: 0 40px 40px 0;}
-.contractApprovalDetail li:hover{border: 1px solid #a8a0ed;box-shadow: 0 3px 3px #b6b4e6;}
+.contractApprovalDetail li.active{border: 1px solid #a8a0ed;box-shadow: 0 3px 3px #b6b4e6;}
 
 .approvalDetailTip{display:none;position: absolute;width: 100px;height: 82px;padding-top:10px;background-color:#fff;border: 1px solid #b9aff6;top:0;left: 0;margin: 36px 0 0 294px;}
 .approvalDetailTip p{padding-left: 10px;line-height: 20px;}
@@ -110,46 +94,14 @@ input[type="checkbox"]{width:18px;height: 18px;vertical-align: -4px;margin-right
 .advancedScreeningTable{font-size: 14px;width: 96%;margin: 0 auto;}
 .advancedScreeningTable td{border-bottom: 1px solid #ccc;height: 40px;line-height: 40px;}
 .advancedScreeningTable td:first-child{width: 30%;padding-left: 20px;}
-.advancedScreeningTable td select{width: 100%;height: 20px;border: none; line-height: 20px; outline: none; }
-.advancedScreeningTable td input{width: 100%;height: 20px;border: none; line-height: 20px; outline: none; }
+.advancedScreeningTable td select{width: 100%;height: 20px;border: none;}
+.advancedScreeningTable td input{width: 100%;height: 20px;border: none;}
 .advancedScreeningTable td.btns{border-bottom: none;}
 .advancedScreeningTable td.btns button{width: 100px;height: 30px;border-radius: 5px;line-height: 20px;background-color: #fff;color: #7460ee;margin-left: 100px;margin-top: 20px;border: 1px solid #b9aff6;}
 .advancedScreeningTable td.btns button:first-child{background-color: #7460ee;color: #fff;margin-left: 135px;}
 
-#table th { background: #eef1f7; color: #999; line-height: 20px; }
-td,th{position: relative;}
-.width100per{width: 100%;border: none;background-color: #fff;}
-.disabledShelter{position: absolute;width: 50px;height: 30px;background-color: #fff;top:0;right: 0;}
-
-/* .relationBubble{display: none;} */
-/* .relationBubbleP:hover.relationBubble{display: block;} */
-
-.mainLeftSide h4 { font-size: 16px; color: #666; border-bottom: #eee 1px solid; padding: 0 20px; height: 40px; line-height: 40px; }
-.mainLeftSide h4 span { color: #7460ee; float: right; position: relative; }
-.mainLeftSide h4 span ul {position: absolute; width: 70px; background: #fff; border: 1px solid #999; box-shadow: 2px 2px 5px #999; text-align: center; right: 0; display: none; }
-.mainLeftSide h4 span ul li { margin: 0; color: #333; font-size: 14px; }
-.mainLeftSide ul li { margin: 0 20px; }
-.mainLeftSide label { width: 100%; color: #333; height: 40px; line-height: 40px; }
-.mainLeftSide label.borderBottom { border-bottom: 1px solid #eee; }
-.mainLeftSide label:hover { border-color: #999; }
-.mainLeftSide label span { width: 135px; font-size: 14px; display: inline-block; color: #999; }
-.mainLeftSide label select, .mainLeftSide label input { outline: none; height: 30px; line-height: 30px; border: none; font-size: 14px; }
-.mainLeftSide label select.bgNone, .mainLeftSide label input.bgNone { background: transparent !important;}
-.mainLeftSide label input.selectDate { background: url('../img/xiala.png') right 5px center no-repeat; }
-.mainLeftSide .btngroup { float: right; }
-.mainLeftSide .btngroup input { height: 30px !important; width: 60px !important; border: #7460ee 1px solid; border-radius: 4px; margin: 20px; font-size: 14px; }
-.mainLeftSide .btngroup input.save { background: #7460ee; color: #fff; }
-.mainLeftSide .btngroup input.cancel { background: #fff; color: #7460ee; }
 
 /* sheeep */
-.contractDetail .mainRightSide { font-size: 14px; outline: none; }
-.contractDetail .mainLeftSideTableTitle { position: relative; font-size: 16px; font-weight: normal; }
-.contractDetail .operation { position: absolute; right: 20px; z-index: 4; }
-.contractDetail .operation ul { width: 100px; background: #fff; border: #eee 1px solid; box-shadow: 3px 3px 3px #eee; position: absolute; left: -34px; top: 20px; }
-.contractDetail .operation ul li { height: 20px; line-height: 20px; text-align: center; color: #333; font-size: 14px; }
-.contractDetail .operation ul li:hover { color: #7460ee; }
-
-
 .contractContent { background: #fff; clear: both; }
 .pagination > li > a, .pagination > li > span { margin-left: 10px;}
 .pagination > li:first-child > a, .pagination > li:first-child > span {border-radius: 0;}
@@ -164,49 +116,5 @@ div.pull-right.pagination { float: none !important; text-align: center; margin: 
 .jump select { height: 30px; line-height: 30px; width: 65px; text-align: center; }
 
 .modify { font-weight: 900; color: #b3b3b3; }
-.modify+ul { position: absolute; display: none; background: #fff; width: 50px; text-align: center; z-index: 2; right: 0px; }
+.modify+ul { position: absolute; display: none; background: #fff; width: 50px; text-align: center; z-index: 2; right: 50px; }
 .modify+ul li { height: 30px; line-height: 30px; }
-
-
-
-
-.createContract .main .mainLeftSide, .createContract .main .mainRightSide { width: 49%; padding: 0 20px; }
-.createContract .main .mainLeftSide h4, .createContract .main .mainRightSide h4 { margin: 0 -20px; padding-left: 20px; border-bottom: 1px solid #eee; height: 40px; line-height: 40px; font-size: 16px; color: #666; }
-.createContract .main select, 
-.createContract .main input { outline: none; border: none; width: 100%; height: 38px; }
-.createContract .main ul li > label { border-bottom: 1px solid #eee; width: 100%; color: #999; height: 40px; line-height: 40px; font-size: 14px; }
-.createContract .main .btngroup input { width: 60px; height: 30px; border: #7460ee 1px solid; border-radius: 4px; margin-top: 40px; } 
-.createContract .main .btngroup input.save { color: #fff; background: #7460ee; }
-.createContract .main .btngroup input.cancel { color: #7460ee; background: #fff; margin-left: 40px; }
-
-.createContract .relationBubble { height: 508px; width: 611px; background: url('../img/backgroundImg.png') center no-repeat; position: absolute; left: 508px; top: -200px; font-size: 14px; }
-.createContract .relationBubble h4 { margin: 0 !important; border: none; vertical-align: center }
-.forCheckbox { margin-right: 10px; }
-.createContract input.selectDate { width: 49%; display: inline-block; background: url('../img/xiala.png') right center no-repeat; }
-.createContract label.selectLabel { max-width: 48%; display: inline-block; text-align: right; }
-
-
-
-.filterPop { height: 100%; width: 100%; position: absolute; z-index: 4; }
-.filterPop .filtermain { font-size: 14px; height: 380px; width: 600px;  background: #fff; position: absolute; top: 50%; left: 50%; margin: -190px 0 0 -300px; z-index: 10; }
-.filtermain h4 { height: 40px; line-height: 40px; background: #eef1f7; font-size: 16px; color: #333; padding: 0 20px; }
-.filtermain h4 img { position: absolute; right: 20px; top: 15px; }
-.filtermain label { width: 560px; display: block; margin: 0 auto; height: 40px; border-bottom: 1px solid #eee; line-height: 40px; }
-.filtermain label:hover { border-color: #999; }
-.filtermain label span { width: 135px; display: inline-block; }
-.filtermain label select,  .filtermain label input { outline: none; width: 420px; height: 30px; line-height: 30px; border: none; }
-.filtermain .btngroup { width: 100%; }
-.filtermain .btngroup button { width: 100px; border: #7460ee 1px solid; border-radius: 4px; height: 30px; position: absolute; bottom: 30px; }
-.filtermain .btngroup .sure { background: #7460ee; color: #fff; left: 25%; }
-.filtermain .btngroup .cancel { color: #7460ee; background: #fff; right: 25%; }
-
-.shenpiBtn ul { color: #333; text-align: left; background: #fff; border: 1px solid #999; padding-left: 10px; display: none; }
-
-
-.relationBubble .pagination { position: absolute; left: 40px; bottom: 0px; }
-.relationBubble .pagination ul { display: inline-block; }
-.relationBubble li { display: inline-block; color: #999; margin: 0 !important;}
-.relationBubble li a { color: #999; font-size: 14px; height: 20px; width: 20px; display: block; }
-.relationBubble li.active a { color: #333; background: transparent; }
-.mainLeftSide .relationBubble select { width: 40px !important; height: 20px !important; border: 1px solid #999; }
-.relationBubble span { color: #999; }

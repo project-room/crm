@@ -7,13 +7,6 @@ $(function() {
 	RightHeaderClick();
 
 
-	$('.modify').hover(function() {
-	    $(this).find('img').attr('src', '/crm/img/more2.png')
-    },function() {
-        $(this).find('img').attr('src', '/crm/img/more3.png')
-    });
-
-
 
     //根据客户名来模糊搜所客户信息
     // $(".search").click(function () {
@@ -56,7 +49,7 @@ $(function() {
     });
 
     if(roleNameSession!="销售员"){
-        $(".seas .tag").text("公海池");
+        $(".weater").text("公海池");
     }
 
 
@@ -93,7 +86,14 @@ $(function() {
     });
 
 
+
+
+
+
 });
+
+
+
 
 //右边头部email和user
 function RightHeaderClick() {
@@ -112,14 +112,11 @@ function RightHeaderClick() {
 		});
 	})
 
-	$('body').dblclick(function(e) {
+	$('body').click(function() {
 		$('.detail').css({
 			display: 'none'
 		});
 		$('.rightContent .header .mail div').css({
-			display: 'none'
-		});
-        $('.add_list_a').css({
 			display: 'none'
 		});
 	});
@@ -216,8 +213,8 @@ function forFenye() {
     $('.page-number').eq(0).removeClass('dnone');
     $('.page-number').eq($('.page-number').length - 1).removeClass('dnone');
     if ($('.page-number.active').find('a').text() <= 4) {
-        console.log($('.page-number').length)
         if ($('.page-number').length <= 5) {
+
             $('.page-separator').remove();
         } else {
             $('.page-separator').remove();
@@ -261,71 +258,5 @@ function forFenye() {
     } else {
         $('.page-last').removeClass('disabled');
         $('.page-next').removeClass('disabled');
-    }
-    
-   //表单筛选
-    var mobile = $('#mobile'), 
-        mobileReg = /^1([358][0-9][0-9]{8})|([4][7][0-9]{8})|([7][0781][0-9]{8})$/,
-        telphone = $('#telphone'), 
-        telphoneReg = /^0[0-9]{2,3}[-][0-9]{7,8}$/,
-        email = $("#mail"), 
-        emailReg = /^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_-]+([.][a-zA-Z]+){1,2}$/;
-    function checkTxt(element,reg){
-       $(element).blur(function(){
-               if(!reg.test(element.val())){
-                $(this).next().html('请输入正确的格式').css('color',"red");
-            }else{
-                $(this).next().html('')
-            }
-       })
-    }
-
-    checkTxt(mobile,mobileReg);
-    checkTxt(telphone,telphoneReg);
-    checkTxt(email,emailReg);
-}
-
-function fenye2() {
-    $('.page-number2.active').siblings('.page-number2').addClass('dnone');
-    $('.page-number2.active').prev('.page-number2').removeClass('dnone');
-    $('.page-number2.active').prev('.page-number2').prev('.page-number2').removeClass('dnone');
-    $('.page-number2.active').next('.page-number2').removeClass('dnone');
-    $('.page-number2.active').next('.page-number2').next('.page-number2').removeClass('dnone');
-    $('.page-number2').eq(0).removeClass('dnone');
-    $('.page-number2').eq($('.page-number2').length - 1).removeClass('dnone');
-    if ($('.page-number2.active').find('a').text() <= 4) {
-        if ($('.page-number2').length <= 5) {
-            $('.page-separator2').remove();
-        } else {
-            $('.page-separator2').remove();
-            $('.page-number2').eq($('.page-number2').length - 1).before('<li class="page-separator2 disabled"><a href="#">...</a></li>');
-        }  
-    } else if ($('.page-number2.active').find('a').text() > 4 && $('.page-number2.active').find('a').text() < $('.page-number2').eq($('.page-number2').length - 1).find('a').text() - 3) {
-        $('.page-separator2').remove();
-        $('.page-number2').eq($('.page-number2').length - 1).before('<li class="page-separator2 disabled"><a href="#">...</a></li>');
-        $('.page-number2').eq(0).after('<li class="page-separator2 disabled"><a href="#">...</a></li>');
-    } else if ($('.page-number2.active').find('a').text() >= $('.page-number2').eq($('.page-number2').length - 1).find('a').text() - 3) {
-        if ($('.page-number2').length <= 5) {
-            $('.page-separator2').remove();
-        } else {
-            $('.page-separator2').remove();
-            $('.page-number2').eq(0).after('<li class="page-separator2 disabled"><a href="#">...</a></li>');
-        }
-    } 
-    if ($('.page-number2.active').find('a').text() == 1) {
-        $('.page-number2').eq(1).removeClass('dnone');
-        $('.page-number2').eq(2).removeClass('dnone');
-        if ($('.page-number2').length <= 5) {
-            $('.page-number2').eq(3).removeClass('dnone');
-        }
-    } else {
-    }
-    if ($('.page-number2.active').find('a').text() == $('.page-number2').eq($('.page-number2').length - 1).find('a').text()) {
-        $('.page-number2').eq($('.page-number2').length - 2).removeClass('dnone');
-        $('.page-number2').eq($('.page-number2').length - 3).removeClass('dnone');
-        if ($('.page-number2').length <= 5) {
-            $('.page-number2').eq($('.page-number2').length - 4).removeClass('dnone');
-        }
-    } else {
     }
 }

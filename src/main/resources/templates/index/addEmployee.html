@@ -5,26 +5,20 @@
             <title>
                 客户关系管理系统
             </title>
-            <script th:src="@{/js/jquery-1.8.3.min.js}">
-            </script>
-            <script th:src="@{/bootstrap/js/bootstrap.js}">
-            </script>
-            <script th:src="@{/bootstrap/js/bootstrap-table.js}">
-            </script>
-            <script th:src="@{/js/jquery.nicescroll.js}">
-            </script>
-            <script th:src="@{/laydate/laydate.js}">
-            </script>
-            <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
-            <link rel="stylesheet" th:href="@{/css/default.css}"/>
-            <link rel="stylesheet" th:href="@{/css/setting.css}"/>
-            <script th:src="@{/js/default.js}">
-            </script>
-            <script th:src="@{/js/setting.js}">
-            </script>
+            <script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+            <script th:src="@{/bootstrap/js/bootstrap-table.js}"></script>
+            <script th:src="@{/js/jquery.nicescroll.js}"></script>
+            <script th:src="@{/laydate/laydate.js}"></script>
+            <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+            <link th:href="@{/css/default.css}" rel="stylesheet"/>
+            <link th:href="@{/css/setting.css}" rel="stylesheet"/>
+            <script th:src="@{/js/default.js}"></script>
+            <script th:src="@{/js/setting.js}"></script>
         </meta>
     </head>
     <body class="EmployeeMsg">
+        
         <div class="leftContent">
             <div class="logo">
                 <img alt="logo" th:src="@{/img/logo.png}"/>
@@ -57,14 +51,7 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <img alt="合同" th:src="@{/img/contract.png}"/>
-                        <span class="navTxt">
-                            合同
-                        </span>
-                    </a>
-                </li>
+                <li><a ><img th:src="@{/img/contract.png}" alt="合同" /><span class="navTxt">合同</span></a></li>
                 <li>
                     <img alt="财务" th:src="@{/img/financial.png}"/>
                     <span class="navTxt">
@@ -78,11 +65,11 @@
                     </span>
                 </li>
                 <li class="active">
-                    <a href="/crm/sysUser/getSysUserList/1/10">
-                        <img alt="设置" th:src="@{/img/setting.png}"/>
-                        <span class="navTxt">
-                            设置
-                        </span>
+                    <a href="/crm/sysUser/getSysUserList/1/10" >
+                    <img alt="设置" th:src="@{/img/setting.png}"/>
+                    <span class="navTxt">
+                        设置
+                    </span>
                     </a>
                 </li>
             </ul>
@@ -90,7 +77,7 @@
         <div class="rightContent">
             <div class="header">
                 <div>
-                    <input class="searchName" placeholder="请输入客户名称" type="text"/>
+                    <input placeholder="请输入客户名称" type="text" class="searchName"/>
                     <button class="search">
                         <img alt="" th:src="@{/img/searchIcon.png}"/>
                     </button>
@@ -154,138 +141,53 @@
                     <div class="mainHeader">
                         <div class="fleft">
                             <ul>
-                                <li class="active">
-                                    <a href="/crm/sysUser/getSysUserList/1/10">
-                                        用户管理
-                                    </a>
-                                </li>
-                                <li class="org">
-                                    <a href="javascript:void(0);">
-                                        组织架构管理
-                                    </a>
-                                    <i>
-                                    </i>
+                                <li class="active"><a href="/crm/sysUser/getSysUserList/1/10">用户管理</a></li>
+                                <li class="org"><a href="javascript:void(0);">组织架构管理</a><i></i>
                                     <ul class="bumen dnone">
                                         <li>
-                                            <a th:href="@{/sysUser/loadSalesManager}">
-                                                销售部
-                                            </a>
+                                            <a th:href="@{/sysUser/loadSalesManager}">销售部</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a>
-                                                技术支持
-                                            </a>
+                                            <a >技术支持</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a>
-                                                财务部
-                                            </a>
+                                            <a >财务部</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a>
-                                                行政部
-                                            </a>
+                                            <a >行政部</a>
                                             <ul class="quyu">
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        1A区
-                                                    </a>
-                                                </li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
+                                                <li><a >1A区</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="cus">
-                                    <a href="javascript:void(0);">
-                                        自定义字段设置
-                                    </a>
-                                    <i>
-                                    </i>
+                                <li class="cus"><a href="javascript:void(0);">自定义字段设置</a><i></i>
                                     <ul class="dnone">
-                                        <li>
-                                            <a>
-                                                机会
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                合同
-                                            </a>
-                                        </li>
+                                        <li><a >机会</a></li>
+                                        <li><a >合同</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a>
-                                        业务流程设置
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        参数设置
-                                    </a>
-                                </li>
+                                <li><a >业务流程设置</a></li>
+                                <li><a >参数设置</a></li>
                             </ul>
+                            
                         </div>
                         <div class="fright">
                             <a href="#">
@@ -293,87 +195,56 @@
                             </a>
                         </div>
                     </div>
+                    
                     <div class="content">
-                        <h4>
-                            添加员工
-                        </h4>
+                        <h4>添加员工</h4>
                         <form action="/sysUser/addSysUser" method="POST">
                             <label>
-                                <span>
-                                    员工名字
-                                </span>
-                                <input name="userName" type="text"/>
+                                <span>员工名字</span>
+                                <input type="text" name="userName" />
                             </label>
                             <label>
-                                <span>
-                                    登录账号
-                                </span>
-                                <input name="userAccounts" type="text"/>
+                                <span>登录账号</span>
+                                <input type="text" name="userAccounts" />
                             </label>
                             <label>
-                                <span>
-                                    输入密码
-                                </span>
-                                <input name="userPassword" type="password"/>
+                                <span>输入密码</span>
+                                <input type="password" name="userPassword" />
                             </label>
                             <label>
-                                <span>
-                                    确认密码
-                                </span>
-                                <input name="" type="password"/>
+                                <span>确认密码</span>
+                                <input type="password" name="" />
                             </label>
                             <label>
-                                <span>
-                                    状态
-                                </span>
+                                <span>状态</span>
                                 <select>
-                                    <option>
-                                        正常
-                                    </option>
+                                    <option>正常</option>
                                 </select>
                             </label>
                             <label>
-                                <span>
-                                    手机号码
-                                </span>
-                                <input name="userPhone" type="text"/>
+                                <span>手机号码</span>
+                                <input type="text" name="userPhone" />
                             </label>
                             <label>
-                                <span>
-                                    部门
-                                </span>
-                                <input name="userDepartment" type="text"/>
+                                <span>部门</span>
+                                <input type="text" name="userDepartment" />
                             </label>
                             <label>
-                                <span>
-                                    职位
-                                </span>
-                                <input name="userPosition" type="text"/>
+                                <span>职位</span>
+                                <input type="text" name="userPosition" />
                             </label>
                             <label>
-                                <span>
-                                    角色
-                                </span>
+                                <span>角色</span>
                                 <select class="juese">
-                                    <option value="管理员">
-                                        管理员
-                                    </option>
-                                    <option value="销售经理">
-                                        销售经理
-                                    </option>
-                                    <option selected="selected" value="销售员">
-                                        销售员
-                                    </option>
+                                    <option value="管理员">管理员</option>
+                                    <option value="销售经理">销售经理</option>
+                                    <option value="销售员" selected="selected">销售员</option>
                                 </select>
                             </label>
                         </form>
                         <div class="btngroup">
-                            <button class="save" id="addEmployee">
-                                保存
-                            </button>
-                            <button class="cancel" type="reset">
-                                取消
-                            </button>
+                            <button class="save" id="addEmployee">保存</button>
+                            <button class="cancel">取消</button>
                         </div>
                     </div>
                 </div>

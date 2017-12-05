@@ -1,17 +1,12 @@
 $(function() {
-    $('.main').height($(window).height() - 60);
-    $('.content').css({
-    	'min-height': $(window).height() - 135 + 'px',
-    	'margin-bottom': '25px'
-    });
-
+	$('.main').height($(window).height() - 60);
 	$('.main').niceScroll({
         cursorcolor: '#ccc'
     });
-    // $('.content').css({
-    // 	'min-height': $(window).height() - 130 + 'px',
-    // 	'margin-bottom': '25px'
-    // });
+    $('.content').css({
+    	'min-height': $(window).height() - 130 + 'px',
+    	'margin-bottom': '25px'
+    });
 
 	$('form input').width($('form label').width() - 150);
 	$('form select').width($('form label').width() - 150);
